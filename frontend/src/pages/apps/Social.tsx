@@ -6,9 +6,11 @@ import {
 } from "lucide-react";
 import { useCurrentUser } from "../../hooks/CurrentUserContext";
 import { useActionRecorder } from "../../hooks/useActionRecorder";
-import { generatePosts } from "../../data/mockContent";
+import { useMockData } from "../../hooks/useMockData";
+import { api } from "../../services/api";
 import ActivityToast from "../../components/ActivityToast";
-import { Button } from "../../components/ui";
+
+import "./social.css";
 
 type Tab = "feed" | "explore" | "reels" | "messages" | "profile" | "settings";
 
@@ -23,7 +25,9 @@ export default function Social() {
   const [notifications, setNotifications] = useState(true);
 
   const contacts = useMemo(() => users.filter((u) => u.id !== currentUser?.id), [users, currentUser]);
-  const posts = useMemo(() => (currentUser ? generatePosts(currentUser, contacts) : []), [currentUser, contacts]);
+  const { data, updateData, loading, refresh } = useMockData<{posts: any[], threads: Record<string, any[]>}>("social", { posts: [], threads: {} });
+  const posts = data.posts;
+  const threads = data.threads;
 
   useEffect(() => {
     if (currentUser) record({ event_type: "LOGIN", action: "LOGIN" });
@@ -33,12 +37,12 @@ export default function Social() {
   if (!currentUser) return null;
 
   return (
-    <div className="flex h-[calc(100vh-64px)] max-w-6xl mx-auto border-x" style={{ borderColor: "var(--border)", background: "var(--bg)" }}>
+    <div className="pulse-app">
       {/* Sidebar Navigation */}
-      <div className="w-16 md:w-64 border-r flex flex-col justify-between py-6 px-3 shrink-0" style={{ borderColor: "var(--border)" }}>
-        <div className="flex flex-col gap-2">
-          <div className="hidden md:block px-4 pb-6 font-bold text-2xl italic tracking-tighter" style={{ color: "var(--text)" }}>Pulse</div>
-          
+      <div className="pulse-sidebar">
+        <div className="pulse-logo">Pulse</div>
+        
+        <div style={{ display: "flex", flexDirection: "column", width: "100%", padding: "0 12px", gap: "8px" }}>
           <NavItem icon={<Home />} label="Home" active={tab === "feed"} onClick={() => setTab("feed")} />
           <NavItem icon={<Search />} label="Explore" active={tab === "explore"} onClick={() => setTab("explore")} />
           <NavItem icon={<PlaySquare />} label="Reels" active={tab === "reels"} onClick={() => setTab("reels")} />
@@ -46,90 +50,104 @@ export default function Social() {
           <NavItem icon={<UserIcon />} label="Profile" active={tab === "profile"} onClick={() => setTab("profile")} />
         </div>
         
-        <div className="flex flex-col gap-2">
+        <div style={{ marginTop: "auto", width: "100%", padding: "0 12px" }}>
           <NavItem icon={<SettingsIcon />} label="Settings" active={tab === "settings"} onClick={() => setTab("settings")} />
         </div>
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 overflow-y-auto relative bg-black/5 dark:bg-transparent">
+      <div className="pulse-main">
         {tab === "feed" && (
-          <div className="max-w-xl mx-auto py-8 px-4 flex flex-col gap-6">
+          <div className="pulse-feed-container">
             {/* Stories */}
-            <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
-              <div className="flex flex-col items-center gap-1 shrink-0 cursor-pointer">
-                <div className="w-16 h-16 rounded-full border-2 p-0.5 flex items-center justify-center relative" style={{ borderColor: "var(--border)" }}>
-                  <div className="w-full h-full rounded-full bg-gray-200" style={{ background: "var(--bg-inset)" }}></div>
-                  <div className="absolute bottom-0 right-0 rounded-full bg-blue-500 text-white p-0.5 border-2 border-white"><Camera size={12}/></div>
+            <div className="pulse-stories">
+              <div className="pulse-story">
+                <div className="pulse-story-ring add-story">
+                  <div className="pulse-story-img" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                     <Camera size={20} color="#fff" />
+                     <div style={{ position: 'absolute', bottom: 2, right: 2, background: '#ff007f', borderRadius: '50%', width: 14, height: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 'bold' }}>+</div>
+                  </div>
                 </div>
-                <span className="text-xs truncate w-16 text-center">Your story</span>
+                <span className="pulse-story-name">Your story</span>
               </div>
               {contacts.slice(0, 8).map(c => (
-                <div key={c.id} className="flex flex-col items-center gap-1 shrink-0 cursor-pointer hover:opacity-80 transition-opacity" onClick={() => record({ event_type: "PROFILE_VIEW", action: "PROFILE_VIEW", resource_type: "profile", resource_id: c.name })}>
-                  <div className="w-16 h-16 rounded-full p-0.5" style={{ background: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)" }}>
-                    <div className="w-full h-full rounded-full border-2" style={{ borderColor: "var(--bg)", background: "var(--bg-inset)" }} />
+                <div key={c.id} className="pulse-story" onClick={() => record({ event_type: "PROFILE_VIEW", action: "PROFILE_VIEW", resource_type: "profile", resource_id: c.name })}>
+                  <div className="pulse-story-ring">
+                    <img src={`/images/avatar_${(Number(c.id) % 2) + 1}.jpg`} className="pulse-story-img" alt={c.name} />
                   </div>
-                  <span className="text-xs truncate w-16 text-center">{c.name.split(" ")[0]}</span>
+                  <span className="pulse-story-name">{c.name.split(" ")[0]}</span>
                 </div>
               ))}
             </div>
 
             {/* Create Post */}
-            <div className="flex flex-col gap-3 py-4 border-b" style={{ borderColor: "var(--border)" }}>
-              <div className="flex gap-3 items-center">
-                <div className="w-10 h-10 rounded-full shrink-0" style={{ background: "var(--bg-inset)" }}></div>
+            <div className="pulse-create-post">
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <img src={`/images/avatar_${(Number(currentUser.id) % 2) + 1}.jpg`} alt="me" style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }} />
                 <textarea
                   value={caption}
                   onChange={(e) => setCaption(e.target.value)}
                   placeholder={`What's happening, ${currentUser.name.split(" ")[0]}?`}
-                  rows={1}
-                  className="w-full resize-none outline-none bg-transparent text-sm"
+                  rows={2}
+                  className="pulse-create-input"
                 />
               </div>
-              <div className="flex justify-end">
-                <Button disabled={!caption.trim()} onClick={() => {
-                  record({ event_type: "POST_CREATE", action: "POST_CREATE", resource_type: "post", resource_id: `post-${Date.now()}`, data_volume: 20 + caption.length });
+              <button 
+                className="pulse-btn" 
+                disabled={!caption.trim()} 
+                onClick={() => {
+                  const newPost = {
+                    id: `post-${Date.now()}`,
+                    author: currentUser.name,
+                    authorAvatar: `/images/avatar_${(Number(currentUser.id) % 2) + 1}.jpg`,
+                    caption,
+                    likes: 0,
+                    comments: 0,
+                    imageUrl: `/images/post_${["office", "team", "travel"][Math.floor(Math.random() * 3)]}.jpg`
+                  };
+                  updateData({ ...data, posts: [newPost, ...posts] });
+                  record({ event_type: "POST_CREATE", action: "POST_CREATE", resource_type: "post", resource_id: newPost.id, data_volume: 20 + caption.length });
                   setCaption("");
-                }}>Post</Button>
-              </div>
+                }}
+              >
+                Post
+              </button>
             </div>
 
             {/* Feed */}
-            <div className="flex flex-col gap-8">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
               {posts.map((p) => (
-                <div key={p.id} className="flex flex-col gap-3 pb-8 border-b last:border-0" style={{ borderColor: "var(--border)" }}>
-                  <div className="flex items-center justify-between px-1">
-                    <button className="flex items-center gap-2 font-semibold text-sm hover:opacity-80" onClick={() => record({ event_type: "PROFILE_VIEW", action: "PROFILE_VIEW", resource_type: "profile", resource_id: p.author })}>
-                      <div className="w-8 h-8 rounded-full" style={{ background: "var(--bg-inset)" }}></div>
+                <div key={p.id} className="pulse-post">
+                  <div className="pulse-post-header">
+                    <div className="pulse-post-author" onClick={() => record({ event_type: "PROFILE_VIEW", action: "PROFILE_VIEW", resource_type: "profile", resource_id: p.author })}>
+                      <img src={(p as any).authorAvatar} className="pulse-post-avatar" alt={p.author} />
                       {p.author}
-                    </button>
-                    <MoreHorizontal size={20} className="cursor-pointer" style={{ color: "var(--text-muted)" }}/>
+                    </div>
+                    <button className="pulse-icon-btn"><MoreHorizontal size={20} /></button>
                   </div>
                   <div 
-                    className="w-full aspect-square rounded-sm cursor-pointer relative group flex items-center justify-center transition-all" 
-                    style={{ background: `linear-gradient(135deg, hsl(${p.hue},70%,60%), hsl(${(p.hue + 60) % 360},70%,50%))` }}
+                    className="pulse-post-image-container" 
                     onDoubleClick={() => record({ event_type: "SETTINGS_CHANGE", action: "LIKE_POST", resource_type: "post", metadata: { post_id: p.id } })}
                   >
+                     <img src={(p as any).imageUrl} alt="post" className="pulse-post-image" />
                   </div>
-                  <div className="flex flex-col gap-2 px-1">
-                    <div className="flex items-center justify-between">
-                      <div className="flex gap-4">
-                        <Heart size={24} className="cursor-pointer hover:opacity-70 transition-opacity" />
-                        <MessageCircle size={24} className="cursor-pointer hover:opacity-70 transition-opacity" />
-                        <Share2 size={24} className="cursor-pointer hover:opacity-70 transition-opacity" />
-                      </div>
-                      <Bookmark 
-                        size={24} 
-                        className="cursor-pointer hover:opacity-70 transition-opacity" 
-                        onClick={() => record({ event_type: "CONTENT_DOWNLOAD", action: "CONTENT_DOWNLOAD", resource_type: "media", resource_id: p.id, data_volume: 180 })}
-                      />
+                  <div className="pulse-post-actions">
+                    <div className="pulse-action-group">
+                      <button className="pulse-icon-btn"><Heart size={26} /></button>
+                      <button className="pulse-icon-btn"><MessageCircle size={26} /></button>
+                      <button className="pulse-icon-btn"><Share2 size={26} /></button>
                     </div>
-                    <div className="font-semibold text-sm">{p.likes} likes</div>
-                    <div className="text-sm">
-                      <span className="font-semibold mr-2">{p.author}</span>
+                    <button className="pulse-icon-btn" onClick={() => record({ event_type: "CONTENT_DOWNLOAD", action: "CONTENT_DOWNLOAD", resource_type: "media", resource_id: p.id, data_volume: 180 })}>
+                      <Bookmark size={26} />
+                    </button>
+                  </div>
+                  <div className="pulse-post-info">
+                    <div className="pulse-likes">{p.likes} likes</div>
+                    <div className="pulse-caption">
+                      <span className="pulse-caption-author">{p.author}</span>
                       {p.caption}
                     </div>
-                    <div className="text-sm cursor-pointer mt-1" style={{ color: "var(--text-muted)" }}>View all {p.comments} comments</div>
+                    <div className="pulse-comments-link">View all {p.comments} comments</div>
                   </div>
                 </div>
               ))}
@@ -138,96 +156,96 @@ export default function Social() {
         )}
 
         {tab === "explore" && (
-          <div className="max-w-4xl mx-auto p-4">
-            <div className="grid grid-cols-3 gap-1 md:gap-4">
-              {Array.from({ length: 15 }).map((_, i) => (
-                <div 
-                  key={i} 
-                  className="aspect-square cursor-pointer hover:opacity-90 transition-opacity rounded-sm"
-                  style={{ background: `hsl(${(i * 45) % 360}, 60%, 50%)` }}
-                  onClick={() => record({ event_type: "CONTENT_DOWNLOAD", action: "CONTENT_DOWNLOAD", resource_type: "media", resource_id: `explore-${i}`, data_volume: 200 })}
-                ></div>
-              ))}
-            </div>
+          <div className="pulse-explore-grid">
+            {Array.from({ length: 15 }).map((_, i) => (
+              <div 
+                key={i} 
+                className="pulse-explore-item"
+                style={{ backgroundImage: `url(/images/post_${["office", "team", "travel"][i % 3]}.jpg)` }}
+                onClick={() => record({ event_type: "CONTENT_DOWNLOAD", action: "CONTENT_DOWNLOAD", resource_type: "media", resource_id: `explore-${i}`, data_volume: 200 })}
+              ></div>
+            ))}
           </div>
         )}
 
         {tab === "reels" && (
-          <div className="h-full w-full flex items-center justify-center p-4 bg-black">
-            <div className="h-full max-h-[800px] w-full max-w-[450px] rounded-xl flex flex-col relative overflow-hidden shadow-2xl" style={{ background: "linear-gradient(45deg, #111, #222)" }}>
-              <div className="absolute top-4 left-4 font-bold text-white text-xl drop-shadow-md">Reels</div>
-              <div className="mt-auto p-4 text-white drop-shadow-md z-10">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 rounded-full bg-gray-500"></div>
-                  <span className="font-semibold">alex_codes</span>
-                  <button className="border border-white/50 rounded-md px-2 py-0.5 text-xs font-semibold hover:bg-white/20 transition-colors" onClick={() => record({ event_type: "FOLLOW_USER", action: "FOLLOW_USER", resource_type: "profile", resource_id: "alex_codes" })}>Follow</button>
+          <div className="pulse-reels-container">
+            <div className="pulse-reel" style={{ backgroundImage: 'url(/images/reel_coding.jpg)' }}>
+              <div className="pulse-reel-overlay">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                  <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#666' }}></div>
+                  <span style={{ fontWeight: 'bold' }}>alex_codes</span>
+                  <button style={{ background: 'transparent', border: '1px solid #fff', color: '#fff', padding: '4px 12px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => record({ event_type: "FOLLOW_USER", action: "FOLLOW_USER", resource_type: "profile", resource_id: "alex_codes" })}>Follow</button>
                 </div>
-                <p className="text-sm font-medium">Building the future of web apps 🚀 #coding #dev</p>
+                <p style={{ fontSize: '14px', fontWeight: 500 }}>Building the future of web apps 🚀 #coding #dev</p>
               </div>
-              <div className="absolute right-4 bottom-20 flex flex-col gap-6 text-white items-center z-10">
-                <div className="flex flex-col items-center gap-1 cursor-pointer hover:opacity-70 transition-opacity"><Heart size={28} /><span className="text-xs font-semibold">12k</span></div>
-                <div className="flex flex-col items-center gap-1 cursor-pointer hover:opacity-70 transition-opacity"><MessageCircle size={28} /><span className="text-xs font-semibold">342</span></div>
-                <div className="flex flex-col items-center gap-1 cursor-pointer hover:opacity-70 transition-opacity"><Send size={28} /></div>
-                <div className="flex flex-col items-center gap-1 cursor-pointer hover:opacity-70 transition-opacity" onClick={() => record({ event_type: "CONTENT_DOWNLOAD", action: "CONTENT_DOWNLOAD", resource_type: "media", resource_id: "reel-1", data_volume: 4500 })}><MoreHorizontal size={28} /></div>
+              <div className="pulse-reel-actions">
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}><Heart size={28} /><span style={{ fontSize: '12px', fontWeight: 'bold' }}>12k</span></div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}><MessageCircle size={28} /><span style={{ fontSize: '12px', fontWeight: 'bold' }}>342</span></div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}><Send size={28} /></div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }} onClick={() => record({ event_type: "CONTENT_DOWNLOAD", action: "CONTENT_DOWNLOAD", resource_type: "media", resource_id: "reel-1", data_volume: 4500 })}><MoreHorizontal size={28} /></div>
               </div>
             </div>
           </div>
         )}
 
         {tab === "messages" && (
-          <div className="flex h-full bg-white dark:bg-transparent">
-            <div className="w-24 md:w-80 border-r overflow-y-auto shrink-0 flex flex-col" style={{ borderColor: "var(--border)" }}>
-              <div className="p-5 font-bold text-xl border-b truncate hidden md:block" style={{ borderColor: "var(--border)" }}>{currentUser.name}</div>
-              {contacts.map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => {
-                    setActiveThread(c.id);
-                    record({ event_type: "MESSAGE_READ", action: "MESSAGE_READ", resource_type: "message", resource_id: `thread-${c.id}` });
-                  }}
-                  className="w-full text-left p-4 hover:opacity-75 flex items-center gap-3 transition-colors"
-                  style={{ background: activeThread === c.id ? "var(--bg-inset)" : "transparent" }}
-                >
-                  <div className="w-12 h-12 rounded-full shrink-0" style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}></div>
-                  <div className="flex-1 min-w-0 hidden md:block">
-                    <div className="font-medium truncate text-sm">{c.name}</div>
-                    <div className="text-xs truncate mt-1" style={{ color: "var(--text-muted)" }}>Tap to chat</div>
-                  </div>
-                </button>
-              ))}
+          <div className="pulse-messages">
+            <div className="pulse-msg-sidebar">
+              <div className="pulse-msg-header">{currentUser.name}</div>
+              <div style={{ flex: 1, overflowY: 'auto' }}>
+                {contacts.map((c) => (
+                  <button
+                    key={c.id}
+                    onClick={() => {
+                      setActiveThread(c.id);
+                      record({ event_type: "MESSAGE_READ", action: "MESSAGE_READ", resource_type: "message", resource_id: `thread-${c.id}` });
+                    }}
+                    className={`pulse-msg-contact ${activeThread === c.id ? 'active' : ''}`}
+                  >
+                    <img src={`/images/avatar_${(Number(c.id) % 2) + 1}.jpg`} style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }} alt={c.name} />
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '15px' }}>{c.name}</span>
+                      <span style={{ color: '#888', fontSize: '13px' }}>Tap to chat</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="flex-1 flex flex-col relative">
+            <div className="pulse-chat-area">
               {activeThread == null ? (
-                <div className="m-auto flex flex-col items-center gap-3" style={{ color: "var(--text-faint)" }}>
-                  <Send size={48} />
-                  <div className="text-xl font-semibold text-center">Your Messages</div>
-                  <div className="text-sm text-center max-w-xs">Send private photos and messages to a friend or group.</div>
+                <div style={{ margin: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', color: '#888' }}>
+                  <Send size={64} color="#555" />
+                  <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#fff' }}>Your Messages</div>
+                  <div>Send private photos and messages to a friend.</div>
                 </div>
               ) : (
                 <>
-                  <div className="p-4 border-b font-semibold flex items-center gap-3 shadow-sm z-10 bg-white/50 backdrop-blur-md" style={{ borderColor: "var(--border)" }}>
-                    <div className="w-8 h-8 rounded-full" style={{ background: "var(--bg-inset)" }}></div>
+                  <div className="pulse-chat-header">
+                    <img src={`/images/avatar_${(Number(activeThread) % 2) + 1}.jpg`} style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} alt="contact" />
                     {contacts.find((c) => c.id === activeThread)?.name}
                   </div>
-                  <div className="flex-1 p-4 overflow-y-auto flex flex-col gap-2">
-                    <div className="m-auto flex flex-col items-center gap-2 mb-8 mt-auto pt-10" style={{ color: "var(--text-faint)" }}>
-                       <div className="w-20 h-20 rounded-full shadow-sm" style={{ background: "var(--bg-inset)" }}></div>
-                       <div className="font-semibold text-lg" style={{ color: "var(--text)" }}>{contacts.find((c) => c.id === activeThread)?.name}</div>
-                       <Button variant="secondary" onClick={() => record({ event_type: "PROFILE_VIEW", action: "PROFILE_VIEW", resource_type: "profile", resource_id: contacts.find((c) => c.id === activeThread)?.name })}>View Profile</Button>
-                    </div>
+                  <div className="pulse-chat-history">
+                    {threads[activeThread] && threads[activeThread].map((msg, i) => (
+                      <div key={i} className={`pulse-chat-bubble ${msg.fromMe ? 'me' : 'them'}`}>
+                        {msg.text}
+                      </div>
+                    ))}
                   </div>
-                  <div className="p-4">
-                    <div className="flex items-center gap-2 border rounded-full px-4 py-2 bg-white dark:bg-black" style={{ borderColor: "var(--border)" }}>
+                  <div className="pulse-chat-input-area">
+                    <div className="pulse-chat-input-box">
                       <input
                         value={messageDraft}
                         onChange={(e) => setMessageDraft(e.target.value)}
                         placeholder="Message..."
-                        className="flex-1 text-sm bg-transparent outline-none py-1"
+                        className="pulse-chat-input"
                       />
                       {messageDraft.trim() && (
                         <button
-                          className="text-sm font-semibold text-blue-500 hover:text-blue-400 transition-colors px-2"
+                          className="pulse-chat-send"
                           onClick={() => {
+                            const newThread = [...(threads[activeThread] || []), { text: messageDraft, fromMe: true }];
+                            updateData({ ...data, threads: { ...threads, [activeThread]: newThread } });
                             record({ event_type: "MESSAGE_SEND", action: "MESSAGE_SEND", resource_type: "message", resource_id: `thread-${activeThread}`, data_volume: 5 + messageDraft.length });
                             setMessageDraft("");
                           }}
@@ -244,43 +262,43 @@ export default function Social() {
         )}
 
         {tab === "profile" && (
-          <div className="max-w-4xl mx-auto pt-8 pb-12">
-            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start px-4 mb-10">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full flex shrink-0 items-center justify-center text-4xl font-semibold border-4" style={{ background: "var(--accent-soft)", color: "var(--accent)", borderColor: "var(--bg-inset)" }}>
-                <UserIcon size={64} />
+          <div className="pulse-profile">
+            <div className="pulse-profile-header">
+              <div className="pulse-profile-avatar">
+                <img src={`/images/avatar_${(Number(currentUser.id) % 2) + 1}.jpg`} alt={currentUser.name} />
               </div>
-              <div className="flex flex-col gap-4 text-center md:text-left flex-1">
-                <div className="flex flex-col md:flex-row items-center gap-4 justify-center md:justify-start">
-                  <div className="text-xl font-medium">{currentUser.name}</div>
-                  <div className="flex gap-2">
-                    <Button variant="secondary" onClick={() => setTab("settings")}>Edit profile</Button>
-                    <Button variant="secondary" onClick={() => record({ event_type: "SETTINGS_CHANGE", action: "SETTINGS_CHANGE", resource_type: "profile" })}>View archive</Button>
+              <div className="pulse-profile-info">
+                <div className="pulse-profile-name-row">
+                  <div className="pulse-profile-name">{currentUser.name}</div>
+                  <div style={{ display: 'flex', gap: '12px' }}>
+                    <button className="pulse-btn-secondary" onClick={() => setTab("settings")}>Edit profile</button>
+                    <button className="pulse-btn-secondary" onClick={() => record({ event_type: "SETTINGS_CHANGE", action: "SETTINGS_CHANGE", resource_type: "profile" })}>View archive</button>
                   </div>
                 </div>
-                <div className="flex justify-center md:justify-start gap-8 text-base">
-                  <div><span className="font-semibold">{posts.length}</span> posts</div>
-                  <div><span className="font-semibold">342</span> followers</div>
-                  <div><span className="font-semibold">{contacts.length}</span> following</div>
+                <div className="pulse-profile-stats">
+                  <div><strong>{posts.length}</strong> posts</div>
+                  <div><strong>342</strong> followers</div>
+                  <div><strong>{contacts.length}</strong> following</div>
                 </div>
-                <div className="text-sm mt-2">
-                  <div className="font-semibold">{currentUser.name}</div>
-                  <div style={{ color: "var(--text-muted)" }}>{currentUser.role} · {currentUser.department}</div>
+                <div className="pulse-profile-bio">
+                  <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>{currentUser.name}</div>
+                  <div style={{ color: '#aaa', fontSize: '14px' }}>{currentUser.role} · {currentUser.department}</div>
                 </div>
               </div>
             </div>
 
-            <div className="border-t flex justify-center gap-12 uppercase text-xs font-semibold tracking-widest" style={{ borderColor: "var(--border)", color: "var(--text-muted)" }}>
-              <div className="flex items-center gap-2 py-4 border-t-2 text-current cursor-pointer" style={{ borderColor: "var(--text)" }}><Grid size={14}/> Posts</div>
-              <div className="flex items-center gap-2 py-4 border-t-2 border-transparent cursor-pointer hover:text-current"><BookmarkIcon size={14}/> Saved</div>
-              <div className="flex items-center gap-2 py-4 border-t-2 border-transparent cursor-pointer hover:text-current"><Tag size={14}/> Tagged</div>
+            <div className="pulse-profile-tabs">
+              <div className="pulse-profile-tab active"><Grid size={16}/> Posts</div>
+              <div className="pulse-profile-tab"><BookmarkIcon size={16}/> Saved</div>
+              <div className="pulse-profile-tab"><Tag size={16}/> Tagged</div>
             </div>
 
-            <div className="grid grid-cols-3 gap-1 md:gap-2 p-1">
+            <div className="pulse-explore-grid">
               {posts.map((p) => (
                 <div 
                   key={p.id} 
-                  className="aspect-square cursor-pointer hover:opacity-90 transition-opacity rounded-sm shadow-sm"
-                  style={{ background: `linear-gradient(135deg, hsl(${p.hue},70%,60%), hsl(${(p.hue + 60) % 360},70%,50%))` }}
+                  className="pulse-explore-item"
+                  style={{ backgroundImage: `url(${(p as any).imageUrl})` }}
                   onClick={() => record({ event_type: "CONTENT_DOWNLOAD", action: "CONTENT_DOWNLOAD", resource_type: "media", resource_id: p.id, data_volume: 180 })}
                 ></div>
               ))}
@@ -289,57 +307,58 @@ export default function Social() {
         )}
 
         {tab === "settings" && (
-          <div className="max-w-3xl mx-auto p-4 md:p-8">
-            <h2 className="text-2xl font-bold mb-6">Settings</h2>
-            <div className="flex flex-col gap-6">
-              
-              <div className="rounded-xl border p-6 flex flex-col gap-4 shadow-sm" style={{ background: "var(--bg-elevated)", borderColor: "var(--border)" }}>
-                <div className="text-lg font-semibold border-b pb-2 flex items-center gap-2" style={{ borderColor: "var(--border)" }}><SettingsIcon size={18}/> Account Privacy</div>
-                <label className="flex items-center justify-between text-sm cursor-pointer mt-2">
-                  <span className="font-medium">Private account</span>
-                  <select
-                    value={privacy}
-                    onChange={(e) => {
-                      setPrivacy(e.target.value);
-                      record({ event_type: "SETTINGS_CHANGE", action: "SETTINGS_CHANGE", resource_type: "account_settings", metadata: { field: "visibility", value: e.target.value } });
-                    }}
-                    className="rounded-lg border px-3 py-1.5 text-sm cursor-pointer outline-none"
-                    style={{ background: "var(--bg-inset)", borderColor: "var(--border)", color: "var(--text)" }}
-                  >
-                    <option>Public</option>
-                    <option>Private</option>
-                  </select>
-                </label>
-                <div className="text-xs" style={{ color: "var(--text-faint)" }}>When your account is public, your profile and posts can be seen by anyone, on or off Pulse.</div>
+          <div className="pulse-settings">
+            <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '32px' }}>Settings</h2>
+            
+            <div className="pulse-settings-card">
+              <div className="pulse-settings-title"><SettingsIcon size={20}/> Account Privacy</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontWeight: 500 }}>Private account</span>
+                <select
+                  value={privacy}
+                  onChange={(e) => {
+                    setPrivacy(e.target.value);
+                    record({ event_type: "SETTINGS_CHANGE", action: "SETTINGS_CHANGE", resource_type: "account_settings", metadata: { field: "visibility", value: e.target.value } });
+                  }}
+                  className="pulse-select"
+                  style={{ width: 'auto', padding: '8px 16px' }}
+                >
+                  <option>Public</option>
+                  <option>Private</option>
+                </select>
               </div>
-
-              <div className="rounded-xl border p-6 flex flex-col gap-4 shadow-sm" style={{ background: "var(--bg-elevated)", borderColor: "var(--border)" }}>
-                <div className="text-lg font-semibold border-b pb-2 flex items-center gap-2" style={{ borderColor: "var(--border)" }}><Heart size={18}/> Notifications</div>
-                <label className="flex items-center justify-between text-sm cursor-pointer mt-2">
-                  <span className="font-medium">Push notifications</span>
-                  <input
-                    type="checkbox"
-                    className="w-5 h-5 cursor-pointer accent-blue-500"
-                    checked={notifications}
-                    onChange={(e) => {
-                      setNotifications(e.target.checked);
-                      record({ event_type: "SETTINGS_CHANGE", action: "SETTINGS_CHANGE", resource_type: "account_settings", metadata: { field: "notifications", value: e.target.checked } });
-                    }}
-                  />
-                </label>
-              </div>
-
-              <div className="rounded-xl border p-6 flex flex-col gap-4 shadow-sm" style={{ background: "var(--bg-elevated)", borderColor: "var(--border)" }}>
-                <div className="text-lg font-semibold border-b pb-2" style={{ borderColor: "var(--border)" }}>Login Activity</div>
-                <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                  See your recent login history and manage trusted devices in the main Security Center dashboard.
-                </p>
-                <div>
-                  <Button variant="secondary" onClick={() => window.open('/security/overview', '_blank')}>Go to Security Center</Button>
-                </div>
-              </div>
-
+              <div style={{ color: '#888', fontSize: '13px', marginTop: '12px' }}>When your account is public, your profile and posts can be seen by anyone, on or off Pulse.</div>
             </div>
+
+            <div className="pulse-settings-card">
+              <div className="pulse-settings-title"><Heart size={20}/> Notifications</div>
+              <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
+                <span style={{ fontWeight: 500 }}>Push notifications</span>
+                <input
+                  type="checkbox"
+                  style={{ width: '20px', height: '20px', cursor: 'pointer', accentColor: '#ff007f' }}
+                  checked={notifications}
+                  onChange={(e) => {
+                    setNotifications(e.target.checked);
+                    record({ event_type: "SETTINGS_CHANGE", action: "SETTINGS_CHANGE", resource_type: "account_settings", metadata: { field: "notifications", value: e.target.checked } });
+                  }}
+                />
+              </label>
+            </div>
+
+            <div className="pulse-settings-card">
+              <div className="pulse-settings-title text-red-500" style={{ color: '#ff4444' }}>Reset Mock Data</div>
+              <p style={{ color: '#888', fontSize: '14px', marginBottom: '20px' }}>
+                Reset all apps back to their initial static data state.
+              </p>
+              <button className="pulse-btn-secondary" style={{ color: '#ff4444', borderColor: '#ff4444' }} onClick={async () => {
+                await api.post('/mock/reset');
+                refresh();
+              }}>
+                Reset App Data
+              </button>
+            </div>
+
           </div>
         )}
       </div>
@@ -353,11 +372,10 @@ function NavItem({ icon, label, active, onClick }: { icon: React.ReactNode, labe
   return (
     <button 
       onClick={onClick}
-      className={`flex items-center gap-4 p-3 rounded-lg transition-all hover:bg-black/5 dark:hover:bg-white/5 w-full ${active ? 'font-bold' : ''}`}
-      style={{ background: active ? "var(--bg-inset)" : "transparent" }}
+      className={`pulse-nav-item ${active ? 'active' : ''}`}
     >
-      <div className={`shrink-0 ${active ? 'scale-110' : ''} transition-transform`}>{icon}</div>
-      <span className="hidden md:block text-base">{label}</span>
+      <div className="pulse-nav-icon">{icon}</div>
+      <span className="pulse-nav-label">{label}</span>
     </button>
   );
 }

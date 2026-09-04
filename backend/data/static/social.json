@@ -1,0 +1,77 @@
+{
+  "posts": [
+    {
+      "id": "post-static-0",
+      "author": "Sofia Alvarez",
+      "authorAvatar": "/images/avatar_2.jpg",
+      "caption": "Proud of what we built this quarter",
+      "likes": 52,
+      "comments": 7,
+      "imageUrl": "/images/post_office.jpg"
+    },
+    {
+      "id": "post-static-1",
+      "author": "Chloe Dubois",
+      "authorAvatar": "/images/avatar_2.jpg",
+      "caption": "Weekend hike recap",
+      "likes": 51,
+      "comments": 2,
+      "imageUrl": "/images/post_travel.jpg"
+    },
+    {
+      "id": "post-static-2",
+      "author": "Chloe Dubois",
+      "authorAvatar": "/images/avatar_1.jpg",
+      "caption": "Shipping something new soon\u2026",
+      "likes": 49,
+      "comments": 3,
+      "imageUrl": "/images/post_office.jpg"
+    },
+    {
+      "id": "post-static-3",
+      "author": "Sofia Alvarez",
+      "authorAvatar": "/images/avatar_2.jpg",
+      "caption": "Weekend hike recap",
+      "likes": 157,
+      "comments": 14,
+      "imageUrl": "/images/post_office.jpg"
+    },
+    {
+      "id": "post-static-4",
+      "author": "Hiro Tanaka",
+      "authorAvatar": "/images/avatar_1.jpg",
+      "caption": "Throwback to the launch party",
+      "likes": 88,
+      "comments": 9,
+      "imageUrl": "/images/post_team.jpg"
+    },
+    {
+      "id": "post-static-5",
+      "author": "Wei Zhang",
+      "authorAvatar": "/images/avatar_1.jpg",
+      "caption": "Great team offsite this week \ud83c\udf89",
+      "likes": 183,
+      "comments": 18,
+      "imageUrl": "/images/post_travel.jpg"
+    },
+    {
+      "id": "post-static-6",
+      "author": "Hiro Tanaka",
+      "authorAvatar": "/images/avatar_2.jpg",
+      "caption": "Weekend hike recap",
+      "likes": 66,
+      "comments": 7,
+      "imageUrl": "/images/post_office.jpg"
+    },
+    {
+      "id": "post-static-7",
+      "author": "Jasmine Patel",
+      "authorAvatar": "/images/avatar_2.jpg",
+      "caption": "Coffee first, code later \u2615",
+      "likes": 14,
+      "comments": 10,
+      "imageUrl": "/images/post_office.jpg"
+    }
+  ],
+  "threads": {}
+}

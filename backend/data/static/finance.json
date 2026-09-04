@@ -1,0 +1,86 @@
+{
+  "transactions": [
+    {
+      "id": "txn-static-0",
+      "merchant": "Software License",
+      "amount": 2329.88,
+      "isCredit": false,
+      "timestamp": "2026-08-28T13:39:10.637923Z"
+    },
+    {
+      "id": "txn-static-1",
+      "merchant": "Catering Services",
+      "amount": 2000.58,
+      "isCredit": true,
+      "timestamp": "2026-08-27T04:39:10.637923Z"
+    },
+    {
+      "id": "txn-static-2",
+      "merchant": "Utility Payment",
+      "amount": 1825.79,
+      "isCredit": true,
+      "timestamp": "2026-09-03T03:39:10.637923Z"
+    },
+    {
+      "id": "txn-static-3",
+      "merchant": "Catering Services",
+      "amount": 2146.65,
+      "isCredit": true,
+      "timestamp": "2026-08-31T04:39:10.637923Z"
+    },
+    {
+      "id": "txn-static-4",
+      "merchant": "Utility Payment",
+      "amount": 2105.48,
+      "isCredit": true,
+      "timestamp": "2026-09-03T15:39:10.637923Z"
+    },
+    {
+      "id": "txn-static-5",
+      "merchant": "Catering Services",
+      "amount": 249.62,
+      "isCredit": false,
+      "timestamp": "2026-08-26T09:39:10.637923Z"
+    },
+    {
+      "id": "txn-static-6",
+      "merchant": "Office Supplies Ltd.",
+      "amount": 1222.27,
+      "isCredit": false,
+      "timestamp": "2026-08-27T03:39:10.637923Z"
+    },
+    {
+      "id": "txn-static-7",
+      "merchant": "Software License",
+      "amount": 2200.58,
+      "isCredit": false,
+      "timestamp": "2026-09-03T12:39:10.637923Z"
+    },
+    {
+      "id": "txn-static-8",
+      "merchant": "Payroll Deposit",
+      "amount": 660.91,
+      "isCredit": false,
+      "timestamp": "2026-08-29T11:39:10.637923Z"
+    },
+    {
+      "id": "txn-static-9",
+      "merchant": "Software License",
+      "amount": 1818.57,
+      "isCredit": false,
+      "timestamp": "2026-08-27T07:39:10.637923Z"
+    }
+  ],
+  "beneficiaries": [
+    {
+      "id": "bene-static-0",
+      "name": "Acme Vendor LLC",
+      "accountNumber": "\u2022\u2022\u2022\u20223125"
+    },
+    {
+      "id": "bene-static-1",
+      "name": "Regional Tax Office",
+      "accountNumber": "\u2022\u2022\u2022\u20228606"
+    }
+  ]
+}

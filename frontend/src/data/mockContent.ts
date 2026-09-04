@@ -15,6 +15,17 @@ const POST_CAPTIONS = [
   "Throwback to the launch party", "New desk setup, finally!",
 ];
 
+const POST_IMAGES = [
+  "/images/post_office.jpg",
+  "/images/post_team.jpg",
+  "/images/post_travel.jpg"
+];
+
+const AVATAR_IMAGES = [
+  "/images/avatar_1.jpg",
+  "/images/avatar_2.jpg"
+];
+
 const EMAIL_SUBJECTS = [
   "Q3 planning notes", "Re: Budget approval needed", "Weekly sync agenda", "Contract renewal - action required",
   "Team lunch on Friday?", "Invoice #4521 attached", "Project Atlas status update", "Following up on our call",
@@ -33,10 +44,11 @@ export function generatePosts(user: UserSummary, contacts: UserSummary[]) {
     return {
       id: `post-${user.id}-${i}`,
       author: author.name,
+      authorAvatar: AVATAR_IMAGES[Math.floor(rand() * AVATAR_IMAGES.length)],
       caption: POST_CAPTIONS[Math.floor(rand() * POST_CAPTIONS.length)],
       likes: Math.floor(rand() * 180) + 5,
       comments: Math.floor(rand() * 20),
-      hue: Math.floor(rand() * 360),
+      imageUrl: POST_IMAGES[Math.floor(rand() * POST_IMAGES.length)],
     };
   });
 }

@@ -1,0 +1,148 @@
+{
+  "emails": [
+    {
+      "id": "email-static-0",
+      "from": "Jasmine Patel",
+      "fromEmail": "jasmine.patel@northwind.com",
+      "subject": "Q3 planning notes",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": true,
+      "hasAttachment": false,
+      "attachmentName": null,
+      "attachmentSizeKb": 0,
+      "timestamp": "2026-09-02T21:39:10.637923Z"
+    },
+    {
+      "id": "email-static-1",
+      "from": "Hiro Tanaka",
+      "fromEmail": "hiro.tanaka@northwind.com",
+      "subject": "Team lunch on Friday?",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": false,
+      "hasAttachment": false,
+      "attachmentName": null,
+      "attachmentSizeKb": 0,
+      "timestamp": "2026-09-02T14:39:10.637923Z"
+    },
+    {
+      "id": "email-static-2",
+      "from": "Sofia Alvarez",
+      "fromEmail": "sofia.alvarez@northwind.com",
+      "subject": "Contract renewal - action required",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": false,
+      "hasAttachment": false,
+      "attachmentName": null,
+      "attachmentSizeKb": 0,
+      "timestamp": "2026-09-01T19:39:10.637923Z"
+    },
+    {
+      "id": "email-static-3",
+      "from": "Sofia Alvarez",
+      "fromEmail": "sofia.alvarez@northwind.com",
+      "subject": "Weekly sync agenda",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": true,
+      "hasAttachment": true,
+      "attachmentName": "document-3.pdf",
+      "attachmentSizeKb": 217,
+      "timestamp": "2026-09-03T03:39:10.637923Z"
+    },
+    {
+      "id": "email-static-4",
+      "from": "Wei Zhang",
+      "fromEmail": "wei.zhang@northwind.com",
+      "subject": "Contract renewal - action required",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": true,
+      "hasAttachment": false,
+      "attachmentName": null,
+      "attachmentSizeKb": 0,
+      "timestamp": "2026-09-02T18:39:10.637923Z"
+    },
+    {
+      "id": "email-static-5",
+      "from": "Ravi Kumar",
+      "fromEmail": "ravi.kumar@northwind.com",
+      "subject": "Following up on our call",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": false,
+      "hasAttachment": false,
+      "attachmentName": null,
+      "attachmentSizeKb": 0,
+      "timestamp": "2026-09-03T21:39:10.637923Z"
+    },
+    {
+      "id": "email-static-6",
+      "from": "Hiro Tanaka",
+      "fromEmail": "hiro.tanaka@northwind.com",
+      "subject": "Q3 planning notes",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": true,
+      "hasAttachment": false,
+      "attachmentName": null,
+      "attachmentSizeKb": 0,
+      "timestamp": "2026-09-01T02:39:10.637923Z"
+    },
+    {
+      "id": "email-static-7",
+      "from": "Chloe Dubois",
+      "fromEmail": "chloe.dubois@northwind.com",
+      "subject": "Q3 planning notes",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": true,
+      "hasAttachment": true,
+      "attachmentName": "document-7.pdf",
+      "attachmentSizeKb": 282,
+      "timestamp": "2026-09-03T09:39:10.637923Z"
+    },
+    {
+      "id": "email-static-8",
+      "from": "Wei Zhang",
+      "fromEmail": "wei.zhang@northwind.com",
+      "subject": "Following up on our call",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": true,
+      "hasAttachment": true,
+      "attachmentName": "document-8.pdf",
+      "attachmentSizeKb": 259,
+      "timestamp": "2026-09-03T12:39:10.637923Z"
+    },
+    {
+      "id": "email-static-9",
+      "from": "Hiro Tanaka",
+      "fromEmail": "hiro.tanaka@northwind.com",
+      "subject": "Weekly sync agenda",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": true,
+      "hasAttachment": true,
+      "attachmentName": "document-9.pdf",
+      "attachmentSizeKb": 47,
+      "timestamp": "2026-09-01T11:39:10.637923Z"
+    },
+    {
+      "id": "email-static-10",
+      "from": "Jasmine Patel",
+      "fromEmail": "jasmine.patel@northwind.com",
+      "subject": "Holiday schedule reminder",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": false,
+      "hasAttachment": true,
+      "attachmentName": "document-10.pdf",
+      "attachmentSizeKb": 239,
+      "timestamp": "2026-09-01T08:39:10.637923Z"
+    },
+    {
+      "id": "email-static-11",
+      "from": "Ravi Kumar",
+      "fromEmail": "ravi.kumar@northwind.com",
+      "subject": "Invoice #4521 attached",
+      "snippet": "Hi, just following up on this \u2014 let me know if you have any questions.",
+      "unread": true,
+      "hasAttachment": true,
+      "attachmentName": "document-11.pdf",
+      "attachmentSizeKb": 170,
+      "timestamp": "2026-09-02T11:39:10.637923Z"
+    }
+  ]
+}
