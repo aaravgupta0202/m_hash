@@ -58,6 +58,17 @@ export default function Gmail() {
     return "PUBLIC";
   };
 
+  const getAvatarForName = (name: string) => {
+    const u = users.find(u => u.name === name);
+    return u ? `/images/avatar_${(Number(u.id) % 7) + 1}.jpg` : `/images/avatar_1.jpg`;
+  };
+
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleString('en-US', {
+      month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'
+    });
+  };
+
   return (
     <div className="mail-app">
       {/* Top Header */}
@@ -89,7 +100,7 @@ export default function Gmail() {
           <button className="mail-icon-btn" onClick={() => setTab("settings")}>
             <SettingsIcon size={20} style={{ color: tab === "settings" ? "inherit" : "inherit" }} />
           </button>
-          <div className="mail-avatar">{currentUser.name.charAt(0)}</div>
+          <img src={getAvatarForName(currentUser.name)} className="mail-avatar" alt="me" style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover' }} />
         </div>
       </div>
 
@@ -264,7 +275,7 @@ export default function Gmail() {
                 </div>
                 
                 <div className="mail-reader-header">
-                  <div className="mail-reader-avatar">{openEmail.from.charAt(0)}</div>
+                  <img src={getAvatarForName(openEmail.from)} className="mail-reader-avatar" alt="sender" style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />
                   <div className="mail-reader-meta">
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>

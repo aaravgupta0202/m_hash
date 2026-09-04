@@ -26,6 +26,10 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  get: (path: string) => request<any>(path),
+  put: (path: string, body: any) => request<any>(path, { method: "PUT", body: JSON.stringify(body) }),
+  post: (path: string, body?: any) => request<any>(path, { method: "POST", body: body ? JSON.stringify(body) : undefined }),
+
   overview: () => request<OverviewResponse>("/overview"),
 
   users: () => request<UserSummary[]>("/users"),

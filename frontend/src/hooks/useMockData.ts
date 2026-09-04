@@ -8,7 +8,7 @@ export function useMockData<T>(appName: string, initialData: T) {
   const fetchData = useCallback(async () => {
     try {
       const response = await api.get(`/mock/${appName}`);
-      setData(response.data);
+      setData(response);
     } catch (e) {
       console.error(`Failed to fetch mock data for ${appName}`, e);
     } finally {

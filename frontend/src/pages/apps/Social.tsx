@@ -73,7 +73,7 @@ export default function Social() {
               {contacts.slice(0, 8).map(c => (
                 <div key={c.id} className="pulse-story" onClick={() => record({ event_type: "PROFILE_VIEW", action: "PROFILE_VIEW", resource_type: "profile", resource_id: c.name })}>
                   <div className="pulse-story-ring">
-                    <img src={`/images/avatar_${(Number(c.id) % 2) + 1}.jpg`} className="pulse-story-img" alt={c.name} />
+                    <img src={`/images/avatar_${(Number(c.id) % 7) + 1}.jpg`} className="pulse-story-img" alt={c.name} />
                   </div>
                   <span className="pulse-story-name">{c.name.split(" ")[0]}</span>
                 </div>
@@ -83,7 +83,7 @@ export default function Social() {
             {/* Create Post */}
             <div className="pulse-create-post">
               <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                <img src={`/images/avatar_${(Number(currentUser.id) % 2) + 1}.jpg`} alt="me" style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }} />
+                <img src={`/images/avatar_${(Number(currentUser.id) % 7) + 1}.jpg`} alt="me" style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }} />
                 <textarea
                   value={caption}
                   onChange={(e) => setCaption(e.target.value)}
@@ -99,7 +99,7 @@ export default function Social() {
                   const newPost = {
                     id: `post-${Date.now()}`,
                     author: currentUser.name,
-                    authorAvatar: `/images/avatar_${(Number(currentUser.id) % 2) + 1}.jpg`,
+                    authorAvatar: `/images/avatar_${(Number(currentUser.id) % 7) + 1}.jpg`,
                     caption,
                     likes: 0,
                     comments: 0,
@@ -203,7 +203,7 @@ export default function Social() {
                     }}
                     className={`pulse-msg-contact ${activeThread === c.id ? 'active' : ''}`}
                   >
-                    <img src={`/images/avatar_${(Number(c.id) % 2) + 1}.jpg`} style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }} alt={c.name} />
+                    <img src={`/images/avatar_${(Number(c.id) % 7) + 1}.jpg`} style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }} alt={c.name} />
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                       <span style={{ fontWeight: 'bold', fontSize: '15px' }}>{c.name}</span>
                       <span style={{ color: '#888', fontSize: '13px' }}>Tap to chat</span>
@@ -222,7 +222,7 @@ export default function Social() {
               ) : (
                 <>
                   <div className="pulse-chat-header">
-                    <img src={`/images/avatar_${(Number(activeThread) % 2) + 1}.jpg`} style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} alt="contact" />
+                    <img src={`/images/avatar_${(Number(activeThread) % 7) + 1}.jpg`} style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} alt="contact" />
                     {contacts.find((c) => c.id === activeThread)?.name}
                   </div>
                   <div className="pulse-chat-history">
@@ -265,7 +265,7 @@ export default function Social() {
           <div className="pulse-profile">
             <div className="pulse-profile-header">
               <div className="pulse-profile-avatar">
-                <img src={`/images/avatar_${(Number(currentUser.id) % 2) + 1}.jpg`} alt={currentUser.name} />
+                <img src={`/images/avatar_${(Number(currentUser.id) % 7) + 1}.jpg`} alt={currentUser.name} />
               </div>
               <div className="pulse-profile-info">
                 <div className="pulse-profile-name-row">
