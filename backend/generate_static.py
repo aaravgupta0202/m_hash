@@ -18,10 +18,7 @@ POST_IMAGES = [
   "/images/post_travel.jpg"
 ]
 
-AVATAR_IMAGES = [
-  "/images/avatar_1.jpg",
-  "/images/avatar_2.jpg"
-]
+AVATAR_IMAGES = [f"/images/avatar_{i}.jpg" for i in range(1, 8)]
 
 EMAIL_SUBJECTS = [
   "Q3 planning notes", "Re: Budget approval needed", "Weekly sync agenda", "Contract renewal - action required",
@@ -47,10 +44,12 @@ def seeded_random(seed):
 social_data = {"posts": [], "threads": {}}
 r = seeded_random(42)
 for i in range(8):
+    author_idx = int(r() * len(NAMES))
+    author_name = NAMES[author_idx]
     social_data["posts"].append({
         "id": f"post-static-{i}",
-        "author": NAMES[int(r() * len(NAMES))],
-        "authorAvatar": AVATAR_IMAGES[int(r() * len(AVATAR_IMAGES))],
+        "author": author_name,
+        "authorAvatar": AVATAR_IMAGES[author_idx % len(AVATAR_IMAGES)],
         "caption": POST_CAPTIONS[int(r() * len(POST_CAPTIONS))],
         "likes": int(r() * 180) + 5,
         "comments": int(r() * 20),
