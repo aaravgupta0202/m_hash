@@ -1,272 +1,146 @@
-# Silent Shift — Security Behavior Center
+# tellTale — demo console
 
-**Detecting the insider before the incident.**
+**Context-aware behavioural transition detection.**
+Manipal Hackathon 2026 · Round 1 · Cybersecurity · Team 001
 
-A prototype behavioral-security platform built around one idea: don't ask
-*"was this event malicious?"* — ask *"how has this account's behavior changed,
-and does the change make sense in context?"*
+Most security tooling asks *"was this event malicious?"* and drowns an analyst in alerts that
+are almost all ordinary work. tellTale asks two different questions:
 
-The repo contains a small mock organization (18 fictional employees), three
-mock applications that generate realistic activity (Social, Gmail, Finance),
-and a fourth application — the **Security Behavior Center** — that watches
-all of them through one application-agnostic event pipeline and explains,
-in plain language, why an account's behavior looks like it's drifting.
+1. **How has this identity's behaviour changed** against its own frozen baseline and its peer
+   cohort — not against a global rule?
+2. **Does the organisation's own operational record explain the change?** A ticket, an on-call
+   rotation, an approved trip, a role change.
 
-> This is a hackathon prototype. The scoring model is a transparent,
-> hand-tuned heuristic — not a validated production security standard.
-
----
-
-## 1. Architecture
-
-```mermaid
-flowchart LR
-    subgraph MockApps["Mock Applications"]
-        Social["Social (Instagram-like)"]
-        Gmail["Gmail-like"]
-        Finance["Finance"]
-    end
-
-    subgraph Backend["FastAPI Backend"]
-        Ingest["Event Ingestion\n(app/services/event_service.py)"]
-        Events[("events\n(unified schema)")]
-        Baseline["Baseline Engine"]
-        Deviation["Deviation Engine"]
-        Context["Context Engine"]
-        Correlation["Temporal Correlation"]
-        Risk["Risk + Confidence Engine"]
-        Explain["Explainability"]
-        Alerts[("alerts")]
-    end
-
-    Frontend["React SOC Dashboard"]
-
-    Social --> Ingest
-    Gmail --> Ingest
-    Finance --> Ingest
-    Ingest --> Events
-    Events --> Baseline --> Deviation --> Correlation --> Risk
-    Context --> Risk
-    Risk --> Explain --> Alerts
-    Alerts --> Frontend
-    Events --> Frontend
-```
-
-The detection engine (`app/detection`, `app/context`, `app/scoring`) never
-imports anything from `app/api/apps.py` or knows the words "Instagram" or
-"Gmail" — it only ever reads the unified `Event` model. A future real
-integration would only need to call `event_service.record_event(...)`.
-
-### Pipeline
-
-```
-Mock Applications → Activity Events → Unified Event Model → Feature
-Extraction (Baseline) → Deviation Detection → Context Evaluation →
-Temporal / Multi-Signal Correlation → Risk + Confidence →
-Explainable Alert → Security Analyst Dashboard
-```
+If the record explains it, the anomaly is suppressed — and the suppression is logged with the
+record that caused it, so the claim is auditable rather than convenient. If no record explains
+it, the anomaly is ranked by **expected cost of inaction**, not by raw score. And if a record
+exists but the subject created it themselves, that attempt is a signal of its own.
 
 ---
 
-## 2. Repository structure
-
-```
-backend/
-  app/
-    api/            REST endpoints (users, events, alerts, simulations, apps, settings)
-    models/         SQLAlchemy ORM models
-    schemas/        Pydantic request bodies
-    services/       event ingestion, alert lifecycle, simulation runner, websockets
-    detection/      baseline engine, deviation engine, temporal correlation, config
-    context/        context engine (legitimate-explanation lookups)
-    scoring/        risk engine + deterministic explanation generator
-    database/       SQLAlchemy session/engine
-  seed/             reference data, activity profiles, scenario generators, seed runner
-  tests/            pytest suite
-frontend/
-  src/
-    pages/security/ Overview, Alerts, Users, UserDetail, Timeline, Events, Simulations, Settings
-    pages/apps/     Social, Gmail, Finance mock apps
-    layouts/        SecurityShell (SOC nav), AppShell (mock-app nav + session context)
-    components/     shared UI primitives, BehavioralStateTrack, EventTimeline
-    hooks/          CurrentUserContext, SessionContext, useActionRecorder
-    services/       typed fetch client
-    types/          shared TypeScript types mirroring the API
-```
-
----
-
-## 3. Running it
-
-### Backend
+## Running it
 
 ```bash
-cd backend
-python -m venv .venv
-./.venv/Scripts/activate   # or source .venv/bin/activate on macOS/Linux
-pip install -r requirements.txt
-python -m uvicorn app.main:app --port 8000
-```
-
-On first launch the app creates `security_center.db` (SQLite) and seeds it
-automatically: 18 users, ~30 days of baseline activity, and three narrative
-scenarios (see below). Delete `security_center.db` and restart to reseed.
-
-Run the test suite:
-
-```bash
-python -m pytest tests/ -q
-```
-
-### Frontend
-
-```bash
-cd frontend
+cd telltale
 npm install
-npm run dev
+npm run dev          # http://localhost:3000
 ```
 
-Open `http://localhost:5173`. The Vite dev server proxies `/api/*`
-(including the simulation WebSocket) to the backend on port 8000.
-
-- **Security Center**: `/security/overview`, `/alerts`, `/users`, `/timeline`, `/events`, `/simulations`, `/settings`
-- **Mock apps**: `/apps/social`, `/apps/gmail`, `/apps/finance` — pick "Signed in as" to act as any of the 18 users, and use the **Session** bar to simulate a new device or an unrecognized location for that session.
-
----
-
-## 4. The unified event model
-
-Every application — mock or, eventually, real — reports activity through a
-single call:
-
-```python
-record_event(
-    db, user_id=..., application="GMAIL", event_type="ATTACHMENT_DOWNLOAD",
-    action="ATTACHMENT_DOWNLOAD", resource_id=..., resource_type=...,
-    resource_sensitivity="CONFIDENTIAL", device_name=..., location=...,
-    data_volume=..., metadata={...},
-)
-```
-
-The `events` table (`app/models/event.py`) is the only thing the detection
-engine reads. Adding a fourth application means writing an adapter that
-calls `record_event` — nothing in `app/detection`, `app/context`, or
-`app/scoring` changes.
-
----
-
-## 5. Detection methodology
-
-1. **Baseline** (`app/detection/baseline_engine.py`) — for every user, a
-   `LONG_TERM` baseline (a ~21-day window ending 3 days ago) and a `RECENT`
-   baseline (the last 3 days) are computed from that user's own history:
-   normal hour range, usual locations/devices, application mix, resource
-   categories, action frequencies, and daily event/volume statistics.
-   Observed hours only ever *widen* a user's declared working-hours
-   contract, never narrow it below it.
-
-2. **Deviation** (`app/detection/deviation_engine.py`) — each event is
-   compared against the long-term baseline: unusual time, new device,
-   unusual location, unusual application, unusual/sensitive resource,
-   unusual or sensitive action, and (in aggregate) unusual event/data
-   volume over a trailing 24h window. An action or resource is only ever
-   flagged as "rare" if it is *both* a small share of activity *and* hasn't
-   happened often enough to be an established habit — a once-a-week task
-   that's still 100% normal for a role is not a deviation.
-
-3. **Context** (`app/context/context_engine.py`) — active `ContextEvent`
-   rows (project assignment, role change, approved travel, new-device
-   approval, temporary access, maintenance activity) discount the
-   deviation signals they plausibly explain, by a configurable factor per
-   context type. Unexplained high-severity signals surface a "no recent
-   role or project change explains this" note.
-
-4. **Temporal / multi-signal correlation**
-   (`app/detection/temporal_correlation.py`) — signals that span multiple
-   applications within a short window, cluster within an hour, or persist
-   across multiple days earn additive bonuses on top of the raw deviation
-   score. This is what turns six individually low/medium signals into one
-   high-confidence, correlated picture.
-
-5. **Risk + confidence** (`app/scoring/risk_engine.py`) — a fully
-   transparent, additive formula:
-
-   ```
-   risk = baseline_deviation
-        + sensitive_resource_bonus
-        + cross_app_correlation_bonus
-        + burst_correlation_bonus
-        + persistence_bonus
-   ```
-
-   (context discounts are already baked into each signal's score before
-   this sum). **Confidence** is scored separately — from baseline sample
-   size and the number/diversity of corroborating signals — answering
-   "how sure are we this is a meaningful deviation," not "how bad does it
-   look." All weights live in `app/detection/config.py`.
-
-6. **Explanation** (`app/scoring/explain.py`) — bullets are generated
-   deterministically from the signal list; nothing here is an LLM call.
-
-7. **Behavioral state** maps the 0–100 risk score to
-   `NORMAL → DRIFT → SUSPICIOUS → HIGH_RISK`, visualized as a track on
-   every user's investigation page — the product's central visual concept.
-
-8. **Alerts** (`app/services/alert_service.py`) are only created once risk
-   clears a threshold (default 30/100), and an alert already open for a
-   user is *extended* (evidence merged, `last_observed` bumped) rather than
-   duplicated — so a single incident tells one coherent story across days
-   instead of generating one alert per anomaly.
-
----
-
-## 6. Demo scenarios
-
-Seeded automatically on first launch, and re-playable live from the
-**Simulation Center**:
-
-| Scenario | What it shows |
-|---|---|
-| **Normal Organization** | Ordinary daily activity — the baseline for everything else. |
-| **Legitimate Project Change** (Priya Nair) | A real behavioral shift (new project, new resources, more email volume) that the context engine explains — risk stays low. |
-| **Compromised Account** (Jasmine Carter) | A 6-stage takeover — new device → odd hour → new location → sensitive resource access → large data volume → a fast cross-app burst (Gmail → Social → Finance within one hour). Risk climbs gradually, then spikes. |
-| **Malicious Insider** (Wei Zhang) | Same device, same hours, same location — but scope-of-access and action-based drift (viewing accounts outside their portfolio, exporting financial data via email, adding a beneficiary and transferring funds). Demonstrates detection without any device/location signal. |
-| **Cross-Application Attack** | Replays the compromised-account's cross-app burst live against a random, previously-normal user, for a fast, dramatic demo. |
-
-The Simulation Center streams each scenario's events over a WebSocket as
-they're recorded, then shows the resulting risk score, explanation, and any
-alert generated — in real time, against the real detection pipeline (no
-canned numbers).
-
----
-
-## 7. Testing
-
-`backend/tests/` covers baseline computation, deviation detection
-(including the "established habit isn't a deviation" false-positive
-guard), context discounting, risk scoring (multiple weak signals outscore
-one isolated signal; cross-application signals earn a correlation bonus),
-and — using the real seed generators — the three behavioral claims that
-matter most: a legitimate project change never becomes critical, a
-compromised account eventually becomes high risk, and normal users stay
-quiet.
+For the static export a judge can serve from anywhere:
 
 ```bash
-cd backend && python -m pytest tests/ -q
+npm run build        # verifies fixtures, exports to telltale/out/
+npx serve out        # or: python -m http.server -d out 8080
 ```
 
----
+`npm run build` runs `scripts/verify-fixtures.mjs` first and **fails the build** if any
+displayed number stops agreeing with the numbers shown beside it. There are no network calls
+at runtime, so the export works offline and from a plain file server.
 
-## 8. What's next
+## What this repository is
 
-- Swap SQLite for Postgres by changing `DATABASE_URL` (the ORM layer is
-  already database-agnostic).
-- Peer-group baselining (compare a user against others in the same role,
-  not just their own history).
-- A natural-language "explain this investigation" pass on top of the
-  existing structured evidence (explicitly *not* required for detection to
-  work — see product spec).
-- Persisting simulation replays as first-class fixtures for regression
-  testing the detection engine itself.
-#   m _ h a s h  
- 
+A **static showcase console**. Every byte of data is a literal in a TypeScript fixture file
+under `telltale/src/lib/fixtures/`. There is no backend, no database, no API and no model at
+runtime. The detection engine this interface describes is designed in the master document, not
+implemented here, and it is not faked with live computation.
+
+| Real — designed and specified | Fixture — authored for the demo |
+|---|---|
+| The detection design: context verification, the manufactured-context detector, anchored cohort divergence, the order-2 Markov trajectory model, logistic fusion | All data: 100 subjects, 41 suppression rows, 18 workforce members, one synthetic day |
+| The mathematics: median/MAD robust statistics, Katz backoff, Jensen–Shannon divergence, CUSUM, additive log-odds | All scores: every risk score, logit contribution, transition probability and Z-score |
+| The architecture: cloud connectors, the optional endpoint Sensor, the pseudonymisation boundary, jurisdiction profiles | All connector state: heartbeats, volumes, the CloudTrail outage |
+| The constraints: dual-custody unmasking, metadata-only collection, suppression retention | All captures: every thumbnail is drawn from an integer seed — no image file exists in this repo |
+
+No accuracy figure appears anywhere in the build. Evaluation on a labelled corpus is pending,
+and quoting a number before running it would be the least defensible thing on the screen.
+
+## The three scenarios
+
+The same action — first-ever access to a critical repository — gets three different and
+correct answers. All three are one click from the launcher in the bottom-right of every page.
+
+| Subject | Score | What happened |
+|---|---|---|
+| `#8830` | **14** — suppressed | An authorising ticket, created a day earlier by a different identity, with a scope that resolves to the repository. All four context tests pass. The anomaly was real; the explanation held. |
+| `#4912` | **93** — critical | Clone → archive → external S3 in a 28-minute window at 01:22, from an unseen commercial VPN, with a resignation filed four days earlier. Nothing in any context source authorises any of it. |
+| `#2071` | **78** — high | A ticket exists and covers the repository. The subject created it and assigned it to themselves 40 minutes before the access. Provenance fails, and the context term inverts from a discount into a penalty. |
+
+`#2071` is the interesting one: the behavioural terms are small. The score comes from the
+context term. An analyst reading the contribution table sees immediately that this is a context
+finding, not a behaviour finding.
+
+## Two modules that never mix
+
+The app has a **risk module** (pseudonymous subjects, scores, dossiers) and a **workforce
+module** (named employees, working time, application usage, captures). They never appear on the
+same screen, there is no link from a subject to a workforce profile, and the sidebar shows which
+role you are acting as.
+
+Crossing between them is the dual-custody unmasking flow: two named approvals, recorded against
+the case. In this build that is a modal explaining what would happen.
+
+No category anywhere is labelled productive or unproductive, and no productivity score is
+computed. Composition is a behavioural fact; productivity is a management judgement, and letting
+the second into a risk model is how behavioural security becomes surveillance.
+
+## Every number on screen is checkable
+
+The product claims a score is not a black box. A demo whose contribution table does not add up
+argues against its own pitch, so the relationships are asserted rather than hoped for.
+**899 assertions on the fixtures** run before the build starts, and **281 checks on the
+rendered pages** run after it finishes:
+
+- `Σ contributions = logit` on all 15 investigation pages, `σ(logit) = P`, `round(P × 100) = risk`
+- `Z = (x − median) / (1.4826 · MAD)`, recomputed from the peer array printed on the same page
+- Cohort median and MAD recomputed from the committed peer values
+- `expected cost = risk × asset criticality`, and the queue is sorted by it
+- One intercept across every dossier, and no negative coefficient on an anomaly feature
+- A feature whose evidence says "within baseline" contributes exactly `0.00`
+- Printed session perplexity reproduces the printed trajectory logit
+- The dashboard descent reconciles: the four context reason codes sum to the suppression total
+- Working minutes, hour slots and category time agree across the two screens that show them
+- No workforce name in the risk module; no risk score in the workforce module; the words
+  "productive", "productivity" and "AUROC" appear in no fixture
+
+The second set matters for a different reason: the violations most likely to slip through are
+in hand-written prose, not in data. A sentence like *"see this subject's workforce profile"*
+would pass every fixture assertion and break the module separation anyway, so the export itself
+is scanned for workforce names on risk pages, subject pseudonyms on workforce pages, links
+across the boundary, accuracy claims, placeholder text and bitmap imagery.
+
+```bash
+cd telltale
+npm run verify     # 899 fixture assertions
+npm run build      # verify -> export -> 281 checks on the rendered HTML
+```
+
+## Layout
+
+```
+PRD.md                      Build specification — authoritative for this repo
+tellTale Master Doc.pdf     Product, technical, feasibility and business document
+telltale/
+  src/app/                  10 routes, two modules, all statically exported
+  src/lib/fixtures/         Every number in the build
+  src/components/risk/      Composite timeline, contribution table, context checks,
+                            attack path, cohort strip, evidence list
+  src/components/workforce/ Activity ribbons, time by category, capture placeholders
+  scripts/
+    generate-population.mjs Seeded generator; output committed, never run at runtime
+    verify-fixtures.mjs     899 assertions on the fixtures, before the build
+    check-export.mjs        281 checks on the rendered pages, after it
+    inspect-fixtures.mjs    Ad-hoc: what each queue row's table actually says
+    flatten-segments.mjs    Windows-only export fix, no-op elsewhere
+```
+
+## Notes on the build
+
+- **Next.js 16** App Router, TypeScript strict, Tailwind v4, shadcn/ui, `output: 'export'`.
+- The composite timeline is **hand-built SVG**, not a chart library. Four lanes sharing one hour
+  axis is not a chart-library shape, and there is exactly one `x()` in the file so the lanes
+  cannot drift out of alignment. Recharts draws the dashboard; React Flow draws the attack path.
+- The generator is seeded and its **output is committed**. Nothing randomises at runtime, so the
+  numbers in the demo video and the numbers on a judge's screen are the same numbers.
+- Desktop 1440×900 is the target. Narrower viewports degrade gracefully; they are not optimised.
+- `flatten-segments.mjs` works around a real Next.js bug where Windows exports write segment
+  prefetch payloads into subdirectories instead of flat files, which 404s on every link hover.

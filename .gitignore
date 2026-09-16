@@ -1,18 +1,13 @@
-# Python
-backend/.venv/
-backend/__pycache__/
-backend/**/__pycache__/
-backend/*.db
-backend/security_center.db
-backend/.pytest_cache/
-*.pyc
-
-# Node / frontend
-frontend/node_modules/
-frontend/dist/
-frontend/.vite/
+# Next.js / Node
+telltale/node_modules/
+telltale/.next/
+telltale/out/
+telltale/next-env.d.ts
+telltale/.turbo/
+telltale/tsconfig.tsbuildinfo
 
 # Editor / OS
 .vscode/
+.idea/
 .DS_Store
 Thumbs.db
