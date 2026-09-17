@@ -30,31 +30,31 @@ export function ContributionTable({
     <div className="overflow-x-auto">
       <table className="w-full min-w-[720px] border-collapse text-sm">
         <thead>
-          <tr className="border-b border-line">
-            <th className="label px-4 py-2 text-left text-grey">Feature</th>
-            <th className="label px-4 py-2 text-left text-grey">Evidence</th>
-            <th className="label px-4 py-2 text-right text-grey">Logit</th>
-            <th className="label w-44 px-4 py-2 text-left text-grey">Contribution</th>
+          <tr className="border-b border-line bg-slate-50/80">
+            <th className="label px-4 py-2.5 text-left text-slate-500 text-[10px]">Feature</th>
+            <th className="label px-4 py-2.5 text-left text-slate-500 text-[10px]">Evidence</th>
+            <th className="label px-4 py-2.5 text-right text-slate-500 text-[10px]">Logit</th>
+            <th className="label w-48 px-4 py-2.5 text-left text-slate-500 text-[10px]">Contribution</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-line">
           {contributions.map((c) => {
             const zero = c.logit === 0;
             const raises = c.logit > 0;
             const intercept = c.feature.startsWith("Base rate");
             return (
-              <tr key={c.feature} className={cn("border-b border-line/70", zero && "text-grey")}>
+              <tr key={c.feature} className={cn("hover:bg-slate-50/70 transition-colors", zero && "text-slate-400")}>
                 <td className="px-4 py-2.5 align-top">
-                  <span className={cn("font-medium", zero ? "text-grey" : "text-ink")}>{c.feature}</span>
-                  {intercept && <span className="machine ml-1.5 text-[10px] text-grey">β₀</span>}
+                  <span className={cn("font-semibold", zero ? "text-slate-400" : "text-slate-900")}>{c.feature}</span>
+                  {intercept && <span className="machine ml-1.5 text-[10px] text-slate-500">β₀</span>}
                 </td>
-                <td className="max-w-md px-4 py-2.5 align-top text-xs leading-relaxed text-grey">
+                <td className="max-w-md px-4 py-2.5 align-top text-xs leading-relaxed text-slate-600">
                   <EvidenceText text={c.evidence} />
                 </td>
                 <td
                   className={cn(
-                    "machine px-4 py-2.5 text-right align-top font-medium whitespace-nowrap",
-                    zero ? "text-grey" : raises ? "text-red" : "text-green",
+                    "machine px-4 py-2.5 text-right align-top font-bold whitespace-nowrap",
+                    zero ? "text-slate-400" : raises ? "text-red-600" : "text-emerald-700",
                   )}
                 >
                   {zero ? "0.00" : `${raises ? "+" : "−"}${Math.abs(c.logit).toFixed(2)}`}
@@ -67,16 +67,16 @@ export function ContributionTable({
           })}
         </tbody>
         <tfoot>
-          <tr className="border-t-2 border-purple/30 bg-purple-lt/50">
-            <td className="px-4 py-2.5 align-middle font-semibold text-purple">Σ contributions</td>
-            <td className="machine px-4 py-2.5 align-middle text-xs text-grey">
+          <tr className="border-t-2 border-emerald-500 bg-emerald-50/80">
+            <td className="px-4 py-3 align-middle font-bold text-emerald-950">Σ contributions</td>
+            <td className="machine px-4 py-3 align-middle text-xs text-slate-700">
               logit {fmt(logitTotal)} → σ(logit) = {probability.toFixed(2)} → risk {risk}
             </td>
-            <td className="machine px-4 py-2.5 text-right align-middle font-semibold text-purple">
+            <td className="machine px-4 py-3 text-right align-middle font-bold text-emerald-950">
               {fmt(sum)}
             </td>
-            <td className="px-4 py-2.5 align-middle">
-              <span className="machine text-xs font-semibold text-purple">
+            <td className="px-4 py-3 align-middle">
+              <span className="machine text-xs font-bold text-emerald-900">
                 calibrated P(malicious) = {probability.toFixed(2)}
               </span>
             </td>
@@ -95,11 +95,14 @@ function Bar({ logit, scale }: { logit: number; scale: number }) {
   const pct = (Math.abs(logit) / scale) * 50;
   const raises = logit > 0;
   return (
-    <div className="relative h-4 w-full min-w-40 rounded-sm bg-purple-lt/70">
-      <div className="absolute inset-y-0 left-1/2 w-px bg-line" />
+    <div className="relative h-4.5 w-full min-w-40 rounded border border-line bg-slate-100 overflow-hidden">
+      <div className="absolute inset-y-0 left-1/2 w-px bg-slate-300" />
       {logit !== 0 && (
         <div
-          className={cn("bar-grow absolute inset-y-0.5 rounded-[2px]", raises ? "bg-red/70" : "bg-green/70")}
+          className={cn(
+            "bar-grow absolute inset-y-0.5 rounded-[2px]",
+            raises ? "bg-red-500" : "bg-emerald-600",
+          )}
           style={
             raises
               ? { left: "50%", width: `${pct}%`, transformOrigin: "left" }
@@ -110,6 +113,7 @@ function Bar({ logit, scale }: { logit: number; scale: number }) {
     </div>
   );
 }
+
 
 /**
  * Evidence strings are part prose, part machine output. Splitting on the
@@ -125,7 +129,7 @@ function EvidenceText({ text }: { text: string }) {
     <>
       {parts.map((p, i) =>
         i % 2 === 1 ? (
-          <span key={i} className="machine text-ink">
+          <span key={i} className="machine font-semibold text-slate-900">
             {p}
           </span>
         ) : (

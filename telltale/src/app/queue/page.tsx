@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Inbox, Clock, Flame, ShieldAlert } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Panel } from "@/components/panel";
 import { QueueTable } from "@/components/risk/queue-table";
@@ -20,23 +20,25 @@ export default function QueuePage() {
         right={
           <Link
             href="/suppressions"
-            className="flex items-center gap-1.5 rounded-sm border border-line bg-purple-lt px-3 py-2 text-sm font-medium text-purple hover:bg-purple/10"
+            className="flex items-center gap-2 rounded-md border border-emerald-300 bg-emerald-50 px-3.5 py-2 text-xs font-semibold text-emerald-800 hover:bg-emerald-100 hover:border-emerald-400 shadow-xs transition-colors"
           >
             {SUPPRESSED_TODAY.toLocaleString("en-US")} suppressed today — view log
-            <ArrowUpRight className="size-3.5" />
+            <ArrowUpRight className="size-4" />
           </Link>
         }
       />
 
-      <div className="mb-4 grid grid-cols-4 gap-4">
-        <Stat label="In queue" value={String(QUEUE_ROWS.length)} sub="after identity aggregation" />
-        <Stat label="Inside capacity" value={String(aboveLine.length)} sub="6 analyst-hours today" />
+      <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <Stat icon={Inbox} label="In queue" value={String(QUEUE_ROWS.length)} sub="after identity aggregation" />
+        <Stat icon={Clock} label="Inside capacity" value={String(aboveLine.length)} sub="6 analyst-hours today" />
         <Stat
+          icon={Flame}
           label="Highest expected cost"
           value={QUEUE_ROWS[0].pseudonym}
           sub={`${QUEUE_ROWS[0].expectedCost.toFixed(1)} — risk ${QUEUE_ROWS[0].risk}`}
         />
         <Stat
+          icon={ShieldAlert}
           label="Highest raw risk"
           value={topByRisk.pseudonym}
           sub={`risk ${topByRisk.risk} — ranks #${topByRisk.rank}`}
@@ -50,12 +52,15 @@ export default function QueuePage() {
   );
 }
 
-function Stat({ label, value, sub }: { label: string; value: string; sub: string }) {
+function Stat({ icon: Icon, label, value, sub }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string; sub: string }) {
   return (
-    <div className="panel px-4 py-3">
-      <p className="label text-grey">{label}</p>
-      <p className="machine mt-1 text-2xl leading-none font-semibold text-purple">{value}</p>
-      <p className="mt-1.5 text-xs text-grey">{sub}</p>
+    <div className="panel px-4 py-3 bg-white border border-line rounded-lg shadow-xs">
+      <div className="flex items-center justify-between">
+        <p className="label text-slate-500">{label}</p>
+        <Icon className="size-4 text-emerald-600" />
+      </div>
+      <p className="machine mt-1.5 truncate text-2xl leading-none font-bold text-slate-900">{value}</p>
+      <p className="mt-1.5 text-xs text-slate-500">{sub}</p>
     </div>
   );
 }

@@ -18,10 +18,10 @@ function lcg(seed: number) {
 }
 
 const PALETTES: [string, string][] = [
-  ["#efeaf8", "#d9d0ee"],
-  ["#eaf2ee", "#d3e6dc"],
-  ["#f2eee7", "#e5dbcb"],
-  ["#eceef6", "#d7dbeb"],
+  ["#f8fafc", "#e2e8f0"],
+  ["#f1f5f9", "#cbd5e1"],
+  ["#ecfdf5", "#d1fae5"],
+  ["#f0fdf4", "#e2e8f0"],
 ];
 
 export function CaptureThumb({
@@ -39,12 +39,12 @@ export function CaptureThumb({
   const blocks = Array.from({ length: cols * 3 }, () => ({
     w: 30 + rand() * 60,
     h: 4 + rand() * 9,
-    o: 0.12 + rand() * 0.3,
+    o: 0.15 + rand() * 0.35,
   }));
   const gid = `cap-${seed}`;
 
   return (
-    <div className={`${aspect} w-full overflow-hidden rounded-sm border border-line bg-white`}>
+    <div className={`${aspect} w-full overflow-hidden rounded border border-line bg-slate-50 shadow-xs`}>
       <svg viewBox="0 0 320 200" className="size-full" role="img" aria-label="Generated placeholder capture">
         <defs>
           <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
@@ -56,13 +56,13 @@ export function CaptureThumb({
 
         {chrome && (
           <>
-            <rect x="14" y="14" width="292" height="172" rx="3" fill="#fff" fillOpacity="0.72" />
-            <rect x="14" y="14" width="292" height="16" rx="3" fill="var(--tt-purple)" fillOpacity="0.1" />
+            <rect x="14" y="14" width="292" height="172" rx="3" fill="#ffffff" fillOpacity="0.95" stroke="#cbd5e1" strokeWidth="0.8" />
+            <rect x="14" y="14" width="292" height="16" rx="3" fill="#059669" fillOpacity="0.08" />
             {[24, 34, 44].map((cx) => (
-              <circle key={cx} cx={cx} cy="22" r="2.6" fill="var(--tt-grey)" fillOpacity="0.35" />
+              <circle key={cx} cx={cx} cy="22" r="2.6" fill="#94a3b8" fillOpacity="0.5" />
             ))}
-            <rect x="60" y="18.5" width="90" height="7" rx="3.5" fill="var(--tt-grey)" fillOpacity="0.2" />
-            <rect x="14" y="30" width="72" height="156" fill="var(--tt-purple)" fillOpacity="0.05" />
+            <rect x="60" y="18.5" width="90" height="7" rx="3.5" fill="#cbd5e1" fillOpacity="0.5" />
+            <rect x="14" y="30" width="72" height="156" fill="#f8fafc" />
           </>
         )}
 
@@ -79,8 +79,8 @@ export function CaptureThumb({
               width={Math.min(b.w, 200 / cols - 10)}
               height={b.h}
               rx="2"
-              fill="var(--tt-ink)"
-              fillOpacity={b.o}
+              fill="#0f172a"
+              fillOpacity={b.o * 0.4}
             />
           );
         })}
@@ -92,8 +92,8 @@ export function CaptureThumb({
             width={40 + (i % 3) * 8}
             height="6"
             rx="3"
-            fill="var(--tt-purple)"
-            fillOpacity="0.16"
+            fill="#059669"
+            fillOpacity="0.15"
           />
         ))}
       </svg>

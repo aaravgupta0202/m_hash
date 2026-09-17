@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Layers, ShieldCheck, UserCheck, AlertTriangle, Activity } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Panel } from "@/components/panel";
 import { ConnectorStrip } from "@/components/connectors/strip";
@@ -13,6 +13,8 @@ import {
   SUBJECTS,
 } from "@/lib/fixtures";
 
+const ICONS = [Layers, ShieldCheck, UserCheck, AlertTriangle];
+
 export default function DashboardPage() {
   return (
     <>
@@ -23,26 +25,34 @@ export default function DashboardPage() {
         right={
           <Link
             href="/queue"
-            className="flex items-center gap-1.5 rounded-sm bg-purple px-3 py-2 text-sm font-medium text-white hover:bg-purple-dk"
+            className="flex items-center gap-2 rounded-md bg-emerald-600 hover:bg-emerald-700 px-3.5 py-2 text-xs font-semibold text-white shadow-xs transition-colors"
           >
-            Open the queue
+            <span>Open the queue</span>
             <ArrowRight className="size-3.5" />
           </Link>
         }
       />
 
       {/* Row 1 — the descent from a million events to three findings. */}
-      <div className="mb-4 grid grid-cols-4 gap-4">
-        {STAT_TILES.map((t, i) => (
-          <div key={t.label} className="panel relative px-4 py-3.5">
-            <p className="label text-grey">{t.label}</p>
-            <p className="machine mt-1.5 text-3xl leading-none font-semibold text-purple">{t.value}</p>
-            <p className="mt-2 text-xs leading-relaxed text-grey">{t.sub}</p>
-            {i < STAT_TILES.length - 1 && (
-              <ArrowRight className="absolute top-1/2 -right-3 z-10 size-4 -translate-y-1/2 bg-white text-line" />
-            )}
-          </div>
-        ))}
+      <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {STAT_TILES.map((t, i) => {
+          const Icon = ICONS[i] ?? Layers;
+          return (
+            <div key={t.label} className="panel relative bg-white border border-line p-4 rounded-lg overflow-hidden shadow-xs group hover:border-emerald-500/50 transition-colors">
+              <div className="flex items-center justify-between">
+                <p className="label text-slate-500 text-[10px]">{t.label}</p>
+                <Icon className="size-4 text-emerald-600 group-hover:text-emerald-700 transition-colors" />
+              </div>
+              <p className="machine mt-2 text-3xl leading-none font-bold text-slate-900 tracking-tight">{t.value}</p>
+              <p className="mt-2.5 text-xs leading-relaxed text-slate-500">{t.sub}</p>
+              {i < STAT_TILES.length - 1 && (
+                <div className="absolute top-1/2 -right-3 z-10 hidden lg:flex size-6 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-white text-slate-400 shadow-xs">
+                  <ArrowRight className="size-3" />
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* Row 2 — where the noise went, and what the month looked like. */}
@@ -71,8 +81,9 @@ export default function DashboardPage() {
         title="Connector health"
         sub="Six sources, each with a dead-man heartbeat. One is behind."
         right={
-          <Link href="/connectors" className="text-xs text-purple hover:underline">
-            Connector detail →
+          <Link href="/connectors" className="flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:text-emerald-700 hover:underline transition-colors">
+            <span>Connector detail</span>
+            <ArrowRight className="size-3" />
           </Link>
         }
         bodyClassName="p-0"
@@ -83,7 +94,7 @@ export default function DashboardPage() {
         <ConnectorStrip />
       </Panel>
 
-      <p className="mt-4 text-xs leading-relaxed text-grey">
+      <p className="mt-4 text-xs leading-relaxed text-slate-500">
         {SUBJECTS.length} identities are in scope on the pinned synthetic day. Nothing on this screen is
         computed at runtime — every figure is a fixture, and the relationships between them are asserted by a
         verifier that runs as part of the build.
@@ -91,3 +102,4 @@ export default function DashboardPage() {
     </>
   );
 }
+

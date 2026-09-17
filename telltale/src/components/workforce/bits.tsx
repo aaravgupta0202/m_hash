@@ -18,9 +18,9 @@ import type { CategoryTime } from "@/lib/fixtures";
  */
 
 const STATE_CLASS = {
-  active: "bg-green/70",
-  idle: "bg-purple/35",
-  offline: "bg-purple-lt",
+  active: "bg-emerald-600",
+  idle: "bg-emerald-200",
+  offline: "bg-slate-200",
 } as const;
 
 export const STATE_LABEL = { active: "Active", idle: "Idle", offline: "Offline" } as const;
@@ -34,17 +34,17 @@ export function ActivityRibbon({
 }) {
   return (
     <div className="min-w-48">
-      <div className="flex gap-px overflow-hidden rounded-sm">
+      <div className="flex gap-px overflow-hidden rounded-[3px] border border-line bg-slate-100 p-0.5">
         {ribbon.map((state, h) => (
           <div
             key={h}
             title={`${String(h).padStart(2, "0")}:00 — ${STATE_LABEL[state]}`}
-            className={cn("h-3.5 flex-1", STATE_CLASS[state])}
+            className={cn("h-3.5 flex-1 rounded-[1px]", STATE_CLASS[state])}
           />
         ))}
       </div>
       {showHours && (
-        <div className="machine mt-1 flex justify-between text-[9px] text-grey">
+        <div className="machine mt-1 flex justify-between text-[9px] text-slate-500">
           {[0, 6, 12, 18, 24].map((h) => (
             <span key={h}>{String(h).padStart(2, "0")}:00</span>
           ))}
@@ -60,7 +60,7 @@ export function RibbonLegend() {
       {(["active", "idle", "offline"] as const).map((s) => (
         <span key={s} className="flex items-center gap-1.5">
           <span className={cn("size-2.5 rounded-sm", STATE_CLASS[s])} />
-          <span className="text-[11px] text-grey">{STATE_LABEL[s]}</span>
+          <span className="text-[11px] text-slate-500">{STATE_LABEL[s]}</span>
         </span>
       ))}
     </div>
@@ -68,16 +68,16 @@ export function RibbonLegend() {
 }
 
 const CATEGORY_COLOR: Record<string, string> = {
-  development: "#351c75",
-  browser: "#5b41a0",
-  communication: "#8472bb",
-  "file management": "#a798d0",
-  administrative: "#c9bfe4",
-  other: "#e3dcf2",
+  development: "#059669",
+  browser: "#0284c7",
+  communication: "#4f46e5",
+  "file management": "#0d9488",
+  administrative: "#d97706",
+  other: "#64748b",
 };
 
 export function categoryColor(category: string) {
-  return CATEGORY_COLOR[category] ?? "#e3dcf2";
+  return CATEGORY_COLOR[category] ?? "#64748b";
 }
 
 /** Time by category — never "productivity" (PRD §7.2). */
@@ -115,10 +115,10 @@ export function CategoryDonut({ data }: { data: CategoryTime[] }) {
             </circle>
           ))}
         </g>
-        <text x="70" y="66" textAnchor="middle" fontSize="18" className="machine" fill="var(--tt-purple)" fontWeight="600">
+        <text x="70" y="66" textAnchor="middle" fontSize="18" className="machine" fill="#0f172a" fontWeight="700">
           {fmtHours(total)}
         </text>
-        <text x="70" y="80" textAnchor="middle" fontSize="8.5" fill="var(--tt-grey)" className="label">
+        <text x="70" y="80" textAnchor="middle" fontSize="8.5" fill="#64748b" className="label font-bold">
           Tracked
         </text>
       </svg>
@@ -127,9 +127,9 @@ export function CategoryDonut({ data }: { data: CategoryTime[] }) {
         {data.map((d) => (
           <li key={d.category} className="flex items-center gap-2">
             <span className="size-2.5 shrink-0 rounded-sm" style={{ backgroundColor: categoryColor(d.category) }} />
-            <span className="min-w-0 flex-1 truncate text-sm text-ink capitalize">{d.category}</span>
-            <span className="machine shrink-0 text-xs text-grey">{fmtHours(d.minutes)}</span>
-            <span className="machine w-10 shrink-0 text-right text-xs text-ink">
+            <span className="min-w-0 flex-1 truncate text-xs text-slate-700 capitalize">{d.category}</span>
+            <span className="machine shrink-0 text-xs text-slate-500">{fmtHours(d.minutes)}</span>
+            <span className="machine w-10 shrink-0 text-right text-xs text-slate-900 font-semibold">
               {Math.round((d.minutes / total) * 100)}%
             </span>
           </li>
@@ -144,3 +144,4 @@ export function fmtHours(minutes: number) {
   const m = minutes % 60;
   return h === 0 ? `${m}m` : `${h}h ${String(m).padStart(2, "0")}m`;
 }
+

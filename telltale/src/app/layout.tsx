@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Shell } from "@/components/shell/shell";
 import "./globals.css";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"] });
+const sans = Plus_Jakarta_Sans({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "tellTale — Demo Console",
@@ -14,8 +22,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable} h-full`}>
-      <body className="min-h-full">
+    <html lang="en" className={`${sans.variable} ${jetbrains.variable} h-full`}>
+      <body className="min-h-full bg-background text-foreground font-sans antialiased selection:bg-emerald-100 selection:text-emerald-900">
         <TooltipProvider delay={150}>
           <Shell>{children}</Shell>
         </TooltipProvider>
@@ -23,3 +31,4 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     </html>
   );
 }
+

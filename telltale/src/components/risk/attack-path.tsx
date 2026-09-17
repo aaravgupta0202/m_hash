@@ -45,14 +45,14 @@ function StepNode({ data }: NodeProps<Node<StepData>>) {
   const color = SENSITIVITY_COLOR[data.sensitivity];
   return (
     <div
-      className="w-44 rounded-sm border bg-white px-2.5 py-2"
-      style={{ borderColor: color, borderLeftWidth: 3 }}
+      className="w-44 rounded-lg border border-line bg-white px-3 py-2 shadow-xs"
+      style={{ borderLeftColor: color, borderLeftWidth: 3.5 }}
       title={`${data.label} — ${data.sensitivity} sensitivity`}
     >
-      <Handle type="target" position={Position.Left} isConnectable={false} className="!size-1.5 !border-0 !bg-line" />
-      <p className="machine truncate text-[11px] leading-tight font-medium text-ink">{data.label}</p>
-      <p className="mt-1 text-[10px] leading-snug text-grey">{data.sublabel}</p>
-      <Handle type="source" position={Position.Right} isConnectable={false} className="!size-1.5 !border-0 !bg-line" />
+      <Handle type="target" position={Position.Left} isConnectable={false} className="!size-1.5 !border-0 !bg-slate-400" />
+      <p className="machine truncate text-[11px] leading-tight font-bold text-slate-900">{data.label}</p>
+      <p className="mt-1 text-[10px] leading-snug text-slate-500">{data.sublabel}</p>
+      <Handle type="source" position={Position.Right} isConnectable={false} className="!size-1.5 !border-0 !bg-slate-400" />
     </div>
   );
 }
@@ -90,18 +90,18 @@ export function AttackPath({
         animated: false,
         label: e.probability === undefined ? undefined : `P = ${formatP(e.probability)}`,
         labelShowBg: true,
-        labelBgPadding: [4, 2],
-        labelBgBorderRadius: 2,
-        labelBgStyle: { fill: "#fff", stroke: e.anomalous ? "var(--tt-red)" : "var(--tt-line)" },
+        labelBgPadding: [6, 3],
+        labelBgBorderRadius: 4,
+        labelBgStyle: { fill: "#ffffff", stroke: e.anomalous ? "#dc2626" : "#cbd5e1" },
         labelStyle: {
-          fill: e.anomalous ? "var(--tt-red)" : "var(--tt-grey)",
+          fill: e.anomalous ? "#dc2626" : "#475569",
           fontSize: 10,
           fontFamily: "var(--font-jetbrains)",
-          fontWeight: e.anomalous ? 600 : 400,
+          fontWeight: e.anomalous ? 700 : 500,
         },
         style: {
-          stroke: e.anomalous ? "var(--tt-red)" : "var(--tt-line)",
-          strokeWidth: e.anomalous ? 2 : 1.4,
+          stroke: e.anomalous ? "#dc2626" : "#94a3b8",
+          strokeWidth: e.anomalous ? 2.2 : 1.4,
         },
       })),
     [fixtureEdges],
@@ -115,7 +115,7 @@ export function AttackPath({
 
   return (
     <div>
-      <div className="h-60 w-full border-b border-line">
+      <div className="h-60 w-full border-b border-line bg-slate-50/50">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -137,21 +137,21 @@ export function AttackPath({
             [width, 220],
           ]}
         >
-          <Background variant={BackgroundVariant.Dots} gap={18} size={1} color="var(--tt-line)" />
+          <Background variant={BackgroundVariant.Dots} gap={18} size={1} color="#cbd5e1" />
         </ReactFlow>
       </div>
 
       <div className="px-4 py-2.5">
         {anomalous.length === 0 ? (
-          <p className="text-xs leading-relaxed text-grey">
+          <p className="text-xs leading-relaxed text-slate-500">
             No transition in this path falls below the surprisal threshold. The path is unusual in its
             resources, not in its shape.
           </p>
         ) : (
           <ul className="space-y-1">
             {anomalous.map((e) => (
-              <li key={`${e.from}-${e.to}`} className="text-xs leading-relaxed text-grey">
-                <span className="machine text-red">
+              <li key={`${e.from}-${e.to}`} className="text-xs leading-relaxed text-slate-600">
+                <span className="machine text-red-600 font-bold">
                   P({labelOf(e.to)} | {labelOf(e.from)}) = {formatP(e.probability ?? 0)}
                 </span>{" "}
                 — {describe(e.probability ?? 0)}

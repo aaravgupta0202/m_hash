@@ -44,8 +44,8 @@ export function SuppressionTable() {
 
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-1.5 border-b border-line px-4 py-2.5">
-        <span className="label mr-1 text-grey">Reason code</span>
+      <div className="flex flex-wrap items-center gap-1.5 border-b border-line bg-slate-50/70 px-4 py-2.5">
+        <span className="label mr-1 text-slate-500 text-[10px]">Reason code</span>
         <Chip active={reason === ALL} onClick={() => setReason(ALL)} count={ROWS.length}>
           All
         </Chip>
@@ -58,14 +58,14 @@ export function SuppressionTable() {
           type="button"
           onClick={() => setReason(REOPENED)}
           className={cn(
-            "ml-2 flex items-center gap-1.5 rounded-sm border px-2 py-1 text-xs",
+            "ml-2 flex items-center gap-1.5 rounded border px-2.5 py-1 text-xs font-semibold transition-all shadow-2xs",
             reason === REOPENED
-              ? "border-red bg-red text-white"
-              : "border-red/40 bg-red/5 text-red hover:bg-red/10",
+              ? "border-red-300 bg-red-100 text-red-900 font-bold"
+              : "border-red-200 bg-red-50 text-red-700 hover:bg-red-100/70",
           )}
         >
           Reopened
-          <span className={cn("machine text-[10px]", reason === REOPENED ? "text-white/70" : "text-red/70")}>
+          <span className={cn("machine text-[10px] px-1.5 py-0.2 rounded font-bold", reason === REOPENED ? "bg-red-200 text-red-900" : "bg-red-100 text-red-700")}>
             {ROWS.filter((s) => s.underReview).length}
           </span>
         </button>
@@ -74,15 +74,15 @@ export function SuppressionTable() {
       <div className="overflow-x-auto">
         <table className="w-full min-w-[960px] border-collapse text-sm">
           <thead>
-            <tr className="border-b border-line">
+            <tr className="border-b border-line bg-slate-50/80">
               {["", "Time", "Subject", "Anomaly", "Suppressed by", "Reason code", "Reviewable"].map((h) => (
-                <th key={h} className="label px-3 py-2 text-left text-grey">
+                <th key={h} className="label px-3 py-2.5 text-left text-slate-500 text-[10px]">
                   {h}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-line">
             {rows.map((s) => {
               const expanded = open === s.id;
               return (
@@ -90,51 +90,51 @@ export function SuppressionTable() {
                   <tr
                     onClick={() => setOpen(expanded ? null : s.id)}
                     className={cn(
-                      "cursor-pointer border-b border-line/70 hover:bg-purple-lt/50",
-                      s.underReview && "border-l-2 border-l-red bg-red/4",
-                      expanded && "bg-purple-lt/60",
+                      "cursor-pointer hover:bg-emerald-50/40 transition-colors",
+                      s.underReview && "border-l-3 border-l-red-500 bg-red-50/40",
+                      expanded && "bg-slate-50/60",
                     )}
                   >
-                    <td className="px-3 py-2 text-grey">
-                      {expanded ? <ChevronDown className="size-3.5" /> : <ChevronRight className="size-3.5" />}
+                    <td className="px-3 py-2.5 text-slate-400">
+                      {expanded ? <ChevronDown className="size-3.5 text-emerald-700" /> : <ChevronRight className="size-3.5 text-slate-400" />}
                     </td>
-                    <td className="machine px-3 py-2 text-xs text-grey">
+                    <td className="machine px-3 py-2.5 text-xs text-slate-500">
                       {s.ts.slice(11, 19)}
                     </td>
-                    <td className="machine px-3 py-2 font-medium text-purple">{s.subjectPseudonym}</td>
-                    <td className="px-3 py-2 text-ink">{s.anomaly}</td>
-                    <td className="px-3 py-2 text-grey">{s.suppressedBy}</td>
-                    <td className="machine px-3 py-2 text-xs text-ink">{s.reasonCode}</td>
-                    <td className="px-3 py-2">
+                    <td className="machine px-3 py-2.5 font-bold text-emerald-700">{s.subjectPseudonym}</td>
+                    <td className="px-3 py-2.5 text-slate-800">{s.anomaly}</td>
+                    <td className="px-3 py-2.5 text-slate-600">{s.suppressedBy}</td>
+                    <td className="machine px-3 py-2.5 text-xs text-slate-600">{s.reasonCode}</td>
+                    <td className="px-3 py-2.5">
                       {s.underReview ? (
-                        <span className="label rounded-sm border border-red/40 bg-red/8 px-1.5 py-0.5 text-red">
+                        <span className="label rounded border border-red-200 bg-red-50 px-2 py-0.5 text-red-800 font-bold">
                           Under review
                         </span>
                       ) : (
-                        <span className="label text-green">Retained</span>
+                        <span className="label text-emerald-700 font-semibold">Retained</span>
                       )}
                     </td>
                   </tr>
 
                   {expanded && (
-                    <tr className={cn("border-b border-line", s.underReview ? "bg-red/3" : "bg-purple-lt/30")}>
+                    <tr className={cn("border-b border-line", s.underReview ? "bg-red-50/30" : "bg-slate-50/60")}>
                       <td />
-                      <td colSpan={6} className="px-3 pt-1 pb-3">
-                        <p className="label mb-2 text-grey">Context record examined</p>
-                        <dl className="machine grid grid-cols-4 gap-x-6 gap-y-1.5 text-xs">
+                      <td colSpan={6} className="px-3 pt-2 pb-4">
+                        <p className="label mb-2 text-slate-500 text-[10px] font-bold">Context record examined</p>
+                        <dl className="machine grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-1.5 text-xs">
                           <Pair k="record_id" v={s.record.recordId} />
                           <Pair
                             k="created_by"
                             v={s.record.createdBy}
-                            tone={s.underReview ? "text-red" : undefined}
+                            tone={s.underReview ? "text-red-700 font-bold" : undefined}
                           />
                           <Pair k="created_at" v={s.record.createdAt.replace("T", " ").replace("Z", "")} />
                           <Pair k="scope" v={s.record.scope} />
                         </dl>
 
                         {s.underReview && (
-                          <div className="mt-3 rounded-sm border border-red/40 bg-white px-3 py-2.5">
-                            <p className="text-sm leading-relaxed text-ink">
+                          <div className="mt-3 rounded-lg border border-red-200 bg-white px-4 py-3 shadow-xs">
+                            <p className="text-xs leading-relaxed text-slate-800">
                               This suppression rested on a record the subject created and assigned to
                               themselves. The manufactured-context detector fired on the record itself, the
                               suppression was reopened, and the anomaly was re-scored with the context term
@@ -143,7 +143,7 @@ export function SuppressionTable() {
                             {s.linkedSubjectId && (
                               <Link
                                 href={`/subject/${routeIdFor(s.linkedSubjectId)}`}
-                                className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-red hover:underline"
+                                className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-red-700 hover:text-red-900 hover:underline"
                               >
                                 Open the investigation this reopened →
                               </Link>
@@ -152,7 +152,7 @@ export function SuppressionTable() {
                         )}
 
                         {!s.underReview && (
-                          <p className="mt-2.5 max-w-3xl text-xs leading-relaxed text-grey">
+                          <p className="mt-2.5 max-w-3xl text-xs leading-relaxed text-slate-600">
                             The anomaly was real and the explanation was checked. The record was created by an
                             identity other than the subject, before the activity, with a scope that resolves
                             to the resources touched. Nothing was deleted — this row is queryable and the
@@ -188,14 +188,14 @@ function Chip({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex items-center gap-1.5 rounded-sm border px-2 py-1 text-xs",
+        "flex items-center gap-1.5 rounded border px-2.5 py-1 text-xs transition-all shadow-2xs",
         active
-          ? "border-purple bg-purple text-white"
-          : "border-line text-grey hover:bg-purple-lt hover:text-purple",
+          ? "border-emerald-300 bg-emerald-50 font-semibold text-emerald-800"
+          : "border-line bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900",
       )}
     >
-      {children}
-      <span className={cn("machine text-[10px]", active ? "text-white/70" : "text-grey/70")}>{count}</span>
+      <span>{children}</span>
+      <span className={cn("machine text-[10px] font-semibold", active ? "text-emerald-700" : "text-slate-400")}>{count}</span>
     </button>
   );
 }
@@ -203,8 +203,9 @@ function Chip({
 function Pair({ k, v, tone }: { k: string; v: string; tone?: string }) {
   return (
     <div className="min-w-0">
-      <dt className="text-[10px] text-grey/80">{k}</dt>
-      <dd className={cn("truncate", tone ?? "text-ink")}>{v}</dd>
+      <dt className="text-[10px] text-slate-500">{k}</dt>
+      <dd className={cn("truncate text-xs text-slate-800", tone)}>{v}</dd>
     </div>
   );
 }
+

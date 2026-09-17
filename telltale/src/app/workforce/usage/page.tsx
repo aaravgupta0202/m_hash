@@ -1,3 +1,4 @@
+import { Clock, Layers, PieChart, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Panel } from "@/components/panel";
 import { CategoryDonut, categoryColor, fmtHours } from "@/components/workforce/bits";
@@ -44,11 +45,11 @@ export default function UsagePage() {
         description="Time by category and by application across the organisation, aggregated from the same per-member records the day views show."
       />
 
-      <div className="mb-4 grid grid-cols-4 gap-4">
-        <Stat label="Tracked time" value={fmtHours(totalMinutes)} sub={`${MEMBERS.length} members, one day`} />
-        <Stat label="Applications seen" value={String(APP_TOTALS.length)} sub="distinct executables" />
-        <Stat label="Categories" value={String(CATEGORY_TOTALS.length)} sub="composition, not classification" />
-        <Stat label="Most-used" value={topApp.application} sub={`${fmtHours(topApp.minutes)} across the org`} />
+      <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <Stat icon={Clock} label="Tracked time" value={fmtHours(totalMinutes)} sub={`${MEMBERS.length} members, one day`} />
+        <Stat icon={Layers} label="Applications seen" value={String(APP_TOTALS.length)} sub="distinct executables" />
+        <Stat icon={PieChart} label="Categories" value={String(CATEGORY_TOTALS.length)} sub="composition, not classification" />
+        <Stat icon={Sparkles} label="Most-used" value={topApp.application} sub={`${fmtHours(topApp.minutes)} across the org`} />
       </div>
 
       <div className="mb-4 grid grid-cols-1 gap-4 xl:grid-cols-[1fr_1.25fr]">
@@ -67,10 +68,10 @@ export default function UsagePage() {
         >
           <div className="max-h-96 overflow-y-auto">
             <table className="w-full border-collapse text-sm">
-              <thead className="sticky top-0 bg-white">
+              <thead className="sticky top-0 bg-slate-50 z-10">
                 <tr className="border-b border-line">
                   {["Application", "Category", "Titles", "Duration", ""].map((h) => (
-                    <th key={h} className="label px-4 py-2 text-left text-grey">
+                    <th key={h} className="label px-4 py-2.5 text-left text-slate-500">
                       {h}
                     </th>
                   ))}
@@ -78,20 +79,20 @@ export default function UsagePage() {
               </thead>
               <tbody>
                 {APP_TOTALS.map((a) => (
-                  <tr key={a.application} className="border-b border-line/70">
-                    <td className="px-4 py-1.5 font-medium text-ink">{a.application}</td>
-                    <td className="px-4 py-1.5">
-                      <span className="flex items-center gap-1.5 text-xs text-ink capitalize">
+                  <tr key={a.application} className="border-b border-line hover:bg-slate-50 transition-colors">
+                    <td className="px-4 py-2 font-medium text-slate-900">{a.application}</td>
+                    <td className="px-4 py-2">
+                      <span className="flex items-center gap-1.5 text-xs text-slate-700 capitalize">
                         <span className="size-2 rounded-sm" style={{ backgroundColor: categoryColor(a.category) }} />
                         {a.category}
                       </span>
                     </td>
-                    <td className="machine px-4 py-1.5 text-xs text-grey">{a.titles}</td>
-                    <td className="machine px-4 py-1.5 text-ink">{fmtHours(a.minutes)}</td>
-                    <td className="w-32 px-4 py-1.5">
-                      <div className="h-3 w-full rounded-sm bg-purple-lt">
+                    <td className="machine px-4 py-2 text-xs text-slate-500">{a.titles}</td>
+                    <td className="machine px-4 py-2 font-semibold text-emerald-700">{fmtHours(a.minutes)}</td>
+                    <td className="w-32 px-4 py-2">
+                      <div className="h-3 w-full rounded bg-slate-100 border border-line overflow-hidden">
                         <div
-                          className="bar-grow h-3 rounded-sm"
+                          className="bar-grow h-3 rounded"
                           style={{
                             width: `${(a.minutes / topApp.minutes) * 100}%`,
                             backgroundColor: categoryColor(a.category),
@@ -116,9 +117,9 @@ export default function UsagePage() {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] border-collapse text-sm">
             <thead>
-              <tr className="border-b border-line">
+              <tr className="border-b border-line bg-slate-50">
                 {["Hour", "Application", "Category", "Members", "Recorded time", ""].map((h) => (
-                  <th key={h} className="label px-4 py-2 text-left text-grey">
+                  <th key={h} className="label px-4 py-2 text-left text-slate-500">
                     {h}
                   </th>
                 ))}
@@ -126,22 +127,25 @@ export default function UsagePage() {
             </thead>
             <tbody>
               {HOURLY_TOP_APPLICATION.map((h) => (
-                <tr key={h.hour} className="border-b border-line/70">
-                  <td className="machine px-4 py-1.5 text-grey">{h.hour}</td>
-                  <td className="px-4 py-1.5 font-medium text-ink">{h.application}</td>
-                  <td className="px-4 py-1.5">
-                    <span className="flex items-center gap-1.5 text-xs text-ink capitalize">
+                <tr key={h.hour} className="border-b border-line hover:bg-slate-50 transition-colors">
+                  <td className="machine px-4 py-2 text-slate-500">{h.hour}</td>
+                  <td className="px-4 py-2 font-medium text-slate-900">{h.application}</td>
+                  <td className="px-4 py-2">
+                    <span className="flex items-center gap-1.5 text-xs text-slate-700 capitalize">
                       <span className="size-2 rounded-sm" style={{ backgroundColor: categoryColor(h.category) }} />
                       {h.category}
                     </span>
                   </td>
-                  <td className="machine px-4 py-1.5 text-ink">{h.members}</td>
-                  <td className="machine px-4 py-1.5 text-grey">{fmtHours(h.minutes)}</td>
-                  <td className="w-40 px-4 py-1.5">
-                    <div className="h-3 w-full rounded-sm bg-purple-lt">
+                  <td className="machine px-4 py-2 font-semibold text-slate-900">{h.members}</td>
+                  <td className="machine px-4 py-2 text-slate-500">{fmtHours(h.minutes)}</td>
+                  <td className="w-40 px-4 py-2">
+                    <div className="h-3 w-full rounded bg-slate-100 border border-line overflow-hidden">
                       <div
-                        className="bar-grow h-3 rounded-sm bg-purple/40"
-                        style={{ width: `${(h.minutes / HOURLY_MAX) * 100}%` }}
+                        className="bar-grow h-3 rounded"
+                        style={{
+                          width: `${(h.minutes / HOURLY_MAX) * 100}%`,
+                          backgroundColor: categoryColor(h.category),
+                        }}
                       />
                     </div>
                   </td>
@@ -155,12 +159,15 @@ export default function UsagePage() {
   );
 }
 
-function Stat({ label, value, sub }: { label: string; value: string; sub: string }) {
+function Stat({ icon: Icon, label, value, sub }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string; sub: string }) {
   return (
-    <div className="panel px-4 py-3">
-      <p className="label text-grey">{label}</p>
-      <p className="machine mt-1 truncate text-2xl leading-none font-semibold text-purple">{value}</p>
-      <p className="mt-1.5 text-xs text-grey">{sub}</p>
+    <div className="panel px-4 py-3 bg-white border border-line rounded-lg shadow-xs">
+      <div className="flex items-center justify-between">
+        <p className="label text-slate-500">{label}</p>
+        <Icon className="size-4 text-emerald-600" />
+      </div>
+      <p className="machine mt-1.5 truncate text-2xl leading-none font-bold text-slate-900">{value}</p>
+      <p className="mt-1.5 text-xs text-slate-500">{sub}</p>
     </div>
   );
 }

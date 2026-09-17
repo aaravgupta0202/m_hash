@@ -1,26 +1,28 @@
-import { Bot, Server, User } from "lucide-react";
+import { Bot, Server, User, CheckCircle2, AlertCircle, AlertTriangle, ShieldCheck } from "lucide-react";
 import { cn } from "cn";
 import type { ContextVerdict, IdentityClass, Sensitivity, SubjectStatus } from "@/lib/fixtures";
 
 /* PRD §5.2: four context chips, and red only where something is genuinely wrong. */
-const VERDICT: Record<ContextVerdict, { label: string; className: string }> = {
-  authorised: { label: "AUTHORISED", className: "border-green/40 bg-green/8 text-green" },
-  partial: { label: "PARTIAL", className: "border-line bg-purple-lt text-grey" },
-  absent: { label: "ABSENT", className: "border-amber/40 bg-amber/8 text-amber" },
-  suspicious: { label: "SUSPICIOUS", className: "border-red/40 bg-red/8 text-red" },
+const VERDICT: Record<ContextVerdict, { label: string; className: string; Icon: typeof CheckCircle2 }> = {
+  authorised: { label: "AUTHORISED", className: "border-emerald-200 bg-emerald-50 text-emerald-800", Icon: CheckCircle2 },
+  partial: { label: "PARTIAL", className: "border-slate-200 bg-slate-100 text-slate-700", Icon: AlertCircle },
+  absent: { label: "ABSENT", className: "border-amber-200 bg-amber-50 text-amber-800", Icon: AlertTriangle },
+  suspicious: { label: "SUSPICIOUS", className: "border-red-200 bg-red-50 text-red-800", Icon: AlertCircle },
 };
 
 export function VerdictChip({ verdict, className }: { verdict: ContextVerdict; className?: string }) {
   const v = VERDICT[verdict];
+  const Icon = v.Icon;
   return (
     <span
       className={cn(
-        "label inline-flex items-center rounded-sm border px-1.5 py-0.5 whitespace-nowrap",
+        "label inline-flex items-center gap-1 rounded border px-2 py-0.5 whitespace-nowrap text-[10px] font-bold tracking-wider",
         v.className,
         className,
       )}
     >
-      {v.label}
+      <Icon className="size-3 shrink-0" />
+      <span>{v.label}</span>
     </span>
   );
 }
@@ -34,7 +36,7 @@ const IDENTITY: Record<IdentityClass, { Icon: typeof User; title: string }> = {
 export function IdentityGlyph({ identityClass }: { identityClass: IdentityClass }) {
   const { Icon, title } = IDENTITY[identityClass];
   return (
-    <span title={title} className="inline-flex text-grey">
+    <span title={title} className="inline-flex text-slate-500 hover:text-emerald-700 transition-colors">
       <Icon className="size-3.5" aria-hidden />
       <span className="sr-only">{title}</span>
     </span>
@@ -52,14 +54,14 @@ export function StatusChip({ status }: { status: SubjectStatus }) {
   return (
     <span
       className={cn(
-        "label inline-flex items-center rounded-sm border px-1.5 py-0.5 whitespace-nowrap",
+        "label inline-flex items-center rounded border px-2 py-0.5 whitespace-nowrap text-[10px] font-bold tracking-wider",
         status === "confirmed"
-          ? "border-red/40 bg-red/8 text-red"
+          ? "border-red-200 bg-red-50 text-red-800"
           : status === "suppressed"
-            ? "border-green/40 bg-green/8 text-green"
+            ? "border-emerald-200 bg-emerald-50 text-emerald-800"
             : status === "triaging"
-              ? "border-purple/30 bg-purple-lt text-purple"
-              : "border-line bg-white text-grey",
+              ? "border-amber-200 bg-amber-50 text-amber-800"
+              : "border-slate-200 bg-slate-100 text-slate-600",
       )}
     >
       {STATUS[status]}
@@ -74,8 +76,17 @@ export function riskTone(risk: number): "green" | "amber" | "red" {
   return "green";
 }
 
-const TONE_BG = { green: "bg-green", amber: "bg-amber", red: "bg-red" } as const;
-const TONE_TEXT = { green: "text-green", amber: "text-amber", red: "text-red" } as const;
+const TONE_BG = {
+  green: "bg-emerald-100",
+  amber: "bg-amber-100",
+  red: "bg-red-100",
+} as const;
+
+const TONE_TEXT = {
+  green: "text-emerald-800",
+  amber: "text-amber-800",
+  red: "text-red-800",
+} as const;
 
 /**
  * A number with a bar behind it (PRD §5.2). `max` lets the expected-cost
@@ -98,15 +109,18 @@ export function ValueBar({
   const pct = Math.max(0, Math.min(100, (value / max) * 100));
   const t = tone ?? riskTone(value);
   return (
-    <div className={cn("relative h-5 w-full min-w-24 overflow-hidden rounded-sm bg-purple-lt", className)}>
+    <div className={cn("relative h-5.5 w-full min-w-24 overflow-hidden rounded border border-line bg-slate-100", className)}>
       <div
-        className={cn("bar-grow absolute inset-y-0 left-0", t === "purple" ? "bg-purple/25" : TONE_BG[t])}
-        style={{ width: `${pct}%`, opacity: t === "purple" ? 1 : 0.18 }}
+        className={cn(
+          "bar-grow absolute inset-y-0 left-0",
+          t === "purple" ? "bg-emerald-100" : TONE_BG[t],
+        )}
+        style={{ width: `${pct}%` }}
       />
       <span
         className={cn(
-          "machine absolute inset-0 flex items-center px-1.5 text-xs font-medium",
-          t === "purple" ? "text-purple" : TONE_TEXT[t],
+          "machine absolute inset-0 flex items-center px-2 text-xs font-bold tabular-nums",
+          t === "purple" ? "text-emerald-800" : TONE_TEXT[t],
         )}
       >
         {display ?? value}
@@ -131,3 +145,4 @@ export function SensitivityDot({ sensitivity }: { sensitivity: Sensitivity }) {
     />
   );
 }
+

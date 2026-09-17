@@ -397,7 +397,7 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
                   y={AXIS_H + 12}
                   fontSize="9.5"
                   className="machine"
-                  fill="#fff"
+                  fill="var(--tt-ink)"
                 >
                   {hhmm(tAt(cursor))}
                 </text>
@@ -407,8 +407,8 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
 
           {hover && (
             <div
-              className="pointer-events-none absolute z-10 w-64 rounded-sm border border-line bg-white p-2.5"
-              style={{ left: Math.max(0, Math.min(hover.x - 128, W - 256)), top: hover.y + 44 }}
+              className="pointer-events-none absolute z-10 w-64 rounded-lg border border-line bg-white p-2.5 shadow-lg text-slate-800"
+              style={{ left: Math.min(hover.x + 12, 600), top: hover.y + 12 }}
             >
               <p className="machine text-xs font-semibold" style={{ color: hover.tone }}>
                 {hover.title}

@@ -3,76 +3,76 @@
 @import "shadcn/tailwind.css";
 
 /*
- * tellTale palette — PRD §8, verbatim. Purple dominates; red is reserved for
- * things that are genuinely wrong. One theme, no dark mode (PRD non-goal 6).
+ * tellTale Enterprise Light Mode — Crisp slate canvas with refined Emerald accents.
  */
 :root {
-  --tt-ink: #1b1233;
-  --tt-purple: #351c75;
-  --tt-purple-dk: #20124d;
-  --tt-purple-lt: #f0ecf8;
-  --tt-green: #0e8a5f;
-  --tt-amber: #a96a0c;
-  --tt-red: #a82219;
-  --tt-grey: #6c6c7d;
-  --tt-line: #dbd5ec;
+  --tt-ink: #0f172a;         /* slate-900 primary text */
+  --tt-purple: #059669;      /* emerald-600 accent */
+  --tt-purple-dk: #047857;   /* emerald-700 dark accent */
+  --tt-purple-lt: #ecfdf5;   /* emerald-50 soft accent surface */
+  --tt-green: #10b981;       /* emerald-500 */
+  --tt-amber: #d97706;       /* amber-600 */
+  --tt-red: #dc2626;         /* red-600 */
+  --tt-grey: #64748b;        /* slate-500 secondary text */
+  --tt-line: #e2e8f0;        /* slate-200 border */
+  --tt-panel: #ffffff;       /* clean white cards */
   --tt-white: #ffffff;
 
-  /* shadcn semantic tokens mapped onto the palette so every primitive is
-     purple-by-default without per-component overrides. */
-  --background: var(--tt-white);
-  --foreground: var(--tt-ink);
-  --card: var(--tt-white);
-  --card-foreground: var(--tt-ink);
-  --popover: var(--tt-white);
-  --popover-foreground: var(--tt-ink);
-  --primary: var(--tt-purple);
-  --primary-foreground: var(--tt-white);
-  --secondary: var(--tt-purple-lt);
-  --secondary-foreground: var(--tt-purple);
-  --muted: var(--tt-purple-lt);
-  --muted-foreground: var(--tt-grey);
-  --accent: var(--tt-purple-lt);
-  --accent-foreground: var(--tt-purple);
-  --destructive: var(--tt-red);
-  --border: var(--tt-line);
-  --input: var(--tt-line);
-  --ring: var(--tt-purple);
-  --chart-1: var(--tt-purple);
-  --chart-2: var(--tt-green);
-  --chart-3: var(--tt-amber);
-  --chart-4: var(--tt-red);
-  --chart-5: var(--tt-grey);
-  --radius: 0.25rem;
-  --sidebar: var(--tt-white);
-  --sidebar-foreground: var(--tt-ink);
-  --sidebar-primary: var(--tt-purple);
-  --sidebar-primary-foreground: var(--tt-white);
-  --sidebar-accent: var(--tt-purple-lt);
-  --sidebar-accent-foreground: var(--tt-purple);
-  --sidebar-border: var(--tt-line);
-  --sidebar-ring: var(--tt-purple);
+  /* shadcn semantic tokens */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #059669;
+  --primary-foreground: #ffffff;
+  --secondary: #ecfdf5;
+  --secondary-foreground: #047857;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f8fafc;
+  --accent-foreground: #047857;
+  --destructive: #dc2626;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #059669;
+  --chart-1: #059669;
+  --chart-2: #10b981;
+  --chart-3: #f59e0b;
+  --chart-4: #ef4444;
+  --chart-5: #64748b;
+  --radius: 0.375rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #059669;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ecfdf5;
+  --sidebar-accent-foreground: #047857;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #059669;
 
   color-scheme: light;
 }
 
 @theme inline {
-  --color-ink: var(--tt-ink);
-  --color-purple: var(--tt-purple);
-  --color-purple-dk: var(--tt-purple-dk);
-  --color-purple-lt: var(--tt-purple-lt);
-  --color-green: var(--tt-green);
-  --color-amber: var(--tt-amber);
-  --color-red: var(--tt-red);
-  --color-grey: var(--tt-grey);
-  --color-line: var(--tt-line);
-  --color-white: var(--tt-white);
+  --color-ink: #0f172a;
+  --color-purple: #059669;
+  --color-purple-dk: #047857;
+  --color-purple-lt: #ecfdf5;
+  --color-green: #10b981;
+  --color-amber: #d97706;
+  --color-red: #dc2626;
+  --color-grey: #64748b;
+  --color-line: #e2e8f0;
+  --color-panel: #ffffff;
+  --color-white: #ffffff;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-jetbrains);
-  --font-heading: var(--font-inter);
+  --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -125,14 +125,13 @@
 }
 
 @layer utilities {
-  /* PRD §8: monospace for anything machine-generated — timestamps, action
-     tokens, resource ids, probabilities. Sans for anything a human wrote. */
+  /* Monospace for numbers and machine-generated tokens */
   .machine {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.01em;
   }
-  /* Small uppercase label used for section eyebrows and chips. */
+  /* Small uppercase label used for section eyebrows and chips */
   .label {
     font-size: 0.6875rem;
     line-height: 1rem;
@@ -140,11 +139,17 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
+  /* Subtle clean shadows */
+  .glow-mint {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.08);
+  }
+  .glow-border {
+    border-color: #059669;
+    box-shadow: 0 0 0 1px rgba(5, 150, 105, 0.2);
+  }
 }
 
-/* PRD §8: risk bars animate width on mount (200ms). Nothing else moves.
-   Done with a CSS keyframe rather than JS so bars animate in a server
-   component without shipping a client bundle for decoration. */
+/* Risk bars animation */
 @keyframes tt-bar-grow {
   from {
     transform: scaleX(0);
@@ -159,11 +164,13 @@
     transform-origin: left;
     animation: tt-bar-grow 200ms ease-out both;
   }
-  /* Bordered, unshadowed surface — shadows read as consumer (PRD §8). */
+  /* Clean white card surface with subtle ambient depth */
   .panel {
     border-width: 1px;
     border-color: var(--tt-line);
     border-radius: var(--radius);
-    background-color: var(--tt-white);
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.02);
   }
 }
+

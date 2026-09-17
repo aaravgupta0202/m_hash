@@ -3,21 +3,21 @@ import { cn } from "cn";
 import { CONNECTORS, type ConnectorState } from "@/lib/fixtures";
 
 export const STATE_DOT: Record<ConnectorState, string> = {
-  healthy: "bg-green",
-  degraded: "bg-amber",
-  silent: "bg-red",
+  healthy: "bg-emerald-500",
+  degraded: "bg-amber-500",
+  silent: "bg-red-500",
 };
 
 export const STATE_TEXT: Record<ConnectorState, string> = {
-  healthy: "text-green",
-  degraded: "text-amber",
-  silent: "text-red",
+  healthy: "text-emerald-700",
+  degraded: "text-amber-700",
+  silent: "text-red-700",
 };
 
 export const STATE_BORDER: Record<ConnectorState, string> = {
-  healthy: "border-line",
-  degraded: "border-amber/50 bg-amber/5",
-  silent: "border-red/50 bg-red/5",
+  healthy: "border-line bg-white hover:border-emerald-300 hover:bg-emerald-50/40",
+  degraded: "border-amber-200 bg-amber-50/60 hover:border-amber-300",
+  silent: "border-red-200 bg-red-50/60 hover:border-red-300",
 };
 
 /**
@@ -27,26 +27,27 @@ export const STATE_BORDER: Record<ConnectorState, string> = {
  */
 export function ConnectorStrip({ href = "/connectors" }: { href?: string }) {
   return (
-    <div className="grid grid-cols-6 gap-2 p-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 p-4">
       {CONNECTORS.map((c) => (
         <Link
           key={c.id}
           href={href}
           className={cn(
-            "flex flex-col gap-1.5 rounded-sm border px-3 py-2.5 hover:bg-purple-lt/60",
+            "flex flex-col gap-1.5 rounded-lg border px-3 py-2.5 shadow-xs transition-all",
             STATE_BORDER[c.state],
           )}
         >
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <span className={cn("size-2 shrink-0 rounded-full", STATE_DOT[c.state])} />
-            <span className="min-w-0 truncate text-sm font-medium text-ink">{c.name}</span>
+            <span className="min-w-0 truncate text-xs font-semibold text-slate-900">{c.name}</span>
           </div>
-          <span className={cn("machine text-[11px]", c.state === "healthy" ? "text-grey" : STATE_TEXT[c.state])}>
+          <span className={cn("machine text-[11px]", c.state === "healthy" ? "text-slate-500" : STATE_TEXT[c.state])}>
             {c.state === "healthy" ? c.lastSeenAgo : `last seen ${c.lastSeenAgo}`}
           </span>
-          <span className={cn("label", STATE_TEXT[c.state])}>{c.state}</span>
+          <span className={cn("label text-[10px] uppercase font-bold tracking-wider", STATE_TEXT[c.state])}>{c.state}</span>
         </Link>
       ))}
     </div>
   );
 }
+

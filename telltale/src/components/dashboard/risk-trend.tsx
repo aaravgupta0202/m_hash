@@ -45,32 +45,32 @@ export function RiskTrend() {
           <AreaChart data={RISK_TREND} margin={{ top: 10, right: 34, bottom: 0, left: -18 }}>
             <defs>
               <linearGradient id="tt-trend" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="var(--tt-purple)" stopOpacity="0.22" />
-                <stop offset="100%" stopColor="var(--tt-purple)" stopOpacity="0.02" />
+                <stop offset="0%" stopColor="#059669" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#059669" stopOpacity="0.0" />
               </linearGradient>
             </defs>
-            <CartesianGrid stroke="var(--tt-line)" strokeDasharray="2 4" vertical={false} />
+            <CartesianGrid stroke="#e2e8f0" strokeDasharray="2 4" vertical={false} />
             <XAxis
               dataKey="date"
-              tick={{ fontSize: 10, fill: "var(--tt-grey)", fontFamily: "var(--font-jetbrains)" }}
+              tick={{ fontSize: 10, fill: "#64748b", fontFamily: "var(--font-jetbrains)" }}
               interval="preserveStartEnd"
               minTickGap={44}
               tickLine={false}
-              axisLine={{ stroke: "var(--tt-line)" }}
+              axisLine={{ stroke: "#e2e8f0" }}
             />
             <YAxis
               domain={[0, 100]}
               ticks={[0, 25, 50, 75, 100]}
-              tick={{ fontSize: 10, fill: "var(--tt-grey)", fontFamily: "var(--font-jetbrains)" }}
+              tick={{ fontSize: 10, fill: "#64748b", fontFamily: "var(--font-jetbrains)" }}
               tickLine={false}
               axisLine={false}
             />
             <Tooltip
               content={({ active, payload, label }) =>
                 active && payload?.length ? (
-                  <div className="rounded-sm border border-line bg-white px-2.5 py-1.5">
-                    <p className="machine text-xs text-ink">{label}</p>
-                    <p className="machine text-xs text-purple">peak risk {payload[0].value}</p>
+                  <div className="rounded-lg border border-line bg-white px-3 py-2 shadow-lg">
+                    <p className="machine text-xs text-slate-700 font-semibold">{label}</p>
+                    <p className="machine text-xs text-emerald-700 font-bold">peak risk {payload[0].value}</p>
                   </div>
                 ) : null
               }
@@ -78,22 +78,22 @@ export function RiskTrend() {
             <Area
               type="stepAfter"
               dataKey="risk"
-              stroke="var(--tt-purple)"
-              strokeWidth={1.6}
+              stroke="#059669"
+              strokeWidth={2}
               fill="url(#tt-trend)"
               isAnimationActive={false}
               dot={false}
-              activeDot={{ r: 3, fill: "var(--tt-purple)", stroke: "none" }}
+              activeDot={{ r: 4, fill: "#059669", stroke: "#ffffff", strokeWidth: 2 }}
             />
             {MARKERS.map((m) => (
               <ReferenceDot
                 key={m.subjectId}
                 x={m.date}
                 y={m.risk}
-                r={4.5}
-                fill={m.risk >= 80 ? "var(--tt-red)" : m.risk >= 50 ? "var(--tt-amber)" : "var(--tt-green)"}
-                stroke="var(--tt-white)"
-                strokeWidth={1.5}
+                r={5}
+                fill={m.risk >= 80 ? "#dc2626" : m.risk >= 50 ? "#d97706" : "#059669"}
+                stroke="#ffffff"
+                strokeWidth={2}
                 ifOverflow="visible"
               />
             ))}
@@ -107,22 +107,20 @@ export function RiskTrend() {
             <button
               type="button"
               onClick={() => router.push(`/subject/${routeIdFor(m.subjectId)}`)}
-              className="flex w-full items-center gap-2 rounded-sm px-1 py-1 text-left hover:bg-purple-lt"
+              className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left hover:bg-slate-100 transition-colors"
             >
               <span
-                className="size-2.5 shrink-0 rounded-full"
+                className="size-2 rounded-full shrink-0"
                 style={{
-                  backgroundColor:
-                    m.risk >= 80 ? "var(--tt-red)" : m.risk >= 50 ? "var(--tt-amber)" : "var(--tt-green)",
+                  backgroundColor: m.risk >= 80 ? "#dc2626" : m.risk >= 50 ? "#d97706" : "#059669",
                 }}
               />
-              <span className="machine min-w-0 truncate text-xs text-ink">{m.label}</span>
-              {m.raisedRisk !== undefined && (
-                <span className="label rounded-sm border border-green/40 bg-green/8 px-1.5 py-0.5 text-green">
-                  suppressed
-                </span>
-              )}
-              <span className="ml-auto shrink-0 text-[11px] whitespace-nowrap text-grey">open →</span>
+              <span className="machine text-xs font-bold text-slate-900">{m.label.split(" ")[0]}</span>
+              <span className="text-xs text-slate-600 truncate">{m.label.split(" ").slice(1).join(" ")}</span>
+              <span className="machine ml-auto text-xs text-slate-500">
+                {m.raisedRisk !== undefined ? `raised ${m.raisedRisk} → ` : ""}
+                calibrated {m.risk}
+              </span>
             </button>
           </li>
         ))}

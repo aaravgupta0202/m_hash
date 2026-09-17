@@ -27,20 +27,23 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
 
   return (
     <>
-      <Link href="/workforce" className="mb-3 inline-flex items-center gap-1.5 text-xs text-grey hover:text-purple">
-        <ArrowLeft className="size-3.5" />
+      <Link
+        href="/workforce"
+        className="mb-3 inline-flex items-center gap-1.5 rounded-md border border-line bg-white px-2.5 py-1 text-xs text-slate-600 hover:text-emerald-700 hover:bg-slate-50 hover:border-emerald-300 shadow-xs transition-all"
+      >
+        <ArrowLeft className="size-3.5 text-emerald-600" />
         Org summary
       </Link>
 
-      <div className="panel mb-4 px-5 py-4">
-        <div className="flex items-start justify-between gap-6">
+      <div className="panel mb-4 px-5 py-4 bg-white border border-line shadow-xs rounded-lg">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight text-ink">{member.name}</h1>
-            <p className="mt-1 text-sm text-grey">
-              {member.team} · <span className="machine text-xs">{member.id}</span>
+            <h1 className="text-xl font-bold tracking-tight text-slate-900">{member.name}</h1>
+            <p className="mt-1 text-sm text-slate-500">
+              {member.team} · <span className="machine text-xs text-emerald-700 font-semibold">{member.id}</span>
             </p>
           </div>
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             <Field label="Working" mono>
               {fmtHours(member.workingMinutes)}
             </Field>
@@ -56,7 +59,7 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
 
         <div className="mt-4 border-t border-line pt-3">
           <div className="mb-2 flex items-center justify-between">
-            <p className="label text-grey">Activity across the day</p>
+            <p className="label text-slate-500">Activity across the day</p>
             <RibbonLegend />
           </div>
           <ActivityRibbon ribbon={member.ribbon} showHours />
@@ -76,9 +79,9 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-sm">
               <thead>
-                <tr className="border-b border-line">
+                <tr className="border-b border-line bg-slate-50">
                   {["Hour", "Working", "Idle", "Distribution"].map((h) => (
-                    <th key={h} className="label px-4 py-2 text-left text-grey">
+                    <th key={h} className="label px-4 py-2 text-left text-slate-500">
                       {h}
                     </th>
                   ))}
@@ -86,18 +89,18 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
               </thead>
               <tbody>
                 {day.hourSlots.map((s) => (
-                  <tr key={s.hour} className="border-b border-line/70">
-                    <td className="machine px-4 py-1.5 text-grey">{s.hour}</td>
-                    <td className="machine px-4 py-1.5 text-ink">{s.workingMinutes}m</td>
-                    <td className="machine px-4 py-1.5 text-grey">{s.idleMinutes}m</td>
+                  <tr key={s.hour} className="border-b border-line hover:bg-slate-50 transition-colors">
+                    <td className="machine px-4 py-1.5 text-slate-500">{s.hour}</td>
+                    <td className="machine px-4 py-1.5 font-semibold text-emerald-700">{s.workingMinutes}m</td>
+                    <td className="machine px-4 py-1.5 text-slate-500">{s.idleMinutes}m</td>
                     <td className="px-4 py-1.5">
-                      <div className="flex h-3 w-full min-w-32 gap-px overflow-hidden rounded-sm bg-purple-lt">
+                      <div className="flex h-3 w-full min-w-32 gap-px overflow-hidden rounded bg-slate-100 border border-line">
                         <div
-                          className="bar-grow bg-green/70"
+                          className="bar-grow bg-emerald-600"
                           style={{ width: `${(s.workingMinutes / maxSlot) * 100}%` }}
                         />
                         <div
-                          className="bar-grow bg-purple/30"
+                          className="bar-grow bg-slate-300"
                           style={{ width: `${(s.idleMinutes / maxSlot) * 100}%` }}
                         />
                       </div>
@@ -119,9 +122,9 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] border-collapse text-sm">
             <thead>
-              <tr className="border-b border-line">
+              <tr className="border-b border-line bg-slate-50">
                 {["Application", "Window title", "Category", "Duration", ""].map((h) => (
-                  <th key={h} className="label px-4 py-2 text-left text-grey">
+                  <th key={h} className="label px-4 py-2 text-left text-slate-500">
                     {h}
                   </th>
                 ))}
@@ -129,20 +132,20 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
             </thead>
             <tbody>
               {day.applications.map((a, i) => (
-                <tr key={i} className="border-b border-line/70">
-                  <td className="px-4 py-2 font-medium text-ink">{a.application}</td>
-                  <td className="machine px-4 py-2 text-xs text-grey">{a.windowTitle}</td>
+                <tr key={i} className="border-b border-line hover:bg-slate-50 transition-colors">
+                  <td className="px-4 py-2 font-medium text-slate-900">{a.application}</td>
+                  <td className="machine px-4 py-2 text-xs text-slate-500">{a.windowTitle}</td>
                   <td className="px-4 py-2">
-                    <span className="flex items-center gap-1.5 text-xs text-ink capitalize">
+                    <span className="flex items-center gap-1.5 text-xs text-slate-700 capitalize">
                       <span className="size-2 rounded-sm" style={{ backgroundColor: categoryColor(a.category) }} />
                       {a.category}
                     </span>
                   </td>
-                  <td className="machine px-4 py-2 text-ink">{fmtHours(a.minutes)}</td>
+                  <td className="machine px-4 py-2 font-semibold text-emerald-700">{fmtHours(a.minutes)}</td>
                   <td className="w-40 px-4 py-2">
-                    <div className="h-3 w-full rounded-sm bg-purple-lt">
+                    <div className="h-3 w-full rounded bg-slate-100 border border-line overflow-hidden">
                       <div
-                        className="bar-grow h-3 rounded-sm"
+                        className="bar-grow h-3 rounded"
                         style={{
                           width: `${(a.minutes / day.applications[0].minutes) * 100}%`,
                           backgroundColor: categoryColor(a.category),
@@ -161,7 +164,7 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
         title="Captures"
         sub={`${captures.length} on the pinned day. Thumbnails are generated placeholders — never an image of a real screen.`}
         right={
-          <Link href="/workforce/captures" className="text-xs text-purple hover:underline">
+          <Link href="/workforce/captures" className="text-xs text-emerald-400 hover:text-emerald-300 hover:underline">
             Full gallery →
           </Link>
         }

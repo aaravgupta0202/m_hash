@@ -29,14 +29,14 @@ const REASON_CODES = [
 ];
 
 const KIND_TONE: Record<string, string> = {
-  Action: "border-purple/30 bg-purple-lt text-purple",
-  Identity: "border-line bg-white text-grey",
-  "Context record": "border-amber/40 bg-amber/5 text-amber",
-  Presence: "border-line bg-white text-grey",
-  Employment: "border-line bg-white text-grey",
-  Capture: "border-red/40 bg-red/5 text-red",
-  "Suppression record": "border-green/40 bg-green/5 text-green",
-  Baseline: "border-line bg-white text-grey",
+  Action: "border-emerald-200 bg-emerald-50 text-emerald-800",
+  Identity: "border-slate-200 bg-slate-100 text-slate-700",
+  "Context record": "border-amber-200 bg-amber-50 text-amber-800",
+  Presence: "border-slate-200 bg-slate-100 text-slate-700",
+  Employment: "border-slate-200 bg-slate-100 text-slate-700",
+  Capture: "border-red-200 bg-red-50 text-red-800",
+  "Suppression record": "border-emerald-200 bg-emerald-50 text-emerald-800",
+  Baseline: "border-slate-200 bg-slate-100 text-slate-700",
 };
 
 export function EvidenceList({ items }: { items: EvidenceItem[] }) {
@@ -54,11 +54,11 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
 
   return (
     <div>
-      <div className="flex items-center justify-between gap-4 border-b border-line px-4 py-2">
-        <p className="machine text-xs text-grey">
+      <div className="flex items-center justify-between gap-4 border-b border-line px-4 py-2 bg-slate-50/50">
+        <p className="machine text-xs text-slate-500">
           {items.length} artefacts · {flaggedCount} flagged · {taggedCount} tagged
         </p>
-        <p className="text-[11px] text-grey">Tags and flags are session state in this build and reset on reload.</p>
+        <p className="text-[11px] text-slate-400">Tags and flags are session state in this build and reset on reload.</p>
       </div>
 
       <ul className="divide-y divide-line">
@@ -69,34 +69,34 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
             <li
               key={item.id}
               className={cn(
-                "flex items-start gap-4 border-l-2 px-4 py-2.5",
-                flag ? "border-l-red bg-red/3" : "border-l-transparent",
+                "flex items-start gap-4 border-l-2 px-4 py-2.5 transition-colors",
+                flag ? "border-l-red-500 bg-red-50/30" : "border-l-transparent hover:bg-slate-50/50",
               )}
             >
-              <span className="machine w-40 shrink-0 text-xs text-grey">
+              <span className="machine w-40 shrink-0 text-xs text-slate-500">
                 {item.ts.replace("T", " ").replace("Z", "")}
               </span>
 
               <span
                 className={cn(
-                  "label w-36 shrink-0 truncate rounded-sm border px-1.5 py-0.5 text-center whitespace-nowrap",
-                  KIND_TONE[item.kind] ?? "border-line bg-white text-grey",
+                  "label w-36 shrink-0 truncate rounded border px-1.5 py-0.5 text-center whitespace-nowrap text-[10px] font-semibold",
+                  KIND_TONE[item.kind] ?? "border-slate-200 bg-slate-100 text-slate-700",
                 )}
               >
                 {item.kind}
               </span>
 
               <div className="min-w-0 flex-1">
-                <p className="machine text-xs leading-relaxed text-ink">{item.detail}</p>
+                <p className="machine text-xs leading-relaxed text-slate-800">{item.detail}</p>
                 <div className="mt-1 flex flex-wrap items-center gap-1.5">
-                  <span className="text-[11px] text-grey">source · {item.source}</span>
+                  <span className="text-[11px] text-slate-400">source · {item.source}</span>
                   {itemTags.map((t) => (
-                    <span key={t} className="label rounded-sm border border-purple/30 bg-purple-lt px-1.5 py-0.5 text-purple">
+                    <span key={t} className="label rounded border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-800">
                       {t}
                     </span>
                   ))}
                   {flag && (
-                    <span className="label machine rounded-sm border border-red/40 bg-red/8 px-1.5 py-0.5 text-red">
+                    <span className="label machine rounded border border-red-200 bg-red-50 px-1.5 py-0.5 text-[10px] font-bold text-red-800">
                       {flag}
                     </span>
                   )}
@@ -110,27 +110,27 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
                       <button
                         type="button"
                         className={cn(
-                          "flex items-center gap-1 rounded-sm border px-1.5 py-1 text-[11px]",
+                          "flex items-center gap-1 rounded border px-2 py-1 text-[11px] font-medium transition-colors shadow-2xs",
                           itemTags.length
-                            ? "border-purple/30 bg-purple-lt text-purple"
-                            : "border-line text-grey hover:bg-purple-lt hover:text-purple",
+                            ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+                            : "border-line bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900",
                         )}
                       />
                     }
                   >
-                    <Tag className="size-3" />
+                    <Tag className="size-3 text-emerald-600" />
                     Tag
                   </PopoverTrigger>
-                  <PopoverContent align="end" className="w-56 rounded-sm p-1 shadow-none">
+                  <PopoverContent align="end" className="w-56 rounded-lg p-1 shadow-lg bg-white border border-line text-slate-800 z-50">
                     {TAGS.map((t) => (
                       <button
                         key={t}
                         type="button"
                         onClick={() => toggleTag(item.id, t)}
-                        className="flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-left text-xs text-ink hover:bg-purple-lt"
+                        className="flex w-full items-center justify-between rounded px-2 py-1.5 text-left text-xs text-slate-700 hover:bg-slate-100"
                       >
                         {t}
-                        {itemTags.includes(t) && <span className="text-purple">✓</span>}
+                        {itemTags.includes(t) && <span className="text-emerald-600 font-bold">✓</span>}
                       </button>
                     ))}
                   </PopoverContent>
@@ -142,26 +142,26 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
                       <button
                         type="button"
                         className={cn(
-                          "flex items-center gap-1 rounded-sm border px-1.5 py-1 text-[11px]",
-                          flag ? "border-red/40 bg-red/8 text-red" : "border-line text-grey hover:bg-purple-lt hover:text-purple",
+                          "flex items-center gap-1 rounded border px-2 py-1 text-[11px] font-medium transition-colors shadow-2xs",
+                          flag ? "border-red-300 bg-red-50 text-red-800" : "border-line bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900",
                         )}
                       />
                     }
                   >
-                    <Flag className="size-3" />
+                    <Flag className="size-3 text-red-600" />
                     Flag
                   </PopoverTrigger>
-                  <PopoverContent align="end" className="w-72 rounded-sm p-1 shadow-none">
-                    <p className="label px-2 py-1.5 text-grey">Reason code</p>
+                  <PopoverContent align="end" className="w-72 rounded-lg p-2 shadow-lg bg-white border border-line text-slate-800 z-50">
+                    <p className="label px-2 py-1 text-[10px] text-slate-400 font-bold uppercase tracking-wider">Reason code</p>
                     {REASON_CODES.map((r) => (
                       <button
                         key={r.code}
                         type="button"
                         onClick={() => setFlags((prev) => ({ ...prev, [item.id]: r.code }))}
-                        className="block w-full rounded-sm px-2 py-1.5 text-left hover:bg-purple-lt"
+                        className="block w-full rounded px-2 py-1.5 text-left hover:bg-slate-50"
                       >
-                        <span className="machine block text-xs text-ink">{r.code}</span>
-                        <span className="block text-[11px] text-grey">{r.label}</span>
+                        <span className="machine block text-xs font-bold text-slate-900">{r.code}</span>
+                        <span className="block text-[11px] text-slate-500">{r.label}</span>
                       </button>
                     ))}
                     {flag && (
@@ -174,7 +174,7 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
                             return next;
                           })
                         }
-                        className="mt-1 block w-full border-t border-line px-2 py-1.5 text-left text-xs text-grey hover:bg-purple-lt"
+                        className="mt-1 block w-full border-t border-line px-2 py-1.5 text-left text-xs text-red-600 hover:bg-red-50 rounded"
                       >
                         Clear flag
                       </button>
