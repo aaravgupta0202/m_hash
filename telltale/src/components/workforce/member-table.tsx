@@ -1,8 +1,9 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { cn } from "cn";
 import { ActivityRibbon, fmtHours } from "@/components/workforce/bits";
 import { BrandIcon } from "@/components/brand-icon";
@@ -13,46 +14,99 @@ import { MEMBERS } from "@/lib/fixtures";
  * PRD §5.6: per-member working time, idle time, top application, last seen, and
  * a 24-hour activity ribbon.
  *
- * The columns are deliberately boring. There is no score column, no rank, no
- * league table, and the rows are in roster order rather than sorted by hours —
- * sorting a workforce table by working time is how a time-tracking tool becomes
- * a productivity tool (PRD §7.2).
+ * The columns are deliberately operational. Roster order default, searchable and
+ * sortable by name, team, and top application.
  */
 export function MemberTable() {
   const router = useRouter();
   const { team, member } = useFilters();
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<"roster" | "name" | "team" | "app">("roster");
 
-  const rows = MEMBERS.filter(
+  const filtered = MEMBERS.filter(
     (m) =>
       (team === ALL_TEAMS || m.team === team) &&
-      (member === ALL_MEMBERS || m.name === member),
+      (member === ALL_MEMBERS || m.name === member) &&
+      (query.trim() === "" ||
+        m.name.toLowerCase().includes(query.toLowerCase()) ||
+        m.team.toLowerCase().includes(query.toLowerCase()) ||
+        m.topApplication.toLowerCase().includes(query.toLowerCase()) ||
+        m.id.toLowerCase().includes(query.toLowerCase())),
   );
 
+  const rows = useMemo(() => {
+    const out = [...filtered];
+    if (sort === "name") return out.sort((a, b) => a.name.localeCompare(b.name));
+    if (sort === "team") return out.sort((a, b) => a.team.localeCompare(b.team));
+    if (sort === "app") return out.sort((a, b) => a.topApplication.localeCompare(b.topApplication));
+    return out;
+  }, [filtered, sort]);
+
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[980px] border-collapse text-sm">
-        <thead>
-          <tr className="border-b border-line bg-slate-50">
-            {[
-              "Member",
-              "Team",
-              "Working",
-              "Idle",
-              "Top application",
-              "Activity 00:00 → 24:00",
-              "Sensor",
-              "Last seen",
-              "",
-            ].map((h) => (
-              <th
-                key={h}
-                className="label px-3 py-2.5 text-left text-slate-500 text-[10px]"
-              >
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
+    <div>
+      {/* Search and Sort Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-slate-50/70 px-4 py-2.5">
+        <div className="relative flex items-center">
+          <Search className="absolute left-2.5 size-3.5 text-slate-400 pointer-events-none" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search member, team, app..."
+            className="h-8 w-60 rounded-sm border border-line bg-white pl-8 pr-3 text-xs text-slate-800 placeholder:text-slate-400 focus:border-emerald-600 focus:outline-none transition-colors"
+          />
+          {query && (
+            <button
+              onClick={() => setQuery("")}
+              className="ml-2 text-xs text-slate-500 hover:text-emerald-700"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="label text-[10px] text-slate-500">Sort by:</span>
+          <select
+            value={sort}
+            onChange={(e) => setSort(e.target.value as any)}
+            className="h-7 rounded border border-line bg-white px-2 text-xs text-slate-700 focus:border-emerald-600 focus:outline-none"
+          >
+            <option value="roster">Roster order</option>
+            <option value="name">Member Name (A-Z)</option>
+            <option value="team">Team (A-Z)</option>
+            <option value="app">Top Application (A-Z)</option>
+          </select>
+          <span className="machine text-xs text-slate-400 ml-2">
+            {rows.length} {rows.length === 1 ? "member" : "members"}
+          </span>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[980px] border-collapse text-sm">
+          <thead>
+            <tr className="border-b border-line bg-slate-50">
+              {[
+                "Member",
+                "Team",
+                "Working",
+                "Idle",
+                "Top application",
+                "Activity 00:00 - 24:00",
+                "Sensor",
+                "Last seen",
+                "",
+              ].map((h) => (
+                <th
+                  key={h}
+                  className="label px-3 py-2.5 text-left text-slate-500 text-[10px]"
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
         <tbody className="divide-y divide-line">
           {rows.length === 0 && (
             <tr>
@@ -120,6 +174,7 @@ export function MemberTable() {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 }

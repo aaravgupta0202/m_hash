@@ -8,7 +8,7 @@ import {
   SUPPRESSIONS,
 } from "@/lib/fixtures";
 
-export const metadata = { title: "Suppression log — tellTale" };
+export const metadata = { title: "Approved activity - tellTale" };
 
 export default function SuppressionsPage() {
   const underReview = SUPPRESSIONS.filter((s) => s.underReview).length;
@@ -17,15 +17,15 @@ export default function SuppressionsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Risk module"
-        title="Suppressed, not discarded."
-        description="Every anomaly context explained away is retained with the record that explained it, who created that record, and when. A suppression nobody can audit is indistinguishable from a detection that never fired."
+        eyebrow="Security module"
+        title="Approved, not discarded."
+        description="Every anomaly explained away by context is retained with the record that explained it, who created that record, and when. Full auditability for every automated approval."
       />
 
       <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <Stat
           icon={ShieldCheck}
-          label="Suppressed today"
+          label="Approved today"
           value={SUPPRESSED_BY_CONTEXT.toLocaleString("en-US")}
           sub={`${pct}% of ${RAISED_ANOMALIES.toLocaleString("en-US")} raised`}
         />
@@ -51,7 +51,7 @@ export default function SuppressionsPage() {
 
       <Panel
         bodyClassName="p-0"
-        footnote="Retention here is what makes the 84% claim checkable. A reviewer can take any suppressed anomaly, read the record that suppressed it, and disagree — which is the difference between a filter and an argument."
+        footnote="Retention here makes every automatic approval checkable. A reviewer can take any suppressed anomaly, read the record that approved it, and disagree: which keeps the system fully accountable."
       >
         <SuppressionTable />
       </Panel>

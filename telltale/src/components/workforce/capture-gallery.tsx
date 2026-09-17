@@ -37,7 +37,7 @@ const FLAG_REASONS = [
   { code: "POLICY_REVIEW", label: "Acceptable-use review" },
   { code: "DATA_HANDLING", label: "Data-handling concern" },
   { code: "CASE_EVIDENCE", label: "Attach to an open case" },
-  { code: "MISCAPTURE", label: "Captured in error — delete" },
+  { code: "MISCAPTURE", label: "Captured in error (delete)" },
 ];
 const FLAG_LABEL: Record<string, string> = Object.fromEntries(
   FLAG_REASONS.map((r) => [r.code, r.label]),
@@ -46,8 +46,8 @@ const FLAG_LABEL: Record<string, string> = Object.fromEntries(
 const SORTS = {
   newest: "Newest first",
   oldest: "Oldest first",
-  member: "Member (A–Z)",
-  application: "Application (A–Z)",
+  member: "Member (A-Z)",
+  application: "Application (A-Z)",
 } as const;
 type SortKey = keyof typeof SORTS;
 
@@ -81,7 +81,9 @@ export function CaptureGallery() {
       (!flaggedOnly || flags[c.id] !== undefined) &&
       (q === "" ||
         c.memberName.toLowerCase().includes(q) ||
-        c.application.toLowerCase().includes(q)),
+        c.application.toLowerCase().includes(q) ||
+        c.id.toLowerCase().includes(q) ||
+        (flags[c.id] && flags[c.id].toLowerCase().includes(q))),
   );
 
   const sorted = useMemo(() => {
@@ -178,7 +180,7 @@ export function CaptureGallery() {
           <span className="machine text-xs text-slate-500">
             {sorted.length === 0
               ? "0"
-              : `${current * PAGE + 1}–${current * PAGE + shown.length}`}{" "}
+              : `${current * PAGE + 1}-${current * PAGE + shown.length}`}{" "}
             of {sorted.length}
           </span>
           <button
@@ -252,7 +254,7 @@ export function CaptureGallery() {
                     </span>
                     {flag && (
                       <span className="label truncate rounded border border-red-200 bg-red-50 px-1.5 py-0.5 text-[10px] text-red-800">
-                        {FLAG_LABEL[flag] ?? flag}
+                        {FLAG_LABEL[flag] ?? flag.replace(/_/g, " ")}
                       </span>
                     )}
                   </div>

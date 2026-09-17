@@ -14,7 +14,7 @@ import { RibbonLegend, fmtHours } from "@/components/workforce/bits";
 import { MemberTable } from "@/components/workforce/member-table";
 import { CAPTURES, CONNECTORS, MEMBERS } from "@/lib/fixtures";
 
-export const metadata = { title: "Workforce — tellTale" };
+export const metadata = { title: "Team overview - tellTale" };
 
 export default function WorkforcePage() {
   const sensor = MEMBERS.filter((m) => m.sensorEquipped).length;
@@ -26,8 +26,8 @@ export default function WorkforcePage() {
     <>
       <PageHeader
         eyebrow="Workforce module"
-        title="Org summary"
-        description="Working time, activity and coverage for named employees. This module carries no risk scores and no link to the risk module — crossing between them is the dual-custody unmasking flow, not a navigation."
+        title="Team overview"
+        description="Working time, activity and coverage for named team members. This module carries no security scores and is kept strictly separated from alerts."
       />
 
       <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -59,7 +59,7 @@ export default function WorkforcePage() {
 
       <Panel
         title="Members"
-        sub={`${MEMBERS.length} people, ${fmtHours(totalWorking)} of working time recorded on the pinned day. Roster order — not ranked.`}
+        sub={`${MEMBERS.length} people, ${fmtHours(totalWorking)} of working time recorded on the pinned day. Roster order (not ranked).`}
         right={<RibbonLegend />}
         bodyClassName="p-0"
         className="mb-4"
@@ -73,20 +73,20 @@ export default function WorkforcePage() {
           <ul className="space-y-2.5">
             {[
               {
-                href: "/workforce/usage",
-                label: "Application usage",
+                href: "/demo/workforce/usage",
+                label: "App usage",
                 sub: "Category and application breakdown, hourly top application",
                 icon: BarChart3,
               },
               {
-                href: "/workforce/captures",
+                href: "/demo/workforce/captures",
                 label: "Screen captures",
-                sub: "Generated placeholder gallery with tag and flag",
+                sub: "Generated placeholder gallery with search and sort",
                 icon: Camera,
               },
               {
-                href: `/workforce/${MEMBERS[0].id}`,
-                label: "A member day view",
+                href: `/demo/workforce/${MEMBERS[0].id}`,
+                label: "Member day view",
                 sub: "Timeline, hours by slot, time by category, captures",
                 icon: Layout,
               },

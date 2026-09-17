@@ -20,7 +20,7 @@ export function generateStaticParams() {
 export async function generateMetadata(props: PageProps<"/demo/workforce/[id]">) {
   const { id } = await props.params;
   const member = memberById(id);
-  return { title: `${member?.name ?? id} — workforce — tellTale` };
+  return { title: `${member?.name ?? id} - Workforce - tellTale` };
 }
 
 export default async function MemberPage(props: PageProps<"/demo/workforce/[id]">) {
@@ -151,7 +151,7 @@ export default async function MemberPage(props: PageProps<"/demo/workforce/[id]"
 
       <Panel
         title="Applications and window titles"
-        sub="The nine longest-running windows of the day. Window titles are metadata — no message body, file content or typed text is collected or shown."
+        sub="The nine longest-running windows of the day. Window titles are metadata (no message body, file content or typed text is collected or shown)."
         bodyClassName="p-0"
         className="mb-4"
       >
@@ -222,7 +222,7 @@ export default async function MemberPage(props: PageProps<"/demo/workforce/[id]"
 
       <Panel
         title="Captures"
-        sub={`${captures.length} on the pinned day. Thumbnails are generated, or a generic reference image for a few applications — never a capture of a real screen.`}
+        sub={`${captures.length} on the pinned day. Thumbnails are generated, or a generic reference image for a few applications (never a capture of a real screen).`}
         right={
           <Link
             href="/demo/workforce/captures"

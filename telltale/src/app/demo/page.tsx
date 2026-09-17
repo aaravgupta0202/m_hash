@@ -25,23 +25,21 @@ export default function DashboardPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Risk module"
+        eyebrow="Security module"
         title="Detection overview"
-        description={DASHBOARD_LEDE}
+        description={DASHBOARD_LEDE.replace(/ — /g, ": ")}
         right={
           <Link
             href="/demo/queue"
-            className="flex items-center gap-2 rounded-sm bg-purple hover:bg-purple-dk px-3.5 py-2 text-xs font-semibold text-white transition-colors"
+            className="flex items-center gap-2 rounded-md bg-emerald-600 hover:bg-emerald-700 px-4 py-2 text-xs font-semibold text-white shadow-xs transition-colors"
           >
-            <span>Open the queue</span>
+            <span>Review alerts</span>
             <ArrowRight className="size-3.5" />
           </Link>
         }
       />
 
-      {/* Row 1 — the descent from a million events to three findings. Read
-          left to right, each tile is roughly a tenth of the one before it —
-          that ratio is the point, so nothing else earns emphasis here. */}
+      {/* Row 1: the descent from a million events to three findings. */}
       <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {STAT_TILES.map((t, i) => {
           const Icon = ICONS[i] ?? Layers;
@@ -52,26 +50,26 @@ export default function DashboardPage() {
                 <Icon className="size-4 text-emerald-600" />
               </div>
               <p className="machine mt-2 text-3xl leading-none font-semibold text-ink">{t.value}</p>
-              <p className="mt-2.5 text-xs leading-relaxed text-grey">{t.sub}</p>
+              <p className="mt-2.5 text-xs leading-relaxed text-grey">{t.sub.replace(/ — /g, ": ")}</p>
             </div>
           );
         })}
       </div>
 
-      {/* Row 2 — where the noise went, and what the month looked like. */}
+      {/* Row 2: where the noise went, and what the month looked like. */}
       <div className="mb-4 grid grid-cols-1 gap-4 xl:grid-cols-2">
         <Panel
           title="Where the noise went"
-          sub="Every anomaly raised in the last 30 days, by what explained it. Suppressed is not the same as discarded — each one is logged with the record that suppressed it."
+          sub="Every anomaly raised in the last 30 days, by what explained it. Suppressed is not the same as discarded: each one is logged with the record that suppressed it."
           bodyClassName="p-0"
-          footnote={NOISE_FOOTNOTE}
+          footnote={NOISE_FOOTNOTE.replace(/ — /g, ": ")}
         >
           <NoiseBar />
         </Panel>
 
         <Panel
           title="Risk over the last 30 days"
-          sub="Peak calibrated risk across the organisation per day. Flat is the expected shape — a behavioural model that spikes daily is a model nobody reads."
+          sub="Peak calibrated risk across the organisation per day. Flat is the expected shape: a behavioural model that spikes daily is a model nobody reads."
           bodyClassName="p-0"
           footnote="Three findings this month. Click one to open its investigation."
         >
@@ -79,16 +77,16 @@ export default function DashboardPage() {
         </Panel>
       </div>
 
-      {/* Row 3 — our own telemetry. */}
+      {/* Row 3: connected tools */}
       <Panel
-        title="Connector health"
-        sub="Six sources, each with a dead-man heartbeat. One is behind."
+        title="App connections"
+        sub="Six sources, each with active status monitoring. One is behind."
         right={
           <Link
             href="/demo/connectors"
             className="flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:text-emerald-700 hover:underline transition-colors"
           >
-            <span>Connector detail</span>
+            <span>Connection details</span>
             <ArrowRight className="size-3" />
           </Link>
         }
@@ -102,7 +100,7 @@ export default function DashboardPage() {
 
       <p className="mt-4 text-xs leading-relaxed text-slate-500">
         {SUBJECTS.length} identities are in scope on the pinned synthetic day.
-        Nothing on this screen is computed at runtime — every figure is a
+        Nothing on this screen is computed at runtime: every figure is a
         fixture, and the relationships between them are asserted by a verifier
         that runs as part of the build.
       </p>

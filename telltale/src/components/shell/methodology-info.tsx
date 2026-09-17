@@ -61,8 +61,12 @@ export function MethodologyInfo() {
             type="button"
             title="How this page works"
             className={cn(
-              "fixed bottom-4 z-40 flex size-9 items-center justify-center rounded-full border border-line bg-white text-grey shadow-lg transition-[left] duration-200 hover:border-purple/40 hover:text-purple",
-              collapsed ? "left-20" : "left-68",
+              // On mobile the demo launcher becomes a full-width bar along
+              // the very bottom (see demo-launcher.tsx), so this sits one
+              // row above it there; on lg+ the launcher is a compact
+              // right-aligned pill and this can drop back to bottom-4.
+              "fixed bottom-16 left-4 z-40 flex size-9 items-center justify-center rounded-full border border-line bg-white text-grey shadow-lg transition-[left] duration-200 hover:border-purple/40 hover:text-purple lg:bottom-4",
+              collapsed ? "lg:left-20" : "lg:left-68",
             )}
           />
         }

@@ -4,7 +4,7 @@ import { Panel } from "@/components/panel";
 import { CaptureGallery } from "@/components/workforce/capture-gallery";
 import { CAPTURES } from "@/lib/fixtures";
 
-export const metadata = { title: "Screen captures — tellTale" };
+export const metadata = { title: "Screen captures - tellTale" };
 
 export default function CapturesPage() {
   const triggered = CAPTURES.filter((c) => c.mode === "triggered").length;
@@ -14,7 +14,7 @@ export default function CapturesPage() {
       <PageHeader
         eyebrow="Workforce module"
         title="Screen captures"
-        description="Scheduled captures at a fixed cadence, plus captures a behavioural trigger requested. Most frames below are generated; a few applications use a generic reference image instead — either way, no frame is a capture of anyone's actual screen."
+        description="Scheduled captures at a fixed cadence, plus captures requested by behavioural triggers. Most frames below are generated; a few applications use a generic reference image instead (no frame is a capture of anyone's actual screen)."
       />
 
       <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -40,13 +40,13 @@ export default function CapturesPage() {
           icon={ShieldCheck}
           label="Employee screens shown"
           value="0"
-          sub="generated, or a generic reference image — never a real capture"
+          sub="generated, or a generic reference image (never a real capture)"
         />
       </div>
 
       <Panel
         bodyClassName="p-0"
-        footnote="Under the EU standard profile, scheduled capture is off and only triggered capture remains — dormant until behaviour justifies it. The jurisdiction chip in the sidebar names the active profile. What's collected, what isn't, and how this differs from a risk investigation capture is in the i button below."
+        footnote="Under the EU standard profile, scheduled capture is off and only triggered capture remains (dormant until behaviour justifies it). The jurisdiction chip in the sidebar names the active profile."
       >
         <CaptureGallery />
       </Panel>

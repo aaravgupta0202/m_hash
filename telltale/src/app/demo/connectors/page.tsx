@@ -5,7 +5,7 @@ import { ConnectorRibbons } from "@/components/connectors/ribbon";
 import { ConnectorStrip, STATE_TEXT } from "@/components/connectors/strip";
 import { CONNECTORS, CONNECTOR_INSTANCES, NOW } from "@/lib/fixtures";
 
-export const metadata = { title: "Connector health — tellTale" };
+export const metadata = { title: "App connections - tellTale" };
 
 export default function ConnectorsPage() {
   const degraded = CONNECTORS.filter((c) => c.state !== "healthy");
@@ -13,9 +13,9 @@ export default function ConnectorsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Risk module"
-        title="Connector health"
-        description="Every source carries a dead-man heartbeat and an expected-volume band. A source that stops reporting raises an alert of its own."
+        eyebrow="Security module"
+        title="App connections"
+        description="Every integrated tool carries health status and expected volume checks. An integration that stops reporting raises an alert automatically."
         right={
           <div className="text-right">
             <p className="label text-slate-500 text-[10px]">Evaluated at</p>

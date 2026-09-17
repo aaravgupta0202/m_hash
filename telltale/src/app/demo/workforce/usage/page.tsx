@@ -7,9 +7,10 @@ import {
   categoryColor,
   fmtHours,
 } from "@/components/workforce/bits";
+import { AppUsageTable } from "@/components/workforce/app-usage-table";
 import { HOURLY_TOP_APPLICATION, MEMBERS, MEMBER_DAYS } from "@/lib/fixtures";
 
-export const metadata = { title: "Application usage — tellTale" };
+export const metadata = { title: "App usage - tellTale" };
 
 /** Aggregated across the org from the same per-member fixtures the day view reads. */
 const CATEGORY_TOTALS = Object.entries(
@@ -100,68 +101,10 @@ export default function UsagePage() {
 
         <Panel
           title="Applications"
-          sub="Ordered by recorded duration. Window-title counts are distinct titles seen, which is metadata."
+          sub="Ordered by recorded duration. Searchable by app name or category."
           bodyClassName="p-0"
         >
-          <div className="max-h-96 overflow-y-auto">
-            <table className="w-full border-collapse text-sm">
-              <thead className="sticky top-0 bg-slate-50 z-10">
-                <tr className="border-b border-line">
-                  {["Application", "Category", "Titles", "Duration", ""].map(
-                    (h) => (
-                      <th
-                        key={h}
-                        className="label px-4 py-2.5 text-left text-slate-500"
-                      >
-                        {h}
-                      </th>
-                    ),
-                  )}
-                </tr>
-              </thead>
-              <tbody>
-                {APP_TOTALS.map((a) => (
-                  <tr
-                    key={a.application}
-                    className="border-b border-line hover:bg-slate-50 transition-colors"
-                  >
-                    <td className="px-4 py-2 font-medium text-slate-900">
-                      <div className="flex items-center gap-2">
-                        <BrandIcon name={a.application} className="size-4" />
-                        <span>{a.application}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-2">
-                      <span className="flex items-center gap-1.5 text-xs text-slate-700 capitalize">
-                        <span
-                          className="size-2 rounded-sm"
-                          style={{ backgroundColor: categoryColor(a.category) }}
-                        />
-                        {a.category}
-                      </span>
-                    </td>
-                    <td className="machine px-4 py-2 text-xs text-slate-500">
-                      {a.titles}
-                    </td>
-                    <td className="machine px-4 py-2 font-semibold text-emerald-700">
-                      {fmtHours(a.minutes)}
-                    </td>
-                    <td className="w-32 px-4 py-2">
-                      <div className="h-3 w-full rounded bg-slate-100 border border-line overflow-hidden">
-                        <div
-                          className="bar-grow h-3 rounded"
-                          style={{
-                            width: `${(a.minutes / topApp.minutes) * 100}%`,
-                            backgroundColor: categoryColor(a.category),
-                          }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <AppUsageTable items={APP_TOTALS} topMinutes={topApp.minutes} />
         </Panel>
       </div>
 
@@ -169,7 +112,7 @@ export default function UsagePage() {
         title="Top application by hour"
         sub="The application with the most recorded time in each hour of the working day, and how many members it was open for."
         bodyClassName="p-0"
-        footnote="An hour with a high member count and a low minute total is a short shared activity — a standup, a deploy window. Reading intent into either is a management judgement this screen deliberately does not make."
+        footnote="An hour with a high member count and a low minute total is a short shared activity (such as a standup or deploy window). Reading intent into either is a management judgement this screen deliberately does not make."
       >
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] border-collapse text-sm">

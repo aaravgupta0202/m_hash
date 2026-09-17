@@ -8,9 +8,9 @@ import { cn } from "cn";
 import { DEMO_SCENARIOS, normalisePath } from "@/lib/nav";
 
 const TONE_DOT: Record<string, string> = {
-  "/subject/8830": "bg-emerald-500",
-  "/subject/4912": "bg-red-500",
-  "/subject/2071": "bg-amber-500",
+  "/demo/subject/8830": "bg-emerald-500",
+  "/demo/subject/4912": "bg-red-500",
+  "/demo/subject/2071": "bg-amber-500",
 };
 
 /**
@@ -30,12 +30,12 @@ export function DemoLauncher() {
   const pathname = normalisePath(usePathname());
 
   return (
-    <div className="fixed right-4 bottom-4 z-40 flex items-stretch overflow-hidden rounded-sm border border-line bg-white shadow-lg">
+    <div className="fixed right-4 bottom-4 left-4 z-40 flex max-w-full items-stretch overflow-hidden rounded-sm border border-line bg-white shadow-lg sm:left-auto sm:w-auto">
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="flex items-center gap-1.5 bg-emerald-700 px-3 py-1.5 text-white hover:bg-emerald-800"
+        className="flex shrink-0 items-center gap-1.5 bg-emerald-700 px-3 py-1.5 text-white hover:bg-emerald-800"
       >
         <Play className="size-3 fill-current" />
         <span className="text-xs font-medium">Demo scenarios</span>
@@ -48,7 +48,7 @@ export function DemoLauncher() {
       </button>
 
       {open && (
-        <ul className="flex items-stretch divide-x divide-line">
+        <ul className="flex items-stretch divide-x divide-line overflow-x-auto">
           {DEMO_SCENARIOS.map((s) => {
             const active = pathname === s.href;
             const dot = TONE_DOT[s.href] ?? "bg-emerald-500";

@@ -32,7 +32,7 @@ const REASON_CODES = [
   { code: "CONTEXT_FORGED", label: "Context record appears manufactured" },
   { code: "CREDENTIAL_MISUSE", label: "Credential or session misuse" },
   { code: "POLICY_BREACH", label: "Acceptable-use or policy breach" },
-  { code: "FALSE_POSITIVE", label: "False positive — authorised work" },
+  { code: "FALSE_POSITIVE", label: "False positive: authorised work" },
 ];
 
 const KIND_TONE: Record<string, string> = {
@@ -122,8 +122,8 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
                     </span>
                   ))}
                   {flag && (
-                    <span className="label machine rounded border border-red-200 bg-red-50 px-1.5 py-0.5 text-[10px] font-bold text-red-800">
-                      {flag}
+                    <span className="label rounded border border-red-200 bg-red-50 px-2 py-0.5 text-[10px] font-bold text-red-800">
+                      {REASON_CODES.find((r) => r.code === flag)?.label ?? flag.replace(/_/g, " ")}
                     </span>
                   )}
                 </div>

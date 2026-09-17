@@ -31,8 +31,8 @@ const HEAD = [
   { label: "Subject", className: "w-32" },
   { label: "Cohort", className: "w-44" },
   { label: "Risk", className: "w-28" },
-  { label: "Expected cost", className: "w-32" },
-  { label: "Top signal", className: "min-w-64" },
+  { label: "Priority score", className: "w-32" },
+  { label: "Trigger signal", className: "min-w-64" },
   { label: "Context", className: "w-32" },
   { label: "Age", className: "w-24 text-right" },
   { label: "Status", className: "w-28" },
@@ -44,8 +44,9 @@ export function QueueTable() {
   const { cohort, subject } = useFilters();
   const [query, setQuery] = useState("");
   const [filterClass, setFilterClass] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<"rank" | "risk" | "cost">("rank");
 
-  const rows = QUEUE_ROWS.filter((r) => {
+  const filtered = QUEUE_ROWS.filter((r) => {
     if (cohort !== ALL_COHORTS && r.cohort !== cohort) return false;
     if (subject !== ALL_SUBJECTS && r.pseudonym !== subject) return false;
     if (filterClass !== "all" && r.identityClass !== filterClass) return false;
@@ -58,6 +59,12 @@ export function QueueTable() {
       );
     }
     return true;
+  });
+
+  const rows = [...filtered].sort((a, b) => {
+    if (sortBy === "risk") return b.risk - a.risk;
+    if (sortBy === "cost") return b.expectedCost - a.expectedCost;
+    return a.rank - b.rank;
   });
 
   /* The capacity rule sits before the first row that ranks below capacity */
@@ -74,7 +81,7 @@ export function QueueTable() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Filter queue by #id, signal or cohort..."
+              placeholder="Search alerts by #id, signal, cohort..."
               className="h-8 w-64 rounded-sm border border-line bg-white pl-8 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-emerald-600 focus:outline-none transition-colors"
             />
           </div>
@@ -88,35 +95,49 @@ export function QueueTable() {
           )}
         </div>
 
-        <div className="flex items-center gap-1.5">
-          <span className="label text-[10px] text-slate-500 mr-1 flex items-center gap-1">
-            <Filter className="size-3 text-emerald-600" />
-            Identity:
-          </span>
-          {[
-            { id: "all", label: "All" },
-            { id: "human", label: "Human", Icon: User },
-            { id: "service", label: "Service", Icon: Server },
-            { id: "agent", label: "Agent", Icon: Bot },
-          ].map((tab) => {
-            const active = filterClass === tab.id;
-            return (
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5">
+            <span className="label text-[10px] text-slate-500 mr-1 flex items-center gap-1">
+              Sort:
+            </span>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as any)}
+              className="h-7 rounded border border-line bg-white px-2 text-xs text-slate-700 focus:border-emerald-600 focus:outline-none"
+            >
+              <option value="rank">Recommended (Priority order)</option>
+              <option value="risk">Highest risk first</option>
+              <option value="cost">Highest priority score</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            <span className="label text-[10px] text-slate-500 mr-1 flex items-center gap-1">
+              <Filter className="size-3 text-emerald-600" />
+              Identity:
+            </span>
+            {[
+              { id: "all", label: "All" },
+              { id: "human", label: "Human", Icon: User },
+              { id: "service", label: "Service", Icon: Server },
+              { id: "agent", label: "Agent", Icon: Bot },
+            ].map(({ id, label, Icon }) => (
               <button
-                key={tab.id}
+                key={id}
                 type="button"
-                onClick={() => setFilterClass(tab.id)}
+                onClick={() => setFilterClass(id)}
                 className={cn(
-                  "flex items-center gap-1 rounded px-2.5 py-1 text-[11px] font-medium transition-all",
-                  active
-                    ? "border border-emerald-300 bg-emerald-50 text-emerald-800 font-semibold"
-                    : "border border-line bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                  "flex items-center gap-1 rounded border px-2 py-1 text-xs font-medium transition-all",
+                  filterClass === id
+                    ? "border-emerald-600 bg-emerald-50 text-emerald-800 font-semibold"
+                    : "border-line bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900",
                 )}
               >
-                {tab.Icon && <tab.Icon className="size-3" />}
-                <span>{tab.label}</span>
+                {Icon && <Icon className="size-3" />}
+                {label}
               </button>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
 
@@ -163,7 +184,7 @@ export function QueueTable() {
                             {TRIAGE_CAPACITY_LABEL}
                           </span>
                           <span className="text-xs text-amber-900/80">
-                            Everything below this line is retained and ranked —
+                            Everything below this line is retained and ranked:
                             it is simply not pretending to be actionable today.
                           </span>
                         </div>

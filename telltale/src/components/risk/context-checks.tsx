@@ -62,7 +62,7 @@ const VERDICT_LINE: Record<ContextVerdict, string> = {
   partial:
     "Some tests pass and some do not. The context term is applied at partial weight rather than in full.",
   absent:
-    "No context record was found in any source, so there is nothing to test. Absence is not evidence of intent — it removes the discount, it does not add a penalty.",
+    "No context record was found in any source, so there is nothing to test. Absence is not evidence of intent: it removes the discount, it does not add a penalty.",
   suspicious:
     "A record exists and fails provenance. The attempt to manufacture authorisation is itself the signal, and it raises the score rather than lowering it.",
 };
@@ -126,20 +126,23 @@ export function ContextChecks({
                     punchline ? "font-bold text-red-700" : "text-slate-800",
                   )}
                 >
-                  {check.finding}
+                  {check.finding.replace(/subject_(\d+)/g, "Subject #$1")}
                 </p>
                 {(check.recordId || check.createdBy || check.createdAt) && (
                   <dl className="machine mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-slate-600">
                     {check.recordId && <Pair k="record" v={check.recordId} />}
                     {check.createdBy && (
                       <Pair
-                        k="created_by"
-                        v={check.createdBy}
+                        k="created by"
+                        v={check.createdBy.replace(/subject_(\d+)/g, "Subject #$1")}
                         highlight={!!punchline}
                       />
                     )}
                     {check.createdAt && (
-                      <Pair k="created_at" v={check.createdAt} />
+                      <Pair
+                        k="created at"
+                        v={check.createdAt.replace("T", " ").replace("Z", "")}
+                      />
                     )}
                   </dl>
                 )}
@@ -168,7 +171,7 @@ function Pair({
 }) {
   return (
     <div className="flex gap-1.5 items-center">
-      <dt className="text-slate-400 text-[11px]">{k}:</dt>
+      <dt className="text-slate-400 text-[11px] capitalize">{k}:</dt>
       <dd
         className={cn(
           "text-[11px]",

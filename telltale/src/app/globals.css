@@ -61,6 +61,49 @@
   color-scheme: light;
 }
 
+.dark {
+  --tt-ink: #f8fafc;
+  --tt-purple: #10b981;
+  --tt-purple-dk: #059669;
+  --tt-purple-lt: #064e3b;
+  --tt-green: #10b981;
+  --tt-amber: #f59e0b;
+  --tt-red: #ef4444;
+  --tt-grey: #94a3b8;
+  --tt-line: #1e293b;
+  --tt-panel: #0f172a;
+  --tt-white: #090d16;
+
+  --background: #090d16;
+  --foreground: #f8fafc;
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  --popover: #0f172a;
+  --popover-foreground: #f8fafc;
+  --primary: #10b981;
+  --primary-foreground: #090d16;
+  --secondary: #1e293b;
+  --secondary-foreground: #10b981;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #1e293b;
+  --accent-foreground: #10b981;
+  --destructive: #ef4444;
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #10b981;
+  --sidebar: #090d16;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #10b981;
+  --sidebar-primary-foreground: #090d16;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #10b981;
+  --sidebar-border: #1e293b;
+  --sidebar-ring: #10b981;
+
+  color-scheme: dark;
+}
+
 @theme inline {
   --color-ink: var(--tt-ink);
   --color-purple: var(--tt-purple);
@@ -128,8 +171,6 @@
   body {
     @apply bg-background text-foreground text-sm;
   }
-  /* A plain thin scrollbar reads as a real desktop tool; the oversized
-     rounded ones some browsers default to read as a mobile web wrapper. */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -148,17 +189,11 @@
 }
 
 @layer utilities {
-  /* Monospace for anything machine-generated — timestamps, action tokens,
-     resource ids, probabilities. Sans for anything a human wrote. This is
-     the one typographic rule that does most of the work in this build. */
   .machine {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.01em;
   }
-  /* Small uppercase label for section eyebrows and status chips. Used on its
-     own — stacking font-bold or tracking-wider on top fights the weight and
-     spacing this class already sets. */
   .label {
     font-size: 0.6875rem;
     line-height: 1rem;
@@ -168,7 +203,6 @@
   }
 }
 
-/* Risk bars animate width on mount. Nothing else moves (PRD §8). */
 @keyframes tt-bar-grow {
   from {
     transform: scaleX(0);
@@ -183,13 +217,177 @@
     transform-origin: left;
     animation: tt-bar-grow 200ms ease-out both;
   }
-  /* The only surface in the build: 1px border, small radius, flat. Shadows
-     read as a marketing-site mock, not as an analyst tool someone sits in
-     front of for eight hours. */
   .panel {
     border-width: 1px;
     border-color: var(--tt-line);
     border-radius: var(--radius);
     background-color: var(--tt-panel);
   }
+}
+
+/* =========================================================================
+   DARK MODE COMPREHENSIVE HIGH-CONTRAST ENTERPRISE STYLING
+   ========================================================================= */
+.dark body {
+  background-color: #090d16 !important;
+  color: #f8fafc !important;
+}
+
+.dark .bg-white {
+  background-color: #0f172a !important;
+}
+
+.dark .bg-slate-50,
+.dark .bg-slate-50\/60,
+.dark .bg-slate-50\/70,
+.dark .bg-slate-50\/80,
+.dark .bg-slate-100 {
+  background-color: #0b1120 !important;
+}
+
+.dark .bg-slate-200 {
+  background-color: #1e293b !important;
+}
+
+.dark .text-ink,
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-slate-700 {
+  color: #f8fafc !important;
+}
+
+.dark .text-slate-600,
+.dark .text-slate-500,
+.dark .text-grey {
+  color: #94a3b8 !important;
+}
+
+.dark .text-slate-400 {
+  color: #64748b !important;
+}
+
+.dark .border-line,
+.dark .border-border,
+.dark .divide-line > :not([hidden]) ~ :not([hidden]),
+.dark [class*="border-slate-"] {
+  border-color: #1e293b !important;
+}
+
+.dark .hover\:bg-slate-50:hover {
+  background-color: #1e293b !important;
+}
+
+.dark .hover\:bg-slate-100:hover {
+  background-color: #1e293b !important;
+}
+
+.dark .hover\:bg-emerald-50:hover {
+  background-color: #064e3b40 !important;
+}
+
+.dark .panel {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+}
+
+.dark header {
+  background-color: #090d16 !important;
+  border-color: #1e293b !important;
+}
+
+.dark footer {
+  background-color: #090d16 !important;
+  border-color: #1e293b !important;
+}
+
+.dark aside {
+  background-color: #090d16 !important;
+  border-color: #1e293b !important;
+}
+
+.dark .bg-emerald-50,
+.dark .bg-emerald-50\/30,
+.dark .bg-emerald-50\/40,
+.dark .bg-emerald-50\/70 {
+  background-color: #064e3b30 !important;
+}
+
+.dark .border-emerald-200,
+.dark .border-emerald-200\/60,
+.dark .border-emerald-200\/70,
+.dark .border-emerald-200\/80,
+.dark .border-emerald-300 {
+  border-color: #065f46 !important;
+}
+
+.dark .text-emerald-800,
+.dark .text-emerald-900,
+.dark .text-emerald-700 {
+  color: #34d399 !important;
+}
+
+.dark .bg-red-50,
+.dark .bg-red-50\/30 {
+  background-color: #450a0a30 !important;
+}
+
+.dark .border-red-200,
+.dark .border-red-200\/60,
+.dark .border-red-200\/70,
+.dark .border-red-300 {
+  border-color: #7f1d1d !important;
+}
+
+.dark .text-red-800,
+.dark .text-red-900,
+.dark .text-red-700 {
+  color: #f87171 !important;
+}
+
+.dark .bg-amber-50,
+.dark .bg-amber-50\/30,
+.dark .bg-amber-50\/40,
+.dark .bg-amber-50\/80 {
+  background-color: #451a0330 !important;
+}
+
+.dark .border-amber-200,
+.dark .border-amber-200\/60,
+.dark .border-amber-200\/70,
+.dark .border-amber-300 {
+  border-color: #78350f !important;
+}
+
+.dark .text-amber-800,
+.dark .text-amber-900,
+.dark .text-amber-700 {
+  color: #fbbf24 !important;
+}
+
+.dark input,
+.dark select,
+.dark [role="combobox"] {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+.dark [role="dialog"],
+.dark [data-state="open"] {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+/* Hide Next.js dev indicators and overlays for clean screen recordings */
+nextjs-portal,
+[data-nextjs-toast],
+[data-nextjs-dev-tools],
+[data-nextjs-portal],
+#next-route-announcer,
+button[data-nextjs-dev-tools-button] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
 }

@@ -28,17 +28,17 @@ export const RISK_NAV: NavItem[] = [
   { href: "/demo", label: "Dashboard", match: exact("/demo") },
   {
     href: "/demo/queue",
-    label: "Investigation queue",
+    label: "Review alerts",
     match: (p) => prefix("/demo/queue")(p) || prefix("/demo/subject")(p),
   },
   {
     href: "/demo/connectors",
-    label: "Connector health",
+    label: "App connections",
     match: prefix("/demo/connectors"),
   },
   {
     href: "/demo/suppressions",
-    label: "Suppression log",
+    label: "Approved activity",
     match: prefix("/demo/suppressions"),
   },
 ];
@@ -46,7 +46,7 @@ export const RISK_NAV: NavItem[] = [
 export const WORKFORCE_NAV: NavItem[] = [
   {
     href: "/demo/workforce",
-    label: "Org summary",
+    label: "Team overview",
     match: (p) =>
       prefix("/demo/workforce")(p) &&
       !prefix("/demo/workforce/usage")(p) &&
@@ -54,7 +54,7 @@ export const WORKFORCE_NAV: NavItem[] = [
   },
   {
     href: "/demo/workforce/usage",
-    label: "Application usage",
+    label: "App usage",
     match: prefix("/demo/workforce/usage"),
   },
   {
@@ -74,17 +74,18 @@ export const MODULE_ROLE: Record<Module, string> = {
   workforce: "WORKFORCE ADMIN",
 };
 
-/** The active module is derived from the URL — nothing is persisted. */
+/** The active module is derived from the URL: nothing is persisted. */
 export function moduleForPath(pathname: string): Module {
   return prefix("/demo/workforce")(pathname) ? "workforce" : "risk";
 }
 
 /** Presenter shorthand names appear here and nowhere else in the UI (PRD §6). */
 export const DEMO_SCENARIOS = [
-  { label: "Priya — suppressed", href: "/demo/subject/8830" },
-  { label: "Marcus — compromised", href: "/demo/subject/4912" },
-  { label: "Dana — manufactured context", href: "/demo/subject/2071" },
+  { label: "Priya - Normal Work (Approved)", href: "/demo/subject/8830" },
+  { label: "Marcus - Suspicious Activity", href: "/demo/subject/4912" },
+  { label: "Dana - Fake Approval", href: "/demo/subject/2071" },
 ] as const;
 
 /** Single synthetic day every fixture lives on (PRD §4, §6). */
 export const DEMO_DATE = "2026-09-14";
+

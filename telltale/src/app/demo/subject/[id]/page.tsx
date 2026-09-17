@@ -22,7 +22,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata(props: PageProps<"/demo/subject/[id]">) {
   const { id } = await props.params;
-  return { title: `#${id} — investigation — tellTale` };
+  return { title: `#${id} - Case Details - tellTale` };
 }
 
 export default async function SubjectPage(props: PageProps<"/demo/subject/[id]">) {
@@ -39,21 +39,21 @@ export default async function SubjectPage(props: PageProps<"/demo/subject/[id]">
 
       <div className="flex flex-col gap-4">
         <Panel
-          title="Composite timeline"
-          sub="Authentication, actions, authorising records and the calibrated score on one hour axis. The lanes share a single scale, so vertical alignment is a statement about the same moment in time."
+          title="Activity timeline"
+          sub="Authentication, actions, and authorising records plotted on a single hour axis for clear chronological correlation."
           bodyClassName="p-0"
-          footnote="Every tick is an event the connectors reported. The CONTEXT lane is the only lane that can be empty while the others are busy, and that combination is the finding."
+          footnote="Every tick is an event reported by connected tools. The CONTEXT lane shows whether an authorizing ticket existed at that moment."
         >
           <CompositeTimelineChart timeline={timeline} />
         </Panel>
 
         <Panel
           title="Why it scored"
-          sub="Additive contributions to the log-odds. The column sums to the logit; the logit maps through the logistic to the calibrated probability. There is no post-hoc attribution step — the explanation is the model."
+          sub="Clear breakdown of factors contributing to the score: each factor adds or subtracts from the overall total with full transparency."
           bodyClassName="p-0"
           footnote={
             dossier.sensorNote ??
-            "Every row names the evidence it was derived from. A feature with no deviation contributes exactly zero and is shown rather than hidden, because an analyst needs to know it was tested."
+            "Every row names the evidence it was derived from. A factor with no deviation contributes zero and is shown for transparency."
           }
         >
           <ContributionTable
@@ -66,15 +66,15 @@ export default async function SubjectPage(props: PageProps<"/demo/subject/[id]">
 
         <Panel
           title="Context verification"
-          sub="Four tests against the operational record that would authorise this activity. A record is not accepted because it exists — it is accepted because it passes."
+          sub="Automated tests against the work ticket: a record is accepted only when author, timing, and scope all match."
           bodyClassName="p-0"
         >
           <ContextChecks checks={dossier.checks} verdict={subject.verdict} />
         </Panel>
 
         <Panel
-          title="Attack path"
-          sub="The trajectory as a graph. Edge labels are empirical transition probabilities measured in this organisation, not global priors."
+          title="Action path"
+          sub="Sequence of actions visualized as steps between systems, measuring transition frequency across the team."
           bodyClassName="p-0"
         >
           <AttackPath
@@ -85,15 +85,15 @@ export default async function SubjectPage(props: PageProps<"/demo/subject/[id]">
 
         <Panel
           title="Cohort comparison"
-          sub="The subject against peers doing the same work, on the metric the volumetric detector uses. The shaded band is one MAD-unit either side of the cohort median, so the Z-score in the table above is a visible distance rather than a claim."
+          sub="Subject activity compared against team peers doing the same job, identifying whether volume is normal or an outlier."
           bodyClassName="p-0"
         >
           <CohortStrip comparison={dossier.comparison} />
         </Panel>
 
         <Panel
-          title="Evidence"
-          sub="Collected artefacts, tagged and flagged by the analyst. Metadata only — no message bodies, no file contents, no typed text."
+          title="Evidence list"
+          sub="Collected metadata artefacts, tagged and flagged by analysts (metadata only: no message bodies or raw file contents)."
           bodyClassName="p-0"
         >
           <EvidenceList items={dossier.evidence} />

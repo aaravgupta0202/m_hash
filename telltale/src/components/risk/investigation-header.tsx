@@ -36,7 +36,7 @@ export function InvestigationHeader({
         className="mb-3 inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-emerald-700 transition-colors"
       >
         <ArrowLeft className="size-3.5" />
-        <span>Back to investigation queue</span>
+        <span>Back to alerts</span>
       </Link>
 
       <div className="panel flex flex-col lg:flex-row items-stretch border border-line bg-white rounded-sm overflow-hidden ">
@@ -112,7 +112,7 @@ export function InvestigationHeader({
             <Field label="Tenure" mono>
               {subject.tenureDays}d
             </Field>
-            <Field label="Expected cost" mono>
+            <Field label="Priority score" mono>
               {subject.expectedCost.toFixed(1)}
             </Field>
             <Field label="Sensor">

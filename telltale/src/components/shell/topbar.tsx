@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Calendar, X } from "lucide-react";
+import { Calendar, Menu, X } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -18,6 +18,8 @@ import {
   useFilters,
 } from "@/lib/filters";
 import { COHORT_STATS, MEMBERS, QUEUE_ROWS } from "@/lib/fixtures";
+import { useSidebar } from "./shell";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const COHORTS = [ALL_COHORTS, ...COHORT_STATS.map((c) => c.cohort)];
 const SUBJECTS = [ALL_SUBJECTS, ...QUEUE_ROWS.map((r) => r.pseudonym)];
@@ -43,6 +45,7 @@ export function Topbar() {
   const pathname = usePathname();
   const mod = moduleForPath(pathname);
   const f = useFilters();
+  const { setMobileOpen } = useSidebar();
 
   const risk = mod === "risk";
   const options = risk
@@ -52,7 +55,7 @@ export function Topbar() {
           value: f.cohort,
           items: COHORTS,
           all: ALL_COHORTS,
-          width: "w-52",
+          width: "w-32 sm:w-52",
           key: "cohort",
         },
         {
@@ -60,7 +63,7 @@ export function Topbar() {
           value: f.subject,
           items: SUBJECTS,
           all: ALL_SUBJECTS,
-          width: "w-36",
+          width: "w-24 sm:w-36",
           key: "subject",
         },
       ] as const)
@@ -70,7 +73,7 @@ export function Topbar() {
           value: f.team,
           items: TEAMS,
           all: ALL_TEAMS,
-          width: "w-52",
+          width: "w-32 sm:w-52",
           key: "team",
         },
         {
@@ -78,7 +81,7 @@ export function Topbar() {
           value: f.member,
           items: MEMBER_NAMES,
           all: ALL_MEMBERS,
-          width: "w-44",
+          width: "w-28 sm:w-44",
           key: "member",
         },
       ] as const);
@@ -86,7 +89,16 @@ export function Topbar() {
   const dirty = options.some((o) => o.value !== o.all);
 
   return (
-    <header className="sticky top-0 z-20 flex h-12 shrink-0 items-center gap-3 border-b border-line bg-white px-6">
+    <header className="sticky top-0 z-20 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-line bg-white px-4 py-2 sm:px-6 lg:h-12 lg:flex-nowrap lg:py-0">
+      <button
+        type="button"
+        onClick={() => setMobileOpen(true)}
+        title="Open menu"
+        className="flex size-7 shrink-0 items-center justify-center rounded-sm text-grey hover:bg-purple-lt hover:text-purple lg:hidden"
+      >
+        <Menu className="size-4" />
+      </button>
+
       {options.map((o) => (
         <div key={o.key} className="flex items-center gap-1.5">
           <span className="label text-grey">{o.label}</span>
@@ -117,14 +129,14 @@ export function Topbar() {
         </div>
       ))}
 
-      <span className="label ml-1 text-grey">Range</span>
+      <span className="label ml-1 hidden text-grey sm:inline">Range</span>
       <div
         title="Date range is pinned to the single synthetic day in this demo build"
         className="machine flex h-7 items-center gap-1.5 rounded-sm border border-line px-2.5 text-xs text-grey"
       >
         <Calendar className="size-3.5" />
         <span className="text-ink">{DEMO_DATE}</span>
-        <span>00:00–23:59</span>
+        <span className="hidden sm:inline">00:00–23:59</span>
       </div>
 
       {dirty && (
@@ -138,7 +150,10 @@ export function Topbar() {
         </button>
       )}
 
-      <span className="machine ml-auto text-xs text-grey">IST</span>
+      <div className="ml-auto flex items-center gap-3">
+        <ThemeToggle />
+        <span className="machine text-xs text-grey">IST</span>
+      </div>
     </header>
   );
 }

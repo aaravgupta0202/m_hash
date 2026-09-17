@@ -2,7 +2,7 @@
 
 import { Fragment, useMemo, useState } from "react";
 import Link from "next/link";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Search } from "lucide-react";
 import { cn } from "cn";
 import { BrandIcon } from "@/components/brand-icon";
 import { SUPPRESSIONS, SUPPRESSION_REASON_LABELS, routeIdFor } from "@/lib/fixtures";
@@ -29,6 +29,7 @@ const ROWS = [...SUPPRESSIONS].sort((a, b) => b.ts.localeCompare(a.ts));
 export function SuppressionTable() {
   const [reason, setReason] = useState(ALL);
   const [open, setOpen] = useState<string | null>("sup-rev");
+  const [query, setQuery] = useState("");
 
   const counts = useMemo(() => {
     const out: Record<string, number> = {};
@@ -36,12 +37,21 @@ export function SuppressionTable() {
     return out;
   }, []);
 
-  const rows =
-    reason === ALL
-      ? ROWS
-      : reason === REOPENED
-        ? ROWS.filter((s) => s.underReview)
-        : ROWS.filter((s) => s.reasonCode === reason);
+  const q = query.trim().toLowerCase();
+
+  const rows = ROWS.filter((s) => {
+    if (reason === REOPENED && !s.underReview) return false;
+    if (reason !== ALL && reason !== REOPENED && s.reasonCode !== reason) return false;
+    if (q) {
+      const match =
+        s.subjectPseudonym.toLowerCase().includes(q) ||
+        s.anomaly.toLowerCase().includes(q) ||
+        s.record.recordId.toLowerCase().includes(q) ||
+        s.suppressedBy.toLowerCase().includes(q);
+      if (!match) return false;
+    }
+    return true;
+  });
 
   return (
     <div>
@@ -88,6 +98,17 @@ export function SuppressionTable() {
             {ROWS.filter((s) => s.underReview).length}
           </span>
         </button>
+
+        <div className="relative ml-auto flex items-center">
+          <Search className="absolute left-2.5 size-3 text-slate-400 pointer-events-none" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search #id, reason, record..."
+            className="h-7 w-48 rounded-sm border border-line bg-white pl-7 pr-2.5 text-xs text-slate-800 placeholder:text-slate-400 focus:border-emerald-600 focus:outline-none transition-colors"
+          />
+        </div>
       </div>
 
       <div className="overflow-x-auto">
@@ -139,7 +160,7 @@ export function SuppressionTable() {
                     <td className="machine px-3 py-2.5 font-bold text-emerald-700">
                       {s.subjectPseudonym}
                     </td>
-                    <td className="px-3 py-2.5 text-slate-800">{s.anomaly}</td>
+                    <td className="px-3 py-2.5 text-slate-800">{s.anomaly.replace(/ — /g, " - ")}</td>
                     <td className="px-3 py-2.5 text-slate-600">
                       <span className="flex items-center gap-1.5">
                         <BrandIcon name={s.suppressedBy} className="size-3.5" />
@@ -147,7 +168,7 @@ export function SuppressionTable() {
                       </span>
                     </td>
                     <td className="px-3 py-2.5 text-xs text-slate-600">
-                      {SUPPRESSION_REASON_LABELS[s.reasonCode] ?? s.reasonCode}
+                      {SUPPRESSION_REASON_LABELS[s.reasonCode] ?? s.reasonCode.replace(/_/g, " ")}
                     </td>
                     <td className="px-3 py-2.5">
                       {s.underReview ? (
@@ -178,7 +199,7 @@ export function SuppressionTable() {
                           <Pair k="Record ID" v={s.record.recordId} mono />
                           <Pair
                             k="Created by"
-                            v={s.record.createdBy}
+                            v={s.record.createdBy.replace(/subject_(\d+)/g, "Subject #$1")}
                             mono
                             tone={
                               s.underReview

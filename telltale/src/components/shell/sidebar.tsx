@@ -13,6 +13,7 @@ import {
   Info,
   PanelLeftClose,
   PanelLeftOpen,
+  X,
 } from "lucide-react";
 import { cn } from "cn";
 import { LogoMark } from "@/components/brand/logo-mark";
@@ -34,14 +35,14 @@ import {
 } from "@/components/ui/tooltip";
 
 const NAV_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
-  "/": LayoutDashboard,
-  "/queue": ShieldAlert,
-  "/connectors": Radio,
-  "/suppressions": ShieldCheck,
-  "/workforce": Users,
-  "/workforce/usage": BarChart3,
-  "/workforce/captures": Camera,
-  "/about": Info,
+  "/demo": LayoutDashboard,
+  "/demo/queue": ShieldAlert,
+  "/demo/connectors": Radio,
+  "/demo/suppressions": ShieldCheck,
+  "/demo/workforce": Users,
+  "/demo/workforce/usage": BarChart3,
+  "/demo/workforce/captures": Camera,
+  "/demo/about": Info,
 };
 
 /**
@@ -59,11 +60,16 @@ const NAV_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
  * itself instead of unmounting out from under it. Tooltips are always
  * present too — they only *show* on hover regardless of width, so there's
  * no structural fork left to desync.
+ *
+ * `collapsed` (the icon-only rail) is a desktop-only concept — the `lg:`
+ * prefix below means a phone or tablet always sees full labels, because
+ * below `lg` the sidebar isn't a rail at all, it's an off-canvas drawer
+ * (`mobileOpen`, a separate piece of state) with room to spare.
  */
 const collapsible = (collapsed: boolean, extra?: string) =>
   cn(
-    "overflow-hidden whitespace-nowrap transition-all duration-200",
-    collapsed ? "w-0 opacity-0" : "opacity-100",
+    "overflow-hidden whitespace-nowrap opacity-100 transition-all duration-200",
+    collapsed && "lg:w-0 lg:opacity-0",
     extra,
   );
 
@@ -71,42 +77,71 @@ export function Sidebar() {
   const pathname = normalisePath(usePathname());
   const mod = moduleForPath(pathname);
   const items = mod === "risk" ? RISK_NAV : WORKFORCE_NAV;
-  const { collapsed, toggleCollapsed } = useSidebar();
+  const { collapsed, toggleCollapsed, mobileOpen, setMobileOpen } = useSidebar();
 
   return (
     <aside
       className={cn(
-        "sticky top-0 z-30 flex h-screen shrink-0 flex-col border-r border-line bg-white transition-[width] duration-200",
-        collapsed ? "w-16" : "w-64",
+        "fixed inset-y-0 left-0 z-40 flex h-screen w-64 shrink-0 -translate-x-full flex-col border-r border-line bg-white transition-transform duration-200",
+        "lg:sticky lg:top-0 lg:z-30 lg:translate-x-0 lg:transition-[width]",
+        mobileOpen && "translate-x-0",
+        collapsed ? "lg:w-16" : "lg:w-64",
       )}
     >
       {/* Header */}
-      <div className="flex h-14 shrink-0 items-center gap-2 border-b border-line px-3">
-        <Link href="/demo" className="flex min-w-0 flex-1 items-center gap-2.5">
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-purple/30 bg-purple-lt text-purple">
-            <LogoMark className="size-4" />
-          </div>
-          <div className={collapsible(collapsed, "flex min-w-0 flex-col")}>
-            <span className="truncate text-sm font-semibold tracking-tight text-ink">
-              tellTale
-            </span>
-            <span className="truncate text-[10px] text-grey">
-              Transition detection
-            </span>
-          </div>
-        </Link>
-        <button
-          type="button"
-          onClick={toggleCollapsed}
-          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          className="flex size-7 shrink-0 items-center justify-center rounded-sm text-grey hover:bg-purple-lt hover:text-purple"
-        >
-          {collapsed ? (
-            <PanelLeftOpen className="size-4" />
-          ) : (
-            <PanelLeftClose className="size-4" />
-          )}
-        </button>
+      <div
+        className={cn(
+          "flex h-14 shrink-0 items-center border-b border-line",
+          collapsed ? "justify-center px-2" : "justify-between px-3 gap-2",
+        )}
+      >
+        {collapsed ? (
+          <button
+            type="button"
+            onClick={toggleCollapsed}
+            title="Expand sidebar"
+            className="group flex size-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all shadow-xs"
+          >
+            <span className="font-black text-sm group-hover:hidden">tT</span>
+            <PanelLeftOpen className="hidden size-4 group-hover:block" />
+          </button>
+        ) : (
+          <>
+            <Link
+              href="/demo"
+              onClick={() => setMobileOpen(false)}
+              className="flex min-w-0 flex-1 items-center gap-2.5"
+            >
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white font-black text-xs shadow-xs">
+                <LogoMark />
+              </div>
+              <div className={collapsible(collapsed, "flex min-w-0 flex-col")}>
+                <span className="truncate text-sm font-bold tracking-tight text-ink">
+                  tellTale
+                </span>
+                <span className="truncate text-[10px] text-slate-500 font-medium">
+                  Activity & Risk Monitor
+                </span>
+              </div>
+            </Link>
+            <button
+              type="button"
+              onClick={toggleCollapsed}
+              title="Collapse sidebar"
+              className="hidden size-7 shrink-0 items-center justify-center rounded-md text-slate-400 hover:bg-emerald-50 hover:text-emerald-700 lg:flex transition-colors"
+            >
+              <PanelLeftClose className="size-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setMobileOpen(false)}
+              title="Close menu"
+              className="flex size-7 shrink-0 items-center justify-center rounded-md text-slate-400 hover:bg-emerald-50 hover:text-emerald-700 lg:hidden transition-colors"
+            >
+              <X className="size-4" />
+            </button>
+          </>
+        )}
       </div>
 
       {/* Module switcher */}
@@ -118,8 +153,8 @@ export function Sidebar() {
             "mt-2 flex items-center justify-between px-0.5",
           )}
         >
-          <span className="label text-grey">Role</span>
-          <span className="label rounded-sm bg-purple-lt px-1.5 py-0.5 text-purple">
+          <span className="label text-slate-500">Role</span>
+          <span className="label rounded border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 text-emerald-800">
             {MODULE_ROLE[mod]}
           </span>
         </div>
@@ -137,6 +172,7 @@ export function Sidebar() {
               item={item}
               active={item.match(pathname)}
               collapsed={collapsed}
+              onNavigate={() => setMobileOpen(false)}
             />
           ))}
         </ul>
@@ -144,7 +180,7 @@ export function Sidebar() {
 
       {/* Footer */}
       <div className="shrink-0 space-y-2 border-t border-line p-2.5">
-        <div className={collapsed ? "hidden" : "block"}>
+        <div className={cn("block", collapsed && "lg:hidden")}>
           <ProfileChip />
         </div>
 
@@ -153,9 +189,10 @@ export function Sidebar() {
             render={
               <Link
                 href="/demo/about"
+                onClick={() => setMobileOpen(false)}
                 className={cn(
-                  "flex items-center gap-2 rounded-sm px-2 py-1.5 text-xs text-grey hover:bg-purple-lt hover:text-purple",
-                  pathname === "/about" && "bg-purple-lt text-purple",
+                  "flex items-center gap-2 rounded-sm px-2 py-1.5 text-xs text-slate-600 hover:bg-emerald-50 hover:text-emerald-800 transition-colors",
+                  pathname === "/demo/about" && "bg-emerald-50 text-emerald-800 font-semibold",
                 )}
               />
             }
@@ -182,7 +219,7 @@ export function Sidebar() {
               <div
                 className={cn(
                   "flex items-center gap-1.5 rounded-sm border border-amber-200 bg-amber-50 px-2 py-1.5",
-                  collapsed && "justify-center px-0",
+                  collapsed && "lg:justify-center lg:px-0",
                 )}
               />
             }
@@ -212,10 +249,12 @@ function NavLink({
   item,
   active,
   collapsed,
+  onNavigate,
 }: {
   item: NavItem;
   active: boolean;
   collapsed: boolean;
+  onNavigate?: () => void;
 }) {
   const Icon = NAV_ICONS[item.href] ?? LayoutDashboard;
 
@@ -226,21 +265,22 @@ function NavLink({
           render={
             <Link
               href={item.href}
+              onClick={onNavigate}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "flex items-center gap-2.5 rounded-sm border-l-2 px-2 py-2 text-sm",
+                "flex items-center gap-2.5 rounded-sm border-l-2 px-2 py-2 text-sm transition-colors",
                 active
-                  ? "border-purple bg-purple-lt font-medium text-purple"
-                  : "border-transparent text-ink hover:bg-purple-lt/60 hover:text-purple",
-                collapsed && "justify-center px-0",
+                  ? "border-emerald-600 bg-emerald-50/80 font-semibold text-emerald-900"
+                  : "border-transparent text-slate-700 hover:bg-slate-50 hover:text-slate-900",
+                collapsed && "lg:justify-center lg:px-0",
               )}
             />
           }
         >
           <Icon
             className={cn(
-              "size-4 shrink-0",
-              active ? "text-purple" : "text-grey",
+              "size-4 shrink-0 transition-colors",
+              active ? "text-emerald-600" : "text-slate-400",
             )}
           />
           <span className={collapsible(collapsed, "truncate")}>

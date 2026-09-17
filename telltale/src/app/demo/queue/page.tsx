@@ -9,7 +9,7 @@ import {
   SUPPRESSED_TODAY,
 } from "@/lib/fixtures";
 
-export const metadata = { title: "Investigation queue — tellTale" };
+export const metadata = { title: "Review alerts - tellTale" };
 
 export default function QueuePage() {
   const aboveLine = QUEUE_ROWS.filter((r) => r.rank <= 7);
@@ -18,16 +18,15 @@ export default function QueuePage() {
   return (
     <>
       <PageHeader
-        eyebrow="Risk module"
-        title="Investigation queue"
-        description="Ranked by expected cost of inaction, not by raw risk. Seven items sit inside today's triage capacity; the rest are retained, ranked and visible."
+        eyebrow="Security module"
+        title="Review alerts"
+        description="Ranked by priority score so critical assets are handled first. Seven items sit inside today's review capacity; the rest remain visible and tracked."
         right={
           <Link
             href="/demo/suppressions"
             className="flex items-center gap-2 rounded-sm border border-emerald-300 bg-emerald-50 px-3.5 py-2 text-xs font-semibold text-emerald-800 hover:bg-emerald-100 hover:border-emerald-400 transition-colors"
           >
-            {SUPPRESSED_TODAY.toLocaleString("en-US")} suppressed today — view
-            log
+            {SUPPRESSED_TODAY.toLocaleString("en-US")} auto-approved today: view log
             <ArrowUpRight className="size-4" />
           </Link>
         }
@@ -48,15 +47,15 @@ export default function QueuePage() {
         />
         <Stat
           icon={Flame}
-          label="Highest expected cost"
+          label="Highest priority score"
           value={QUEUE_ROWS[0].pseudonym}
-          sub={`${QUEUE_ROWS[0].expectedCost.toFixed(1)} — risk ${QUEUE_ROWS[0].risk}`}
+          sub={`${QUEUE_ROWS[0].expectedCost.toFixed(1)} (risk ${QUEUE_ROWS[0].risk})`}
         />
         <Stat
           icon={ShieldAlert}
           label="Highest raw risk"
           value={topByRisk.pseudonym}
-          sub={`risk ${topByRisk.risk} — ranks #${topByRisk.rank}`}
+          sub={`risk ${topByRisk.risk} (ranked #${topByRisk.rank})`}
         />
       </div>
 
