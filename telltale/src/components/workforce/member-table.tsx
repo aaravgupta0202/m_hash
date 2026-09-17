@@ -67,12 +67,12 @@ export function MemberTable() {
           {rows.map((m) => (
             <tr
               key={m.id}
-              onClick={() => router.push(`/workforce/${m.id}`)}
+              onClick={() => router.push(`/demo/workforce/${m.id}`)}
               className="group cursor-pointer hover:bg-slate-50/80 transition-colors"
             >
               <td className="px-3 py-2.5">
                 <Link
-                  href={`/workforce/${m.id}`}
+                  href={`/demo/workforce/${m.id}`}
                   onClick={(e) => e.stopPropagation()}
                   className="font-semibold text-slate-900 group-hover:text-emerald-700 transition-colors"
                 >

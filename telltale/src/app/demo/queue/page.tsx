@@ -23,7 +23,7 @@ export default function QueuePage() {
         description="Ranked by expected cost of inaction, not by raw risk. Seven items sit inside today's triage capacity; the rest are retained, ranked and visible."
         right={
           <Link
-            href="/suppressions"
+            href="/demo/suppressions"
             className="flex items-center gap-2 rounded-sm border border-emerald-300 bg-emerald-50 px-3.5 py-2 text-xs font-semibold text-emerald-800 hover:bg-emerald-100 hover:border-emerald-400 transition-colors"
           >
             {SUPPRESSED_TODAY.toLocaleString("en-US")} suppressed today — view

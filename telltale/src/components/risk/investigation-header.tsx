@@ -32,7 +32,7 @@ export function InvestigationHeader({
   return (
     <div className="mb-4">
       <Link
-        href="/queue"
+        href="/demo/queue"
         className="mb-3 inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-emerald-700 transition-colors"
       >
         <ArrowLeft className="size-3.5" />

@@ -25,48 +25,48 @@ const prefix = (href: string) => (p: string) => {
 };
 
 export const RISK_NAV: NavItem[] = [
-  { href: "/", label: "Dashboard", match: exact("/") },
+  { href: "/demo", label: "Dashboard", match: exact("/demo") },
   {
-    href: "/queue",
+    href: "/demo/queue",
     label: "Investigation queue",
-    match: (p) => prefix("/queue")(p) || prefix("/subject")(p),
+    match: (p) => prefix("/demo/queue")(p) || prefix("/demo/subject")(p),
   },
   {
-    href: "/connectors",
+    href: "/demo/connectors",
     label: "Connector health",
-    match: prefix("/connectors"),
+    match: prefix("/demo/connectors"),
   },
   {
-    href: "/suppressions",
+    href: "/demo/suppressions",
     label: "Suppression log",
-    match: prefix("/suppressions"),
+    match: prefix("/demo/suppressions"),
   },
 ];
 
 export const WORKFORCE_NAV: NavItem[] = [
   {
-    href: "/workforce",
+    href: "/demo/workforce",
     label: "Org summary",
     match: (p) =>
-      prefix("/workforce")(p) &&
-      !prefix("/workforce/usage")(p) &&
-      !prefix("/workforce/captures")(p),
+      prefix("/demo/workforce")(p) &&
+      !prefix("/demo/workforce/usage")(p) &&
+      !prefix("/demo/workforce/captures")(p),
   },
   {
-    href: "/workforce/usage",
+    href: "/demo/workforce/usage",
     label: "Application usage",
-    match: prefix("/workforce/usage"),
+    match: prefix("/demo/workforce/usage"),
   },
   {
-    href: "/workforce/captures",
+    href: "/demo/workforce/captures",
     label: "Screen captures",
-    match: prefix("/workforce/captures"),
+    match: prefix("/demo/workforce/captures"),
   },
 ];
 
 export const MODULE_HOME: Record<Module, string> = {
-  risk: "/",
-  workforce: "/workforce",
+  risk: "/demo",
+  workforce: "/demo/workforce",
 };
 
 export const MODULE_ROLE: Record<Module, string> = {
@@ -76,14 +76,14 @@ export const MODULE_ROLE: Record<Module, string> = {
 
 /** The active module is derived from the URL — nothing is persisted. */
 export function moduleForPath(pathname: string): Module {
-  return prefix("/workforce")(pathname) ? "workforce" : "risk";
+  return prefix("/demo/workforce")(pathname) ? "workforce" : "risk";
 }
 
 /** Presenter shorthand names appear here and nowhere else in the UI (PRD §6). */
 export const DEMO_SCENARIOS = [
-  { label: "Priya — suppressed", href: "/subject/8830" },
-  { label: "Marcus — compromised", href: "/subject/4912" },
-  { label: "Dana — manufactured context", href: "/subject/2071" },
+  { label: "Priya — suppressed", href: "/demo/subject/8830" },
+  { label: "Marcus — compromised", href: "/demo/subject/4912" },
+  { label: "Dana — manufactured context", href: "/demo/subject/2071" },
 ] as const;
 
 /** Single synthetic day every fixture lives on (PRD §4, §6). */

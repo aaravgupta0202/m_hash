@@ -146,8 +146,8 @@ export function SuppressionTable() {
                         {s.suppressedBy}
                       </span>
                     </td>
-                    <td className="machine px-3 py-2.5 text-xs text-slate-600">
-                      {s.reasonCode}
+                    <td className="px-3 py-2.5 text-xs text-slate-600">
+                      {SUPPRESSION_REASON_LABELS[s.reasonCode] ?? s.reasonCode}
                     </td>
                     <td className="px-3 py-2.5">
                       {s.underReview ? (
@@ -174,11 +174,12 @@ export function SuppressionTable() {
                         <p className="label mb-2 text-slate-500 text-[10px] font-bold">
                           Context record examined
                         </p>
-                        <dl className="machine grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-1.5 text-xs">
-                          <Pair k="record_id" v={s.record.recordId} />
+                        <dl className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-1.5 text-xs">
+                          <Pair k="Record ID" v={s.record.recordId} mono />
                           <Pair
-                            k="created_by"
+                            k="Created by"
                             v={s.record.createdBy}
+                            mono
                             tone={
                               s.underReview
                                 ? "text-red-700 font-bold"
@@ -186,12 +187,13 @@ export function SuppressionTable() {
                             }
                           />
                           <Pair
-                            k="created_at"
+                            k="Created at"
                             v={s.record.createdAt
                               .replace("T", " ")
                               .replace("Z", "")}
+                            mono
                           />
-                          <Pair k="scope" v={s.record.scope} />
+                          <Pair k="Scope" v={s.record.scope} />
                         </dl>
 
                         {s.underReview && (
@@ -206,7 +208,7 @@ export function SuppressionTable() {
                             </p>
                             {s.linkedSubjectId && (
                               <Link
-                                href={`/subject/${routeIdFor(s.linkedSubjectId)}`}
+                                href={`/demo/subject/${routeIdFor(s.linkedSubjectId)}`}
                                 className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-red-700 hover:text-red-900 hover:underline"
                               >
                                 Open the investigation this reopened →
@@ -273,11 +275,21 @@ function Chip({
   );
 }
 
-function Pair({ k, v, tone }: { k: string; v: string; tone?: string }) {
+function Pair({
+  k,
+  v,
+  tone,
+  mono,
+}: {
+  k: string;
+  v: string;
+  tone?: string;
+  mono?: boolean;
+}) {
   return (
     <div className="min-w-0">
       <dt className="text-[10px] text-slate-500">{k}</dt>
-      <dd className={cn("truncate text-xs text-slate-800", tone)}>{v}</dd>
+      <dd className={cn("truncate text-xs text-slate-800", mono && "machine", tone)}>{v}</dd>
     </div>
   );
 }

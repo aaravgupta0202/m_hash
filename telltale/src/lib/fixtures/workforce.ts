@@ -55,7 +55,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-002",
-    name: "Tomas Berg",
+    name: "Aditya Verma",
     team: "Platform",
     workingMinutes: 494,
     idleMinutes: 226,
@@ -91,7 +91,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-003",
-    name: "Imani Osei",
+    name: "Ananya Iyer",
     team: "Platform",
     workingMinutes: 510,
     idleMinutes: 210,
@@ -163,7 +163,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-005",
-    name: "Lucia Ferrari",
+    name: "Meera Nair",
     team: "Product Engineering",
     workingMinutes: 616,
     idleMinutes: 104,
@@ -199,7 +199,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-006",
-    name: "Noor Haddad",
+    name: "Priya Menon",
     team: "Product Engineering",
     workingMinutes: 468,
     idleMinutes: 252,
@@ -235,7 +235,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-007",
-    name: "Elias Kowalski",
+    name: "Rohan Kapoor",
     team: "Product Engineering",
     workingMinutes: 389,
     idleMinutes: 331,
@@ -271,7 +271,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-008",
-    name: "Mira Lindqvist",
+    name: "Kavya Reddy",
     team: "Data",
     workingMinutes: 531,
     idleMinutes: 189,
@@ -307,7 +307,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-009",
-    name: "Chen Wei-Lin",
+    name: "Siddharth Joshi",
     team: "Data",
     workingMinutes: 411,
     idleMinutes: 309,
@@ -343,7 +343,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-010",
-    name: "Kofi Mensah",
+    name: "Aarav Malhotra",
     team: "Data",
     workingMinutes: 427,
     idleMinutes: 293,
@@ -379,7 +379,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-011",
-    name: "Sanne de Vries",
+    name: "Diya Bhatt",
     team: "Finance Systems",
     workingMinutes: 519,
     idleMinutes: 201,
@@ -451,7 +451,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-013",
-    name: "Yara Nasser",
+    name: "Ishaan Chatterjee",
     team: "Customer Operations",
     workingMinutes: 449,
     idleMinutes: 271,
@@ -487,7 +487,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-014",
-    name: "Peter Ondrej",
+    name: "Varun Deshmukh",
     team: "Customer Operations",
     workingMinutes: 580,
     idleMinutes: 140,
@@ -523,7 +523,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-015",
-    name: "Hana Takeda",
+    name: "Neha Bose",
     team: "Customer Operations",
     workingMinutes: 521,
     idleMinutes: 199,
@@ -559,7 +559,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-016",
-    name: "Gabriel Santos",
+    name: "Karan Thakur",
     team: "Security Engineering",
     workingMinutes: 517,
     idleMinutes: 203,
@@ -595,7 +595,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-017",
-    name: "Freya Halvorsen",
+    name: "Sanya Kaur",
     team: "Security Engineering",
     workingMinutes: 492,
     idleMinutes: 228,
@@ -631,7 +631,7 @@ export const MEMBERS: WorkforceMember[] = [
   },
   {
     id: "emp-018",
-    name: "Omar Belkacem",
+    name: "Vikram Sethi",
     team: "IT Operations",
     workingMinutes: 445,
     idleMinutes: 275,
@@ -3327,7 +3327,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0025",
     memberId: "emp-005",
-    memberName: "Lucia Ferrari",
+    memberName: "Meera Nair",
     ts: "2026-09-14T09:00:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3337,7 +3337,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0061",
     memberId: "emp-011",
-    memberName: "Sanne de Vries",
+    memberName: "Diya Bhatt",
     ts: "2026-09-14T09:01:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -3347,7 +3347,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0007",
     memberId: "emp-002",
-    memberName: "Tomas Berg",
+    memberName: "Aditya Verma",
     ts: "2026-09-14T09:10:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -3357,7 +3357,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0049",
     memberId: "emp-009",
-    memberName: "Chen Wei-Lin",
+    memberName: "Siddharth Joshi",
     ts: "2026-09-14T09:10:00Z",
     mode: "scheduled",
     application: "Visual Studio Code",
@@ -3367,7 +3367,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0043",
     memberId: "emp-008",
-    memberName: "Mira Lindqvist",
+    memberName: "Kavya Reddy",
     ts: "2026-09-14T09:14:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -3387,7 +3387,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0031",
     memberId: "emp-006",
-    memberName: "Noor Haddad",
+    memberName: "Priya Menon",
     ts: "2026-09-14T09:17:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3397,7 +3397,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0013",
     memberId: "emp-003",
-    memberName: "Imani Osei",
+    memberName: "Ananya Iyer",
     ts: "2026-09-14T09:19:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -3417,7 +3417,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0085",
     memberId: "emp-015",
-    memberName: "Hana Takeda",
+    memberName: "Neha Bose",
     ts: "2026-09-14T09:22:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -3427,7 +3427,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0079",
     memberId: "emp-014",
-    memberName: "Peter Ondrej",
+    memberName: "Varun Deshmukh",
     ts: "2026-09-14T09:23:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3437,7 +3437,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0055",
     memberId: "emp-010",
-    memberName: "Kofi Mensah",
+    memberName: "Aarav Malhotra",
     ts: "2026-09-14T09:26:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3447,7 +3447,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0073",
     memberId: "emp-013",
-    memberName: "Yara Nasser",
+    memberName: "Ishaan Chatterjee",
     ts: "2026-09-14T09:28:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3457,7 +3457,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0037",
     memberId: "emp-007",
-    memberName: "Elias Kowalski",
+    memberName: "Rohan Kapoor",
     ts: "2026-09-14T09:31:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -3477,7 +3477,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0044",
     memberId: "emp-008",
-    memberName: "Mira Lindqvist",
+    memberName: "Kavya Reddy",
     ts: "2026-09-14T11:00:00Z",
     mode: "scheduled",
     application: "Slack",
@@ -3487,7 +3487,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0086",
     memberId: "emp-015",
-    memberName: "Hana Takeda",
+    memberName: "Neha Bose",
     ts: "2026-09-14T11:03:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -3497,7 +3497,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0062",
     memberId: "emp-011",
-    memberName: "Sanne de Vries",
+    memberName: "Diya Bhatt",
     ts: "2026-09-14T11:10:00Z",
     mode: "scheduled",
     application: "Visual Studio Code",
@@ -3507,7 +3507,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0014",
     memberId: "emp-003",
-    memberName: "Imani Osei",
+    memberName: "Ananya Iyer",
     ts: "2026-09-14T11:11:00Z",
     mode: "scheduled",
     application: "Visual Studio Code",
@@ -3527,7 +3527,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0056",
     memberId: "emp-010",
-    memberName: "Kofi Mensah",
+    memberName: "Aarav Malhotra",
     ts: "2026-09-14T11:18:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -3557,7 +3557,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0008",
     memberId: "emp-002",
-    memberName: "Tomas Berg",
+    memberName: "Aditya Verma",
     ts: "2026-09-14T11:21:00Z",
     mode: "triggered",
     application: "Figma",
@@ -3567,7 +3567,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0074",
     memberId: "emp-013",
-    memberName: "Yara Nasser",
+    memberName: "Ishaan Chatterjee",
     ts: "2026-09-14T11:23:00Z",
     mode: "scheduled",
     application: "iTerm2",
@@ -3577,7 +3577,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0038",
     memberId: "emp-007",
-    memberName: "Elias Kowalski",
+    memberName: "Rohan Kapoor",
     ts: "2026-09-14T11:26:00Z",
     mode: "scheduled",
     application: "Slack",
@@ -3587,7 +3587,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0050",
     memberId: "emp-009",
-    memberName: "Chen Wei-Lin",
+    memberName: "Siddharth Joshi",
     ts: "2026-09-14T11:26:00Z",
     mode: "scheduled",
     application: "iTerm2",
@@ -3597,7 +3597,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0080",
     memberId: "emp-014",
-    memberName: "Peter Ondrej",
+    memberName: "Varun Deshmukh",
     ts: "2026-09-14T11:28:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3607,7 +3607,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0026",
     memberId: "emp-005",
-    memberName: "Lucia Ferrari",
+    memberName: "Meera Nair",
     ts: "2026-09-14T11:32:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3617,7 +3617,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0032",
     memberId: "emp-006",
-    memberName: "Noor Haddad",
+    memberName: "Priya Menon",
     ts: "2026-09-14T11:35:00Z",
     mode: "triggered",
     application: "Slack",
@@ -3627,7 +3627,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0033",
     memberId: "emp-006",
-    memberName: "Noor Haddad",
+    memberName: "Priya Menon",
     ts: "2026-09-14T12:54:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3647,7 +3647,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0009",
     memberId: "emp-002",
-    memberName: "Tomas Berg",
+    memberName: "Aditya Verma",
     ts: "2026-09-14T13:00:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3657,7 +3657,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0051",
     memberId: "emp-009",
-    memberName: "Chen Wei-Lin",
+    memberName: "Siddharth Joshi",
     ts: "2026-09-14T13:03:00Z",
     mode: "scheduled",
     application: "Slack",
@@ -3667,7 +3667,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0057",
     memberId: "emp-010",
-    memberName: "Kofi Mensah",
+    memberName: "Aarav Malhotra",
     ts: "2026-09-14T13:03:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -3677,7 +3677,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0039",
     memberId: "emp-007",
-    memberName: "Elias Kowalski",
+    memberName: "Rohan Kapoor",
     ts: "2026-09-14T13:05:00Z",
     mode: "scheduled",
     application: "Slack",
@@ -3687,7 +3687,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0015",
     memberId: "emp-003",
-    memberName: "Imani Osei",
+    memberName: "Ananya Iyer",
     ts: "2026-09-14T13:07:00Z",
     mode: "scheduled",
     application: "iTerm2",
@@ -3697,7 +3697,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0045",
     memberId: "emp-008",
-    memberName: "Mira Lindqvist",
+    memberName: "Kavya Reddy",
     ts: "2026-09-14T13:12:00Z",
     mode: "triggered",
     application: "Finder",
@@ -3707,7 +3707,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0087",
     memberId: "emp-015",
-    memberName: "Hana Takeda",
+    memberName: "Neha Bose",
     ts: "2026-09-14T13:15:00Z",
     mode: "scheduled",
     application: "iTerm2",
@@ -3717,7 +3717,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0081",
     memberId: "emp-014",
-    memberName: "Peter Ondrej",
+    memberName: "Varun Deshmukh",
     ts: "2026-09-14T13:17:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3737,7 +3737,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0063",
     memberId: "emp-011",
-    memberName: "Sanne de Vries",
+    memberName: "Diya Bhatt",
     ts: "2026-09-14T13:28:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3757,7 +3757,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0075",
     memberId: "emp-013",
-    memberName: "Yara Nasser",
+    memberName: "Ishaan Chatterjee",
     ts: "2026-09-14T13:29:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3767,7 +3767,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0027",
     memberId: "emp-005",
-    memberName: "Lucia Ferrari",
+    memberName: "Meera Nair",
     ts: "2026-09-14T13:30:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -3787,7 +3787,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0052",
     memberId: "emp-009",
-    memberName: "Chen Wei-Lin",
+    memberName: "Siddharth Joshi",
     ts: "2026-09-14T14:51:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3797,7 +3797,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0028",
     memberId: "emp-005",
-    memberName: "Lucia Ferrari",
+    memberName: "Meera Nair",
     ts: "2026-09-14T14:53:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -3807,7 +3807,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0046",
     memberId: "emp-008",
-    memberName: "Mira Lindqvist",
+    memberName: "Kavya Reddy",
     ts: "2026-09-14T14:55:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3837,7 +3837,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0088",
     memberId: "emp-015",
-    memberName: "Hana Takeda",
+    memberName: "Neha Bose",
     ts: "2026-09-14T15:03:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3847,7 +3847,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0058",
     memberId: "emp-010",
-    memberName: "Kofi Mensah",
+    memberName: "Aarav Malhotra",
     ts: "2026-09-14T15:09:00Z",
     mode: "scheduled",
     application: "Slack",
@@ -3857,7 +3857,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0010",
     memberId: "emp-002",
-    memberName: "Tomas Berg",
+    memberName: "Aditya Verma",
     ts: "2026-09-14T15:11:00Z",
     mode: "scheduled",
     application: "Slack",
@@ -3867,7 +3867,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0082",
     memberId: "emp-014",
-    memberName: "Peter Ondrej",
+    memberName: "Varun Deshmukh",
     ts: "2026-09-14T15:11:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -3877,7 +3877,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0064",
     memberId: "emp-011",
-    memberName: "Sanne de Vries",
+    memberName: "Diya Bhatt",
     ts: "2026-09-14T15:16:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3887,7 +3887,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0076",
     memberId: "emp-013",
-    memberName: "Yara Nasser",
+    memberName: "Ishaan Chatterjee",
     ts: "2026-09-14T15:16:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3897,7 +3897,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0016",
     memberId: "emp-003",
-    memberName: "Imani Osei",
+    memberName: "Ananya Iyer",
     ts: "2026-09-14T15:20:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -3907,7 +3907,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0034",
     memberId: "emp-006",
-    memberName: "Noor Haddad",
+    memberName: "Priya Menon",
     ts: "2026-09-14T15:22:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3917,7 +3917,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0040",
     memberId: "emp-007",
-    memberName: "Elias Kowalski",
+    memberName: "Rohan Kapoor",
     ts: "2026-09-14T15:25:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3927,7 +3927,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0029",
     memberId: "emp-005",
-    memberName: "Lucia Ferrari",
+    memberName: "Meera Nair",
     ts: "2026-09-14T16:43:00Z",
     mode: "scheduled",
     application: "iTerm2",
@@ -3937,7 +3937,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0011",
     memberId: "emp-002",
-    memberName: "Tomas Berg",
+    memberName: "Aditya Verma",
     ts: "2026-09-14T16:44:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -3947,7 +3947,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0083",
     memberId: "emp-014",
-    memberName: "Peter Ondrej",
+    memberName: "Varun Deshmukh",
     ts: "2026-09-14T16:44:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -3967,7 +3967,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0077",
     memberId: "emp-013",
-    memberName: "Yara Nasser",
+    memberName: "Ishaan Chatterjee",
     ts: "2026-09-14T16:54:00Z",
     mode: "scheduled",
     application: "iTerm2",
@@ -3977,7 +3977,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0065",
     memberId: "emp-011",
-    memberName: "Sanne de Vries",
+    memberName: "Diya Bhatt",
     ts: "2026-09-14T16:57:00Z",
     mode: "scheduled",
     application: "Slack",
@@ -3987,7 +3987,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0035",
     memberId: "emp-006",
-    memberName: "Noor Haddad",
+    memberName: "Priya Menon",
     ts: "2026-09-14T17:01:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -3997,7 +3997,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0059",
     memberId: "emp-010",
-    memberName: "Kofi Mensah",
+    memberName: "Aarav Malhotra",
     ts: "2026-09-14T17:01:00Z",
     mode: "scheduled",
     application: "Visual Studio Code",
@@ -4027,7 +4027,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0089",
     memberId: "emp-015",
-    memberName: "Hana Takeda",
+    memberName: "Neha Bose",
     ts: "2026-09-14T17:08:00Z",
     mode: "scheduled",
     application: "iTerm2",
@@ -4037,7 +4037,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0017",
     memberId: "emp-003",
-    memberName: "Imani Osei",
+    memberName: "Ananya Iyer",
     ts: "2026-09-14T17:10:00Z",
     mode: "scheduled",
     application: "Slack",
@@ -4047,7 +4047,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0047",
     memberId: "emp-008",
-    memberName: "Mira Lindqvist",
+    memberName: "Kavya Reddy",
     ts: "2026-09-14T17:10:00Z",
     mode: "scheduled",
     application: "Figma",
@@ -4057,7 +4057,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0053",
     memberId: "emp-009",
-    memberName: "Chen Wei-Lin",
+    memberName: "Siddharth Joshi",
     ts: "2026-09-14T17:11:00Z",
     mode: "triggered",
     application: "Google Chrome",
@@ -4067,7 +4067,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0041",
     memberId: "emp-007",
-    memberName: "Elias Kowalski",
+    memberName: "Rohan Kapoor",
     ts: "2026-09-14T17:16:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -4077,7 +4077,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0042",
     memberId: "emp-007",
-    memberName: "Elias Kowalski",
+    memberName: "Rohan Kapoor",
     ts: "2026-09-14T18:38:00Z",
     mode: "scheduled",
     application: "Finder",
@@ -4087,7 +4087,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0066",
     memberId: "emp-011",
-    memberName: "Sanne de Vries",
+    memberName: "Diya Bhatt",
     ts: "2026-09-14T18:51:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -4097,7 +4097,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0054",
     memberId: "emp-009",
-    memberName: "Chen Wei-Lin",
+    memberName: "Siddharth Joshi",
     ts: "2026-09-14T18:54:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -4107,7 +4107,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0030",
     memberId: "emp-005",
-    memberName: "Lucia Ferrari",
+    memberName: "Meera Nair",
     ts: "2026-09-14T18:58:00Z",
     mode: "scheduled",
     application: "iTerm2",
@@ -4117,7 +4117,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0084",
     memberId: "emp-014",
-    memberName: "Peter Ondrej",
+    memberName: "Varun Deshmukh",
     ts: "2026-09-14T18:58:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -4127,7 +4127,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0018",
     memberId: "emp-003",
-    memberName: "Imani Osei",
+    memberName: "Ananya Iyer",
     ts: "2026-09-14T18:59:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -4167,7 +4167,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0048",
     memberId: "emp-008",
-    memberName: "Mira Lindqvist",
+    memberName: "Kavya Reddy",
     ts: "2026-09-14T19:02:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -4177,7 +4177,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0060",
     memberId: "emp-010",
-    memberName: "Kofi Mensah",
+    memberName: "Aarav Malhotra",
     ts: "2026-09-14T19:03:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -4187,7 +4187,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0090",
     memberId: "emp-015",
-    memberName: "Hana Takeda",
+    memberName: "Neha Bose",
     ts: "2026-09-14T19:06:00Z",
     mode: "scheduled",
     application: "Visual Studio Code",
@@ -4197,7 +4197,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0078",
     memberId: "emp-013",
-    memberName: "Yara Nasser",
+    memberName: "Ishaan Chatterjee",
     ts: "2026-09-14T19:07:00Z",
     mode: "scheduled",
     application: "Workday",
@@ -4207,7 +4207,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0036",
     memberId: "emp-006",
-    memberName: "Noor Haddad",
+    memberName: "Priya Menon",
     ts: "2026-09-14T19:11:00Z",
     mode: "scheduled",
     application: "Google Chrome",
@@ -4217,7 +4217,7 @@ export const CAPTURES: Capture[] = [
   {
     id: "cap-0012",
     memberId: "emp-002",
-    memberName: "Tomas Berg",
+    memberName: "Aditya Verma",
     ts: "2026-09-14T19:14:00Z",
     mode: "scheduled",
     application: "Slack",

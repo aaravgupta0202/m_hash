@@ -54,8 +54,12 @@ const docs = await Promise.all(
   })),
 );
 
-const risk = docs.filter((d) => !d.route.startsWith("/workforce"));
-const workforce = docs.filter((d) => d.route.startsWith("/workforce"));
+/* The landing page at "/" is outside the demo console entirely — it isn't
+ * part of either module, so it's excluded from the module-scoped checks
+ * below rather than folded into "risk" by default. */
+const demo = docs.filter((d) => d.route.startsWith("/demo"));
+const risk = demo.filter((d) => !d.route.startsWith("/demo/workforce"));
+const workforce = demo.filter((d) => d.route.startsWith("/demo/workforce"));
 
 console.log(`\nExport content constraints — ${docs.length} rendered pages\n`);
 
@@ -80,7 +84,7 @@ for (const doc of workforce) {
 /* ---- PRD §7.1: no navigation from a subject to a workforce profile ----- */
 for (const doc of risk) {
   ok(
-    !/href="\/workforce\/[^"]/.test(doc.html),
+    !/href="[^"]*\/workforce\/[^"]/.test(doc.html),
     `${doc.route}: no link from the risk module into a workforce profile`,
   );
 }
@@ -105,16 +109,23 @@ for (const doc of docs) {
   ok(!junk, `${doc.route}: no placeholder or TODO text`, junk?.[0]);
 }
 
-/* ---- PRD §7.4: no raster imagery shipped ----------------------------- */
+/* ---- PRD §7.4: no raster imagery of a real screen shipped ------------
+ * The one deliberate exception is /capture-screenshots/ — a handful of
+ * generic vendor reference images (VS Code, Chrome, GitHub, Figma docs
+ * screenshots, see public/capture-screenshots/NOTICE.md) used as gallery
+ * illustration, not a capture of anyone's actual screen. Every other route
+ * still carries the original zero-bitmap guarantee unchanged. */
 for (const doc of docs) {
-  const img = /<img[^>]+src="(?!data:image\/svg)[^"]*\.(png|jpe?g|gif|webp)/i.exec(doc.html);
-  ok(!img, `${doc.route}: no bitmap screenshot imagery`, img?.[0]);
+  const img = /<img[^>]+src="(?!data:image\/svg)(?!\/capture-screenshots\/)[^"]*\.(png|jpe?g|gif|webp)/i.exec(
+    doc.html,
+  );
+  ok(!img, `${doc.route}: no bitmap screenshot imagery outside capture-screenshots/`, img?.[0]);
 }
 
 /* ---- Every queue row is reachable and rendered ----------------------- */
 for (const row of fx.QUEUE_ROWS) {
   const id = fx.routeIdFor(row.id);
-  const page = docs.find((d) => d.route === `/subject/${id}`);
+  const page = docs.find((d) => d.route === `/demo/subject/${id}`);
   ok(!!page, `${row.pseudonym}: investigation page exists in the export`);
   if (page) {
     ok(

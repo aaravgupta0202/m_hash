@@ -68,23 +68,7 @@ export default function WorkforcePage() {
         <MemberTable />
       </Panel>
 
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-        <Panel title="What this module is for">
-          <p className="text-xs leading-relaxed text-slate-700">
-            Workforce reporting answers operational questions — who was working,
-            on what, for how long, and with what coverage. It is named, because
-            a working-time record that cannot be attributed is not a
-            working-time record.
-          </p>
-          <p className="mt-2.5 text-xs leading-relaxed text-slate-500">
-            The risk module answers a different question and uses a different
-            identity space. It is pseudonymous, and it never sees this screen.
-            That separation is the product, not a setting: behavioural risk
-            analysis does not need to know who anyone is until a human being
-            decides it does, and that decision takes two approvals.
-          </p>
-        </Panel>
-
+      <div className="grid grid-cols-1">
         <Panel title="Where to go next">
           <ul className="space-y-2.5">
             {[

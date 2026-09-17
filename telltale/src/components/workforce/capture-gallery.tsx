@@ -1,25 +1,34 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, Flag, Tag } from "lucide-react";
+import { ChevronLeft, ChevronRight, Flag, Search, Tag } from "lucide-react";
 import { cn } from "cn";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { BrandIcon } from "@/components/brand-icon";
 import { CaptureThumb } from "@/components/workforce/capture-thumb";
+import { CaptureDetailDialog } from "@/components/workforce/capture-detail-dialog";
 import { ALL_MEMBERS, ALL_TEAMS, useFilters } from "@/lib/filters";
-import { CAPTURES, MEMBERS } from "@/lib/fixtures";
+import { CAPTURES, MEMBERS, type Capture } from "@/lib/fixtures";
 
 /**
  * PRD §5.6: a paged gallery. Each thumbnail carries the member name, timestamp,
- * and tag and flag controls, with a `Flagged only` filter.
+ * and tag and flag controls, with search, sort and a `Flagged only` filter.
+ * Clicking a thumbnail opens the full detail dialog (capture-detail-dialog.tsx).
  *
- * Every frame is drawn from its committed seed (PRD §7.4) — there is no image
- * file anywhere in this repository, so it is not possible for a real screenshot
- * to reach the build by accident.
+ * Most frames are drawn from their committed seed (PRD §7.4); a few
+ * applications render a generic reference image instead (capture-screenshots.ts)
+ * — either way, no frame is a capture of anyone's actual screen.
  */
 
 const PAGE = 18;
@@ -30,35 +39,68 @@ const FLAG_REASONS = [
   { code: "CASE_EVIDENCE", label: "Attach to an open case" },
   { code: "MISCAPTURE", label: "Captured in error — delete" },
 ];
+const FLAG_LABEL: Record<string, string> = Object.fromEntries(
+  FLAG_REASONS.map((r) => [r.code, r.label]),
+);
+
+const SORTS = {
+  newest: "Newest first",
+  oldest: "Oldest first",
+  member: "Member (A–Z)",
+  application: "Application (A–Z)",
+} as const;
+type SortKey = keyof typeof SORTS;
 
 export function CaptureGallery() {
   const { team, member } = useFilters();
   const [flaggedOnly, setFlaggedOnly] = useState(false);
   const [mode, setMode] = useState<"all" | "scheduled" | "triggered">("all");
   const [page, setPage] = useState(0);
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<SortKey>("newest");
   const [tags, setTags] = useState<Record<string, string[]>>({});
   const [flags, setFlags] = useState<Record<string, string>>(
     Object.fromEntries(
       CAPTURES.filter((c) => c.flagged).map((c) => [c.id, "CASE_EVIDENCE"]),
     ),
   );
+  const [detail, setDetail] = useState<Capture | null>(null);
 
   const teamOf = useMemo(
     () => Object.fromEntries(MEMBERS.map((m) => [m.id, m.team])),
     [],
   );
 
+  const q = query.trim().toLowerCase();
+
   const filtered = CAPTURES.filter(
     (c) =>
       (team === ALL_TEAMS || teamOf[c.memberId] === team) &&
       (member === ALL_MEMBERS || c.memberName === member) &&
       (mode === "all" || c.mode === mode) &&
-      (!flaggedOnly || flags[c.id] !== undefined),
+      (!flaggedOnly || flags[c.id] !== undefined) &&
+      (q === "" ||
+        c.memberName.toLowerCase().includes(q) ||
+        c.application.toLowerCase().includes(q)),
   );
 
-  const pages = Math.max(1, Math.ceil(filtered.length / PAGE));
+  const sorted = useMemo(() => {
+    const out = [...filtered];
+    switch (sort) {
+      case "newest":
+        return out.sort((a, b) => b.ts.localeCompare(a.ts));
+      case "oldest":
+        return out.sort((a, b) => a.ts.localeCompare(b.ts));
+      case "member":
+        return out.sort((a, b) => a.memberName.localeCompare(b.memberName));
+      case "application":
+        return out.sort((a, b) => a.application.localeCompare(b.application));
+    }
+  }, [filtered, sort]);
+
+  const pages = Math.max(1, Math.ceil(sorted.length / PAGE));
   const current = Math.min(page, pages - 1);
-  const shown = filtered.slice(current * PAGE, current * PAGE + PAGE);
+  const shown = sorted.slice(current * PAGE, current * PAGE + PAGE);
 
   const toggleTag = (id: string, tag: string) =>
     setTags((prev) => {
@@ -105,12 +147,39 @@ export function CaptureGallery() {
           Flagged only
         </label>
 
+        <div className="relative">
+          <Search className="pointer-events-none absolute top-1/2 left-2 size-3 -translate-y-1/2 text-slate-400" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setPage(0);
+            }}
+            placeholder="Search member or application"
+            className="w-52 rounded-sm border border-line bg-white py-1 pr-2.5 pl-6.5 text-xs text-slate-800 placeholder:text-slate-400 focus:border-emerald-400 focus:outline-none"
+          />
+        </div>
+
+        <Select value={sort} onValueChange={(v) => setSort(v as SortKey)}>
+          <SelectTrigger size="sm" className="h-[26px] w-40 rounded-sm border-line text-xs text-slate-700">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent className="rounded-sm">
+            {(Object.entries(SORTS) as [SortKey, string][]).map(([key, label]) => (
+              <SelectItem key={key} value={key} className="text-xs">
+                {label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
         <div className="ml-auto flex items-center gap-2">
           <span className="machine text-xs text-slate-500">
-            {filtered.length === 0
+            {sorted.length === 0
               ? "0"
               : `${current * PAGE + 1}–${current * PAGE + shown.length}`}{" "}
-            of {filtered.length}
+            of {sorted.length}
           </span>
           <button
             type="button"
@@ -136,8 +205,8 @@ export function CaptureGallery() {
 
       {shown.length === 0 ? (
         <p className="px-4 py-12 text-center text-sm text-slate-500">
-          No capture matches these filters. Clear the mode chip or the
-          flagged-only box.
+          No capture matches these filters. Clear the mode chip, the search
+          box, or the flagged-only box.
         </p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3.5 p-4">
@@ -152,7 +221,14 @@ export function CaptureGallery() {
                   flag ? "border-red-200 bg-red-50/20" : "border-line",
                 )}
               >
-                <CaptureThumb seed={c.seed} />
+                <button
+                  type="button"
+                  onClick={() => setDetail(c)}
+                  className="cursor-zoom-in"
+                  title="View capture details"
+                >
+                  <CaptureThumb seed={c.seed} application={c.application} />
+                </button>
                 <figcaption className="mt-2 px-0.5">
                   <p className="truncate text-xs font-semibold text-slate-900">
                     {c.memberName}
@@ -175,8 +251,8 @@ export function CaptureGallery() {
                       {c.mode}
                     </span>
                     {flag && (
-                      <span className="label machine truncate rounded border border-red-200 bg-red-50 px-1.5 py-0.5 text-[10px] text-red-800">
-                        {flag}
+                      <span className="label truncate rounded border border-red-200 bg-red-50 px-1.5 py-0.5 text-[10px] text-red-800">
+                        {FLAG_LABEL[flag] ?? flag}
                       </span>
                     )}
                   </div>
@@ -257,14 +333,9 @@ export function CaptureGallery() {
                             onClick={() =>
                               setFlags((prev) => ({ ...prev, [c.id]: r.code }))
                             }
-                            className="block w-full rounded px-2 py-1.5 text-left hover:bg-slate-100 transition-colors"
+                            className="block w-full rounded px-2 py-1.5 text-left text-xs text-slate-800 hover:bg-slate-100 transition-colors"
                           >
-                            <span className="machine block text-xs font-semibold text-slate-900">
-                              {r.code}
-                            </span>
-                            <span className="block text-[11px] text-slate-500">
-                              {r.label}
-                            </span>
+                            {r.label}
                           </button>
                         ))}
                         {flag && (
@@ -291,6 +362,16 @@ export function CaptureGallery() {
           })}
         </div>
       )}
+
+      <CaptureDetailDialog
+        capture={detail}
+        team={detail ? teamOf[detail.memberId] : undefined}
+        tags={detail ? (tags[detail.id] ?? []) : []}
+        flagLabel={detail && flags[detail.id] ? FLAG_LABEL[flags[detail.id]] : undefined}
+        onOpenChange={(open) => {
+          if (!open) setDetail(null);
+        }}
+      />
     </div>
   );
 }

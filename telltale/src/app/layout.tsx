@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Shell } from "@/components/shell/shell";
 import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({
@@ -16,18 +14,22 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "tellTale — Demo Console",
+  title: "tellTale — Context-aware behavioural detection",
   description:
-    "Context-aware behavioural transition detection. Demo build — all data synthetic.",
+    "Context-aware behavioural transition detection. See the reasoning behind every score, not just a number.",
 };
 
+/**
+ * The demo console (sidebar, topbar, tooltip provider) lives one level down,
+ * in src/app/demo/layout.tsx — this root only sets up fonts and the page
+ * shell, so the marketing page at "/" can have its own header instead of
+ * inheriting the console chrome.
+ */
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${sans.variable} ${jetbrains.variable} h-full`}>
       <body className="min-h-full bg-background text-foreground font-sans antialiased selection:bg-emerald-100 selection:text-emerald-900">
-        <TooltipProvider delay={150}>
-          <Shell>{children}</Shell>
-        </TooltipProvider>
+        {children}
       </body>
     </html>
   );

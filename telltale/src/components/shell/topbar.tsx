@@ -138,7 +138,7 @@ export function Topbar() {
         </button>
       )}
 
-      <span className="machine ml-auto text-xs text-grey">UTC</span>
+      <span className="machine ml-auto text-xs text-grey">IST</span>
     </header>
   );
 }

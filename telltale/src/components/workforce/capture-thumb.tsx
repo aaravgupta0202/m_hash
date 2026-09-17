@@ -1,12 +1,20 @@
+import { screenshotFor } from "@/lib/capture-screenshots";
+
 /**
- * PRD §7.4: capture thumbnails are generated placeholders. Never an image of
- * anyone's actual screen, including our own.
+ * PRD §7.4: capture thumbnails are never an image of anyone's actual screen,
+ * including our own. Two kinds of frame satisfy that:
  *
- * Everything below is drawn from the capture's committed seed — an abstract
- * window with chrome, a toolbar and content blocks. There is no text content in
- * it, because §7.5 excludes message bodies, file contents and typed text even
- * as mock data. The application name and the timestamp are metadata and are
- * shown in the caption, outside the frame.
+ *  - For a handful of applications (see capture-screenshots.ts), a generic
+ *    reference image of that application's real UI, sourced from the
+ *    vendor's own published documentation — recognisable, but not a capture
+ *    of anyone's screen and not tied to any specific fixture record.
+ *  - For everything else, the frame is generated from the capture's
+ *    committed seed — an abstract window with chrome, a toolbar and content
+ *    blocks. There is no text content in it, because §7.5 excludes message
+ *    bodies, file contents and typed text even as mock data.
+ *
+ * The application name and the timestamp are metadata and are shown in the
+ * caption, outside the frame either way.
  */
 
 function lcg(seed: number) {
@@ -26,13 +34,33 @@ const PALETTES: [string, string][] = [
 
 export function CaptureThumb({
   seed,
+  application,
   aspect = "aspect-16/10",
   chrome = true,
 }: {
   seed: number;
+  application?: string;
   aspect?: string;
   chrome?: boolean;
 }) {
+  const reference = application ? screenshotFor(application, seed) : null;
+  if (reference) {
+    return (
+      <div
+        className={`${aspect} w-full overflow-hidden rounded border border-line bg-slate-50`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={reference}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          className="size-full object-cover"
+        />
+      </div>
+    );
+  }
+
   const rand = lcg(seed);
   const [from, to] = PALETTES[Math.floor(rand() * PALETTES.length)];
   const cols = 2 + Math.floor(rand() * 2);

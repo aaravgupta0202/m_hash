@@ -17,13 +17,13 @@ export function generateStaticParams() {
   return MEMBERS.map((m) => ({ id: m.id }));
 }
 
-export async function generateMetadata(props: PageProps<"/workforce/[id]">) {
+export async function generateMetadata(props: PageProps<"/demo/workforce/[id]">) {
   const { id } = await props.params;
   const member = memberById(id);
   return { title: `${member?.name ?? id} — workforce — tellTale` };
 }
 
-export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
+export default async function MemberPage(props: PageProps<"/demo/workforce/[id]">) {
   const { id } = await props.params;
   const member = memberById(id);
   const day = memberDayById(id);
@@ -38,7 +38,7 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
   return (
     <>
       <Link
-        href="/workforce"
+        href="/demo/workforce"
         className="mb-3 inline-flex items-center gap-1.5 rounded-sm border border-line bg-white px-2.5 py-1 text-xs text-slate-600 hover:text-emerald-700 hover:bg-slate-50 hover:border-emerald-300 transition-all"
       >
         <ArrowLeft className="size-3.5 text-emerald-600" />
@@ -72,7 +72,7 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
               </span>
             </Field>
             <Field label="Last seen" mono>
-              {member.lastSeen.slice(11, 16)} UTC
+              {member.lastSeen.slice(11, 16)} IST
             </Field>
           </div>
         </div>
@@ -222,10 +222,10 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
 
       <Panel
         title="Captures"
-        sub={`${captures.length} on the pinned day. Thumbnails are generated placeholders — never an image of a real screen.`}
+        sub={`${captures.length} on the pinned day. Thumbnails are generated, or a generic reference image for a few applications — never a capture of a real screen.`}
         right={
           <Link
-            href="/workforce/captures"
+            href="/demo/workforce/captures"
             className="text-xs text-emerald-400 hover:text-emerald-300 hover:underline"
           >
             Full gallery →
@@ -241,7 +241,7 @@ export default async function MemberPage(props: PageProps<"/workforce/[id]">) {
           <div className="grid grid-cols-6 gap-3">
             {captures.map((c) => (
               <figure key={c.id}>
-                <CaptureThumb seed={c.seed} />
+                <CaptureThumb seed={c.seed} application={c.application} />
                 <figcaption className="mt-1.5">
                   <p className="machine text-[11px] text-ink">
                     {c.ts.slice(11, 16)}

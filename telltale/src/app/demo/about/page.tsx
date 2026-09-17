@@ -202,7 +202,7 @@ export default function AboutPage() {
                 "Sensor coverage",
                 `${SENSOR_COVERAGE.equipped} of ${SENSOR_COVERAGE.total} endpoints`,
               ],
-              ["Pinned day", "2026-09-14, 00:00 → 23:59 UTC"],
+              ["Pinned day", "2026-09-14, 00:00 → 23:59 IST"],
               ["Network calls", "None. It runs from a plain file server."],
             ].map(([k, v]) => (
               <div

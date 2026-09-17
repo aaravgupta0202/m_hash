@@ -554,7 +554,7 @@ function Tick({
           y: LANES[lane].top,
           title: tick.action,
           lines: [
-            tick.ts.replace("T", " ").replace("Z", " UTC"),
+            tick.ts.replace("T", " ").replace("Z", " IST"),
             tick.resource
               ? `resource · ${tick.resource}`
               : `${tick.sensitivity} sensitivity`,

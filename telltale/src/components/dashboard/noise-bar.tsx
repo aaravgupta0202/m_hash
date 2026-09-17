@@ -83,9 +83,6 @@ export function NoiseBar() {
             >
               {s.label}
             </span>
-            <span className="machine w-48 shrink-0 text-right text-[11px] text-slate-500">
-              {s.reasonCode}
-            </span>
             <span className="machine w-10 shrink-0 text-right text-xs text-slate-800 font-medium">
               {s.pct}%
             </span>
@@ -98,9 +95,6 @@ export function NoiseBar() {
           <span className="size-2.5 shrink-0" />
           <span className="min-w-0 flex-1 text-xs font-bold text-slate-900">
             Raised anomalies
-          </span>
-          <span className="machine w-48 shrink-0 text-right text-[11px] text-slate-500">
-            TOTAL
           </span>
           <span className="machine w-10 shrink-0 text-right text-xs text-slate-900 font-semibold">
             100%

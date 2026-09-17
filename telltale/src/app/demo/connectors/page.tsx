@@ -3,12 +3,7 @@ import { PageHeader } from "@/components/page-header";
 import { Panel } from "@/components/panel";
 import { ConnectorRibbons } from "@/components/connectors/ribbon";
 import { ConnectorStrip, STATE_TEXT } from "@/components/connectors/strip";
-import {
-  CONNECTORS,
-  CONNECTOR_CALLOUT,
-  CONNECTOR_INSTANCES,
-  NOW,
-} from "@/lib/fixtures";
+import { CONNECTORS, CONNECTOR_INSTANCES, NOW } from "@/lib/fixtures";
 
 export const metadata = { title: "Connector health — tellTale" };
 
@@ -25,7 +20,7 @@ export default function ConnectorsPage() {
           <div className="text-right">
             <p className="label text-slate-500 text-[10px]">Evaluated at</p>
             <p className="machine text-xs font-semibold text-emerald-700">
-              {NOW.replace("T", " ").replace("Z", " UTC")}
+              {NOW.replace("T", " ").replace("Z", " IST")}
             </p>
           </div>
         }
@@ -139,11 +134,8 @@ export default function ConnectorsPage() {
         </div>
       </Panel>
 
-      <Panel title="Why this screen exists" className="border-line bg-white ">
-        <p className="max-w-4xl text-xs leading-relaxed text-slate-600">
-          {CONNECTOR_CALLOUT}
-        </p>
-        <ul className="mt-3 space-y-1.5 text-xs text-slate-600">
+      <Panel title="Legend" className="border-line bg-white ">
+        <ul className="space-y-1.5 text-xs text-slate-600">
           <li className="flex items-center gap-2">
             <span
               className={cn(

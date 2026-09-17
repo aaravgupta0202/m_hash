@@ -152,7 +152,7 @@ export function QueueTable() {
 
             {rows.map((r, i) => {
               const below = r.rank > TRIAGE_CAPACITY_AFTER_RANK;
-              const href = `/subject/${routeIdFor(r.id)}`;
+              const href = `/demo/subject/${routeIdFor(r.id)}`;
               return (
                 <Fragment key={r.id}>
                   {i === ruleBefore && ruleBefore > 0 && (

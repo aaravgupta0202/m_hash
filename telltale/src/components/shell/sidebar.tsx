@@ -13,9 +13,9 @@ import {
   Info,
   PanelLeftClose,
   PanelLeftOpen,
-  Layers,
 } from "lucide-react";
 import { cn } from "cn";
+import { LogoMark } from "@/components/brand/logo-mark";
 import {
   MODULE_ROLE,
   RISK_NAV,
@@ -82,9 +82,9 @@ export function Sidebar() {
     >
       {/* Header */}
       <div className="flex h-14 shrink-0 items-center gap-2 border-b border-line px-3">
-        <Link href="/" className="flex min-w-0 flex-1 items-center gap-2.5">
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-emerald-200 bg-emerald-50 text-emerald-700">
-            <Layers className="size-4" />
+        <Link href="/demo" className="flex min-w-0 flex-1 items-center gap-2.5">
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-purple/30 bg-purple-lt text-purple">
+            <LogoMark className="size-4" />
           </div>
           <div className={collapsible(collapsed, "flex min-w-0 flex-col")}>
             <span className="truncate text-sm font-semibold tracking-tight text-ink">
@@ -152,7 +152,7 @@ export function Sidebar() {
           <TooltipTrigger
             render={
               <Link
-                href="/about"
+                href="/demo/about"
                 className={cn(
                   "flex items-center gap-2 rounded-sm px-2 py-1.5 text-xs text-grey hover:bg-purple-lt hover:text-purple",
                   pathname === "/about" && "bg-purple-lt text-purple",

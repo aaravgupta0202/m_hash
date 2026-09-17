@@ -20,12 +20,12 @@ export function generateStaticParams() {
   return ALL_DOSSIERS.map((d) => ({ id: routeIdFor(d.subjectId) }));
 }
 
-export async function generateMetadata(props: PageProps<"/subject/[id]">) {
+export async function generateMetadata(props: PageProps<"/demo/subject/[id]">) {
   const { id } = await props.params;
   return { title: `#${id} — investigation — tellTale` };
 }
 
-export default async function SubjectPage(props: PageProps<"/subject/[id]">) {
+export default async function SubjectPage(props: PageProps<"/demo/subject/[id]">) {
   const { id } = await props.params;
   const subjectId = `subject_${id}`;
   const dossier = dossierFor(subjectId);
