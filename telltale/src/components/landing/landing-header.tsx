@@ -5,7 +5,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export function LandingHeader() {
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-line bg-white/95 backdrop-blur dark:bg-slate-950/95 dark:border-slate-800">
       <div className="mx-auto flex h-16 w-full max-w-[1600px] items-center gap-6 px-6 sm:px-10 lg:px-16">
         <Link href="/" className="flex items-center gap-2.5">
           <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white font-black text-xs shadow-xs">

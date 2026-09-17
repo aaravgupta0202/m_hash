@@ -13,19 +13,9 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     if (stored === "dark") {
       document.documentElement.classList.add("dark");
       setIsDark(true);
-    } else if (stored === "light") {
+    } else {
       document.documentElement.classList.remove("dark");
       setIsDark(false);
-    } else {
-      // Default to dark or check system preference
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (prefersDark) {
-        document.documentElement.classList.add("dark");
-        setIsDark(true);
-      } else {
-        document.documentElement.classList.remove("dark");
-        setIsDark(false);
-      }
     }
   }, []);
 
@@ -43,7 +33,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 
   if (!mounted) {
     return (
-      <div className={`size-7 rounded-sm border border-line flex items-center justify-center opacity-0 ${className}`} />
+      <div className={`h-8 w-8 rounded-md border border-line bg-white opacity-0 ${className}`} />
     );
   }
 
@@ -52,13 +42,19 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       type="button"
       onClick={toggle}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      aria-label="Toggle dark mode"
-      className={`flex size-7 items-center justify-center rounded-sm border border-line bg-white text-slate-700 hover:bg-slate-100 hover:text-emerald-700 transition-colors shadow-2xs dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-750 ${className}`}
+      aria-label="Toggle theme"
+      className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-md border border-line bg-white px-2.5 text-xs font-medium text-slate-700 shadow-2xs transition-colors hover:bg-slate-50 hover:text-emerald-700 hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-emerald-400 ${className}`}
     >
       {isDark ? (
-        <Sun className="size-3.5 text-amber-400 fill-amber-400/20" />
+        <>
+          <Sun className="size-3.5 text-amber-400 fill-amber-400/20" />
+          <span className="text-[11px] font-medium hidden sm:inline">Light</span>
+        </>
       ) : (
-        <Moon className="size-3.5 text-slate-600" />
+        <>
+          <Moon className="size-3.5 text-slate-600" />
+          <span className="text-[11px] font-medium hidden sm:inline">Dark</span>
+        </>
       )}
     </button>
   );

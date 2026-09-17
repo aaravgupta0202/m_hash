@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Check, ArrowRight, Shield, Cpu, Monitor, Bot } from "lucide-react";
+import { Check, ArrowRight, Shield, Cpu, Monitor, Bot, Briefcase, Lock } from "lucide-react";
 
 const TIERS = [
   {
@@ -12,10 +12,10 @@ const TIERS = [
     features: [
       "Identity & SaaS audit telemetry",
       "Robust volumetric baselines (Median / MAD)",
-      "Markov trajectory sequence scoring",
+      "Order-2 Markov trajectory sequence scoring",
       "4-test context verification engine",
       "Plain-English investigation dossiers",
-      "Ranked priority alert queue",
+      "Ranked Review Alerts priority queue",
     ],
     cta: "Start with Cloud",
     popular: false,
@@ -26,14 +26,14 @@ const TIERS = [
     period: "/ identity / yr (₹580/mo)",
     icon: Monitor,
     badge: "Most Popular",
-    description: "Managed corporate devices. Adds endpoint activity & the complete workforce module.",
+    description: "Managed corporate devices. Adds endpoint Sensor and the full workforce module.",
     features: [
       "All Cloud tier capabilities",
       "User-space Sensor (Windows, Mac, Linux)",
       "Presence divergence detection",
       "Application composition drift",
-      "Full workforce module: app & web usage",
-      "Active vs idle timelines & team reports",
+      "Full workforce module: Team Overview & App Usage",
+      "Active vs idle timelines and team reports",
     ],
     cta: "Deploy Sensor",
     popular: true,
@@ -47,11 +47,11 @@ const TIERS = [
     description: "Engineers, DevOps, administrators, executives, and high-compliance teams.",
     features: [
       "All Sensor tier capabilities",
-      "Scheduled & triggered screen capture",
-      "Jurisdiction profile policy gating",
+      "Scheduled (5-min) and triggered screen capture",
+      "Encrypted evidence vault with dual-custody access",
       "Honeytoken deception orchestration",
-      "Communication graph topology analysis",
-      "Automated containment action webhooks",
+      "Action path graph and containment webhooks",
+      "Jurisdiction profiles (India DPDP, EU GDPR, Works agreement)",
     ],
     cta: "Explore Capture",
     popular: false,
@@ -94,6 +94,7 @@ export function PricingSection() {
           </p>
         </div>
 
+        {/* 4 Tiers Grid */}
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {TIERS.map((tier) => (
             <div
@@ -153,19 +154,58 @@ export function PricingSection() {
           ))}
         </div>
 
-        <div className="mt-8 rounded-lg border border-line bg-white p-5 shadow-xs">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        {/* Two Budgets, One Agent: Business Strategy Showcase (Master Doc §4.10 & §4.4) */}
+        <div className="mt-10 rounded-xl border border-line bg-white p-6 sm:p-8 shadow-xs">
+          <div className="max-w-3xl">
+            <span className="label text-emerald-700">Business Strategy</span>
+            <h3 className="mt-1 text-xl font-bold tracking-tight text-ink">
+              Two Budgets, One Agent: The Indian Mid-Market Incumbent Displacement
+            </h3>
+            <p className="mt-2 text-xs leading-relaxed text-slate-600">
+              Workforce analytics incumbents (ActivTrak, Hubstaff, EmployEye) charge ₹5,000–₹10,000 per user per year for activity reporting alone with zero detection engine. tellTale’s Sensor tier is priced at incumbent parity (₹7,000/yr), letting buyers fund enterprise threat detection out of an existing, approved operational budget.
+            </p>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="rounded-lg border border-emerald-200 bg-emerald-50/40 p-5">
+              <div className="flex items-center gap-2 text-emerald-800 font-bold text-xs">
+                <Lock className="size-4 text-emerald-700" />
+                CISO / SecOps Lead
+              </div>
+              <p className="mt-1 text-xs font-semibold text-slate-700">Owns Identity Threat & Insider Risk Budget</p>
+              <ul className="mt-3 space-y-1.5 text-xs text-slate-600">
+                <li>• Gets session-theft detection and credential-misuse alerts.</li>
+                <li>• Receives an evidence-backed mathematical dossier per finding.</li>
+                <li>• Operates on pseudonymous subjects (#4912), never productivity scores.</li>
+              </ul>
+            </div>
+
+            <div className="rounded-lg border border-blue-200 bg-blue-50/40 p-5">
+              <div className="flex items-center gap-2 text-blue-900 font-bold text-xs">
+                <Briefcase className="size-4 text-blue-700" />
+                HR / Operations Lead
+              </div>
+              <p className="mt-1 text-xs font-semibold text-slate-700">Owns Workforce Analytics & Attendance Budget</p>
+              <ul className="mt-3 space-y-1.5 text-xs text-slate-600">
+                <li>• Gets Team Overview, App Usage, attendance, and capture trail.</li>
+                <li>• Gains operational team visibility and tool allocation metrics.</li>
+                <li>• Sees named employees, never a security risk score.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-line pt-5">
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-800">
-                The 15-Minute Retrospective Audit for Indian Mid-Market
+                The 15-Minute Retrospective Audit
               </h4>
-              <p className="mt-1 text-xs text-slate-600">
-                Connect Okta and GitHub read-only via OAuth. We replay your past 90 days of retained audit logs to produce day-two findings: departing employees whose access patterns shifted, dormant credentials, and how many alerts our context gate would have suppressed.
+              <p className="mt-0.5 text-xs text-slate-600">
+                Connect Okta and GitHub read-only via OAuth. We replay 90 days of existing audit logs to deliver day-two findings: departing employees whose access shifted, dormant credentials, and how many alerts our context gate suppresses.
               </p>
             </div>
             <Link
               href="/demo"
-              className="shrink-0 inline-flex items-center gap-1.5 rounded-md bg-emerald-50 px-4 py-2 text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition-colors border border-emerald-200"
+              className="shrink-0 inline-flex items-center gap-1.5 rounded-md bg-emerald-600 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-700 transition-colors shadow-xs"
             >
               <span>Explore Demo Findings</span>
               <ArrowRight className="size-3.5" />
