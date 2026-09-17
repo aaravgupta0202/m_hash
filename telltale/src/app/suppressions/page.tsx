@@ -2,7 +2,11 @@ import { ShieldCheck, ListFilter, AlertCircle, Trash2 } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Panel } from "@/components/panel";
 import { SuppressionTable } from "@/components/risk/suppression-table";
-import { RAISED_ANOMALIES, SUPPRESSED_BY_CONTEXT, SUPPRESSIONS } from "@/lib/fixtures";
+import {
+  RAISED_ANOMALIES,
+  SUPPRESSED_BY_CONTEXT,
+  SUPPRESSIONS,
+} from "@/lib/fixtures";
 
 export const metadata = { title: "Suppression log — tellTale" };
 
@@ -19,10 +23,30 @@ export default function SuppressionsPage() {
       />
 
       <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        <Stat icon={ShieldCheck} label="Suppressed today" value={SUPPRESSED_BY_CONTEXT.toLocaleString("en-US")} sub={`${pct}% of ${RAISED_ANOMALIES.toLocaleString("en-US")} raised`} />
-        <Stat icon={ListFilter} label="Shown here" value={String(SUPPRESSIONS.length)} sub="most recent, all reason codes" />
-        <Stat icon={AlertCircle} label="Under review" value={String(underReview)} sub="reopened by the context detector" />
-        <Stat icon={Trash2} label="Deleted" value="0" sub="suppression is reversible by design" />
+        <Stat
+          icon={ShieldCheck}
+          label="Suppressed today"
+          value={SUPPRESSED_BY_CONTEXT.toLocaleString("en-US")}
+          sub={`${pct}% of ${RAISED_ANOMALIES.toLocaleString("en-US")} raised`}
+        />
+        <Stat
+          icon={ListFilter}
+          label="Shown here"
+          value={String(SUPPRESSIONS.length)}
+          sub="most recent, all reason codes"
+        />
+        <Stat
+          icon={AlertCircle}
+          label="Under review"
+          value={String(underReview)}
+          sub="reopened by the context detector"
+        />
+        <Stat
+          icon={Trash2}
+          label="Deleted"
+          value="0"
+          sub="suppression is reversible by design"
+        />
       </div>
 
       <Panel
@@ -35,14 +59,26 @@ export default function SuppressionsPage() {
   );
 }
 
-function Stat({ icon: Icon, label, value, sub }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string; sub: string }) {
+function Stat({
+  icon: Icon,
+  label,
+  value,
+  sub,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string;
+  sub: string;
+}) {
   return (
-    <div className="panel px-4 py-3 bg-white border border-line rounded-lg shadow-xs">
+    <div className="panel px-4 py-3 bg-white border border-line rounded-sm ">
       <div className="flex items-center justify-between">
         <p className="label text-slate-500">{label}</p>
         <Icon className="size-4 text-emerald-600" />
       </div>
-      <p className="machine mt-1.5 truncate text-2xl leading-none font-bold text-slate-900">{value}</p>
+      <p className="machine mt-1.5 truncate text-2xl leading-none font-bold text-slate-900">
+        {value}
+      </p>
       <p className="mt-1.5 text-xs text-slate-500">{sub}</p>
     </div>
   );

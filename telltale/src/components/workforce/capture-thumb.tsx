@@ -10,7 +10,7 @@
  */
 
 function lcg(seed: number) {
-  let s = (seed % 2147483647) || 1;
+  let s = seed % 2147483647 || 1;
   return () => {
     s = (s * 48271) % 2147483647;
     return (s - 1) / 2147483646;
@@ -44,8 +44,15 @@ export function CaptureThumb({
   const gid = `cap-${seed}`;
 
   return (
-    <div className={`${aspect} w-full overflow-hidden rounded border border-line bg-slate-50 shadow-xs`}>
-      <svg viewBox="0 0 320 200" className="size-full" role="img" aria-label="Generated placeholder capture">
+    <div
+      className={`${aspect} w-full overflow-hidden rounded border border-line bg-slate-50 `}
+    >
+      <svg
+        viewBox="0 0 320 200"
+        className="size-full"
+        role="img"
+        aria-label="Generated placeholder capture"
+      >
         <defs>
           <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor={from} />
@@ -56,12 +63,45 @@ export function CaptureThumb({
 
         {chrome && (
           <>
-            <rect x="14" y="14" width="292" height="172" rx="3" fill="#ffffff" fillOpacity="0.95" stroke="#cbd5e1" strokeWidth="0.8" />
-            <rect x="14" y="14" width="292" height="16" rx="3" fill="#059669" fillOpacity="0.08" />
+            <rect
+              x="14"
+              y="14"
+              width="292"
+              height="172"
+              rx="3"
+              fill="#ffffff"
+              fillOpacity="0.95"
+              stroke="#cbd5e1"
+              strokeWidth="0.8"
+            />
+            <rect
+              x="14"
+              y="14"
+              width="292"
+              height="16"
+              rx="3"
+              fill="#059669"
+              fillOpacity="0.08"
+            />
             {[24, 34, 44].map((cx) => (
-              <circle key={cx} cx={cx} cy="22" r="2.6" fill="#94a3b8" fillOpacity="0.5" />
+              <circle
+                key={cx}
+                cx={cx}
+                cy="22"
+                r="2.6"
+                fill="#94a3b8"
+                fillOpacity="0.5"
+              />
             ))}
-            <rect x="60" y="18.5" width="90" height="7" rx="3.5" fill="#cbd5e1" fillOpacity="0.5" />
+            <rect
+              x="60"
+              y="18.5"
+              width="90"
+              height="7"
+              rx="3.5"
+              fill="#cbd5e1"
+              fillOpacity="0.5"
+            />
             <rect x="14" y="30" width="72" height="156" fill="#f8fafc" />
           </>
         )}

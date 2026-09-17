@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!--
+    Workday has no entry in the Iconify/Simple Icons free logo sets used for
+    the rest of this build, so this is a hand-drawn monogram rather than a
+    downloaded mark — a bold "W" in a plausible Workday-adjacent orange, not
+    a claim to reproduce their trademarked sunburst icon exactly.
+  -->
+  <rect width="256" height="256" rx="40" fill="#E8720C" />
+  <path
+    d="M52 84h26l20 92 24-92h12l24 92 20-92h26l-34 128h-24l-22-88-22 88H86Z"
+    fill="#fff"
+  />
+</svg>

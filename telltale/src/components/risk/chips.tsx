@@ -1,28 +1,56 @@
-import { Bot, Server, User, CheckCircle2, AlertCircle, AlertTriangle, ShieldCheck } from "lucide-react";
+import { Bot, Server, User } from "lucide-react";
 import { cn } from "cn";
-import type { ContextVerdict, IdentityClass, Sensitivity, SubjectStatus } from "@/lib/fixtures";
+import type {
+  ContextVerdict,
+  IdentityClass,
+  Sensitivity,
+  SubjectStatus,
+} from "@/lib/fixtures";
 
 /* PRD §5.2: four context chips, and red only where something is genuinely wrong. */
-const VERDICT: Record<ContextVerdict, { label: string; className: string; Icon: typeof CheckCircle2 }> = {
-  authorised: { label: "AUTHORISED", className: "border-emerald-200 bg-emerald-50 text-emerald-800", Icon: CheckCircle2 },
-  partial: { label: "PARTIAL", className: "border-slate-200 bg-slate-100 text-slate-700", Icon: AlertCircle },
-  absent: { label: "ABSENT", className: "border-amber-200 bg-amber-50 text-amber-800", Icon: AlertTriangle },
-  suspicious: { label: "SUSPICIOUS", className: "border-red-200 bg-red-50 text-red-800", Icon: AlertCircle },
+const VERDICT: Record<ContextVerdict, { label: string; className: string }> = {
+  authorised: {
+    label: "Authorised",
+    className: "border-emerald-200 bg-emerald-50 text-emerald-800",
+  },
+  partial: {
+    label: "Partial",
+    className: "border-slate-200 bg-slate-100 text-slate-600",
+  },
+  absent: {
+    label: "Absent",
+    className: "border-amber-200 bg-amber-50 text-amber-800",
+  },
+  suspicious: {
+    label: "Suspicious",
+    className: "border-red-200 bg-red-50 text-red-800",
+  },
 };
 
-export function VerdictChip({ verdict, className }: { verdict: ContextVerdict; className?: string }) {
+/**
+ * A verdict is read many times per page — 14 rows on the queue, one per
+ * table row on cohort pages. An icon glued to every instance turns into
+ * visual noise at that repetition; the colour and the word already carry
+ * the distinction on their own, the way a real ticketing system's status
+ * column does.
+ */
+export function VerdictChip({
+  verdict,
+  className,
+}: {
+  verdict: ContextVerdict;
+  className?: string;
+}) {
   const v = VERDICT[verdict];
-  const Icon = v.Icon;
   return (
     <span
       className={cn(
-        "label inline-flex items-center gap-1 rounded border px-2 py-0.5 whitespace-nowrap text-[10px] font-bold tracking-wider",
+        "inline-flex items-center rounded-sm border px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap",
         v.className,
         className,
       )}
     >
-      <Icon className="size-3 shrink-0" />
-      <span>{v.label}</span>
+      {v.label}
     </span>
   );
 }
@@ -33,10 +61,17 @@ const IDENTITY: Record<IdentityClass, { Icon: typeof User; title: string }> = {
   agent: { Icon: Bot, title: "Autonomous agent identity" },
 };
 
-export function IdentityGlyph({ identityClass }: { identityClass: IdentityClass }) {
+export function IdentityGlyph({
+  identityClass,
+}: {
+  identityClass: IdentityClass;
+}) {
   const { Icon, title } = IDENTITY[identityClass];
   return (
-    <span title={title} className="inline-flex text-slate-500 hover:text-emerald-700 transition-colors">
+    <span
+      title={title}
+      className="inline-flex text-slate-500 hover:text-emerald-700 transition-colors"
+    >
       <Icon className="size-3.5" aria-hidden />
       <span className="sr-only">{title}</span>
     </span>
@@ -44,17 +79,17 @@ export function IdentityGlyph({ identityClass }: { identityClass: IdentityClass 
 }
 
 const STATUS: Record<SubjectStatus, string> = {
-  new: "NEW",
-  triaging: "TRIAGING",
-  suppressed: "SUPPRESSED",
-  confirmed: "CONFIRMED",
+  new: "New",
+  triaging: "Triaging",
+  suppressed: "Suppressed",
+  confirmed: "Confirmed",
 };
 
 export function StatusChip({ status }: { status: SubjectStatus }) {
   return (
     <span
       className={cn(
-        "label inline-flex items-center rounded border px-2 py-0.5 whitespace-nowrap text-[10px] font-bold tracking-wider",
+        "inline-flex items-center rounded-sm border px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap",
         status === "confirmed"
           ? "border-red-200 bg-red-50 text-red-800"
           : status === "suppressed"
@@ -109,7 +144,12 @@ export function ValueBar({
   const pct = Math.max(0, Math.min(100, (value / max) * 100));
   const t = tone ?? riskTone(value);
   return (
-    <div className={cn("relative h-5.5 w-full min-w-24 overflow-hidden rounded border border-line bg-slate-100", className)}>
+    <div
+      className={cn(
+        "relative h-5.5 w-full min-w-24 overflow-hidden rounded-sm border border-line bg-slate-100",
+        className,
+      )}
+    >
       <div
         className={cn(
           "bar-grow absolute inset-y-0 left-0",
@@ -119,7 +159,7 @@ export function ValueBar({
       />
       <span
         className={cn(
-          "machine absolute inset-0 flex items-center px-2 text-xs font-bold tabular-nums",
+          "machine absolute inset-0 flex items-center px-2 text-xs font-semibold tabular-nums",
           t === "purple" ? "text-emerald-800" : TONE_TEXT[t],
         )}
       >
@@ -145,4 +185,3 @@ export function SensitivityDot({ sensitivity }: { sensitivity: Sensitivity }) {
     />
   );
 }
-

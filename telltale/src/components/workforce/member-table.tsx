@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { cn } from "cn";
 import { ActivityRibbon, fmtHours } from "@/components/workforce/bits";
+import { BrandIcon } from "@/components/brand-icon";
 import { ALL_MEMBERS, ALL_TEAMS, useFilters } from "@/lib/filters";
 import { MEMBERS } from "@/lib/fixtures";
 
@@ -22,7 +23,9 @@ export function MemberTable() {
   const { team, member } = useFilters();
 
   const rows = MEMBERS.filter(
-    (m) => (team === ALL_TEAMS || m.team === team) && (member === ALL_MEMBERS || m.name === member),
+    (m) =>
+      (team === ALL_TEAMS || m.team === team) &&
+      (member === ALL_MEMBERS || m.name === member),
   );
 
   return (
@@ -30,19 +33,33 @@ export function MemberTable() {
       <table className="w-full min-w-[980px] border-collapse text-sm">
         <thead>
           <tr className="border-b border-line bg-slate-50">
-            {["Member", "Team", "Working", "Idle", "Top application", "Activity 00:00 → 24:00", "Sensor", "Last seen", ""].map(
-              (h) => (
-                <th key={h} className="label px-3 py-2.5 text-left text-slate-500 text-[10px]">
-                  {h}
-                </th>
-              ),
-            )}
+            {[
+              "Member",
+              "Team",
+              "Working",
+              "Idle",
+              "Top application",
+              "Activity 00:00 → 24:00",
+              "Sensor",
+              "Last seen",
+              "",
+            ].map((h) => (
+              <th
+                key={h}
+                className="label px-3 py-2.5 text-left text-slate-500 text-[10px]"
+              >
+                {h}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody className="divide-y divide-line">
           {rows.length === 0 && (
             <tr>
-              <td colSpan={9} className="px-3 py-10 text-center text-sm text-slate-500">
+              <td
+                colSpan={9}
+                className="px-3 py-10 text-center text-sm text-slate-500"
+              >
                 No member matches this filter. Clear it from the top bar.
               </td>
             </tr>
@@ -61,12 +78,23 @@ export function MemberTable() {
                 >
                   {m.name}
                 </Link>
-                <span className="machine ml-2 text-[10px] text-slate-400">{m.id}</span>
+                <span className="machine ml-2 text-[10px] text-slate-400">
+                  {m.id}
+                </span>
               </td>
               <td className="px-3 py-2.5 text-slate-600">{m.team}</td>
-              <td className="machine px-3 py-2.5 text-emerald-700 font-semibold">{fmtHours(m.workingMinutes)}</td>
-              <td className="machine px-3 py-2.5 text-slate-500">{fmtHours(m.idleMinutes)}</td>
-              <td className="px-3 py-2.5 text-slate-700">{m.topApplication}</td>
+              <td className="machine px-3 py-2.5 text-emerald-700 font-semibold">
+                {fmtHours(m.workingMinutes)}
+              </td>
+              <td className="machine px-3 py-2.5 text-slate-500">
+                {fmtHours(m.idleMinutes)}
+              </td>
+              <td className="px-3 py-2.5 text-slate-700">
+                <div className="flex items-center gap-1.5">
+                  <BrandIcon name={m.topApplication} className="size-4" />
+                  <span>{m.topApplication}</span>
+                </div>
+              </td>
               <td className="px-3 py-2.5">
                 <ActivityRibbon ribbon={m.ribbon} />
               </td>
@@ -82,7 +110,9 @@ export function MemberTable() {
                   {m.sensorEquipped ? "Deployed" : "Cloud-only"}
                 </span>
               </td>
-              <td className="machine px-3 py-2.5 text-xs text-slate-500">{m.lastSeen.slice(11, 16)}</td>
+              <td className="machine px-3 py-2.5 text-xs text-slate-500">
+                {m.lastSeen.slice(11, 16)}
+              </td>
               <td className="px-3 py-2.5 text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 transition-all">
                 <ArrowRight className="size-3.5" />
               </td>
@@ -93,4 +123,3 @@ export function MemberTable() {
     </div>
   );
 }
-

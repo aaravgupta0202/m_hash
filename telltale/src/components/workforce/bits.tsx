@@ -23,7 +23,11 @@ const STATE_CLASS = {
   offline: "bg-slate-200",
 } as const;
 
-export const STATE_LABEL = { active: "Active", idle: "Idle", offline: "Offline" } as const;
+export const STATE_LABEL = {
+  active: "Active",
+  idle: "Idle",
+  offline: "Offline",
+} as const;
 
 export function ActivityRibbon({
   ribbon,
@@ -88,7 +92,7 @@ export function CategoryDonut({ data }: { data: CategoryTime[] }) {
   const C = 2 * Math.PI * R;
 
   /* Arc offsets are precomputed rather than accumulated inside the map, so the
-     geometry does not depend on render order. */
+ geometry does not depend on render order. */
   const arcs = data.map((d, i) => ({
     ...d,
     length: (d.minutes / total) * C,
@@ -115,10 +119,25 @@ export function CategoryDonut({ data }: { data: CategoryTime[] }) {
             </circle>
           ))}
         </g>
-        <text x="70" y="66" textAnchor="middle" fontSize="18" className="machine" fill="#0f172a" fontWeight="700">
+        <text
+          x="70"
+          y="66"
+          textAnchor="middle"
+          fontSize="18"
+          className="machine"
+          fill="#0f172a"
+          fontWeight="700"
+        >
           {fmtHours(total)}
         </text>
-        <text x="70" y="80" textAnchor="middle" fontSize="8.5" fill="#64748b" className="label font-bold">
+        <text
+          x="70"
+          y="80"
+          textAnchor="middle"
+          fontSize="8.5"
+          fill="#64748b"
+          className="label font-bold"
+        >
           Tracked
         </text>
       </svg>
@@ -126,9 +145,16 @@ export function CategoryDonut({ data }: { data: CategoryTime[] }) {
       <ul className="min-w-0 flex-1 space-y-1">
         {data.map((d) => (
           <li key={d.category} className="flex items-center gap-2">
-            <span className="size-2.5 shrink-0 rounded-sm" style={{ backgroundColor: categoryColor(d.category) }} />
-            <span className="min-w-0 flex-1 truncate text-xs text-slate-700 capitalize">{d.category}</span>
-            <span className="machine shrink-0 text-xs text-slate-500">{fmtHours(d.minutes)}</span>
+            <span
+              className="size-2.5 shrink-0 rounded-sm"
+              style={{ backgroundColor: categoryColor(d.category) }}
+            />
+            <span className="min-w-0 flex-1 truncate text-xs text-slate-700 capitalize">
+              {d.category}
+            </span>
+            <span className="machine shrink-0 text-xs text-slate-500">
+              {fmtHours(d.minutes)}
+            </span>
             <span className="machine w-10 shrink-0 text-right text-xs text-slate-900 font-semibold">
               {Math.round((d.minutes / total) * 100)}%
             </span>
@@ -144,4 +170,3 @@ export function fmtHours(minutes: number) {
   const m = minutes % 60;
   return h === 0 ? `${m}m` : `${h}h ${String(m).padStart(2, "0")}m`;
 }
-

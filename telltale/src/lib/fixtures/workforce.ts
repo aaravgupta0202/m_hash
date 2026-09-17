@@ -3,7 +3,13 @@
  * Committed deliberately: nothing randomises at runtime, so the numbers in the
  * demo video and the numbers a judge sees are the same numbers (PRD §6).
  */
-import type { ApplicationUse, Capture, CategoryTime, HourSlot, WorkforceMember } from "./types";
+import type {
+  ApplicationUse,
+  Capture,
+  CategoryTime,
+  HourSlot,
+  WorkforceMember,
+} from "./types";
 
 /**
  * Workforce module. Named employees, working time, usage, captures — and no
@@ -12,15 +18,15 @@ import type { ApplicationUse, Capture, CategoryTime, HourSlot, WorkforceMember }
  */
 export const MEMBERS: WorkforceMember[] = [
   {
-    "id": "emp-001",
-    "name": "Rhea Kulkarni",
-    "team": "Platform",
-    "workingMinutes": 423,
-    "idleMinutes": 297,
-    "topApplication": "Slack",
-    "lastSeen": "2026-09-14T17:04:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-001",
+    name: "Rhea Kulkarni",
+    team: "Platform",
+    workingMinutes: 423,
+    idleMinutes: 297,
+    topApplication: "Slack",
+    lastSeen: "2026-09-14T17:04:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -44,19 +50,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-002",
-    "name": "Tomas Berg",
-    "team": "Platform",
-    "workingMinutes": 494,
-    "idleMinutes": 226,
-    "topApplication": "Google Chrome",
-    "lastSeen": "2026-09-14T18:22:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-002",
+    name: "Tomas Berg",
+    team: "Platform",
+    workingMinutes: 494,
+    idleMinutes: 226,
+    topApplication: "Google Chrome",
+    lastSeen: "2026-09-14T18:22:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -80,19 +86,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-003",
-    "name": "Imani Osei",
-    "team": "Platform",
-    "workingMinutes": 510,
-    "idleMinutes": 210,
-    "topApplication": "Figma",
-    "lastSeen": "2026-09-14T18:48:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-003",
+    name: "Imani Osei",
+    team: "Platform",
+    workingMinutes: 510,
+    idleMinutes: 210,
+    topApplication: "Figma",
+    lastSeen: "2026-09-14T18:48:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -116,19 +122,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-004",
-    "name": "Devan Rao",
-    "team": "Product Engineering",
-    "workingMinutes": 486,
-    "idleMinutes": 234,
-    "topApplication": "iTerm2",
-    "lastSeen": "2026-09-14T18:30:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-004",
+    name: "Devan Rao",
+    team: "Product Engineering",
+    workingMinutes: 486,
+    idleMinutes: 234,
+    topApplication: "iTerm2",
+    lastSeen: "2026-09-14T18:30:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -152,19 +158,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-005",
-    "name": "Lucia Ferrari",
-    "team": "Product Engineering",
-    "workingMinutes": 616,
-    "idleMinutes": 104,
-    "topApplication": "Figma",
-    "lastSeen": "2026-09-14T17:32:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-005",
+    name: "Lucia Ferrari",
+    team: "Product Engineering",
+    workingMinutes: 616,
+    idleMinutes: 104,
+    topApplication: "Figma",
+    lastSeen: "2026-09-14T17:32:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -188,19 +194,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-006",
-    "name": "Noor Haddad",
-    "team": "Product Engineering",
-    "workingMinutes": 468,
-    "idleMinutes": 252,
-    "topApplication": "Slack",
-    "lastSeen": "2026-09-14T18:26:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-006",
+    name: "Noor Haddad",
+    team: "Product Engineering",
+    workingMinutes: 468,
+    idleMinutes: 252,
+    topApplication: "Slack",
+    lastSeen: "2026-09-14T18:26:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -224,19 +230,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-007",
-    "name": "Elias Kowalski",
-    "team": "Product Engineering",
-    "workingMinutes": 389,
-    "idleMinutes": 331,
-    "topApplication": "Finder",
-    "lastSeen": "2026-09-14T19:02:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-007",
+    name: "Elias Kowalski",
+    team: "Product Engineering",
+    workingMinutes: 389,
+    idleMinutes: 331,
+    topApplication: "Finder",
+    lastSeen: "2026-09-14T19:02:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -260,19 +266,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-008",
-    "name": "Mira Lindqvist",
-    "team": "Data",
-    "workingMinutes": 531,
-    "idleMinutes": 189,
-    "topApplication": "Visual Studio Code",
-    "lastSeen": "2026-09-14T18:11:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-008",
+    name: "Mira Lindqvist",
+    team: "Data",
+    workingMinutes: 531,
+    idleMinutes: 189,
+    topApplication: "Visual Studio Code",
+    lastSeen: "2026-09-14T18:11:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -296,19 +302,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-009",
-    "name": "Chen Wei-Lin",
-    "team": "Data",
-    "workingMinutes": 411,
-    "idleMinutes": 309,
-    "topApplication": "Slack",
-    "lastSeen": "2026-09-14T19:11:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-009",
+    name: "Chen Wei-Lin",
+    team: "Data",
+    workingMinutes: 411,
+    idleMinutes: 309,
+    topApplication: "Slack",
+    lastSeen: "2026-09-14T19:11:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -332,19 +338,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-010",
-    "name": "Kofi Mensah",
-    "team": "Data",
-    "workingMinutes": 427,
-    "idleMinutes": 293,
-    "topApplication": "Slack",
-    "lastSeen": "2026-09-14T19:59:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-010",
+    name: "Kofi Mensah",
+    team: "Data",
+    workingMinutes: 427,
+    idleMinutes: 293,
+    topApplication: "Slack",
+    lastSeen: "2026-09-14T19:59:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -368,19 +374,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-011",
-    "name": "Sanne de Vries",
-    "team": "Finance Systems",
-    "workingMinutes": 519,
-    "idleMinutes": 201,
-    "topApplication": "Figma",
-    "lastSeen": "2026-09-14T18:30:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-011",
+    name: "Sanne de Vries",
+    team: "Finance Systems",
+    workingMinutes: 519,
+    idleMinutes: 201,
+    topApplication: "Figma",
+    lastSeen: "2026-09-14T18:30:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -404,19 +410,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-012",
-    "name": "Arjun Pillai",
-    "team": "Finance Systems",
-    "workingMinutes": 506,
-    "idleMinutes": 214,
-    "topApplication": "Workday",
-    "lastSeen": "2026-09-14T17:16:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-012",
+    name: "Arjun Pillai",
+    team: "Finance Systems",
+    workingMinutes: 506,
+    idleMinutes: 214,
+    topApplication: "Workday",
+    lastSeen: "2026-09-14T17:16:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -440,19 +446,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-013",
-    "name": "Yara Nasser",
-    "team": "Customer Operations",
-    "workingMinutes": 449,
-    "idleMinutes": 271,
-    "topApplication": "Workday",
-    "lastSeen": "2026-09-14T18:12:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-013",
+    name: "Yara Nasser",
+    team: "Customer Operations",
+    workingMinutes: 449,
+    idleMinutes: 271,
+    topApplication: "Workday",
+    lastSeen: "2026-09-14T18:12:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -476,19 +482,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-014",
-    "name": "Peter Ondrej",
-    "team": "Customer Operations",
-    "workingMinutes": 580,
-    "idleMinutes": 140,
-    "topApplication": "iTerm2",
-    "lastSeen": "2026-09-14T19:45:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-014",
+    name: "Peter Ondrej",
+    team: "Customer Operations",
+    workingMinutes: 580,
+    idleMinutes: 140,
+    topApplication: "iTerm2",
+    lastSeen: "2026-09-14T19:45:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -512,19 +518,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-015",
-    "name": "Hana Takeda",
-    "team": "Customer Operations",
-    "workingMinutes": 521,
-    "idleMinutes": 199,
-    "topApplication": "Finder",
-    "lastSeen": "2026-09-14T19:15:00Z",
-    "sensorEquipped": true,
-    "ribbon": [
+    id: "emp-015",
+    name: "Hana Takeda",
+    team: "Customer Operations",
+    workingMinutes: 521,
+    idleMinutes: 199,
+    topApplication: "Finder",
+    lastSeen: "2026-09-14T19:15:00Z",
+    sensorEquipped: true,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -548,19 +554,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-016",
-    "name": "Gabriel Santos",
-    "team": "Security Engineering",
-    "workingMinutes": 517,
-    "idleMinutes": 203,
-    "topApplication": "Finder",
-    "lastSeen": "2026-09-14T18:39:00Z",
-    "sensorEquipped": false,
-    "ribbon": [
+    id: "emp-016",
+    name: "Gabriel Santos",
+    team: "Security Engineering",
+    workingMinutes: 517,
+    idleMinutes: 203,
+    topApplication: "Finder",
+    lastSeen: "2026-09-14T18:39:00Z",
+    sensorEquipped: false,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -584,19 +590,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-017",
-    "name": "Freya Halvorsen",
-    "team": "Security Engineering",
-    "workingMinutes": 492,
-    "idleMinutes": 228,
-    "topApplication": "Figma",
-    "lastSeen": "2026-09-14T19:58:00Z",
-    "sensorEquipped": false,
-    "ribbon": [
+    id: "emp-017",
+    name: "Freya Halvorsen",
+    team: "Security Engineering",
+    workingMinutes: 492,
+    idleMinutes: 228,
+    topApplication: "Figma",
+    lastSeen: "2026-09-14T19:58:00Z",
+    sensorEquipped: false,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -620,19 +626,19 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
+      "offline",
+    ],
   },
   {
-    "id": "emp-018",
-    "name": "Omar Belkacem",
-    "team": "IT Operations",
-    "workingMinutes": 445,
-    "idleMinutes": 275,
-    "topApplication": "Visual Studio Code",
-    "lastSeen": "2026-09-14T18:08:00Z",
-    "sensorEquipped": false,
-    "ribbon": [
+    id: "emp-018",
+    name: "Omar Belkacem",
+    team: "IT Operations",
+    workingMinutes: 445,
+    idleMinutes: 275,
+    topApplication: "Visual Studio Code",
+    lastSeen: "2026-09-14T18:08:00Z",
+    sensorEquipped: false,
+    ribbon: [
       "offline",
       "offline",
       "offline",
@@ -656,9 +662,9 @@ export const MEMBERS: WorkforceMember[] = [
       "offline",
       "offline",
       "offline",
-      "offline"
-    ]
-  }
+      "offline",
+    ],
+  },
 ];
 
 export interface MemberDay {
@@ -670,3641 +676,3641 @@ export interface MemberDay {
 
 export const MEMBER_DAYS: MemberDay[] = [
   {
-    "memberId": "emp-001",
-    "categoryTime": [
+    memberId: "emp-001",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 35
+        category: "development",
+        minutes: 35,
       },
       {
-        "category": "browser",
-        "minutes": 59
+        category: "browser",
+        minutes: 59,
       },
       {
-        "category": "communication",
-        "minutes": 96
+        category: "communication",
+        minutes: 96,
       },
       {
-        "category": "file management",
-        "minutes": 63
+        category: "file management",
+        minutes: 63,
       },
       {
-        "category": "administrative",
-        "minutes": 105
+        category: "administrative",
+        minutes: 105,
       },
       {
-        "category": "other",
-        "minutes": 65
-      }
+        category: "other",
+        minutes: 65,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 81
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 81,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#product-eng",
-        "category": "communication",
-        "minutes": 76
+        application: "Slack",
+        windowTitle: "#product-eng",
+        category: "communication",
+        minutes: 76,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 61
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 61,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 55
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 55,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 51
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 51,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 49
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 49,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Grafana — service dashboards",
-        "category": "browser",
-        "minutes": 34
+        application: "Google Chrome",
+        windowTitle: "Grafana — service dashboards",
+        category: "browser",
+        minutes: 34,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 26
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 26,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Jira — sprint board",
-        "category": "browser",
-        "minutes": 24
-      }
+        application: "Google Chrome",
+        windowTitle: "Jira — sprint board",
+        category: "browser",
+        minutes: 24,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "08:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 53,
-        "idleMinutes": 7
+        hour: "09:00",
+        workingMinutes: 53,
+        idleMinutes: 7,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 53,
-        "idleMinutes": 7
+        hour: "10:00",
+        workingMinutes: 53,
+        idleMinutes: 7,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 47,
-        "idleMinutes": 13
+        hour: "11:00",
+        workingMinutes: 47,
+        idleMinutes: 13,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 0,
-        "idleMinutes": 60
+        hour: "12:00",
+        workingMinutes: 0,
+        idleMinutes: 60,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 12,
-        "idleMinutes": 48
+        hour: "13:00",
+        workingMinutes: 12,
+        idleMinutes: 48,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "14:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 6,
-        "idleMinutes": 54
+        hour: "15:00",
+        workingMinutes: 6,
+        idleMinutes: 54,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 58,
-        "idleMinutes": 2
+        hour: "16:00",
+        workingMinutes: 58,
+        idleMinutes: 2,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "17:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 6,
-        "idleMinutes": 54
+        hour: "18:00",
+        workingMinutes: 6,
+        idleMinutes: 54,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 43,
-        "idleMinutes": 17
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 43,
+        idleMinutes: 17,
+      },
+    ],
   },
   {
-    "memberId": "emp-002",
-    "categoryTime": [
+    memberId: "emp-002",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 41
+        category: "development",
+        minutes: 41,
       },
       {
-        "category": "browser",
-        "minutes": 39
+        category: "browser",
+        minutes: 39,
       },
       {
-        "category": "communication",
-        "minutes": 184
+        category: "communication",
+        minutes: 184,
       },
       {
-        "category": "file management",
-        "minutes": 116
+        category: "file management",
+        minutes: 116,
       },
       {
-        "category": "administrative",
-        "minutes": 40
+        category: "administrative",
+        minutes: 40,
       },
       {
-        "category": "other",
-        "minutes": 74
-      }
+        category: "other",
+        minutes: 74,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "billing-web — components",
-        "category": "development",
-        "minutes": 94
+        application: "Visual Studio Code",
+        windowTitle: "billing-web — components",
+        category: "development",
+        minutes: 94,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 93
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 93,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 91
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 91,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 86
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 86,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 80
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 80,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 79
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 79,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 75
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 75,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Shared — Finance",
-        "category": "file management",
-        "minutes": 75
+        application: "Finder",
+        windowTitle: "Shared — Finance",
+        category: "file management",
+        minutes: 75,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Documents — Q3",
-        "category": "file management",
-        "minutes": 70
-      }
+        application: "Finder",
+        windowTitle: "Documents — Q3",
+        category: "file management",
+        minutes: 70,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "08:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 44,
-        "idleMinutes": 16
+        hour: "09:00",
+        workingMinutes: 44,
+        idleMinutes: 16,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 44,
-        "idleMinutes": 16
+        hour: "10:00",
+        workingMinutes: 44,
+        idleMinutes: 16,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 5,
-        "idleMinutes": 55
+        hour: "11:00",
+        workingMinutes: 5,
+        idleMinutes: 55,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
+        hour: "12:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 5,
-        "idleMinutes": 55
+        hour: "13:00",
+        workingMinutes: 5,
+        idleMinutes: 55,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
+        hour: "14:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "15:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "16:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "17:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
+        hour: "18:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 47,
-        "idleMinutes": 13
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 47,
+        idleMinutes: 13,
+      },
+    ],
   },
   {
-    "memberId": "emp-003",
-    "categoryTime": [
+    memberId: "emp-003",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 71
+        category: "development",
+        minutes: 71,
       },
       {
-        "category": "browser",
-        "minutes": 86
+        category: "browser",
+        minutes: 86,
       },
       {
-        "category": "communication",
-        "minutes": 91
+        category: "communication",
+        minutes: 91,
       },
       {
-        "category": "file management",
-        "minutes": 180
+        category: "file management",
+        minutes: 180,
       },
       {
-        "category": "administrative",
-        "minutes": 36
+        category: "administrative",
+        minutes: 36,
       },
       {
-        "category": "other",
-        "minutes": 46
-      }
+        category: "other",
+        minutes: 46,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 88
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 88,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 80
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 80,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Documents — Q3",
-        "category": "file management",
-        "minutes": 78
+        application: "Finder",
+        windowTitle: "Documents — Q3",
+        category: "file management",
+        minutes: 78,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 76
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 76,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "kubectl — staging",
-        "category": "development",
-        "minutes": 75
+        application: "iTerm2",
+        windowTitle: "kubectl — staging",
+        category: "development",
+        minutes: 75,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 74
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 74,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 68
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 68,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 52
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 52,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#incident-2291",
-        "category": "communication",
-        "minutes": 39
-      }
+        application: "Slack",
+        windowTitle: "#incident-2291",
+        category: "communication",
+        minutes: 39,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "08:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
+        hour: "09:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "10:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "11:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "12:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 11,
-        "idleMinutes": 49
+        hour: "13:00",
+        workingMinutes: 11,
+        idleMinutes: 49,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 55,
-        "idleMinutes": 5
+        hour: "14:00",
+        workingMinutes: 55,
+        idleMinutes: 5,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
+        hour: "15:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 3,
-        "idleMinutes": 57
+        hour: "16:00",
+        workingMinutes: 3,
+        idleMinutes: 57,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 43,
-        "idleMinutes": 17
+        hour: "17:00",
+        workingMinutes: 43,
+        idleMinutes: 17,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 56,
-        "idleMinutes": 4
+        hour: "18:00",
+        workingMinutes: 56,
+        idleMinutes: 4,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 45,
-        "idleMinutes": 15
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 45,
+        idleMinutes: 15,
+      },
+    ],
   },
   {
-    "memberId": "emp-004",
-    "categoryTime": [
+    memberId: "emp-004",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 124
+        category: "development",
+        minutes: 124,
       },
       {
-        "category": "browser",
-        "minutes": 41
+        category: "browser",
+        minutes: 41,
       },
       {
-        "category": "communication",
-        "minutes": 61
+        category: "communication",
+        minutes: 61,
       },
       {
-        "category": "file management",
-        "minutes": 53
+        category: "file management",
+        minutes: 53,
       },
       {
-        "category": "administrative",
-        "minutes": 160
+        category: "administrative",
+        minutes: 160,
       },
       {
-        "category": "other",
-        "minutes": 47
-      }
+        category: "other",
+        minutes: 47,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "billing-web — components",
-        "category": "development",
-        "minutes": 89
+        application: "Visual Studio Code",
+        windowTitle: "billing-web — components",
+        category: "development",
+        minutes: 89,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Shared — Finance",
-        "category": "file management",
-        "minutes": 88
+        application: "Finder",
+        windowTitle: "Shared — Finance",
+        category: "file management",
+        minutes: 88,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 85
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 85,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 77
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 77,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 73
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 73,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Design system",
-        "category": "other",
-        "minutes": 72
+        application: "Figma",
+        windowTitle: "Design system",
+        category: "other",
+        minutes: 72,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "kubectl — staging",
-        "category": "development",
-        "minutes": 69
+        application: "iTerm2",
+        windowTitle: "kubectl — staging",
+        category: "development",
+        minutes: 69,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 61
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 61,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 54
-      }
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 54,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "08:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 55,
-        "idleMinutes": 5
+        hour: "09:00",
+        workingMinutes: 55,
+        idleMinutes: 5,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 43,
-        "idleMinutes": 17
+        hour: "10:00",
+        workingMinutes: 43,
+        idleMinutes: 17,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 51,
-        "idleMinutes": 9
+        hour: "11:00",
+        workingMinutes: 51,
+        idleMinutes: 9,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "12:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 10,
-        "idleMinutes": 50
+        hour: "13:00",
+        workingMinutes: 10,
+        idleMinutes: 50,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 43,
-        "idleMinutes": 17
+        hour: "14:00",
+        workingMinutes: 43,
+        idleMinutes: 17,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 2,
-        "idleMinutes": 58
+        hour: "15:00",
+        workingMinutes: 2,
+        idleMinutes: 58,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 57,
-        "idleMinutes": 3
+        hour: "16:00",
+        workingMinutes: 57,
+        idleMinutes: 3,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 45,
-        "idleMinutes": 15
+        hour: "17:00",
+        workingMinutes: 45,
+        idleMinutes: 15,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "18:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
+      },
+    ],
   },
   {
-    "memberId": "emp-005",
-    "categoryTime": [
+    memberId: "emp-005",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 34
+        category: "development",
+        minutes: 34,
       },
       {
-        "category": "browser",
-        "minutes": 120
+        category: "browser",
+        minutes: 120,
       },
       {
-        "category": "communication",
-        "minutes": 77
+        category: "communication",
+        minutes: 77,
       },
       {
-        "category": "file management",
-        "minutes": 147
+        category: "file management",
+        minutes: 147,
       },
       {
-        "category": "administrative",
-        "minutes": 119
+        category: "administrative",
+        minutes: 119,
       },
       {
-        "category": "other",
-        "minutes": 119
-      }
+        category: "other",
+        minutes: 119,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "billing-web — components",
-        "category": "development",
-        "minutes": 95
+        application: "Visual Studio Code",
+        windowTitle: "billing-web — components",
+        category: "development",
+        minutes: 95,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "infra-terraform — modules",
-        "category": "development",
-        "minutes": 95
+        application: "Visual Studio Code",
+        windowTitle: "infra-terraform — modules",
+        category: "development",
+        minutes: 95,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 95
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 95,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 88
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 88,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Team directory",
-        "category": "administrative",
-        "minutes": 77
+        application: "Workday",
+        windowTitle: "Team directory",
+        category: "administrative",
+        minutes: 77,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 66
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 66,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Documents — Q3",
-        "category": "file management",
-        "minutes": 62
+        application: "Finder",
+        windowTitle: "Documents — Q3",
+        category: "file management",
+        minutes: 62,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Design system",
-        "category": "other",
-        "minutes": 53
+        application: "Figma",
+        windowTitle: "Design system",
+        category: "other",
+        minutes: 53,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Shared — Finance",
-        "category": "file management",
-        "minutes": 48
-      }
+        application: "Finder",
+        windowTitle: "Shared — Finance",
+        category: "file management",
+        minutes: 48,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 56,
-        "idleMinutes": 4
+        hour: "08:00",
+        workingMinutes: 56,
+        idleMinutes: 4,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 60,
-        "idleMinutes": 0
+        hour: "09:00",
+        workingMinutes: 60,
+        idleMinutes: 0,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 60,
-        "idleMinutes": 0
+        hour: "10:00",
+        workingMinutes: 60,
+        idleMinutes: 0,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 43,
-        "idleMinutes": 17
+        hour: "11:00",
+        workingMinutes: 43,
+        idleMinutes: 17,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 60,
-        "idleMinutes": 0
+        hour: "12:00",
+        workingMinutes: 60,
+        idleMinutes: 0,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 5,
-        "idleMinutes": 55
+        hour: "13:00",
+        workingMinutes: 5,
+        idleMinutes: 55,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 59,
-        "idleMinutes": 1
+        hour: "14:00",
+        workingMinutes: 59,
+        idleMinutes: 1,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 56,
-        "idleMinutes": 4
+        hour: "15:00",
+        workingMinutes: 56,
+        idleMinutes: 4,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "16:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 60,
-        "idleMinutes": 0
+        hour: "17:00",
+        workingMinutes: 60,
+        idleMinutes: 0,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "18:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
+      },
+    ],
   },
   {
-    "memberId": "emp-006",
-    "categoryTime": [
+    memberId: "emp-006",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 44
+        category: "development",
+        minutes: 44,
       },
       {
-        "category": "browser",
-        "minutes": 116
+        category: "browser",
+        minutes: 116,
       },
       {
-        "category": "communication",
-        "minutes": 128
+        category: "communication",
+        minutes: 128,
       },
       {
-        "category": "file management",
-        "minutes": 111
+        category: "file management",
+        minutes: 111,
       },
       {
-        "category": "administrative",
-        "minutes": 31
+        category: "administrative",
+        minutes: 31,
       },
       {
-        "category": "other",
-        "minutes": 38
-      }
+        category: "other",
+        minutes: 38,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "billing-web — components",
-        "category": "development",
-        "minutes": 85
+        application: "Visual Studio Code",
+        windowTitle: "billing-web — components",
+        category: "development",
+        minutes: 85,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 77
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 77,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#product-eng",
-        "category": "communication",
-        "minutes": 70
+        application: "Slack",
+        windowTitle: "#product-eng",
+        category: "communication",
+        minutes: 70,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 65
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 65,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 64
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 64,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Grafana — service dashboards",
-        "category": "browser",
-        "minutes": 56
+        application: "Google Chrome",
+        windowTitle: "Grafana — service dashboards",
+        category: "browser",
+        minutes: 56,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 49
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 49,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Documents — Q3",
-        "category": "file management",
-        "minutes": 34
+        application: "Finder",
+        windowTitle: "Documents — Q3",
+        category: "file management",
+        minutes: 34,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 29
-      }
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 29,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 47,
-        "idleMinutes": 13
+        hour: "08:00",
+        workingMinutes: 47,
+        idleMinutes: 13,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 45,
-        "idleMinutes": 15
+        hour: "09:00",
+        workingMinutes: 45,
+        idleMinutes: 15,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "10:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 1,
-        "idleMinutes": 59
+        hour: "11:00",
+        workingMinutes: 1,
+        idleMinutes: 59,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 57,
-        "idleMinutes": 3
+        hour: "12:00",
+        workingMinutes: 57,
+        idleMinutes: 3,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 12,
-        "idleMinutes": 48
+        hour: "13:00",
+        workingMinutes: 12,
+        idleMinutes: 48,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 58,
-        "idleMinutes": 2
+        hour: "14:00",
+        workingMinutes: 58,
+        idleMinutes: 2,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 50,
-        "idleMinutes": 10
+        hour: "15:00",
+        workingMinutes: 50,
+        idleMinutes: 10,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "16:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 43,
-        "idleMinutes": 17
+        hour: "17:00",
+        workingMinutes: 43,
+        idleMinutes: 17,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 5,
-        "idleMinutes": 55
+        hour: "18:00",
+        workingMinutes: 5,
+        idleMinutes: 55,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
+      },
+    ],
   },
   {
-    "memberId": "emp-007",
-    "categoryTime": [
+    memberId: "emp-007",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 58
+        category: "development",
+        minutes: 58,
       },
       {
-        "category": "browser",
-        "minutes": 34
+        category: "browser",
+        minutes: 34,
       },
       {
-        "category": "communication",
-        "minutes": 74
+        category: "communication",
+        minutes: 74,
       },
       {
-        "category": "file management",
-        "minutes": 107
+        category: "file management",
+        minutes: 107,
       },
       {
-        "category": "administrative",
-        "minutes": 38
+        category: "administrative",
+        minutes: 38,
       },
       {
-        "category": "other",
-        "minutes": 78
-      }
+        category: "other",
+        minutes: 78,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 95
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 95,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 86
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 86,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 82
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 82,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Jira — sprint board",
-        "category": "browser",
-        "minutes": 76
+        application: "Google Chrome",
+        windowTitle: "Jira — sprint board",
+        category: "browser",
+        minutes: 76,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Grafana — service dashboards",
-        "category": "browser",
-        "minutes": 67
+        application: "Google Chrome",
+        windowTitle: "Grafana — service dashboards",
+        category: "browser",
+        minutes: 67,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 67
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 67,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 66
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 66,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 65
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 65,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Team directory",
-        "category": "administrative",
-        "minutes": 64
-      }
+        application: "Workday",
+        windowTitle: "Team directory",
+        category: "administrative",
+        minutes: 64,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 8,
-        "idleMinutes": 52
+        hour: "08:00",
+        workingMinutes: 8,
+        idleMinutes: 52,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "09:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
+        hour: "10:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 56,
-        "idleMinutes": 4
+        hour: "11:00",
+        workingMinutes: 56,
+        idleMinutes: 4,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
+        hour: "12:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 1,
-        "idleMinutes": 59
+        hour: "13:00",
+        workingMinutes: 1,
+        idleMinutes: 59,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 8,
-        "idleMinutes": 52
+        hour: "14:00",
+        workingMinutes: 8,
+        idleMinutes: 52,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 1,
-        "idleMinutes": 59
+        hour: "15:00",
+        workingMinutes: 1,
+        idleMinutes: 59,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "16:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
+        hour: "17:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 60,
-        "idleMinutes": 0
+        hour: "18:00",
+        workingMinutes: 60,
+        idleMinutes: 0,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 3,
-        "idleMinutes": 57
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 3,
+        idleMinutes: 57,
+      },
+    ],
   },
   {
-    "memberId": "emp-008",
-    "categoryTime": [
+    memberId: "emp-008",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 102
+        category: "development",
+        minutes: 102,
       },
       {
-        "category": "browser",
-        "minutes": 47
+        category: "browser",
+        minutes: 47,
       },
       {
-        "category": "communication",
-        "minutes": 69
+        category: "communication",
+        minutes: 69,
       },
       {
-        "category": "file management",
-        "minutes": 124
+        category: "file management",
+        minutes: 124,
       },
       {
-        "category": "administrative",
-        "minutes": 107
+        category: "administrative",
+        minutes: 107,
       },
       {
-        "category": "other",
-        "minutes": 82
-      }
+        category: "other",
+        minutes: 82,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 93
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 93,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 93
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 93,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "kubectl — staging",
-        "category": "development",
-        "minutes": 81
+        application: "iTerm2",
+        windowTitle: "kubectl — staging",
+        category: "development",
+        minutes: 81,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 69
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 69,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Jira — sprint board",
-        "category": "browser",
-        "minutes": 62
+        application: "Google Chrome",
+        windowTitle: "Jira — sprint board",
+        category: "browser",
+        minutes: 62,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Grafana — service dashboards",
-        "category": "browser",
-        "minutes": 61
+        application: "Google Chrome",
+        windowTitle: "Grafana — service dashboards",
+        category: "browser",
+        minutes: 61,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 61
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 61,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "psql ledger",
-        "category": "development",
-        "minutes": 60
+        application: "iTerm2",
+        windowTitle: "psql ledger",
+        category: "development",
+        minutes: 60,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Shared — Finance",
-        "category": "file management",
-        "minutes": 48
-      }
+        application: "Finder",
+        windowTitle: "Shared — Finance",
+        category: "file management",
+        minutes: 48,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 47,
-        "idleMinutes": 13
+        hour: "08:00",
+        workingMinutes: 47,
+        idleMinutes: 13,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 60,
-        "idleMinutes": 0
+        hour: "09:00",
+        workingMinutes: 60,
+        idleMinutes: 0,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "10:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 59,
-        "idleMinutes": 1
+        hour: "11:00",
+        workingMinutes: 59,
+        idleMinutes: 1,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "12:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 12,
-        "idleMinutes": 48
+        hour: "13:00",
+        workingMinutes: 12,
+        idleMinutes: 48,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
+        hour: "14:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 59,
-        "idleMinutes": 1
+        hour: "15:00",
+        workingMinutes: 59,
+        idleMinutes: 1,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
+        hour: "16:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 45,
-        "idleMinutes": 15
+        hour: "17:00",
+        workingMinutes: 45,
+        idleMinutes: 15,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 3,
-        "idleMinutes": 57
+        hour: "18:00",
+        workingMinutes: 3,
+        idleMinutes: 57,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
+      },
+    ],
   },
   {
-    "memberId": "emp-009",
-    "categoryTime": [
+    memberId: "emp-009",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 51
+        category: "development",
+        minutes: 51,
       },
       {
-        "category": "browser",
-        "minutes": 90
+        category: "browser",
+        minutes: 90,
       },
       {
-        "category": "communication",
-        "minutes": 103
+        category: "communication",
+        minutes: 103,
       },
       {
-        "category": "file management",
-        "minutes": 70
+        category: "file management",
+        minutes: 70,
       },
       {
-        "category": "administrative",
-        "minutes": 50
+        category: "administrative",
+        minutes: 50,
       },
       {
-        "category": "other",
-        "minutes": 47
-      }
+        category: "other",
+        minutes: 47,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 93
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 93,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 91
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 91,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#product-eng",
-        "category": "communication",
-        "minutes": 89
+        application: "Slack",
+        windowTitle: "#product-eng",
+        category: "communication",
+        minutes: 89,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 84
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 84,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Documents — Q3",
-        "category": "file management",
-        "minutes": 81
+        application: "Finder",
+        windowTitle: "Documents — Q3",
+        category: "file management",
+        minutes: 81,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 74
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 74,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 65
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 65,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Jira — sprint board",
-        "category": "browser",
-        "minutes": 63
+        application: "Google Chrome",
+        windowTitle: "Jira — sprint board",
+        category: "browser",
+        minutes: 63,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#incident-2291",
-        "category": "communication",
-        "minutes": 60
-      }
+        application: "Slack",
+        windowTitle: "#incident-2291",
+        category: "communication",
+        minutes: 60,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "08:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "09:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 45,
-        "idleMinutes": 15
+        hour: "10:00",
+        workingMinutes: 45,
+        idleMinutes: 15,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "11:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 51,
-        "idleMinutes": 9
+        hour: "12:00",
+        workingMinutes: 51,
+        idleMinutes: 9,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 6,
-        "idleMinutes": 54
+        hour: "13:00",
+        workingMinutes: 6,
+        idleMinutes: 54,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 2,
-        "idleMinutes": 58
+        hour: "14:00",
+        workingMinutes: 2,
+        idleMinutes: 58,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 1,
-        "idleMinutes": 59
+        hour: "15:00",
+        workingMinutes: 1,
+        idleMinutes: 59,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 2,
-        "idleMinutes": 58
+        hour: "16:00",
+        workingMinutes: 2,
+        idleMinutes: 58,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 55,
-        "idleMinutes": 5
+        hour: "17:00",
+        workingMinutes: 55,
+        idleMinutes: 5,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 47,
-        "idleMinutes": 13
+        hour: "18:00",
+        workingMinutes: 47,
+        idleMinutes: 13,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 57,
-        "idleMinutes": 3
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 57,
+        idleMinutes: 3,
+      },
+    ],
   },
   {
-    "memberId": "emp-010",
-    "categoryTime": [
+    memberId: "emp-010",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 26
+        category: "development",
+        minutes: 26,
       },
       {
-        "category": "browser",
-        "minutes": 98
+        category: "browser",
+        minutes: 98,
       },
       {
-        "category": "communication",
-        "minutes": 63
+        category: "communication",
+        minutes: 63,
       },
       {
-        "category": "file management",
-        "minutes": 23
+        category: "file management",
+        minutes: 23,
       },
       {
-        "category": "administrative",
-        "minutes": 104
+        category: "administrative",
+        minutes: 104,
       },
       {
-        "category": "other",
-        "minutes": 113
-      }
+        category: "other",
+        minutes: 113,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 94
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 94,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Documents — Q3",
-        "category": "file management",
-        "minutes": 88
+        application: "Finder",
+        windowTitle: "Documents — Q3",
+        category: "file management",
+        minutes: 88,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 81
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 81,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 78
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 78,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Jira — sprint board",
-        "category": "browser",
-        "minutes": 74
+        application: "Google Chrome",
+        windowTitle: "Jira — sprint board",
+        category: "browser",
+        minutes: 74,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 57
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 57,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Grafana — service dashboards",
-        "category": "browser",
-        "minutes": 51
+        application: "Google Chrome",
+        windowTitle: "Grafana — service dashboards",
+        category: "browser",
+        minutes: 51,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 46
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 46,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#product-eng",
-        "category": "communication",
-        "minutes": 34
-      }
+        application: "Slack",
+        windowTitle: "#product-eng",
+        category: "communication",
+        minutes: 34,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 4,
-        "idleMinutes": 56
+        hour: "08:00",
+        workingMinutes: 4,
+        idleMinutes: 56,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 47,
-        "idleMinutes": 13
+        hour: "09:00",
+        workingMinutes: 47,
+        idleMinutes: 13,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 59,
-        "idleMinutes": 1
+        hour: "10:00",
+        workingMinutes: 59,
+        idleMinutes: 1,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "11:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "12:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 9,
-        "idleMinutes": 51
+        hour: "13:00",
+        workingMinutes: 9,
+        idleMinutes: 51,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
+        hour: "14:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 1,
-        "idleMinutes": 59
+        hour: "15:00",
+        workingMinutes: 1,
+        idleMinutes: 59,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 56,
-        "idleMinutes": 4
+        hour: "16:00",
+        workingMinutes: 56,
+        idleMinutes: 4,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 9,
-        "idleMinutes": 51
+        hour: "17:00",
+        workingMinutes: 9,
+        idleMinutes: 51,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 44,
-        "idleMinutes": 16
+        hour: "18:00",
+        workingMinutes: 44,
+        idleMinutes: 16,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 55,
-        "idleMinutes": 5
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 55,
+        idleMinutes: 5,
+      },
+    ],
   },
   {
-    "memberId": "emp-011",
-    "categoryTime": [
+    memberId: "emp-011",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 33
+        category: "development",
+        minutes: 33,
       },
       {
-        "category": "browser",
-        "minutes": 137
+        category: "browser",
+        minutes: 137,
       },
       {
-        "category": "communication",
-        "minutes": 153
+        category: "communication",
+        minutes: 153,
       },
       {
-        "category": "file management",
-        "minutes": 80
+        category: "file management",
+        minutes: 80,
       },
       {
-        "category": "administrative",
-        "minutes": 83
+        category: "administrative",
+        minutes: 83,
       },
       {
-        "category": "other",
-        "minutes": 33
-      }
+        category: "other",
+        minutes: 33,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 93
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 93,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 91
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 91,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 88
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 88,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "psql ledger",
-        "category": "development",
-        "minutes": 75
+        application: "iTerm2",
+        windowTitle: "psql ledger",
+        category: "development",
+        minutes: 75,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "kubectl — staging",
-        "category": "development",
-        "minutes": 65
+        application: "iTerm2",
+        windowTitle: "kubectl — staging",
+        category: "development",
+        minutes: 65,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 63
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 63,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Shared — Finance",
-        "category": "file management",
-        "minutes": 53
+        application: "Finder",
+        windowTitle: "Shared — Finance",
+        category: "file management",
+        minutes: 53,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Documents — Q3",
-        "category": "file management",
-        "minutes": 38
+        application: "Finder",
+        windowTitle: "Documents — Q3",
+        category: "file management",
+        minutes: 38,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 36
-      }
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 36,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
+        hour: "08:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 57,
-        "idleMinutes": 3
+        hour: "09:00",
+        workingMinutes: 57,
+        idleMinutes: 3,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 50,
-        "idleMinutes": 10
+        hour: "10:00",
+        workingMinutes: 50,
+        idleMinutes: 10,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 53,
-        "idleMinutes": 7
+        hour: "11:00",
+        workingMinutes: 53,
+        idleMinutes: 7,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 55,
-        "idleMinutes": 5
+        hour: "12:00",
+        workingMinutes: 55,
+        idleMinutes: 5,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 5,
-        "idleMinutes": 55
+        hour: "13:00",
+        workingMinutes: 5,
+        idleMinutes: 55,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 45,
-        "idleMinutes": 15
+        hour: "14:00",
+        workingMinutes: 45,
+        idleMinutes: 15,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 12,
-        "idleMinutes": 48
+        hour: "15:00",
+        workingMinutes: 12,
+        idleMinutes: 48,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "16:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 47,
-        "idleMinutes": 13
+        hour: "17:00",
+        workingMinutes: 47,
+        idleMinutes: 13,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "18:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
+      },
+    ],
   },
   {
-    "memberId": "emp-012",
-    "categoryTime": [
+    memberId: "emp-012",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 93
+        category: "development",
+        minutes: 93,
       },
       {
-        "category": "browser",
-        "minutes": 110
+        category: "browser",
+        minutes: 110,
       },
       {
-        "category": "communication",
-        "minutes": 83
+        category: "communication",
+        minutes: 83,
       },
       {
-        "category": "file management",
-        "minutes": 34
+        category: "file management",
+        minutes: 34,
       },
       {
-        "category": "administrative",
-        "minutes": 119
+        category: "administrative",
+        minutes: 119,
       },
       {
-        "category": "other",
-        "minutes": 67
-      }
+        category: "other",
+        minutes: 67,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 87
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 87,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 82
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 82,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#product-eng",
-        "category": "communication",
-        "minutes": 80
+        application: "Slack",
+        windowTitle: "#product-eng",
+        category: "communication",
+        minutes: 80,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 72
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 72,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 53
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 53,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Documents — Q3",
-        "category": "file management",
-        "minutes": 52
+        application: "Finder",
+        windowTitle: "Documents — Q3",
+        category: "file management",
+        minutes: 52,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Design system",
-        "category": "other",
-        "minutes": 51
+        application: "Figma",
+        windowTitle: "Design system",
+        category: "other",
+        minutes: 51,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 47
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 47,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 42
-      }
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 42,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 0,
-        "idleMinutes": 60
+        hour: "08:00",
+        workingMinutes: 0,
+        idleMinutes: 60,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 59,
-        "idleMinutes": 1
+        hour: "09:00",
+        workingMinutes: 59,
+        idleMinutes: 1,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "10:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 53,
-        "idleMinutes": 7
+        hour: "11:00",
+        workingMinutes: 53,
+        idleMinutes: 7,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "12:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 7,
-        "idleMinutes": 53
+        hour: "13:00",
+        workingMinutes: 7,
+        idleMinutes: 53,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 53,
-        "idleMinutes": 7
+        hour: "14:00",
+        workingMinutes: 53,
+        idleMinutes: 7,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 44,
-        "idleMinutes": 16
+        hour: "15:00",
+        workingMinutes: 44,
+        idleMinutes: 16,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 58,
-        "idleMinutes": 2
+        hour: "16:00",
+        workingMinutes: 58,
+        idleMinutes: 2,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "17:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 43,
-        "idleMinutes": 17
+        hour: "18:00",
+        workingMinutes: 43,
+        idleMinutes: 17,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 51,
-        "idleMinutes": 9
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 51,
+        idleMinutes: 9,
+      },
+    ],
   },
   {
-    "memberId": "emp-013",
-    "categoryTime": [
+    memberId: "emp-013",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 24
+        category: "development",
+        minutes: 24,
       },
       {
-        "category": "browser",
-        "minutes": 137
+        category: "browser",
+        minutes: 137,
       },
       {
-        "category": "communication",
-        "minutes": 77
+        category: "communication",
+        minutes: 77,
       },
       {
-        "category": "file management",
-        "minutes": 67
+        category: "file management",
+        minutes: 67,
       },
       {
-        "category": "administrative",
-        "minutes": 115
+        category: "administrative",
+        minutes: 115,
       },
       {
-        "category": "other",
-        "minutes": 29
-      }
+        category: "other",
+        minutes: 29,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 92
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 92,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 81
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 81,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 74
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 74,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Design system",
-        "category": "other",
-        "minutes": 62
+        application: "Figma",
+        windowTitle: "Design system",
+        category: "other",
+        minutes: 62,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 51
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 51,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#incident-2291",
-        "category": "communication",
-        "minutes": 47
+        application: "Slack",
+        windowTitle: "#incident-2291",
+        category: "communication",
+        minutes: 47,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 43
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 43,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 41
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 41,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Grafana — service dashboards",
-        "category": "browser",
-        "minutes": 40
-      }
+        application: "Google Chrome",
+        windowTitle: "Grafana — service dashboards",
+        category: "browser",
+        minutes: 40,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "08:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 51,
-        "idleMinutes": 9
+        hour: "09:00",
+        workingMinutes: 51,
+        idleMinutes: 9,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 50,
-        "idleMinutes": 10
+        hour: "10:00",
+        workingMinutes: 50,
+        idleMinutes: 10,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 51,
-        "idleMinutes": 9
+        hour: "11:00",
+        workingMinutes: 51,
+        idleMinutes: 9,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 1,
-        "idleMinutes": 59
+        hour: "12:00",
+        workingMinutes: 1,
+        idleMinutes: 59,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 7,
-        "idleMinutes": 53
+        hour: "13:00",
+        workingMinutes: 7,
+        idleMinutes: 53,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "14:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 60,
-        "idleMinutes": 0
+        hour: "15:00",
+        workingMinutes: 60,
+        idleMinutes: 0,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 45,
-        "idleMinutes": 15
+        hour: "16:00",
+        workingMinutes: 45,
+        idleMinutes: 15,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
+        hour: "17:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 5,
-        "idleMinutes": 55
+        hour: "18:00",
+        workingMinutes: 5,
+        idleMinutes: 55,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 43,
-        "idleMinutes": 17
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 43,
+        idleMinutes: 17,
+      },
+    ],
   },
   {
-    "memberId": "emp-014",
-    "categoryTime": [
+    memberId: "emp-014",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 51
+        category: "development",
+        minutes: 51,
       },
       {
-        "category": "browser",
-        "minutes": 140
+        category: "browser",
+        minutes: 140,
       },
       {
-        "category": "communication",
-        "minutes": 85
+        category: "communication",
+        minutes: 85,
       },
       {
-        "category": "file management",
-        "minutes": 101
+        category: "file management",
+        minutes: 101,
       },
       {
-        "category": "administrative",
-        "minutes": 119
+        category: "administrative",
+        minutes: 119,
       },
       {
-        "category": "other",
-        "minutes": 84
-      }
+        category: "other",
+        minutes: 84,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 93
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 93,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 73
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 73,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 72
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 72,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 65
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 65,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 59
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 59,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 59
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 59,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 58
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 58,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Grafana — service dashboards",
-        "category": "browser",
-        "minutes": 56
+        application: "Google Chrome",
+        windowTitle: "Grafana — service dashboards",
+        category: "browser",
+        minutes: 56,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "kubectl — staging",
-        "category": "development",
-        "minutes": 45
-      }
+        application: "iTerm2",
+        windowTitle: "kubectl — staging",
+        category: "development",
+        minutes: 45,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 55,
-        "idleMinutes": 5
+        hour: "08:00",
+        workingMinutes: 55,
+        idleMinutes: 5,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 58,
-        "idleMinutes": 2
+        hour: "09:00",
+        workingMinutes: 58,
+        idleMinutes: 2,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 50,
-        "idleMinutes": 10
+        hour: "10:00",
+        workingMinutes: 50,
+        idleMinutes: 10,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 50,
-        "idleMinutes": 10
+        hour: "11:00",
+        workingMinutes: 50,
+        idleMinutes: 10,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 48,
-        "idleMinutes": 12
+        hour: "12:00",
+        workingMinutes: 48,
+        idleMinutes: 12,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 8,
-        "idleMinutes": 52
+        hour: "13:00",
+        workingMinutes: 8,
+        idleMinutes: 52,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 50,
-        "idleMinutes": 10
+        hour: "14:00",
+        workingMinutes: 50,
+        idleMinutes: 10,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 51,
-        "idleMinutes": 9
+        hour: "15:00",
+        workingMinutes: 51,
+        idleMinutes: 9,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "16:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 59,
-        "idleMinutes": 1
+        hour: "17:00",
+        workingMinutes: 59,
+        idleMinutes: 1,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 57,
-        "idleMinutes": 3
+        hour: "18:00",
+        workingMinutes: 57,
+        idleMinutes: 3,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 45,
-        "idleMinutes": 15
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 45,
+        idleMinutes: 15,
+      },
+    ],
   },
   {
-    "memberId": "emp-015",
-    "categoryTime": [
+    memberId: "emp-015",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 106
+        category: "development",
+        minutes: 106,
       },
       {
-        "category": "browser",
-        "minutes": 82
+        category: "browser",
+        minutes: 82,
       },
       {
-        "category": "communication",
-        "minutes": 30
+        category: "communication",
+        minutes: 30,
       },
       {
-        "category": "file management",
-        "minutes": 84
+        category: "file management",
+        minutes: 84,
       },
       {
-        "category": "administrative",
-        "minutes": 95
+        category: "administrative",
+        minutes: 95,
       },
       {
-        "category": "other",
-        "minutes": 124
-      }
+        category: "other",
+        minutes: 124,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 84
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 84,
       },
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 77
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 77,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 73
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 73,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 70
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 70,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 63
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 63,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#product-eng",
-        "category": "communication",
-        "minutes": 60
+        application: "Slack",
+        windowTitle: "#product-eng",
+        category: "communication",
+        minutes: 60,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#incident-2291",
-        "category": "communication",
-        "minutes": 50
+        application: "Slack",
+        windowTitle: "#incident-2291",
+        category: "communication",
+        minutes: 50,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 49
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 49,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Documents — Q3",
-        "category": "file management",
-        "minutes": 42
-      }
+        application: "Finder",
+        windowTitle: "Documents — Q3",
+        category: "file management",
+        minutes: 42,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 60,
-        "idleMinutes": 0
+        hour: "08:00",
+        workingMinutes: 60,
+        idleMinutes: 0,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "09:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 58,
-        "idleMinutes": 2
+        hour: "10:00",
+        workingMinutes: 58,
+        idleMinutes: 2,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 44,
-        "idleMinutes": 16
+        hour: "11:00",
+        workingMinutes: 44,
+        idleMinutes: 16,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 53,
-        "idleMinutes": 7
+        hour: "12:00",
+        workingMinutes: 53,
+        idleMinutes: 7,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 8,
-        "idleMinutes": 52
+        hour: "13:00",
+        workingMinutes: 8,
+        idleMinutes: 52,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "14:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 44,
-        "idleMinutes": 16
+        hour: "15:00",
+        workingMinutes: 44,
+        idleMinutes: 16,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "16:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "17:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 55,
-        "idleMinutes": 5
+        hour: "18:00",
+        workingMinutes: 55,
+        idleMinutes: 5,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 12,
-        "idleMinutes": 48
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 12,
+        idleMinutes: 48,
+      },
+    ],
   },
   {
-    "memberId": "emp-016",
-    "categoryTime": [
+    memberId: "emp-016",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 51
+        category: "development",
+        minutes: 51,
       },
       {
-        "category": "browser",
-        "minutes": 55
+        category: "browser",
+        minutes: 55,
       },
       {
-        "category": "communication",
-        "minutes": 28
+        category: "communication",
+        minutes: 28,
       },
       {
-        "category": "file management",
-        "minutes": 156
+        category: "file management",
+        minutes: 156,
       },
       {
-        "category": "administrative",
-        "minutes": 100
+        category: "administrative",
+        minutes: 100,
       },
       {
-        "category": "other",
-        "minutes": 127
-      }
+        category: "other",
+        minutes: 127,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Figma",
-        "windowTitle": "Console — queue redesign",
-        "category": "other",
-        "minutes": 73
+        application: "Figma",
+        windowTitle: "Console — queue redesign",
+        category: "other",
+        minutes: 73,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Grafana — service dashboards",
-        "category": "browser",
-        "minutes": 72
+        application: "Google Chrome",
+        windowTitle: "Grafana — service dashboards",
+        category: "browser",
+        minutes: 72,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 71
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 71,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 68
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 68,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 59
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 59,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "kubectl — staging",
-        "category": "development",
-        "minutes": 56
+        application: "iTerm2",
+        windowTitle: "kubectl — staging",
+        category: "development",
+        minutes: 56,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Team directory",
-        "category": "administrative",
-        "minutes": 41
+        application: "Workday",
+        windowTitle: "Team directory",
+        category: "administrative",
+        minutes: 41,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 39
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 39,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 38
-      }
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 38,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 56,
-        "idleMinutes": 4
+        hour: "08:00",
+        workingMinutes: 56,
+        idleMinutes: 4,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "09:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 59,
-        "idleMinutes": 1
+        hour: "10:00",
+        workingMinutes: 59,
+        idleMinutes: 1,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "11:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 42,
-        "idleMinutes": 18
+        hour: "12:00",
+        workingMinutes: 42,
+        idleMinutes: 18,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 6,
-        "idleMinutes": 54
+        hour: "13:00",
+        workingMinutes: 6,
+        idleMinutes: 54,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "14:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 51,
-        "idleMinutes": 9
+        hour: "15:00",
+        workingMinutes: 51,
+        idleMinutes: 9,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 54,
-        "idleMinutes": 6
+        hour: "16:00",
+        workingMinutes: 54,
+        idleMinutes: 6,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 6,
-        "idleMinutes": 54
+        hour: "17:00",
+        workingMinutes: 6,
+        idleMinutes: 54,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 53,
-        "idleMinutes": 7
+        hour: "18:00",
+        workingMinutes: 53,
+        idleMinutes: 7,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 50,
-        "idleMinutes": 10
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 50,
+        idleMinutes: 10,
+      },
+    ],
   },
   {
-    "memberId": "emp-017",
-    "categoryTime": [
+    memberId: "emp-017",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 82
+        category: "development",
+        minutes: 82,
       },
       {
-        "category": "browser",
-        "minutes": 158
+        category: "browser",
+        minutes: 158,
       },
       {
-        "category": "communication",
-        "minutes": 34
+        category: "communication",
+        minutes: 34,
       },
       {
-        "category": "file management",
-        "minutes": 114
+        category: "file management",
+        minutes: 114,
       },
       {
-        "category": "administrative",
-        "minutes": 57
+        category: "administrative",
+        minutes: 57,
       },
       {
-        "category": "other",
-        "minutes": 47
-      }
+        category: "other",
+        minutes: 47,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 90
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 90,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#product-eng",
-        "category": "communication",
-        "minutes": 88
+        application: "Slack",
+        windowTitle: "#product-eng",
+        category: "communication",
+        minutes: 88,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "infra-terraform — modules",
-        "category": "development",
-        "minutes": 87
+        application: "Visual Studio Code",
+        windowTitle: "infra-terraform — modules",
+        category: "development",
+        minutes: 87,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 87
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 87,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Timesheets",
-        "category": "administrative",
-        "minutes": 62
+        application: "Workday",
+        windowTitle: "Timesheets",
+        category: "administrative",
+        minutes: 62,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 61
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 61,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "billing-web — components",
-        "category": "development",
-        "minutes": 59
+        application: "Visual Studio Code",
+        windowTitle: "billing-web — components",
+        category: "development",
+        minutes: 59,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "kubectl — staging",
-        "category": "development",
-        "minutes": 58
+        application: "iTerm2",
+        windowTitle: "kubectl — staging",
+        category: "development",
+        minutes: 58,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Internal wiki — Runbooks",
-        "category": "browser",
-        "minutes": 55
-      }
+        application: "Google Chrome",
+        windowTitle: "Internal wiki — Runbooks",
+        category: "browser",
+        minutes: 55,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 10,
-        "idleMinutes": 50
+        hour: "08:00",
+        workingMinutes: 10,
+        idleMinutes: 50,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 44,
-        "idleMinutes": 16
+        hour: "09:00",
+        workingMinutes: 44,
+        idleMinutes: 16,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "10:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 44,
-        "idleMinutes": 16
+        hour: "11:00",
+        workingMinutes: 44,
+        idleMinutes: 16,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 45,
-        "idleMinutes": 15
+        hour: "12:00",
+        workingMinutes: 45,
+        idleMinutes: 15,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 3,
-        "idleMinutes": 57
+        hour: "13:00",
+        workingMinutes: 3,
+        idleMinutes: 57,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
+        hour: "14:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "15:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "16:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 49,
-        "idleMinutes": 11
+        hour: "17:00",
+        workingMinutes: 49,
+        idleMinutes: 11,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
+        hour: "18:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
-      }
-    ]
+        hour: "19:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
+      },
+    ],
   },
   {
-    "memberId": "emp-018",
-    "categoryTime": [
+    memberId: "emp-018",
+    categoryTime: [
       {
-        "category": "development",
-        "minutes": 94
+        category: "development",
+        minutes: 94,
       },
       {
-        "category": "browser",
-        "minutes": 64
+        category: "browser",
+        minutes: 64,
       },
       {
-        "category": "communication",
-        "minutes": 97
+        category: "communication",
+        minutes: 97,
       },
       {
-        "category": "file management",
-        "minutes": 63
+        category: "file management",
+        minutes: 63,
       },
       {
-        "category": "administrative",
-        "minutes": 60
+        category: "administrative",
+        minutes: 60,
       },
       {
-        "category": "other",
-        "minutes": 67
-      }
+        category: "other",
+        minutes: 67,
+      },
     ],
-    "applications": [
+    applications: [
       {
-        "application": "Slack",
-        "windowTitle": "#platform-oncall",
-        "category": "communication",
-        "minutes": 92
+        application: "Slack",
+        windowTitle: "#platform-oncall",
+        category: "communication",
+        minutes: 92,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "infra-terraform — modules",
-        "category": "development",
-        "minutes": 85
+        application: "Visual Studio Code",
+        windowTitle: "infra-terraform — modules",
+        category: "development",
+        minutes: 85,
       },
       {
-        "application": "Slack",
-        "windowTitle": "#incident-2291",
-        "category": "communication",
-        "minutes": 83
+        application: "Slack",
+        windowTitle: "#incident-2291",
+        category: "communication",
+        minutes: 83,
       },
       {
-        "application": "iTerm2",
-        "windowTitle": "ssh bastion-01",
-        "category": "development",
-        "minutes": 77
+        application: "iTerm2",
+        windowTitle: "ssh bastion-01",
+        category: "development",
+        minutes: 77,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "billing-web — components",
-        "category": "development",
-        "minutes": 68
+        application: "Visual Studio Code",
+        windowTitle: "billing-web — components",
+        category: "development",
+        minutes: 68,
       },
       {
-        "application": "Workday",
-        "windowTitle": "Expense report",
-        "category": "administrative",
-        "minutes": 62
+        application: "Workday",
+        windowTitle: "Expense report",
+        category: "administrative",
+        minutes: 62,
       },
       {
-        "application": "Google Chrome",
-        "windowTitle": "Jira — sprint board",
-        "category": "browser",
-        "minutes": 60
+        application: "Google Chrome",
+        windowTitle: "Jira — sprint board",
+        category: "browser",
+        minutes: 60,
       },
       {
-        "application": "Visual Studio Code",
-        "windowTitle": "payments-core — src/ledger",
-        "category": "development",
-        "minutes": 56
+        application: "Visual Studio Code",
+        windowTitle: "payments-core — src/ledger",
+        category: "development",
+        minutes: 56,
       },
       {
-        "application": "Finder",
-        "windowTitle": "Downloads",
-        "category": "file management",
-        "minutes": 48
-      }
+        application: "Finder",
+        windowTitle: "Downloads",
+        category: "file management",
+        minutes: 48,
+      },
     ],
-    "hourSlots": [
+    hourSlots: [
       {
-        "hour": "08:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
+        hour: "08:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
       },
       {
-        "hour": "09:00",
-        "workingMinutes": 50,
-        "idleMinutes": 10
+        hour: "09:00",
+        workingMinutes: 50,
+        idleMinutes: 10,
       },
       {
-        "hour": "10:00",
-        "workingMinutes": 52,
-        "idleMinutes": 8
+        hour: "10:00",
+        workingMinutes: 52,
+        idleMinutes: 8,
       },
       {
-        "hour": "11:00",
-        "workingMinutes": 43,
-        "idleMinutes": 17
+        hour: "11:00",
+        workingMinutes: 43,
+        idleMinutes: 17,
       },
       {
-        "hour": "12:00",
-        "workingMinutes": 46,
-        "idleMinutes": 14
+        hour: "12:00",
+        workingMinutes: 46,
+        idleMinutes: 14,
       },
       {
-        "hour": "13:00",
-        "workingMinutes": 10,
-        "idleMinutes": 50
+        hour: "13:00",
+        workingMinutes: 10,
+        idleMinutes: 50,
       },
       {
-        "hour": "14:00",
-        "workingMinutes": 57,
-        "idleMinutes": 3
+        hour: "14:00",
+        workingMinutes: 57,
+        idleMinutes: 3,
       },
       {
-        "hour": "15:00",
-        "workingMinutes": 9,
-        "idleMinutes": 51
+        hour: "15:00",
+        workingMinutes: 9,
+        idleMinutes: 51,
       },
       {
-        "hour": "16:00",
-        "workingMinutes": 5,
-        "idleMinutes": 55
+        hour: "16:00",
+        workingMinutes: 5,
+        idleMinutes: 55,
       },
       {
-        "hour": "17:00",
-        "workingMinutes": 10,
-        "idleMinutes": 50
+        hour: "17:00",
+        workingMinutes: 10,
+        idleMinutes: 50,
       },
       {
-        "hour": "18:00",
-        "workingMinutes": 51,
-        "idleMinutes": 9
+        hour: "18:00",
+        workingMinutes: 51,
+        idleMinutes: 9,
       },
       {
-        "hour": "19:00",
-        "workingMinutes": 60,
-        "idleMinutes": 0
-      }
-    ]
-  }
+        hour: "19:00",
+        workingMinutes: 60,
+        idleMinutes: 0,
+      },
+    ],
+  },
 ];
 
 export const CAPTURES: Capture[] = [
   {
-    "id": "cap-0025",
-    "memberId": "emp-005",
-    "memberName": "Lucia Ferrari",
-    "ts": "2026-09-14T09:00:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 26631,
-    "flagged": false
-  },
-  {
-    "id": "cap-0061",
-    "memberId": "emp-011",
-    "memberName": "Sanne de Vries",
-    "ts": "2026-09-14T09:01:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 64600,
-    "flagged": false
-  },
-  {
-    "id": "cap-0007",
-    "memberId": "emp-002",
-    "memberName": "Tomas Berg",
-    "ts": "2026-09-14T09:10:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 79441,
-    "flagged": false
-  },
-  {
-    "id": "cap-0049",
-    "memberId": "emp-009",
-    "memberName": "Chen Wei-Lin",
-    "ts": "2026-09-14T09:10:00Z",
-    "mode": "scheduled",
-    "application": "Visual Studio Code",
-    "seed": 45498,
-    "flagged": false
-  },
-  {
-    "id": "cap-0043",
-    "memberId": "emp-008",
-    "memberName": "Mira Lindqvist",
-    "ts": "2026-09-14T09:14:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 10616,
-    "flagged": false
-  },
-  {
-    "id": "cap-0019",
-    "memberId": "emp-004",
-    "memberName": "Devan Rao",
-    "ts": "2026-09-14T09:15:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 86073,
-    "flagged": false
-  },
-  {
-    "id": "cap-0031",
-    "memberId": "emp-006",
-    "memberName": "Noor Haddad",
-    "ts": "2026-09-14T09:17:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 47412,
-    "flagged": false
-  },
-  {
-    "id": "cap-0013",
-    "memberId": "emp-003",
-    "memberName": "Imani Osei",
-    "ts": "2026-09-14T09:19:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 70958,
-    "flagged": false
-  },
-  {
-    "id": "cap-0067",
-    "memberId": "emp-012",
-    "memberName": "Arjun Pillai",
-    "ts": "2026-09-14T09:22:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 90602,
-    "flagged": false
-  },
-  {
-    "id": "cap-0085",
-    "memberId": "emp-015",
-    "memberName": "Hana Takeda",
-    "ts": "2026-09-14T09:22:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 27356,
-    "flagged": false
-  },
-  {
-    "id": "cap-0079",
-    "memberId": "emp-014",
-    "memberName": "Peter Ondrej",
-    "ts": "2026-09-14T09:23:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 47417,
-    "flagged": false
-  },
-  {
-    "id": "cap-0055",
-    "memberId": "emp-010",
-    "memberName": "Kofi Mensah",
-    "ts": "2026-09-14T09:26:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 39086,
-    "flagged": false
-  },
-  {
-    "id": "cap-0073",
-    "memberId": "emp-013",
-    "memberName": "Yara Nasser",
-    "ts": "2026-09-14T09:28:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 41121,
-    "flagged": false
-  },
-  {
-    "id": "cap-0037",
-    "memberId": "emp-007",
-    "memberName": "Elias Kowalski",
-    "ts": "2026-09-14T09:31:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 77882,
-    "flagged": false
-  },
-  {
-    "id": "cap-0001",
-    "memberId": "emp-001",
-    "memberName": "Rhea Kulkarni",
-    "ts": "2026-09-14T09:36:00Z",
-    "mode": "scheduled",
-    "application": "Visual Studio Code",
-    "seed": 98406,
-    "flagged": false
-  },
-  {
-    "id": "cap-0044",
-    "memberId": "emp-008",
-    "memberName": "Mira Lindqvist",
-    "ts": "2026-09-14T11:00:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 74401,
-    "flagged": false
-  },
-  {
-    "id": "cap-0086",
-    "memberId": "emp-015",
-    "memberName": "Hana Takeda",
-    "ts": "2026-09-14T11:03:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 68250,
-    "flagged": false
-  },
-  {
-    "id": "cap-0062",
-    "memberId": "emp-011",
-    "memberName": "Sanne de Vries",
-    "ts": "2026-09-14T11:10:00Z",
-    "mode": "scheduled",
-    "application": "Visual Studio Code",
-    "seed": 16863,
-    "flagged": false
-  },
-  {
-    "id": "cap-0014",
-    "memberId": "emp-003",
-    "memberName": "Imani Osei",
-    "ts": "2026-09-14T11:11:00Z",
-    "mode": "scheduled",
-    "application": "Visual Studio Code",
-    "seed": 51663,
-    "flagged": false
-  },
-  {
-    "id": "cap-0068",
-    "memberId": "emp-012",
-    "memberName": "Arjun Pillai",
-    "ts": "2026-09-14T11:12:00Z",
-    "mode": "triggered",
-    "application": "iTerm2",
-    "seed": 86798,
-    "flagged": false
-  },
-  {
-    "id": "cap-0056",
-    "memberId": "emp-010",
-    "memberName": "Kofi Mensah",
-    "ts": "2026-09-14T11:18:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 91498,
-    "flagged": false
-  },
-  {
-    "id": "cap-0020",
-    "memberId": "emp-004",
-    "memberName": "Devan Rao",
-    "ts": "2026-09-14T11:19:00Z",
-    "mode": "scheduled",
-    "application": "Visual Studio Code",
-    "seed": 10442,
-    "flagged": false
-  },
-  {
-    "id": "cap-0002",
-    "memberId": "emp-001",
-    "memberName": "Rhea Kulkarni",
-    "ts": "2026-09-14T11:21:00Z",
-    "mode": "triggered",
-    "application": "Workday",
-    "seed": 93711,
-    "flagged": false
-  },
-  {
-    "id": "cap-0008",
-    "memberId": "emp-002",
-    "memberName": "Tomas Berg",
-    "ts": "2026-09-14T11:21:00Z",
-    "mode": "triggered",
-    "application": "Figma",
-    "seed": 62637,
-    "flagged": false
-  },
-  {
-    "id": "cap-0074",
-    "memberId": "emp-013",
-    "memberName": "Yara Nasser",
-    "ts": "2026-09-14T11:23:00Z",
-    "mode": "scheduled",
-    "application": "iTerm2",
-    "seed": 29275,
-    "flagged": false
-  },
-  {
-    "id": "cap-0038",
-    "memberId": "emp-007",
-    "memberName": "Elias Kowalski",
-    "ts": "2026-09-14T11:26:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 55090,
-    "flagged": false
-  },
-  {
-    "id": "cap-0050",
-    "memberId": "emp-009",
-    "memberName": "Chen Wei-Lin",
-    "ts": "2026-09-14T11:26:00Z",
-    "mode": "scheduled",
-    "application": "iTerm2",
-    "seed": 90146,
-    "flagged": false
-  },
-  {
-    "id": "cap-0080",
-    "memberId": "emp-014",
-    "memberName": "Peter Ondrej",
-    "ts": "2026-09-14T11:28:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 42402,
-    "flagged": false
-  },
-  {
-    "id": "cap-0026",
-    "memberId": "emp-005",
-    "memberName": "Lucia Ferrari",
-    "ts": "2026-09-14T11:32:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 99485,
-    "flagged": false
-  },
-  {
-    "id": "cap-0032",
-    "memberId": "emp-006",
-    "memberName": "Noor Haddad",
-    "ts": "2026-09-14T11:35:00Z",
-    "mode": "triggered",
-    "application": "Slack",
-    "seed": 27766,
-    "flagged": false
-  },
-  {
-    "id": "cap-0033",
-    "memberId": "emp-006",
-    "memberName": "Noor Haddad",
-    "ts": "2026-09-14T12:54:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 92844,
-    "flagged": false
-  },
-  {
-    "id": "cap-0003",
-    "memberId": "emp-001",
-    "memberName": "Rhea Kulkarni",
-    "ts": "2026-09-14T12:58:00Z",
-    "mode": "triggered",
-    "application": "Workday",
-    "seed": 74857,
-    "flagged": false
-  },
-  {
-    "id": "cap-0009",
-    "memberId": "emp-002",
-    "memberName": "Tomas Berg",
-    "ts": "2026-09-14T13:00:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 30292,
-    "flagged": false
-  },
-  {
-    "id": "cap-0051",
-    "memberId": "emp-009",
-    "memberName": "Chen Wei-Lin",
-    "ts": "2026-09-14T13:03:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 91071,
-    "flagged": false
-  },
-  {
-    "id": "cap-0057",
-    "memberId": "emp-010",
-    "memberName": "Kofi Mensah",
-    "ts": "2026-09-14T13:03:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 74095,
-    "flagged": false
-  },
-  {
-    "id": "cap-0039",
-    "memberId": "emp-007",
-    "memberName": "Elias Kowalski",
-    "ts": "2026-09-14T13:05:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 30852,
-    "flagged": true
-  },
-  {
-    "id": "cap-0015",
-    "memberId": "emp-003",
-    "memberName": "Imani Osei",
-    "ts": "2026-09-14T13:07:00Z",
-    "mode": "scheduled",
-    "application": "iTerm2",
-    "seed": 13369,
-    "flagged": false
-  },
-  {
-    "id": "cap-0045",
-    "memberId": "emp-008",
-    "memberName": "Mira Lindqvist",
-    "ts": "2026-09-14T13:12:00Z",
-    "mode": "triggered",
-    "application": "Finder",
-    "seed": 41533,
-    "flagged": false
-  },
-  {
-    "id": "cap-0087",
-    "memberId": "emp-015",
-    "memberName": "Hana Takeda",
-    "ts": "2026-09-14T13:15:00Z",
-    "mode": "scheduled",
-    "application": "iTerm2",
-    "seed": 88029,
-    "flagged": false
-  },
-  {
-    "id": "cap-0081",
-    "memberId": "emp-014",
-    "memberName": "Peter Ondrej",
-    "ts": "2026-09-14T13:17:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 95107,
-    "flagged": false
-  },
-  {
-    "id": "cap-0021",
-    "memberId": "emp-004",
-    "memberName": "Devan Rao",
-    "ts": "2026-09-14T13:18:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 90846,
-    "flagged": false
-  },
-  {
-    "id": "cap-0063",
-    "memberId": "emp-011",
-    "memberName": "Sanne de Vries",
-    "ts": "2026-09-14T13:28:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 48312,
-    "flagged": false
-  },
-  {
-    "id": "cap-0069",
-    "memberId": "emp-012",
-    "memberName": "Arjun Pillai",
-    "ts": "2026-09-14T13:29:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 49448,
-    "flagged": false
-  },
-  {
-    "id": "cap-0075",
-    "memberId": "emp-013",
-    "memberName": "Yara Nasser",
-    "ts": "2026-09-14T13:29:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 71689,
-    "flagged": true
-  },
-  {
-    "id": "cap-0027",
-    "memberId": "emp-005",
-    "memberName": "Lucia Ferrari",
-    "ts": "2026-09-14T13:30:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 66880,
-    "flagged": false
-  },
-  {
-    "id": "cap-0004",
-    "memberId": "emp-001",
-    "memberName": "Rhea Kulkarni",
-    "ts": "2026-09-14T14:51:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 58099,
-    "flagged": false
-  },
-  {
-    "id": "cap-0052",
-    "memberId": "emp-009",
-    "memberName": "Chen Wei-Lin",
-    "ts": "2026-09-14T14:51:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 80920,
-    "flagged": true
-  },
-  {
-    "id": "cap-0028",
-    "memberId": "emp-005",
-    "memberName": "Lucia Ferrari",
-    "ts": "2026-09-14T14:53:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 24280,
-    "flagged": false
-  },
-  {
-    "id": "cap-0046",
-    "memberId": "emp-008",
-    "memberName": "Mira Lindqvist",
-    "ts": "2026-09-14T14:55:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 63370,
-    "flagged": false
-  },
-  {
-    "id": "cap-0070",
-    "memberId": "emp-012",
-    "memberName": "Arjun Pillai",
-    "ts": "2026-09-14T14:58:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 50769,
-    "flagged": false
-  },
-  {
-    "id": "cap-0022",
-    "memberId": "emp-004",
-    "memberName": "Devan Rao",
-    "ts": "2026-09-14T15:02:00Z",
-    "mode": "triggered",
-    "application": "Finder",
-    "seed": 34613,
-    "flagged": false
-  },
-  {
-    "id": "cap-0088",
-    "memberId": "emp-015",
-    "memberName": "Hana Takeda",
-    "ts": "2026-09-14T15:03:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 46806,
-    "flagged": false
-  },
-  {
-    "id": "cap-0058",
-    "memberId": "emp-010",
-    "memberName": "Kofi Mensah",
-    "ts": "2026-09-14T15:09:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 41941,
-    "flagged": false
-  },
-  {
-    "id": "cap-0010",
-    "memberId": "emp-002",
-    "memberName": "Tomas Berg",
-    "ts": "2026-09-14T15:11:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 17314,
-    "flagged": false
-  },
-  {
-    "id": "cap-0082",
-    "memberId": "emp-014",
-    "memberName": "Peter Ondrej",
-    "ts": "2026-09-14T15:11:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 48781,
-    "flagged": false
-  },
-  {
-    "id": "cap-0064",
-    "memberId": "emp-011",
-    "memberName": "Sanne de Vries",
-    "ts": "2026-09-14T15:16:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 54692,
-    "flagged": false
-  },
-  {
-    "id": "cap-0076",
-    "memberId": "emp-013",
-    "memberName": "Yara Nasser",
-    "ts": "2026-09-14T15:16:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 91099,
-    "flagged": false
-  },
-  {
-    "id": "cap-0016",
-    "memberId": "emp-003",
-    "memberName": "Imani Osei",
-    "ts": "2026-09-14T15:20:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 66397,
-    "flagged": false
-  },
-  {
-    "id": "cap-0034",
-    "memberId": "emp-006",
-    "memberName": "Noor Haddad",
-    "ts": "2026-09-14T15:22:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 53954,
-    "flagged": false
-  },
-  {
-    "id": "cap-0040",
-    "memberId": "emp-007",
-    "memberName": "Elias Kowalski",
-    "ts": "2026-09-14T15:25:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 11163,
-    "flagged": false
-  },
-  {
-    "id": "cap-0029",
-    "memberId": "emp-005",
-    "memberName": "Lucia Ferrari",
-    "ts": "2026-09-14T16:43:00Z",
-    "mode": "scheduled",
-    "application": "iTerm2",
-    "seed": 11582,
-    "flagged": false
-  },
-  {
-    "id": "cap-0011",
-    "memberId": "emp-002",
-    "memberName": "Tomas Berg",
-    "ts": "2026-09-14T16:44:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 81054,
-    "flagged": false
-  },
-  {
-    "id": "cap-0083",
-    "memberId": "emp-014",
-    "memberName": "Peter Ondrej",
-    "ts": "2026-09-14T16:44:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 45727,
-    "flagged": false
-  },
-  {
-    "id": "cap-0071",
-    "memberId": "emp-012",
-    "memberName": "Arjun Pillai",
-    "ts": "2026-09-14T16:51:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 73601,
-    "flagged": false
-  },
-  {
-    "id": "cap-0077",
-    "memberId": "emp-013",
-    "memberName": "Yara Nasser",
-    "ts": "2026-09-14T16:54:00Z",
-    "mode": "scheduled",
-    "application": "iTerm2",
-    "seed": 45831,
-    "flagged": false
-  },
-  {
-    "id": "cap-0065",
-    "memberId": "emp-011",
-    "memberName": "Sanne de Vries",
-    "ts": "2026-09-14T16:57:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 29302,
-    "flagged": false
-  },
-  {
-    "id": "cap-0035",
-    "memberId": "emp-006",
-    "memberName": "Noor Haddad",
-    "ts": "2026-09-14T17:01:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 56081,
-    "flagged": true
-  },
-  {
-    "id": "cap-0059",
-    "memberId": "emp-010",
-    "memberName": "Kofi Mensah",
-    "ts": "2026-09-14T17:01:00Z",
-    "mode": "scheduled",
-    "application": "Visual Studio Code",
-    "seed": 91622,
-    "flagged": false
-  },
-  {
-    "id": "cap-0005",
-    "memberId": "emp-001",
-    "memberName": "Rhea Kulkarni",
-    "ts": "2026-09-14T17:07:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 92300,
-    "flagged": false
-  },
-  {
-    "id": "cap-0023",
-    "memberId": "emp-004",
-    "memberName": "Devan Rao",
-    "ts": "2026-09-14T17:07:00Z",
-    "mode": "triggered",
-    "application": "iTerm2",
-    "seed": 25040,
-    "flagged": false
-  },
-  {
-    "id": "cap-0089",
-    "memberId": "emp-015",
-    "memberName": "Hana Takeda",
-    "ts": "2026-09-14T17:08:00Z",
-    "mode": "scheduled",
-    "application": "iTerm2",
-    "seed": 17785,
-    "flagged": false
-  },
-  {
-    "id": "cap-0017",
-    "memberId": "emp-003",
-    "memberName": "Imani Osei",
-    "ts": "2026-09-14T17:10:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 31278,
-    "flagged": false
-  },
-  {
-    "id": "cap-0047",
-    "memberId": "emp-008",
-    "memberName": "Mira Lindqvist",
-    "ts": "2026-09-14T17:10:00Z",
-    "mode": "scheduled",
-    "application": "Figma",
-    "seed": 84637,
-    "flagged": false
-  },
-  {
-    "id": "cap-0053",
-    "memberId": "emp-009",
-    "memberName": "Chen Wei-Lin",
-    "ts": "2026-09-14T17:11:00Z",
-    "mode": "triggered",
-    "application": "Google Chrome",
-    "seed": 88990,
-    "flagged": false
-  },
-  {
-    "id": "cap-0041",
-    "memberId": "emp-007",
-    "memberName": "Elias Kowalski",
-    "ts": "2026-09-14T17:16:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 49286,
-    "flagged": false
-  },
-  {
-    "id": "cap-0042",
-    "memberId": "emp-007",
-    "memberName": "Elias Kowalski",
-    "ts": "2026-09-14T18:38:00Z",
-    "mode": "scheduled",
-    "application": "Finder",
-    "seed": 57061,
-    "flagged": false
-  },
-  {
-    "id": "cap-0066",
-    "memberId": "emp-011",
-    "memberName": "Sanne de Vries",
-    "ts": "2026-09-14T18:51:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 22335,
-    "flagged": false
-  },
-  {
-    "id": "cap-0054",
-    "memberId": "emp-009",
-    "memberName": "Chen Wei-Lin",
-    "ts": "2026-09-14T18:54:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 62174,
-    "flagged": false
-  },
-  {
-    "id": "cap-0030",
-    "memberId": "emp-005",
-    "memberName": "Lucia Ferrari",
-    "ts": "2026-09-14T18:58:00Z",
-    "mode": "scheduled",
-    "application": "iTerm2",
-    "seed": 37104,
-    "flagged": false
-  },
-  {
-    "id": "cap-0084",
-    "memberId": "emp-014",
-    "memberName": "Peter Ondrej",
-    "ts": "2026-09-14T18:58:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 16108,
-    "flagged": false
-  },
-  {
-    "id": "cap-0018",
-    "memberId": "emp-003",
-    "memberName": "Imani Osei",
-    "ts": "2026-09-14T18:59:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 59061,
-    "flagged": false
-  },
-  {
-    "id": "cap-0072",
-    "memberId": "emp-012",
-    "memberName": "Arjun Pillai",
-    "ts": "2026-09-14T18:59:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 88551,
-    "flagged": false
-  },
-  {
-    "id": "cap-0006",
-    "memberId": "emp-001",
-    "memberName": "Rhea Kulkarni",
-    "ts": "2026-09-14T19:00:00Z",
-    "mode": "scheduled",
-    "application": "Visual Studio Code",
-    "seed": 97687,
-    "flagged": false
-  },
-  {
-    "id": "cap-0024",
-    "memberId": "emp-004",
-    "memberName": "Devan Rao",
-    "ts": "2026-09-14T19:01:00Z",
-    "mode": "scheduled",
-    "application": "iTerm2",
-    "seed": 22172,
-    "flagged": false
-  },
-  {
-    "id": "cap-0048",
-    "memberId": "emp-008",
-    "memberName": "Mira Lindqvist",
-    "ts": "2026-09-14T19:02:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 20388,
-    "flagged": false
-  },
-  {
-    "id": "cap-0060",
-    "memberId": "emp-010",
-    "memberName": "Kofi Mensah",
-    "ts": "2026-09-14T19:03:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 13987,
-    "flagged": false
-  },
-  {
-    "id": "cap-0090",
-    "memberId": "emp-015",
-    "memberName": "Hana Takeda",
-    "ts": "2026-09-14T19:06:00Z",
-    "mode": "scheduled",
-    "application": "Visual Studio Code",
-    "seed": 48091,
-    "flagged": false
-  },
-  {
-    "id": "cap-0078",
-    "memberId": "emp-013",
-    "memberName": "Yara Nasser",
-    "ts": "2026-09-14T19:07:00Z",
-    "mode": "scheduled",
-    "application": "Workday",
-    "seed": 81145,
-    "flagged": false
-  },
-  {
-    "id": "cap-0036",
-    "memberId": "emp-006",
-    "memberName": "Noor Haddad",
-    "ts": "2026-09-14T19:11:00Z",
-    "mode": "scheduled",
-    "application": "Google Chrome",
-    "seed": 28980,
-    "flagged": false
-  },
-  {
-    "id": "cap-0012",
-    "memberId": "emp-002",
-    "memberName": "Tomas Berg",
-    "ts": "2026-09-14T19:14:00Z",
-    "mode": "scheduled",
-    "application": "Slack",
-    "seed": 21705,
-    "flagged": false
-  }
+    id: "cap-0025",
+    memberId: "emp-005",
+    memberName: "Lucia Ferrari",
+    ts: "2026-09-14T09:00:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 26631,
+    flagged: false,
+  },
+  {
+    id: "cap-0061",
+    memberId: "emp-011",
+    memberName: "Sanne de Vries",
+    ts: "2026-09-14T09:01:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 64600,
+    flagged: false,
+  },
+  {
+    id: "cap-0007",
+    memberId: "emp-002",
+    memberName: "Tomas Berg",
+    ts: "2026-09-14T09:10:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 79441,
+    flagged: false,
+  },
+  {
+    id: "cap-0049",
+    memberId: "emp-009",
+    memberName: "Chen Wei-Lin",
+    ts: "2026-09-14T09:10:00Z",
+    mode: "scheduled",
+    application: "Visual Studio Code",
+    seed: 45498,
+    flagged: false,
+  },
+  {
+    id: "cap-0043",
+    memberId: "emp-008",
+    memberName: "Mira Lindqvist",
+    ts: "2026-09-14T09:14:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 10616,
+    flagged: false,
+  },
+  {
+    id: "cap-0019",
+    memberId: "emp-004",
+    memberName: "Devan Rao",
+    ts: "2026-09-14T09:15:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 86073,
+    flagged: false,
+  },
+  {
+    id: "cap-0031",
+    memberId: "emp-006",
+    memberName: "Noor Haddad",
+    ts: "2026-09-14T09:17:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 47412,
+    flagged: false,
+  },
+  {
+    id: "cap-0013",
+    memberId: "emp-003",
+    memberName: "Imani Osei",
+    ts: "2026-09-14T09:19:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 70958,
+    flagged: false,
+  },
+  {
+    id: "cap-0067",
+    memberId: "emp-012",
+    memberName: "Arjun Pillai",
+    ts: "2026-09-14T09:22:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 90602,
+    flagged: false,
+  },
+  {
+    id: "cap-0085",
+    memberId: "emp-015",
+    memberName: "Hana Takeda",
+    ts: "2026-09-14T09:22:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 27356,
+    flagged: false,
+  },
+  {
+    id: "cap-0079",
+    memberId: "emp-014",
+    memberName: "Peter Ondrej",
+    ts: "2026-09-14T09:23:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 47417,
+    flagged: false,
+  },
+  {
+    id: "cap-0055",
+    memberId: "emp-010",
+    memberName: "Kofi Mensah",
+    ts: "2026-09-14T09:26:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 39086,
+    flagged: false,
+  },
+  {
+    id: "cap-0073",
+    memberId: "emp-013",
+    memberName: "Yara Nasser",
+    ts: "2026-09-14T09:28:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 41121,
+    flagged: false,
+  },
+  {
+    id: "cap-0037",
+    memberId: "emp-007",
+    memberName: "Elias Kowalski",
+    ts: "2026-09-14T09:31:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 77882,
+    flagged: false,
+  },
+  {
+    id: "cap-0001",
+    memberId: "emp-001",
+    memberName: "Rhea Kulkarni",
+    ts: "2026-09-14T09:36:00Z",
+    mode: "scheduled",
+    application: "Visual Studio Code",
+    seed: 98406,
+    flagged: false,
+  },
+  {
+    id: "cap-0044",
+    memberId: "emp-008",
+    memberName: "Mira Lindqvist",
+    ts: "2026-09-14T11:00:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 74401,
+    flagged: false,
+  },
+  {
+    id: "cap-0086",
+    memberId: "emp-015",
+    memberName: "Hana Takeda",
+    ts: "2026-09-14T11:03:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 68250,
+    flagged: false,
+  },
+  {
+    id: "cap-0062",
+    memberId: "emp-011",
+    memberName: "Sanne de Vries",
+    ts: "2026-09-14T11:10:00Z",
+    mode: "scheduled",
+    application: "Visual Studio Code",
+    seed: 16863,
+    flagged: false,
+  },
+  {
+    id: "cap-0014",
+    memberId: "emp-003",
+    memberName: "Imani Osei",
+    ts: "2026-09-14T11:11:00Z",
+    mode: "scheduled",
+    application: "Visual Studio Code",
+    seed: 51663,
+    flagged: false,
+  },
+  {
+    id: "cap-0068",
+    memberId: "emp-012",
+    memberName: "Arjun Pillai",
+    ts: "2026-09-14T11:12:00Z",
+    mode: "triggered",
+    application: "iTerm2",
+    seed: 86798,
+    flagged: false,
+  },
+  {
+    id: "cap-0056",
+    memberId: "emp-010",
+    memberName: "Kofi Mensah",
+    ts: "2026-09-14T11:18:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 91498,
+    flagged: false,
+  },
+  {
+    id: "cap-0020",
+    memberId: "emp-004",
+    memberName: "Devan Rao",
+    ts: "2026-09-14T11:19:00Z",
+    mode: "scheduled",
+    application: "Visual Studio Code",
+    seed: 10442,
+    flagged: false,
+  },
+  {
+    id: "cap-0002",
+    memberId: "emp-001",
+    memberName: "Rhea Kulkarni",
+    ts: "2026-09-14T11:21:00Z",
+    mode: "triggered",
+    application: "Workday",
+    seed: 93711,
+    flagged: false,
+  },
+  {
+    id: "cap-0008",
+    memberId: "emp-002",
+    memberName: "Tomas Berg",
+    ts: "2026-09-14T11:21:00Z",
+    mode: "triggered",
+    application: "Figma",
+    seed: 62637,
+    flagged: false,
+  },
+  {
+    id: "cap-0074",
+    memberId: "emp-013",
+    memberName: "Yara Nasser",
+    ts: "2026-09-14T11:23:00Z",
+    mode: "scheduled",
+    application: "iTerm2",
+    seed: 29275,
+    flagged: false,
+  },
+  {
+    id: "cap-0038",
+    memberId: "emp-007",
+    memberName: "Elias Kowalski",
+    ts: "2026-09-14T11:26:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 55090,
+    flagged: false,
+  },
+  {
+    id: "cap-0050",
+    memberId: "emp-009",
+    memberName: "Chen Wei-Lin",
+    ts: "2026-09-14T11:26:00Z",
+    mode: "scheduled",
+    application: "iTerm2",
+    seed: 90146,
+    flagged: false,
+  },
+  {
+    id: "cap-0080",
+    memberId: "emp-014",
+    memberName: "Peter Ondrej",
+    ts: "2026-09-14T11:28:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 42402,
+    flagged: false,
+  },
+  {
+    id: "cap-0026",
+    memberId: "emp-005",
+    memberName: "Lucia Ferrari",
+    ts: "2026-09-14T11:32:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 99485,
+    flagged: false,
+  },
+  {
+    id: "cap-0032",
+    memberId: "emp-006",
+    memberName: "Noor Haddad",
+    ts: "2026-09-14T11:35:00Z",
+    mode: "triggered",
+    application: "Slack",
+    seed: 27766,
+    flagged: false,
+  },
+  {
+    id: "cap-0033",
+    memberId: "emp-006",
+    memberName: "Noor Haddad",
+    ts: "2026-09-14T12:54:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 92844,
+    flagged: false,
+  },
+  {
+    id: "cap-0003",
+    memberId: "emp-001",
+    memberName: "Rhea Kulkarni",
+    ts: "2026-09-14T12:58:00Z",
+    mode: "triggered",
+    application: "Workday",
+    seed: 74857,
+    flagged: false,
+  },
+  {
+    id: "cap-0009",
+    memberId: "emp-002",
+    memberName: "Tomas Berg",
+    ts: "2026-09-14T13:00:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 30292,
+    flagged: false,
+  },
+  {
+    id: "cap-0051",
+    memberId: "emp-009",
+    memberName: "Chen Wei-Lin",
+    ts: "2026-09-14T13:03:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 91071,
+    flagged: false,
+  },
+  {
+    id: "cap-0057",
+    memberId: "emp-010",
+    memberName: "Kofi Mensah",
+    ts: "2026-09-14T13:03:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 74095,
+    flagged: false,
+  },
+  {
+    id: "cap-0039",
+    memberId: "emp-007",
+    memberName: "Elias Kowalski",
+    ts: "2026-09-14T13:05:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 30852,
+    flagged: true,
+  },
+  {
+    id: "cap-0015",
+    memberId: "emp-003",
+    memberName: "Imani Osei",
+    ts: "2026-09-14T13:07:00Z",
+    mode: "scheduled",
+    application: "iTerm2",
+    seed: 13369,
+    flagged: false,
+  },
+  {
+    id: "cap-0045",
+    memberId: "emp-008",
+    memberName: "Mira Lindqvist",
+    ts: "2026-09-14T13:12:00Z",
+    mode: "triggered",
+    application: "Finder",
+    seed: 41533,
+    flagged: false,
+  },
+  {
+    id: "cap-0087",
+    memberId: "emp-015",
+    memberName: "Hana Takeda",
+    ts: "2026-09-14T13:15:00Z",
+    mode: "scheduled",
+    application: "iTerm2",
+    seed: 88029,
+    flagged: false,
+  },
+  {
+    id: "cap-0081",
+    memberId: "emp-014",
+    memberName: "Peter Ondrej",
+    ts: "2026-09-14T13:17:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 95107,
+    flagged: false,
+  },
+  {
+    id: "cap-0021",
+    memberId: "emp-004",
+    memberName: "Devan Rao",
+    ts: "2026-09-14T13:18:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 90846,
+    flagged: false,
+  },
+  {
+    id: "cap-0063",
+    memberId: "emp-011",
+    memberName: "Sanne de Vries",
+    ts: "2026-09-14T13:28:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 48312,
+    flagged: false,
+  },
+  {
+    id: "cap-0069",
+    memberId: "emp-012",
+    memberName: "Arjun Pillai",
+    ts: "2026-09-14T13:29:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 49448,
+    flagged: false,
+  },
+  {
+    id: "cap-0075",
+    memberId: "emp-013",
+    memberName: "Yara Nasser",
+    ts: "2026-09-14T13:29:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 71689,
+    flagged: true,
+  },
+  {
+    id: "cap-0027",
+    memberId: "emp-005",
+    memberName: "Lucia Ferrari",
+    ts: "2026-09-14T13:30:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 66880,
+    flagged: false,
+  },
+  {
+    id: "cap-0004",
+    memberId: "emp-001",
+    memberName: "Rhea Kulkarni",
+    ts: "2026-09-14T14:51:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 58099,
+    flagged: false,
+  },
+  {
+    id: "cap-0052",
+    memberId: "emp-009",
+    memberName: "Chen Wei-Lin",
+    ts: "2026-09-14T14:51:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 80920,
+    flagged: true,
+  },
+  {
+    id: "cap-0028",
+    memberId: "emp-005",
+    memberName: "Lucia Ferrari",
+    ts: "2026-09-14T14:53:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 24280,
+    flagged: false,
+  },
+  {
+    id: "cap-0046",
+    memberId: "emp-008",
+    memberName: "Mira Lindqvist",
+    ts: "2026-09-14T14:55:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 63370,
+    flagged: false,
+  },
+  {
+    id: "cap-0070",
+    memberId: "emp-012",
+    memberName: "Arjun Pillai",
+    ts: "2026-09-14T14:58:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 50769,
+    flagged: false,
+  },
+  {
+    id: "cap-0022",
+    memberId: "emp-004",
+    memberName: "Devan Rao",
+    ts: "2026-09-14T15:02:00Z",
+    mode: "triggered",
+    application: "Finder",
+    seed: 34613,
+    flagged: false,
+  },
+  {
+    id: "cap-0088",
+    memberId: "emp-015",
+    memberName: "Hana Takeda",
+    ts: "2026-09-14T15:03:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 46806,
+    flagged: false,
+  },
+  {
+    id: "cap-0058",
+    memberId: "emp-010",
+    memberName: "Kofi Mensah",
+    ts: "2026-09-14T15:09:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 41941,
+    flagged: false,
+  },
+  {
+    id: "cap-0010",
+    memberId: "emp-002",
+    memberName: "Tomas Berg",
+    ts: "2026-09-14T15:11:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 17314,
+    flagged: false,
+  },
+  {
+    id: "cap-0082",
+    memberId: "emp-014",
+    memberName: "Peter Ondrej",
+    ts: "2026-09-14T15:11:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 48781,
+    flagged: false,
+  },
+  {
+    id: "cap-0064",
+    memberId: "emp-011",
+    memberName: "Sanne de Vries",
+    ts: "2026-09-14T15:16:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 54692,
+    flagged: false,
+  },
+  {
+    id: "cap-0076",
+    memberId: "emp-013",
+    memberName: "Yara Nasser",
+    ts: "2026-09-14T15:16:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 91099,
+    flagged: false,
+  },
+  {
+    id: "cap-0016",
+    memberId: "emp-003",
+    memberName: "Imani Osei",
+    ts: "2026-09-14T15:20:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 66397,
+    flagged: false,
+  },
+  {
+    id: "cap-0034",
+    memberId: "emp-006",
+    memberName: "Noor Haddad",
+    ts: "2026-09-14T15:22:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 53954,
+    flagged: false,
+  },
+  {
+    id: "cap-0040",
+    memberId: "emp-007",
+    memberName: "Elias Kowalski",
+    ts: "2026-09-14T15:25:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 11163,
+    flagged: false,
+  },
+  {
+    id: "cap-0029",
+    memberId: "emp-005",
+    memberName: "Lucia Ferrari",
+    ts: "2026-09-14T16:43:00Z",
+    mode: "scheduled",
+    application: "iTerm2",
+    seed: 11582,
+    flagged: false,
+  },
+  {
+    id: "cap-0011",
+    memberId: "emp-002",
+    memberName: "Tomas Berg",
+    ts: "2026-09-14T16:44:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 81054,
+    flagged: false,
+  },
+  {
+    id: "cap-0083",
+    memberId: "emp-014",
+    memberName: "Peter Ondrej",
+    ts: "2026-09-14T16:44:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 45727,
+    flagged: false,
+  },
+  {
+    id: "cap-0071",
+    memberId: "emp-012",
+    memberName: "Arjun Pillai",
+    ts: "2026-09-14T16:51:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 73601,
+    flagged: false,
+  },
+  {
+    id: "cap-0077",
+    memberId: "emp-013",
+    memberName: "Yara Nasser",
+    ts: "2026-09-14T16:54:00Z",
+    mode: "scheduled",
+    application: "iTerm2",
+    seed: 45831,
+    flagged: false,
+  },
+  {
+    id: "cap-0065",
+    memberId: "emp-011",
+    memberName: "Sanne de Vries",
+    ts: "2026-09-14T16:57:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 29302,
+    flagged: false,
+  },
+  {
+    id: "cap-0035",
+    memberId: "emp-006",
+    memberName: "Noor Haddad",
+    ts: "2026-09-14T17:01:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 56081,
+    flagged: true,
+  },
+  {
+    id: "cap-0059",
+    memberId: "emp-010",
+    memberName: "Kofi Mensah",
+    ts: "2026-09-14T17:01:00Z",
+    mode: "scheduled",
+    application: "Visual Studio Code",
+    seed: 91622,
+    flagged: false,
+  },
+  {
+    id: "cap-0005",
+    memberId: "emp-001",
+    memberName: "Rhea Kulkarni",
+    ts: "2026-09-14T17:07:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 92300,
+    flagged: false,
+  },
+  {
+    id: "cap-0023",
+    memberId: "emp-004",
+    memberName: "Devan Rao",
+    ts: "2026-09-14T17:07:00Z",
+    mode: "triggered",
+    application: "iTerm2",
+    seed: 25040,
+    flagged: false,
+  },
+  {
+    id: "cap-0089",
+    memberId: "emp-015",
+    memberName: "Hana Takeda",
+    ts: "2026-09-14T17:08:00Z",
+    mode: "scheduled",
+    application: "iTerm2",
+    seed: 17785,
+    flagged: false,
+  },
+  {
+    id: "cap-0017",
+    memberId: "emp-003",
+    memberName: "Imani Osei",
+    ts: "2026-09-14T17:10:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 31278,
+    flagged: false,
+  },
+  {
+    id: "cap-0047",
+    memberId: "emp-008",
+    memberName: "Mira Lindqvist",
+    ts: "2026-09-14T17:10:00Z",
+    mode: "scheduled",
+    application: "Figma",
+    seed: 84637,
+    flagged: false,
+  },
+  {
+    id: "cap-0053",
+    memberId: "emp-009",
+    memberName: "Chen Wei-Lin",
+    ts: "2026-09-14T17:11:00Z",
+    mode: "triggered",
+    application: "Google Chrome",
+    seed: 88990,
+    flagged: false,
+  },
+  {
+    id: "cap-0041",
+    memberId: "emp-007",
+    memberName: "Elias Kowalski",
+    ts: "2026-09-14T17:16:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 49286,
+    flagged: false,
+  },
+  {
+    id: "cap-0042",
+    memberId: "emp-007",
+    memberName: "Elias Kowalski",
+    ts: "2026-09-14T18:38:00Z",
+    mode: "scheduled",
+    application: "Finder",
+    seed: 57061,
+    flagged: false,
+  },
+  {
+    id: "cap-0066",
+    memberId: "emp-011",
+    memberName: "Sanne de Vries",
+    ts: "2026-09-14T18:51:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 22335,
+    flagged: false,
+  },
+  {
+    id: "cap-0054",
+    memberId: "emp-009",
+    memberName: "Chen Wei-Lin",
+    ts: "2026-09-14T18:54:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 62174,
+    flagged: false,
+  },
+  {
+    id: "cap-0030",
+    memberId: "emp-005",
+    memberName: "Lucia Ferrari",
+    ts: "2026-09-14T18:58:00Z",
+    mode: "scheduled",
+    application: "iTerm2",
+    seed: 37104,
+    flagged: false,
+  },
+  {
+    id: "cap-0084",
+    memberId: "emp-014",
+    memberName: "Peter Ondrej",
+    ts: "2026-09-14T18:58:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 16108,
+    flagged: false,
+  },
+  {
+    id: "cap-0018",
+    memberId: "emp-003",
+    memberName: "Imani Osei",
+    ts: "2026-09-14T18:59:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 59061,
+    flagged: false,
+  },
+  {
+    id: "cap-0072",
+    memberId: "emp-012",
+    memberName: "Arjun Pillai",
+    ts: "2026-09-14T18:59:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 88551,
+    flagged: false,
+  },
+  {
+    id: "cap-0006",
+    memberId: "emp-001",
+    memberName: "Rhea Kulkarni",
+    ts: "2026-09-14T19:00:00Z",
+    mode: "scheduled",
+    application: "Visual Studio Code",
+    seed: 97687,
+    flagged: false,
+  },
+  {
+    id: "cap-0024",
+    memberId: "emp-004",
+    memberName: "Devan Rao",
+    ts: "2026-09-14T19:01:00Z",
+    mode: "scheduled",
+    application: "iTerm2",
+    seed: 22172,
+    flagged: false,
+  },
+  {
+    id: "cap-0048",
+    memberId: "emp-008",
+    memberName: "Mira Lindqvist",
+    ts: "2026-09-14T19:02:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 20388,
+    flagged: false,
+  },
+  {
+    id: "cap-0060",
+    memberId: "emp-010",
+    memberName: "Kofi Mensah",
+    ts: "2026-09-14T19:03:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 13987,
+    flagged: false,
+  },
+  {
+    id: "cap-0090",
+    memberId: "emp-015",
+    memberName: "Hana Takeda",
+    ts: "2026-09-14T19:06:00Z",
+    mode: "scheduled",
+    application: "Visual Studio Code",
+    seed: 48091,
+    flagged: false,
+  },
+  {
+    id: "cap-0078",
+    memberId: "emp-013",
+    memberName: "Yara Nasser",
+    ts: "2026-09-14T19:07:00Z",
+    mode: "scheduled",
+    application: "Workday",
+    seed: 81145,
+    flagged: false,
+  },
+  {
+    id: "cap-0036",
+    memberId: "emp-006",
+    memberName: "Noor Haddad",
+    ts: "2026-09-14T19:11:00Z",
+    mode: "scheduled",
+    application: "Google Chrome",
+    seed: 28980,
+    flagged: false,
+  },
+  {
+    id: "cap-0012",
+    memberId: "emp-002",
+    memberName: "Tomas Berg",
+    ts: "2026-09-14T19:14:00Z",
+    mode: "scheduled",
+    application: "Slack",
+    seed: 21705,
+    flagged: false,
+  },
 ];
 
 export const HOURLY_TOP_APPLICATION = [
   {
-    "hour": "08:00",
-    "application": "Google Chrome",
-    "category": "browser",
-    "members": 8,
-    "minutes": 549
+    hour: "08:00",
+    application: "Google Chrome",
+    category: "browser",
+    members: 8,
+    minutes: 549,
   },
   {
-    "hour": "09:00",
-    "application": "Slack",
-    "category": "communication",
-    "members": 13,
-    "minutes": 585
+    hour: "09:00",
+    application: "Slack",
+    category: "communication",
+    members: 13,
+    minutes: 585,
   },
   {
-    "hour": "10:00",
-    "application": "Figma",
-    "category": "other",
-    "members": 6,
-    "minutes": 429
+    hour: "10:00",
+    application: "Figma",
+    category: "other",
+    members: 6,
+    minutes: 429,
   },
   {
-    "hour": "11:00",
-    "application": "Finder",
-    "category": "file management",
-    "members": 9,
-    "minutes": 473
+    hour: "11:00",
+    application: "Finder",
+    category: "file management",
+    members: 9,
+    minutes: 473,
   },
   {
-    "hour": "12:00",
-    "application": "Workday",
-    "category": "administrative",
-    "members": 14,
-    "minutes": 193
+    hour: "12:00",
+    application: "Workday",
+    category: "administrative",
+    members: 14,
+    minutes: 193,
   },
   {
-    "hour": "13:00",
-    "application": "iTerm2",
-    "category": "development",
-    "members": 15,
-    "minutes": 405
+    hour: "13:00",
+    application: "iTerm2",
+    category: "development",
+    members: 15,
+    minutes: 405,
   },
   {
-    "hour": "14:00",
-    "application": "Workday",
-    "category": "administrative",
-    "members": 10,
-    "minutes": 248
+    hour: "14:00",
+    application: "Workday",
+    category: "administrative",
+    members: 10,
+    minutes: 248,
   },
   {
-    "hour": "15:00",
-    "application": "Workday",
-    "category": "administrative",
-    "members": 9,
-    "minutes": 313
+    hour: "15:00",
+    application: "Workday",
+    category: "administrative",
+    members: 9,
+    minutes: 313,
   },
   {
-    "hour": "16:00",
-    "application": "Slack",
-    "category": "communication",
-    "members": 16,
-    "minutes": 608
+    hour: "16:00",
+    application: "Slack",
+    category: "communication",
+    members: 16,
+    minutes: 608,
   },
   {
-    "hour": "17:00",
-    "application": "Google Chrome",
-    "category": "browser",
-    "members": 12,
-    "minutes": 614
+    hour: "17:00",
+    application: "Google Chrome",
+    category: "browser",
+    members: 12,
+    minutes: 614,
   },
   {
-    "hour": "18:00",
-    "application": "Visual Studio Code",
-    "category": "development",
-    "members": 5,
-    "minutes": 358
+    hour: "18:00",
+    application: "Visual Studio Code",
+    category: "development",
+    members: 5,
+    minutes: 358,
   },
   {
-    "hour": "19:00",
-    "application": "Figma",
-    "category": "other",
-    "members": 5,
-    "minutes": 141
-  }
+    hour: "19:00",
+    application: "Figma",
+    category: "other",
+    members: 5,
+    minutes: 141,
+  },
 ] as const;
 
 export function memberById(id: string): WorkforceMember | undefined {

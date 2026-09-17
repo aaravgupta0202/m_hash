@@ -13,7 +13,11 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { SENSITIVITY_COLOR } from "@/components/risk/chips";
-import type { AttackPathEdge, AttackPathNode, Sensitivity } from "@/lib/fixtures";
+import type {
+  AttackPathEdge,
+  AttackPathNode,
+  Sensitivity,
+} from "@/lib/fixtures";
 
 /**
  * PRD §5.3E: left-to-right node graph of the trajectory, React Flow, fixed
@@ -45,14 +49,28 @@ function StepNode({ data }: NodeProps<Node<StepData>>) {
   const color = SENSITIVITY_COLOR[data.sensitivity];
   return (
     <div
-      className="w-44 rounded-lg border border-line bg-white px-3 py-2 shadow-xs"
+      className="w-44 rounded-sm border border-line bg-white px-3 py-2 "
       style={{ borderLeftColor: color, borderLeftWidth: 3.5 }}
       title={`${data.label} — ${data.sensitivity} sensitivity`}
     >
-      <Handle type="target" position={Position.Left} isConnectable={false} className="!size-1.5 !border-0 !bg-slate-400" />
-      <p className="machine truncate text-[11px] leading-tight font-bold text-slate-900">{data.label}</p>
-      <p className="mt-1 text-[10px] leading-snug text-slate-500">{data.sublabel}</p>
-      <Handle type="source" position={Position.Right} isConnectable={false} className="!size-1.5 !border-0 !bg-slate-400" />
+      <Handle
+        type="target"
+        position={Position.Left}
+        isConnectable={false}
+        className="!size-1.5 !border-0 !bg-slate-400"
+      />
+      <p className="machine truncate text-[11px] leading-tight font-bold text-slate-900">
+        {data.label}
+      </p>
+      <p className="mt-1 text-[10px] leading-snug text-slate-500">
+        {data.sublabel}
+      </p>
+      <Handle
+        type="source"
+        position={Position.Right}
+        isConnectable={false}
+        className="!size-1.5 !border-0 !bg-slate-400"
+      />
     </div>
   );
 }
@@ -75,7 +93,11 @@ export function AttackPath({
         draggable: false,
         selectable: false,
         connectable: false,
-        data: { label: n.label, sublabel: n.sublabel, sensitivity: n.sensitivity },
+        data: {
+          label: n.label,
+          sublabel: n.sublabel,
+          sensitivity: n.sensitivity,
+        },
       })),
     [fixtureNodes],
   );
@@ -88,11 +110,17 @@ export function AttackPath({
         target: e.to,
         type: "smoothstep",
         animated: false,
-        label: e.probability === undefined ? undefined : `P = ${formatP(e.probability)}`,
+        label:
+          e.probability === undefined
+            ? undefined
+            : `P = ${formatP(e.probability)}`,
         labelShowBg: true,
         labelBgPadding: [6, 3],
         labelBgBorderRadius: 4,
-        labelBgStyle: { fill: "#ffffff", stroke: e.anomalous ? "#dc2626" : "#cbd5e1" },
+        labelBgStyle: {
+          fill: "#ffffff",
+          stroke: e.anomalous ? "#dc2626" : "#cbd5e1",
+        },
         labelStyle: {
           fill: e.anomalous ? "#dc2626" : "#475569",
           fontSize: 10,
@@ -110,8 +138,9 @@ export function AttackPath({
   const width = Math.max(...fixtureNodes.map((n) => n.x), 0) * X_SCALE + 220;
   const anomalous = fixtureEdges.filter((e) => e.anomalous);
   /* Node ids are internal (n0, n1) on generated rows, so the prose below names
-     the actions rather than the ids. */
-  const labelOf = (id: string) => fixtureNodes.find((n) => n.id === id)?.label ?? id;
+ the actions rather than the ids. */
+  const labelOf = (id: string) =>
+    fixtureNodes.find((n) => n.id === id)?.label ?? id;
 
   return (
     <div>
@@ -137,22 +166,31 @@ export function AttackPath({
             [width, 220],
           ]}
         >
-          <Background variant={BackgroundVariant.Dots} gap={18} size={1} color="#cbd5e1" />
+          <Background
+            variant={BackgroundVariant.Dots}
+            gap={18}
+            size={1}
+            color="#cbd5e1"
+          />
         </ReactFlow>
       </div>
 
       <div className="px-4 py-2.5">
         {anomalous.length === 0 ? (
           <p className="text-xs leading-relaxed text-slate-500">
-            No transition in this path falls below the surprisal threshold. The path is unusual in its
-            resources, not in its shape.
+            No transition in this path falls below the surprisal threshold. The
+            path is unusual in its resources, not in its shape.
           </p>
         ) : (
           <ul className="space-y-1">
             {anomalous.map((e) => (
-              <li key={`${e.from}-${e.to}`} className="text-xs leading-relaxed text-slate-600">
+              <li
+                key={`${e.from}-${e.to}`}
+                className="text-xs leading-relaxed text-slate-600"
+              >
                 <span className="machine text-red-600 font-bold">
-                  P({labelOf(e.to)} | {labelOf(e.from)}) = {formatP(e.probability ?? 0)}
+                  P({labelOf(e.to)} | {labelOf(e.from)}) ={" "}
+                  {formatP(e.probability ?? 0)}
                 </span>{" "}
                 — {describe(e.probability ?? 0)}
               </li>

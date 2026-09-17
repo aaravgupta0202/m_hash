@@ -31,10 +31,18 @@ export function ContributionTable({
       <table className="w-full min-w-[720px] border-collapse text-sm">
         <thead>
           <tr className="border-b border-line bg-slate-50/80">
-            <th className="label px-4 py-2.5 text-left text-slate-500 text-[10px]">Feature</th>
-            <th className="label px-4 py-2.5 text-left text-slate-500 text-[10px]">Evidence</th>
-            <th className="label px-4 py-2.5 text-right text-slate-500 text-[10px]">Logit</th>
-            <th className="label w-48 px-4 py-2.5 text-left text-slate-500 text-[10px]">Contribution</th>
+            <th className="label px-4 py-2.5 text-left text-slate-500 text-[10px]">
+              Feature
+            </th>
+            <th className="label px-4 py-2.5 text-left text-slate-500 text-[10px]">
+              Evidence
+            </th>
+            <th className="label px-4 py-2.5 text-right text-slate-500 text-[10px]">
+              Logit
+            </th>
+            <th className="label w-48 px-4 py-2.5 text-left text-slate-500 text-[10px]">
+              Contribution
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-line">
@@ -43,10 +51,27 @@ export function ContributionTable({
             const raises = c.logit > 0;
             const intercept = c.feature.startsWith("Base rate");
             return (
-              <tr key={c.feature} className={cn("hover:bg-slate-50/70 transition-colors", zero && "text-slate-400")}>
+              <tr
+                key={c.feature}
+                className={cn(
+                  "hover:bg-slate-50/70 transition-colors",
+                  zero && "text-slate-400",
+                )}
+              >
                 <td className="px-4 py-2.5 align-top">
-                  <span className={cn("font-semibold", zero ? "text-slate-400" : "text-slate-900")}>{c.feature}</span>
-                  {intercept && <span className="machine ml-1.5 text-[10px] text-slate-500">β₀</span>}
+                  <span
+                    className={cn(
+                      "font-semibold",
+                      zero ? "text-slate-400" : "text-slate-900",
+                    )}
+                  >
+                    {c.feature}
+                  </span>
+                  {intercept && (
+                    <span className="machine ml-1.5 text-[10px] text-slate-500">
+                      β₀
+                    </span>
+                  )}
                 </td>
                 <td className="max-w-md px-4 py-2.5 align-top text-xs leading-relaxed text-slate-600">
                   <EvidenceText text={c.evidence} />
@@ -54,10 +79,16 @@ export function ContributionTable({
                 <td
                   className={cn(
                     "machine px-4 py-2.5 text-right align-top font-bold whitespace-nowrap",
-                    zero ? "text-slate-400" : raises ? "text-red-600" : "text-emerald-700",
+                    zero
+                      ? "text-slate-400"
+                      : raises
+                        ? "text-red-600"
+                        : "text-emerald-700",
                   )}
                 >
-                  {zero ? "0.00" : `${raises ? "+" : "−"}${Math.abs(c.logit).toFixed(2)}`}
+                  {zero
+                    ? "0.00"
+                    : `${raises ? "+" : "−"}${Math.abs(c.logit).toFixed(2)}`}
                 </td>
                 <td className="px-4 py-2.5 align-top">
                   <Bar logit={c.logit} scale={scale} />
@@ -68,9 +99,12 @@ export function ContributionTable({
         </tbody>
         <tfoot>
           <tr className="border-t-2 border-emerald-500 bg-emerald-50/80">
-            <td className="px-4 py-3 align-middle font-bold text-emerald-950">Σ contributions</td>
+            <td className="px-4 py-3 align-middle font-bold text-emerald-950">
+              Σ contributions
+            </td>
             <td className="machine px-4 py-3 align-middle text-xs text-slate-700">
-              logit {fmt(logitTotal)} → σ(logit) = {probability.toFixed(2)} → risk {risk}
+              logit {fmt(logitTotal)} → σ(logit) = {probability.toFixed(2)} →
+              risk {risk}
             </td>
             <td className="machine px-4 py-3 text-right align-middle font-bold text-emerald-950">
               {fmt(sum)}
@@ -113,7 +147,6 @@ function Bar({ logit, scale }: { logit: number; scale: number }) {
     </div>
   );
 }
-
 
 /**
  * Evidence strings are part prose, part machine output. Splitting on the

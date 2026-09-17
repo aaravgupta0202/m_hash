@@ -1,34 +1,50 @@
 import { Clock, Layers, PieChart, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Panel } from "@/components/panel";
-import { CategoryDonut, categoryColor, fmtHours } from "@/components/workforce/bits";
+import { BrandIcon } from "@/components/brand-icon";
+import {
+  CategoryDonut,
+  categoryColor,
+  fmtHours,
+} from "@/components/workforce/bits";
 import { HOURLY_TOP_APPLICATION, MEMBERS, MEMBER_DAYS } from "@/lib/fixtures";
 
 export const metadata = { title: "Application usage — tellTale" };
 
 /** Aggregated across the org from the same per-member fixtures the day view reads. */
 const CATEGORY_TOTALS = Object.entries(
-  MEMBER_DAYS.flatMap((d) => d.categoryTime).reduce<Record<string, number>>((acc, c) => {
-    acc[c.category] = (acc[c.category] ?? 0) + c.minutes;
-    return acc;
-  }, {}),
-)
-  .map(([category, minutes]) => ({ category, minutes }))
-  .sort((a, b) => b.minutes - a.minutes);
-
-const APP_TOTALS = Object.entries(
-  MEMBER_DAYS.flatMap((d) => d.applications).reduce<Record<string, { minutes: number; category: string; users: Set<string> }>>(
-    (acc, a) => {
-      const row = acc[a.application] ?? { minutes: 0, category: a.category, users: new Set<string>() };
-      row.minutes += a.minutes;
-      row.users.add(a.windowTitle);
-      acc[a.application] = row;
+  MEMBER_DAYS.flatMap((d) => d.categoryTime).reduce<Record<string, number>>(
+    (acc, c) => {
+      acc[c.category] = (acc[c.category] ?? 0) + c.minutes;
       return acc;
     },
     {},
   ),
 )
-  .map(([application, v]) => ({ application, minutes: v.minutes, category: v.category, titles: v.users.size }))
+  .map(([category, minutes]) => ({ category, minutes }))
+  .sort((a, b) => b.minutes - a.minutes);
+
+const APP_TOTALS = Object.entries(
+  MEMBER_DAYS.flatMap((d) => d.applications).reduce<
+    Record<string, { minutes: number; category: string; users: Set<string> }>
+  >((acc, a) => {
+    const row = acc[a.application] ?? {
+      minutes: 0,
+      category: a.category,
+      users: new Set<string>(),
+    };
+    row.minutes += a.minutes;
+    row.users.add(a.windowTitle);
+    acc[a.application] = row;
+    return acc;
+  }, {}),
+)
+  .map(([application, v]) => ({
+    application,
+    minutes: v.minutes,
+    category: v.category,
+    titles: v.users.size,
+  }))
   .sort((a, b) => b.minutes - a.minutes);
 
 const HOURLY_MAX = Math.max(...HOURLY_TOP_APPLICATION.map((h) => h.minutes));
@@ -46,10 +62,31 @@ export default function UsagePage() {
       />
 
       <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        <Stat icon={Clock} label="Tracked time" value={fmtHours(totalMinutes)} sub={`${MEMBERS.length} members, one day`} />
-        <Stat icon={Layers} label="Applications seen" value={String(APP_TOTALS.length)} sub="distinct executables" />
-        <Stat icon={PieChart} label="Categories" value={String(CATEGORY_TOTALS.length)} sub="composition, not classification" />
-        <Stat icon={Sparkles} label="Most-used" value={topApp.application} sub={`${fmtHours(topApp.minutes)} across the org`} />
+        <Stat
+          icon={Clock}
+          label="Tracked time"
+          value={fmtHours(totalMinutes)}
+          sub={`${MEMBERS.length} members, one day`}
+        />
+        <Stat
+          icon={Layers}
+          label="Applications seen"
+          value={String(APP_TOTALS.length)}
+          sub="distinct executables"
+        />
+        <Stat
+          icon={PieChart}
+          label="Categories"
+          value={String(CATEGORY_TOTALS.length)}
+          sub="composition, not classification"
+        />
+        <Stat
+          icon={Sparkles}
+          label="Most-used"
+          value={topApp.application}
+          appIcon={topApp.application}
+          sub={`${fmtHours(topApp.minutes)} across the org`}
+        />
       </div>
 
       <div className="mb-4 grid grid-cols-1 gap-4 xl:grid-cols-[1fr_1.25fr]">
@@ -70,25 +107,45 @@ export default function UsagePage() {
             <table className="w-full border-collapse text-sm">
               <thead className="sticky top-0 bg-slate-50 z-10">
                 <tr className="border-b border-line">
-                  {["Application", "Category", "Titles", "Duration", ""].map((h) => (
-                    <th key={h} className="label px-4 py-2.5 text-left text-slate-500">
-                      {h}
-                    </th>
-                  ))}
+                  {["Application", "Category", "Titles", "Duration", ""].map(
+                    (h) => (
+                      <th
+                        key={h}
+                        className="label px-4 py-2.5 text-left text-slate-500"
+                      >
+                        {h}
+                      </th>
+                    ),
+                  )}
                 </tr>
               </thead>
               <tbody>
                 {APP_TOTALS.map((a) => (
-                  <tr key={a.application} className="border-b border-line hover:bg-slate-50 transition-colors">
-                    <td className="px-4 py-2 font-medium text-slate-900">{a.application}</td>
+                  <tr
+                    key={a.application}
+                    className="border-b border-line hover:bg-slate-50 transition-colors"
+                  >
+                    <td className="px-4 py-2 font-medium text-slate-900">
+                      <div className="flex items-center gap-2">
+                        <BrandIcon name={a.application} className="size-4" />
+                        <span>{a.application}</span>
+                      </div>
+                    </td>
                     <td className="px-4 py-2">
                       <span className="flex items-center gap-1.5 text-xs text-slate-700 capitalize">
-                        <span className="size-2 rounded-sm" style={{ backgroundColor: categoryColor(a.category) }} />
+                        <span
+                          className="size-2 rounded-sm"
+                          style={{ backgroundColor: categoryColor(a.category) }}
+                        />
                         {a.category}
                       </span>
                     </td>
-                    <td className="machine px-4 py-2 text-xs text-slate-500">{a.titles}</td>
-                    <td className="machine px-4 py-2 font-semibold text-emerald-700">{fmtHours(a.minutes)}</td>
+                    <td className="machine px-4 py-2 text-xs text-slate-500">
+                      {a.titles}
+                    </td>
+                    <td className="machine px-4 py-2 font-semibold text-emerald-700">
+                      {fmtHours(a.minutes)}
+                    </td>
                     <td className="w-32 px-4 py-2">
                       <div className="h-3 w-full rounded bg-slate-100 border border-line overflow-hidden">
                         <div
@@ -118,8 +175,18 @@ export default function UsagePage() {
           <table className="w-full min-w-[720px] border-collapse text-sm">
             <thead>
               <tr className="border-b border-line bg-slate-50">
-                {["Hour", "Application", "Category", "Members", "Recorded time", ""].map((h) => (
-                  <th key={h} className="label px-4 py-2 text-left text-slate-500">
+                {[
+                  "Hour",
+                  "Application",
+                  "Category",
+                  "Members",
+                  "Recorded time",
+                  "",
+                ].map((h) => (
+                  <th
+                    key={h}
+                    className="label px-4 py-2 text-left text-slate-500"
+                  >
                     {h}
                   </th>
                 ))}
@@ -127,17 +194,32 @@ export default function UsagePage() {
             </thead>
             <tbody>
               {HOURLY_TOP_APPLICATION.map((h) => (
-                <tr key={h.hour} className="border-b border-line hover:bg-slate-50 transition-colors">
+                <tr
+                  key={h.hour}
+                  className="border-b border-line hover:bg-slate-50 transition-colors"
+                >
                   <td className="machine px-4 py-2 text-slate-500">{h.hour}</td>
-                  <td className="px-4 py-2 font-medium text-slate-900">{h.application}</td>
+                  <td className="px-4 py-2 font-medium text-slate-900">
+                    <div className="flex items-center gap-2">
+                      <BrandIcon name={h.application} className="size-4" />
+                      <span>{h.application}</span>
+                    </div>
+                  </td>
                   <td className="px-4 py-2">
                     <span className="flex items-center gap-1.5 text-xs text-slate-700 capitalize">
-                      <span className="size-2 rounded-sm" style={{ backgroundColor: categoryColor(h.category) }} />
+                      <span
+                        className="size-2 rounded-sm"
+                        style={{ backgroundColor: categoryColor(h.category) }}
+                      />
                       {h.category}
                     </span>
                   </td>
-                  <td className="machine px-4 py-2 font-semibold text-slate-900">{h.members}</td>
-                  <td className="machine px-4 py-2 text-slate-500">{fmtHours(h.minutes)}</td>
+                  <td className="machine px-4 py-2 font-semibold text-slate-900">
+                    {h.members}
+                  </td>
+                  <td className="machine px-4 py-2 text-slate-500">
+                    {fmtHours(h.minutes)}
+                  </td>
                   <td className="w-40 px-4 py-2">
                     <div className="h-3 w-full rounded bg-slate-100 border border-line overflow-hidden">
                       <div
@@ -159,14 +241,31 @@ export default function UsagePage() {
   );
 }
 
-function Stat({ icon: Icon, label, value, sub }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string; sub: string }) {
+function Stat({
+  icon: Icon,
+  label,
+  value,
+  sub,
+  appIcon,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string;
+  sub: string;
+  appIcon?: string;
+}) {
   return (
-    <div className="panel px-4 py-3 bg-white border border-line rounded-lg shadow-xs">
+    <div className="panel px-4 py-3 bg-white border border-line rounded-sm ">
       <div className="flex items-center justify-between">
         <p className="label text-slate-500">{label}</p>
         <Icon className="size-4 text-emerald-600" />
       </div>
-      <p className="machine mt-1.5 truncate text-2xl leading-none font-bold text-slate-900">{value}</p>
+      <div className="mt-1.5 flex items-center gap-2">
+        {appIcon && <BrandIcon name={appIcon} className="size-6" />}
+        <p className="machine truncate text-2xl leading-none font-bold text-slate-900">
+          {value}
+        </p>
+      </div>
       <p className="mt-1.5 text-xs text-slate-500">{sub}</p>
     </div>
   );

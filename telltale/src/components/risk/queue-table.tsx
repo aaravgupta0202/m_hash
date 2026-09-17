@@ -3,11 +3,28 @@
 import { Fragment, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Search, ShieldAlert, Filter, User, Server, Bot } from "lucide-react";
+import {
+  ArrowRight,
+  Search,
+  Filter,
+  User,
+  Server,
+  Bot,
+} from "lucide-react";
 import { cn } from "cn";
-import { IdentityGlyph, StatusChip, ValueBar, VerdictChip } from "@/components/risk/chips";
+import {
+  IdentityGlyph,
+  StatusChip,
+  ValueBar,
+  VerdictChip,
+} from "@/components/risk/chips";
 import { ALL_COHORTS, ALL_SUBJECTS, useFilters } from "@/lib/filters";
-import { QUEUE_ROWS, TRIAGE_CAPACITY_AFTER_RANK, TRIAGE_CAPACITY_LABEL, routeIdFor } from "@/lib/fixtures";
+import {
+  QUEUE_ROWS,
+  TRIAGE_CAPACITY_AFTER_RANK,
+  TRIAGE_CAPACITY_LABEL,
+  routeIdFor,
+} from "@/lib/fixtures";
 
 const HEAD = [
   { label: "Rank", className: "w-14 text-right" },
@@ -34,7 +51,11 @@ export function QueueTable() {
     if (filterClass !== "all" && r.identityClass !== filterClass) return false;
     if (query.trim()) {
       const q = query.toLowerCase();
-      return r.pseudonym.toLowerCase().includes(q) || r.topSignal.toLowerCase().includes(q) || r.cohort.toLowerCase().includes(q);
+      return (
+        r.pseudonym.toLowerCase().includes(q) ||
+        r.topSignal.toLowerCase().includes(q) ||
+        r.cohort.toLowerCase().includes(q)
+      );
     }
     return true;
   });
@@ -54,7 +75,7 @@ export function QueueTable() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Filter queue by #id, signal or cohort..."
-              className="h-8 w-64 rounded-md border border-line bg-white pl-8 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-emerald-600 focus:outline-none transition-colors shadow-2xs"
+              className="h-8 w-64 rounded-sm border border-line bg-white pl-8 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-emerald-600 focus:outline-none transition-colors"
             />
           </div>
           {query && (
@@ -85,7 +106,7 @@ export function QueueTable() {
                 type="button"
                 onClick={() => setFilterClass(tab.id)}
                 className={cn(
-                  "flex items-center gap-1 rounded px-2.5 py-1 text-[11px] font-medium transition-all shadow-2xs",
+                  "flex items-center gap-1 rounded px-2.5 py-1 text-[11px] font-medium transition-all",
                   active
                     ? "border border-emerald-300 bg-emerald-50 text-emerald-800 font-semibold"
                     : "border border-line bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50",
@@ -104,7 +125,13 @@ export function QueueTable() {
           <thead>
             <tr className="border-b border-line bg-slate-50/80">
               {HEAD.map((h, i) => (
-                <th key={i} className={cn("label px-3 py-2.5 text-left align-bottom text-slate-500 text-[10px]", h.className)}>
+                <th
+                  key={i}
+                  className={cn(
+                    "label px-3 py-2.5 text-left align-bottom text-slate-500 text-[10px]",
+                    h.className,
+                  )}
+                >
                   {h.label}
                 </th>
               ))}
@@ -113,8 +140,12 @@ export function QueueTable() {
           <tbody className="divide-y divide-line">
             {rows.length === 0 && (
               <tr>
-                <td colSpan={HEAD.length} className="px-3 py-10 text-center text-sm text-slate-500">
-                  No queued subject matches this query. Clear search or filters to see all entries.
+                <td
+                  colSpan={HEAD.length}
+                  className="px-3 py-10 text-center text-sm text-slate-500"
+                >
+                  No queued subject matches this query. Clear search or filters
+                  to see all entries.
                 </td>
               </tr>
             )}
@@ -128,10 +159,12 @@ export function QueueTable() {
                     <tr>
                       <td colSpan={HEAD.length} className="px-0 py-0">
                         <div className="flex items-center gap-3 border-y border-dashed border-amber-300 bg-amber-50/80 px-4 py-2">
-                          <span className="label text-amber-800 font-bold tracking-wider">{TRIAGE_CAPACITY_LABEL}</span>
+                          <span className="label text-amber-800 font-bold tracking-wider">
+                            {TRIAGE_CAPACITY_LABEL}
+                          </span>
                           <span className="text-xs text-amber-900/80">
-                            Everything below this line is retained and ranked — it is simply not pretending to be
-                            actionable today.
+                            Everything below this line is retained and ranked —
+                            it is simply not pretending to be actionable today.
                           </span>
                         </div>
                       </td>
@@ -144,7 +177,9 @@ export function QueueTable() {
                       below && "opacity-60",
                     )}
                   >
-                    <td className="machine px-3 py-2.5 text-right text-slate-500 font-semibold">{r.rank}</td>
+                    <td className="machine px-3 py-2.5 text-right text-slate-500 font-semibold">
+                      {r.rank}
+                    </td>
                     <td className="px-3 py-2.5">
                       <Link
                         href={href}
@@ -157,7 +192,9 @@ export function QueueTable() {
                     </td>
                     <td className="px-3 py-2.5 text-slate-800">
                       {r.cohort}
-                      <span className="machine ml-1.5 text-xs text-slate-400">n={r.cohortSize}</span>
+                      <span className="machine ml-1.5 text-xs text-slate-400">
+                        n={r.cohortSize}
+                      </span>
                     </td>
                     <td className="px-3 py-2.5">
                       <ValueBar value={r.risk} />
@@ -174,14 +211,22 @@ export function QueueTable() {
                       </p>
                     </td>
                     <td className="px-3 py-2.5 text-slate-800">
-                      <span className={r.topSignal.includes("=") ? "machine text-xs font-mono font-semibold text-emerald-700" : undefined}>
+                      <span
+                        className={
+                          r.topSignal.includes("=")
+                            ? "machine text-xs font-mono font-semibold text-emerald-700"
+                            : undefined
+                        }
+                      >
                         {r.topSignal}
                       </span>
                     </td>
                     <td className="px-3 py-2.5">
                       <VerdictChip verdict={r.verdict} />
                     </td>
-                    <td className="machine px-3 py-2.5 text-right text-xs whitespace-nowrap text-slate-500">{r.age}</td>
+                    <td className="machine px-3 py-2.5 text-right text-xs whitespace-nowrap text-slate-500">
+                      {r.age}
+                    </td>
                     <td className="px-3 py-2.5">
                       <StatusChip status={r.status} />
                     </td>
@@ -198,4 +243,3 @@ export function QueueTable() {
     </div>
   );
 }
-

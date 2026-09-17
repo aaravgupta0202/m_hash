@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 /**
  * PRD §4: the universal filter triple. Cohort and subject filter the queue for
@@ -42,7 +48,9 @@ export function FilterProvider({ children }: { children: ReactNode }) {
     }),
     [state],
   );
-  return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>;
+  return (
+    <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
+  );
 }
 
 export function useFilters(): FilterState {

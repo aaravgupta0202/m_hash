@@ -8,27 +8,72 @@ import type { CheckResult, ContextCheck, ContextVerdict } from "@/lib/fixtures";
  * name its evidence is an assertion, and this screen exists to avoid making
  * assertions.
  */
-const TESTS: { key: ContextCheck["test"]; label: string; question: string }[] = [
-  { key: "precedence", label: "Precedence", question: "Did the record exist before the activity?" },
-  { key: "provenance", label: "Provenance", question: "Was it created by someone other than the subject?" },
-  { key: "scope", label: "Scope match", question: "Does its scope resolve to the resources touched?" },
-  { key: "proportionality", label: "Proportionality", question: "Is the volume plausible for that scope?" },
-];
+const TESTS: { key: ContextCheck["test"]; label: string; question: string }[] =
+  [
+    {
+      key: "precedence",
+      label: "Precedence",
+      question: "Did the record exist before the activity?",
+    },
+    {
+      key: "provenance",
+      label: "Provenance",
+      question: "Was it created by someone other than the subject?",
+    },
+    {
+      key: "scope",
+      label: "Scope match",
+      question: "Does its scope resolve to the resources touched?",
+    },
+    {
+      key: "proportionality",
+      label: "Proportionality",
+      question: "Is the volume plausible for that scope?",
+    },
+  ];
 
-const RESULT: Record<CheckResult, { label: string; Icon: typeof Check; className: string; dot: string }> = {
-  pass: { label: "PASS", Icon: Check, className: "text-emerald-700", dot: "bg-emerald-600" },
-  warn: { label: "WARN", Icon: AlertTriangle, className: "text-amber-700", dot: "bg-amber-600" },
-  fail: { label: "FAIL", Icon: X, className: "text-red-700", dot: "bg-red-600" },
+const RESULT: Record<
+  CheckResult,
+  { label: string; Icon: typeof Check; className: string; dot: string }
+> = {
+  pass: {
+    label: "PASS",
+    Icon: Check,
+    className: "text-emerald-700",
+    dot: "bg-emerald-600",
+  },
+  warn: {
+    label: "WARN",
+    Icon: AlertTriangle,
+    className: "text-amber-700",
+    dot: "bg-amber-600",
+  },
+  fail: {
+    label: "FAIL",
+    Icon: X,
+    className: "text-red-700",
+    dot: "bg-red-600",
+  },
 };
 
 const VERDICT_LINE: Record<ContextVerdict, string> = {
-  authorised: "All four tests pass. The activity is authorised work and the anomaly is suppressed, with the record retained.",
-  partial: "Some tests pass and some do not. The context term is applied at partial weight rather than in full.",
-  absent: "No context record was found in any source, so there is nothing to test. Absence is not evidence of intent — it removes the discount, it does not add a penalty.",
-  suspicious: "A record exists and fails provenance. The attempt to manufacture authorisation is itself the signal, and it raises the score rather than lowering it.",
+  authorised:
+    "All four tests pass. The activity is authorised work and the anomaly is suppressed, with the record retained.",
+  partial:
+    "Some tests pass and some do not. The context term is applied at partial weight rather than in full.",
+  absent:
+    "No context record was found in any source, so there is nothing to test. Absence is not evidence of intent — it removes the discount, it does not add a penalty.",
+  suspicious:
+    "A record exists and fails provenance. The attempt to manufacture authorisation is itself the signal, and it raises the score rather than lowering it.",
 };
 
-export function ContextChecks({ checks, verdict }: { checks: ContextCheck[]; verdict: ContextVerdict }) {
+export function ContextChecks({
+  checks,
+  verdict,
+}: {
+  checks: ContextCheck[];
+  verdict: ContextVerdict;
+}) {
   return (
     <div>
       <ul className="divide-y divide-line">
@@ -36,7 +81,10 @@ export function ContextChecks({ checks, verdict }: { checks: ContextCheck[]; ver
           const check = checks.find((c) => c.test === t.key);
           if (!check) return null;
           const r = RESULT[check.result];
-          const punchline = check.test === "provenance" && check.result === "fail" && check.createdBy;
+          const punchline =
+            check.test === "provenance" &&
+            check.result === "fail" &&
+            check.createdBy;
           return (
             <li
               key={t.key}
@@ -64,7 +112,9 @@ export function ContextChecks({ checks, verdict }: { checks: ContextCheck[]; ver
                 </div>
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-slate-900">{t.label}</p>
-                  <p className={cn("label text-[10px] font-bold", r.className)}>{r.label}</p>
+                  <p className={cn("label text-[10px] font-bold", r.className)}>
+                    {r.label}
+                  </p>
                 </div>
               </div>
 
@@ -81,8 +131,16 @@ export function ContextChecks({ checks, verdict }: { checks: ContextCheck[]; ver
                 {(check.recordId || check.createdBy || check.createdAt) && (
                   <dl className="machine mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-slate-600">
                     {check.recordId && <Pair k="record" v={check.recordId} />}
-                    {check.createdBy && <Pair k="created_by" v={check.createdBy} highlight={!!punchline} />}
-                    {check.createdAt && <Pair k="created_at" v={check.createdAt} />}
+                    {check.createdBy && (
+                      <Pair
+                        k="created_by"
+                        v={check.createdBy}
+                        highlight={!!punchline}
+                      />
+                    )}
+                    {check.createdAt && (
+                      <Pair k="created_at" v={check.createdAt} />
+                    )}
                   </dl>
                 )}
               </div>
@@ -99,12 +157,28 @@ export function ContextChecks({ checks, verdict }: { checks: ContextCheck[]; ver
   );
 }
 
-function Pair({ k, v, highlight }: { k: string; v: string; highlight?: boolean }) {
+function Pair({
+  k,
+  v,
+  highlight,
+}: {
+  k: string;
+  v: string;
+  highlight?: boolean;
+}) {
   return (
     <div className="flex gap-1.5 items-center">
       <dt className="text-slate-400 text-[11px]">{k}:</dt>
-      <dd className={cn("text-[11px]", highlight ? "font-bold text-red-700 bg-red-100 px-1.5 py-0.5 rounded border border-red-200" : "text-emerald-800 font-semibold")}>{v}</dd>
+      <dd
+        className={cn(
+          "text-[11px]",
+          highlight
+            ? "font-bold text-red-700 bg-red-100 px-1.5 py-0.5 rounded border border-red-200"
+            : "text-emerald-800 font-semibold",
+        )}
+      >
+        {v}
+      </dd>
     </div>
   );
 }
-

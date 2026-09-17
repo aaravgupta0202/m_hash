@@ -63,7 +63,8 @@ export const QUEUE_ROWS: QueueRow[] = ORDER.map((id, i) => {
 
 /** Rows after this index render at 60% opacity. Nothing is hidden. */
 export const TRIAGE_CAPACITY_AFTER_RANK = 7;
-export const TRIAGE_CAPACITY_LABEL = "Today's triage capacity — 6 analyst-hours";
+export const TRIAGE_CAPACITY_LABEL =
+  "Today's triage capacity — 6 analyst-hours";
 
 export const QUEUE_SORT_FOOTNOTE =
   "Ranked by expected cost of inaction — calibrated probability × asset criticality — not by raw risk. Row 2 carries a higher score than row 1 on a less critical asset, so it ranks below it.";

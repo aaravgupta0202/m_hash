@@ -3,43 +3,48 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Play, Sparkles } from "lucide-react";
+import { ChevronDown, Play } from "lucide-react";
 import { cn } from "cn";
 import { DEMO_SCENARIOS, normalisePath } from "@/lib/nav";
 
+const TONE_DOT: Record<string, string> = {
+  "/subject/8830": "bg-emerald-500",
+  "/subject/4912": "bg-red-500",
+  "/subject/2071": "bg-amber-500",
+};
+
 /**
- * PRD §10: a small fixed control on every page so the presenter never navigates
- * during the video. The single highest-value piece of demo insurance in the
- * build.
+ * PRD §10: a small fixed control on every page so the presenter never
+ * navigates during the video. The single highest-value piece of demo
+ * insurance in the build.
  *
  * It is a horizontal strip rather than a panel, and it collapses, because a
- * fixed block in the bottom-right corner sits on top of the last rows of every
- * table on every page — which is exactly where a judge scrolls to.
+ * fixed block in the bottom-right corner sits on top of the last rows of
+ * every table on every page — which is exactly where a judge scrolls to.
  *
- * These three labels are the only place the presenter shorthand names appear
- * (PRD §6). Inside the investigation UI a subject is a pseudonym.
+ * These three labels are the only place the presenter shorthand names
+ * appear (PRD §6). Inside the investigation UI a subject is a pseudonym.
  */
 export function DemoLauncher() {
   const [open, setOpen] = useState(true);
   const pathname = normalisePath(usePathname());
 
-  const TONE_DOT: Record<string, string> = {
-    "/subject/8830": "bg-emerald-500",
-    "/subject/4912": "bg-red-500",
-    "/subject/2071": "bg-amber-500",
-  };
-
   return (
-    <div className="fixed right-4 bottom-4 z-40 flex items-stretch overflow-hidden rounded-lg border border-line bg-white shadow-lg">
+    <div className="fixed right-4 bottom-4 z-40 flex items-stretch overflow-hidden rounded-sm border border-line bg-white shadow-lg">
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="flex items-center gap-2 bg-emerald-600 px-3 py-1.5 text-white font-semibold hover:bg-emerald-700 transition-all shadow-xs"
+        className="flex items-center gap-1.5 bg-emerald-700 px-3 py-1.5 text-white hover:bg-emerald-800"
       >
-        <Sparkles className="size-3.5 text-white" />
-        <span className="label text-xs tracking-wider text-white">DEMO SCENARIOS</span>
-        <ChevronDown className={cn("size-3.5 transition-transform duration-200", open ? "" : "-rotate-90")} />
+        <Play className="size-3 fill-current" />
+        <span className="text-xs font-medium">Demo scenarios</span>
+        <ChevronDown
+          className={cn(
+            "size-3.5 transition-transform duration-200",
+            open ? "" : "-rotate-90",
+          )}
+        />
       </button>
 
       {open && (
@@ -52,13 +57,13 @@ export function DemoLauncher() {
                 <Link
                   href={s.href}
                   className={cn(
-                    "flex items-center gap-2 px-3 py-1.5 text-xs whitespace-nowrap transition-all",
+                    "flex items-center gap-2 px-3 py-1.5 text-xs whitespace-nowrap",
                     active
-                      ? "bg-emerald-50 font-semibold text-emerald-900"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+                      ? "bg-emerald-50 font-medium text-emerald-900"
+                      : "text-slate-600 hover:bg-slate-50",
                   )}
                 >
-                  <span className={cn("size-2 rounded-full", dot)} />
+                  <span className={cn("size-1.5 rounded-full", dot)} />
                   <span>{s.label}</span>
                 </Link>
               </li>
@@ -69,4 +74,3 @@ export function DemoLauncher() {
     </div>
   );
 }
-

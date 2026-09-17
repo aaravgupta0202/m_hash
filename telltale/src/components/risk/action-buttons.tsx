@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { KeyRound, ShieldOff, UserSearch, Lock, AlertTriangle } from "lucide-react";
+import {
+  KeyRound,
+  ShieldOff,
+  UserSearch,
+  Lock,
+  AlertTriangle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -55,7 +61,8 @@ const ACTIONS: Action[] = [
     Icon: UserSearch,
     title: "Request identity unmasking",
     body: "Resolves this pseudonym to a named workforce identity. This is the only operation that crosses the two modules, and it is never a single action: it requires a security approval and an independent HR or legal approval, both recorded against the case with a stated reason.",
-    effect: "Requires 2 of 2 approvals · security grant + HR/legal grant · logged to the case file",
+    effect:
+      "Requires 2 of 2 approvals · security grant + HR/legal grant · logged to the case file",
     twoPerson: true,
   },
 ];
@@ -72,7 +79,7 @@ export function ActionButtons({ pseudonym }: { pseudonym: string }) {
             variant="outline"
             size="sm"
             onClick={() => setOpen(a)}
-            className="w-full justify-start gap-2 rounded-md border-line bg-white text-xs font-medium text-slate-700 hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-800 transition-all shadow-2xs"
+            className="w-full justify-start gap-2 rounded-sm border-line bg-white text-xs font-medium text-slate-700 hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-800 transition-all"
           >
             <a.Icon className="size-3.5 text-emerald-600 shrink-0" />
             <span className="truncate">{a.label}</span>
@@ -81,13 +88,15 @@ export function ActionButtons({ pseudonym }: { pseudonym: string }) {
       </div>
 
       <Dialog open={open !== null} onOpenChange={(o) => !o && setOpen(null)}>
-        <DialogContent className="rounded-lg border border-line bg-white text-slate-900 shadow-2xl sm:max-w-lg z-50">
+        <DialogContent className="rounded-sm border border-line bg-white text-slate-900 shadow-2xl sm:max-w-lg z-50">
           <DialogHeader>
             <div className="flex items-center gap-2">
-              <div className="flex size-8 items-center justify-center rounded-md border border-emerald-200 bg-emerald-50 text-emerald-600">
+              <div className="flex size-8 items-center justify-center rounded-sm border border-emerald-200 bg-emerald-50 text-emerald-600">
                 {open && <open.Icon className="size-4" />}
               </div>
-              <DialogTitle className="text-slate-900 text-base font-semibold">{open?.title}</DialogTitle>
+              <DialogTitle className="text-slate-900 text-base font-semibold">
+                {open?.title}
+              </DialogTitle>
             </div>
             <DialogDescription className="text-slate-600 text-xs leading-relaxed pt-2">
               {open?.body}
@@ -95,16 +104,28 @@ export function ActionButtons({ pseudonym }: { pseudonym: string }) {
           </DialogHeader>
 
           <div className="space-y-3 px-6 py-2">
-            <div className="rounded-lg border border-line bg-slate-50 p-3">
-              <p className="label text-emerald-800 text-[10px] font-bold">Target Impact</p>
-              <p className="machine mt-1 text-xs text-slate-800">{open?.effect}</p>
-              <p className="machine mt-2 text-xs text-slate-600">Target: <span className="text-emerald-700 font-semibold">{pseudonym}</span></p>
+            <div className="rounded-sm border border-line bg-slate-50 p-3">
+              <p className="label text-emerald-800 text-[10px] font-bold">
+                Target Impact
+              </p>
+              <p className="machine mt-1 text-xs text-slate-800">
+                {open?.effect}
+              </p>
+              <p className="machine mt-2 text-xs text-slate-600">
+                Target:{" "}
+                <span className="text-emerald-700 font-semibold">
+                  {pseudonym}
+                </span>
+              </p>
             </div>
 
             {open?.twoPerson && (
               <div className="grid grid-cols-2 gap-2.5">
                 {["Security approval", "HR / legal approval"].map((g) => (
-                  <div key={g} className="rounded-lg border border-dashed border-line bg-slate-50/50 p-2.5">
+                  <div
+                    key={g}
+                    className="rounded-sm border border-dashed border-line bg-slate-50/50 p-2.5"
+                  >
                     <p className="label text-slate-500 text-[10px]">{g}</p>
                     <p className="mt-1 text-xs text-amber-700 font-semibold flex items-center gap-1">
                       <Lock className="size-3" />
@@ -115,9 +136,11 @@ export function ActionButtons({ pseudonym }: { pseudonym: string }) {
               </div>
             )}
 
-            <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800 flex items-center gap-2">
+            <div className="rounded-sm border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800 flex items-center gap-2">
               <AlertTriangle className="size-4 shrink-0 text-amber-600" />
-              <span>Disabled in demo build — this would call the connector.</span>
+              <span>
+                Disabled in demo build — this would call the connector.
+              </span>
             </div>
           </div>
 
@@ -141,4 +164,3 @@ export function ActionButtons({ pseudonym }: { pseudonym: string }) {
     </>
   );
 }
-

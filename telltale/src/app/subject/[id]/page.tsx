@@ -7,7 +7,13 @@ import { ContextChecks } from "@/components/risk/context-checks";
 import { ContributionTable } from "@/components/risk/contribution-table";
 import { EvidenceList } from "@/components/risk/evidence-list";
 import { InvestigationHeader } from "@/components/risk/investigation-header";
-import { ALL_DOSSIERS, dossierFor, routeIdFor, subjectById, timelineFor } from "@/lib/fixtures";
+import {
+  ALL_DOSSIERS,
+  dossierFor,
+  routeIdFor,
+  subjectById,
+  timelineFor,
+} from "@/lib/fixtures";
 
 /** Every queue row plus the suppressed subject has a real page (PRD §6). */
 export function generateStaticParams() {
@@ -71,7 +77,10 @@ export default async function SubjectPage(props: PageProps<"/subject/[id]">) {
           sub="The trajectory as a graph. Edge labels are empirical transition probabilities measured in this organisation, not global priors."
           bodyClassName="p-0"
         >
-          <AttackPath nodes={dossier.attackPath.nodes} edges={dossier.attackPath.edges} />
+          <AttackPath
+            nodes={dossier.attackPath.nodes}
+            edges={dossier.attackPath.edges}
+          />
         </Panel>
 
         <Panel

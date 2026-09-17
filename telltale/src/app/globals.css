@@ -3,70 +3,76 @@
 @import "shadcn/tailwind.css";
 
 /*
- * tellTale Enterprise Light Mode — Crisp slate canvas with refined Emerald accents.
+ * tellTale palette. Slate ink on a warm-white canvas, emerald reserved for
+ * things that are actually true (healthy, authorised, suppressed) rather than
+ * painted on every element for brand consistency. Variable names below still
+ * say "purple" — that is the original PRD token naming, carried through so
+ * the ~30 files referencing `text-purple` / `bg-purple-lt` etc. did not all
+ * need a mechanical rename when the accent colour changed. It resolves to
+ * emerald, a shade off Tailwind's stock emerald-600 so it doesn't read as the
+ * unmodified framework default.
  */
 :root {
-  --tt-ink: #0f172a;         /* slate-900 primary text */
-  --tt-purple: #059669;      /* emerald-600 accent */
-  --tt-purple-dk: #047857;   /* emerald-700 dark accent */
-  --tt-purple-lt: #ecfdf5;   /* emerald-50 soft accent surface */
-  --tt-green: #10b981;       /* emerald-500 */
-  --tt-amber: #d97706;       /* amber-600 */
-  --tt-red: #dc2626;         /* red-600 */
-  --tt-grey: #64748b;        /* slate-500 secondary text */
-  --tt-line: #e2e8f0;        /* slate-200 border */
-  --tt-panel: #ffffff;       /* clean white cards */
-  --tt-white: #ffffff;
+  --tt-ink: #17181c; /* near-black, a fraction warmer than slate-900 */
+  --tt-purple: #0f7a5c; /* accent — used sparingly, not as decoration */
+  --tt-purple-dk: #0b5e46;
+  --tt-purple-lt: #eef6f2;
+  --tt-green: #157a4a;
+  --tt-amber: #9a6a1f;
+  --tt-red: #b1372a;
+  --tt-grey: #6b6d76;
+  --tt-line: #e3e3e0;
+  --tt-panel: #fffdfa;
+  --tt-white: #fffdfa; /* the canvas has a hair of warmth, not clinical #fff */
 
-  /* shadcn semantic tokens */
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #059669;
-  --primary-foreground: #ffffff;
-  --secondary: #ecfdf5;
-  --secondary-foreground: #047857;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f8fafc;
-  --accent-foreground: #047857;
-  --destructive: #dc2626;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #059669;
-  --chart-1: #059669;
-  --chart-2: #10b981;
-  --chart-3: #f59e0b;
-  --chart-4: #ef4444;
-  --chart-5: #64748b;
-  --radius: 0.375rem;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #0f172a;
-  --sidebar-primary: #059669;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #ecfdf5;
-  --sidebar-accent-foreground: #047857;
-  --sidebar-border: #e2e8f0;
-  --sidebar-ring: #059669;
+  --background: #faf9f6;
+  --foreground: #17181c;
+  --card: #fffdfa;
+  --card-foreground: #17181c;
+  --popover: #fffdfa;
+  --popover-foreground: #17181c;
+  --primary: #0f7a5c;
+  --primary-foreground: #fffdfa;
+  --secondary: #eef6f2;
+  --secondary-foreground: #0b5e46;
+  --muted: #f1f0eb;
+  --muted-foreground: #6b6d76;
+  --accent: #f1f0eb;
+  --accent-foreground: #0b5e46;
+  --destructive: #b1372a;
+  --border: #e3e3e0;
+  --input: #e3e3e0;
+  --ring: #0f7a5c;
+  --chart-1: #0f7a5c;
+  --chart-2: #3d8f76;
+  --chart-3: #b1802f;
+  --chart-4: #b1372a;
+  --chart-5: #6b6d76;
+  --radius: 0.25rem;
+  --sidebar: #fffdfa;
+  --sidebar-foreground: #17181c;
+  --sidebar-primary: #0f7a5c;
+  --sidebar-primary-foreground: #fffdfa;
+  --sidebar-accent: #eef6f2;
+  --sidebar-accent-foreground: #0b5e46;
+  --sidebar-border: #e3e3e0;
+  --sidebar-ring: #0f7a5c;
 
   color-scheme: light;
 }
 
 @theme inline {
-  --color-ink: #0f172a;
-  --color-purple: #059669;
-  --color-purple-dk: #047857;
-  --color-purple-lt: #ecfdf5;
-  --color-green: #10b981;
-  --color-amber: #d97706;
-  --color-red: #dc2626;
-  --color-grey: #64748b;
-  --color-line: #e2e8f0;
-  --color-panel: #ffffff;
-  --color-white: #ffffff;
+  --color-ink: var(--tt-ink);
+  --color-purple: var(--tt-purple);
+  --color-purple-dk: var(--tt-purple-dk);
+  --color-purple-lt: var(--tt-purple-lt);
+  --color-green: var(--tt-green);
+  --color-amber: var(--tt-amber);
+  --color-red: var(--tt-red);
+  --color-grey: var(--tt-grey);
+  --color-line: var(--tt-line);
+  --color-panel: var(--tt-panel);
+  --color-white: var(--tt-white);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -122,34 +128,47 @@
   body {
     @apply bg-background text-foreground text-sm;
   }
+  /* A plain thin scrollbar reads as a real desktop tool; the oversized
+     rounded ones some browsers default to read as a mobile web wrapper. */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--tt-line);
+    border-radius: 5px;
+    border: 2px solid var(--background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--tt-line) 55%, var(--tt-grey));
+  }
 }
 
 @layer utilities {
-  /* Monospace for numbers and machine-generated tokens */
+  /* Monospace for anything machine-generated — timestamps, action tokens,
+     resource ids, probabilities. Sans for anything a human wrote. This is
+     the one typographic rule that does most of the work in this build. */
   .machine {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.01em;
   }
-  /* Small uppercase label used for section eyebrows and chips */
+  /* Small uppercase label for section eyebrows and status chips. Used on its
+     own — stacking font-bold or tracking-wider on top fights the weight and
+     spacing this class already sets. */
   .label {
     font-size: 0.6875rem;
     line-height: 1rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
-  }
-  /* Subtle clean shadows */
-  .glow-mint {
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.08);
-  }
-  .glow-border {
-    border-color: #059669;
-    box-shadow: 0 0 0 1px rgba(5, 150, 105, 0.2);
   }
 }
 
-/* Risk bars animation */
+/* Risk bars animate width on mount. Nothing else moves (PRD §8). */
 @keyframes tt-bar-grow {
   from {
     transform: scaleX(0);
@@ -164,13 +183,13 @@
     transform-origin: left;
     animation: tt-bar-grow 200ms ease-out both;
   }
-  /* Clean white card surface with subtle ambient depth */
+  /* The only surface in the build: 1px border, small radius, flat. Shadows
+     read as a marketing-site mock, not as an analyst tool someone sits in
+     front of for eight hours. */
   .panel {
     border-width: 1px;
     border-color: var(--tt-line);
     border-radius: var(--radius);
-    background-color: #ffffff;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.02);
+    background-color: var(--tt-panel);
   }
 }
-

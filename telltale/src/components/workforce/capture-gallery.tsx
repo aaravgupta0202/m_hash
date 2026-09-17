@@ -3,7 +3,12 @@
 import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, Flag, Tag } from "lucide-react";
 import { cn } from "cn";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { BrandIcon } from "@/components/brand-icon";
 import { CaptureThumb } from "@/components/workforce/capture-thumb";
 import { ALL_MEMBERS, ALL_TEAMS, useFilters } from "@/lib/filters";
 import { CAPTURES, MEMBERS } from "@/lib/fixtures";
@@ -33,10 +38,15 @@ export function CaptureGallery() {
   const [page, setPage] = useState(0);
   const [tags, setTags] = useState<Record<string, string[]>>({});
   const [flags, setFlags] = useState<Record<string, string>>(
-    Object.fromEntries(CAPTURES.filter((c) => c.flagged).map((c) => [c.id, "CASE_EVIDENCE"])),
+    Object.fromEntries(
+      CAPTURES.filter((c) => c.flagged).map((c) => [c.id, "CASE_EVIDENCE"]),
+    ),
   );
 
-  const teamOf = useMemo(() => Object.fromEntries(MEMBERS.map((m) => [m.id, m.team])), []);
+  const teamOf = useMemo(
+    () => Object.fromEntries(MEMBERS.map((m) => [m.id, m.team])),
+    [],
+  );
 
   const filtered = CAPTURES.filter(
     (c) =>
@@ -53,7 +63,10 @@ export function CaptureGallery() {
   const toggleTag = (id: string, tag: string) =>
     setTags((prev) => {
       const cur = prev[id] ?? [];
-      return { ...prev, [id]: cur.includes(tag) ? cur.filter((t) => t !== tag) : [...cur, tag] };
+      return {
+        ...prev,
+        [id]: cur.includes(tag) ? cur.filter((t) => t !== tag) : [...cur, tag],
+      };
     });
 
   return (
@@ -69,9 +82,9 @@ export function CaptureGallery() {
               setPage(0);
             }}
             className={cn(
-              "rounded-md border px-2.5 py-1 text-xs font-medium capitalize transition-all",
+              "rounded-sm border px-2.5 py-1 text-xs font-medium capitalize transition-all",
               mode === m
-                ? "border-emerald-600 bg-emerald-50 text-emerald-800 font-semibold shadow-xs"
+                ? "border-emerald-600 bg-emerald-50 text-emerald-800 font-semibold "
                 : "border-line bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900",
             )}
           >
@@ -79,7 +92,7 @@ export function CaptureGallery() {
           </button>
         ))}
 
-        <label className="ml-3 flex cursor-pointer items-center gap-1.5 rounded-md border border-line bg-white px-2.5 py-1 text-xs text-slate-700 hover:bg-slate-100 transition-colors">
+        <label className="ml-3 flex cursor-pointer items-center gap-1.5 rounded-sm border border-line bg-white px-2.5 py-1 text-xs text-slate-700 hover:bg-slate-100 transition-colors">
           <input
             type="checkbox"
             checked={flaggedOnly}
@@ -94,8 +107,10 @@ export function CaptureGallery() {
 
         <div className="ml-auto flex items-center gap-2">
           <span className="machine text-xs text-slate-500">
-            {filtered.length === 0 ? "0" : `${current * PAGE + 1}–${current * PAGE + shown.length}`} of{" "}
-            {filtered.length}
+            {filtered.length === 0
+              ? "0"
+              : `${current * PAGE + 1}–${current * PAGE + shown.length}`}{" "}
+            of {filtered.length}
           </span>
           <button
             type="button"
@@ -121,7 +136,8 @@ export function CaptureGallery() {
 
       {shown.length === 0 ? (
         <p className="px-4 py-12 text-center text-sm text-slate-500">
-          No capture matches these filters. Clear the mode chip or the flagged-only box.
+          No capture matches these filters. Clear the mode chip or the
+          flagged-only box.
         </p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3.5 p-4">
@@ -132,15 +148,20 @@ export function CaptureGallery() {
               <figure
                 key={c.id}
                 className={cn(
-                  "flex flex-col rounded-lg border p-2 bg-white shadow-xs transition-all hover:border-emerald-400 hover:shadow-sm",
+                  "flex flex-col rounded-sm border p-2 bg-white transition-all hover:border-emerald-400 hover:",
                   flag ? "border-red-200 bg-red-50/20" : "border-line",
                 )}
               >
                 <CaptureThumb seed={c.seed} />
                 <figcaption className="mt-2 px-0.5">
-                  <p className="truncate text-xs font-semibold text-slate-900">{c.memberName}</p>
-                  <p className="machine truncate text-[11px] text-slate-500 mt-0.5">
-                    {c.ts.slice(11, 16)} · {c.application}
+                  <p className="truncate text-xs font-semibold text-slate-900">
+                    {c.memberName}
+                  </p>
+                  <p className="machine truncate text-[11px] text-slate-500 mt-0.5 flex items-center gap-1.5">
+                    <span>{c.ts.slice(11, 16)}</span>
+                    <span className="text-slate-300">·</span>
+                    <BrandIcon name={c.application} className="size-3" />
+                    <span className="truncate">{c.application}</span>
                   </p>
                   <div className="mt-1.5 flex items-center gap-1">
                     <span
@@ -160,7 +181,9 @@ export function CaptureGallery() {
                     )}
                   </div>
                   {itemTags.length > 0 && (
-                    <p className="mt-1.5 truncate text-[10px] text-emerald-700 font-medium">{itemTags.join(" · ")}</p>
+                    <p className="mt-1.5 truncate text-[10px] text-emerald-700 font-medium">
+                      {itemTags.join(" · ")}
+                    </p>
                   )}
 
                   <div className="mt-2 flex gap-1.5">
@@ -181,7 +204,10 @@ export function CaptureGallery() {
                         <Tag className="size-2.5 text-emerald-600" />
                         Tag
                       </PopoverTrigger>
-                      <PopoverContent align="start" className="w-48 rounded-lg p-1.5 shadow-lg bg-white border border-line text-slate-900 z-50">
+                      <PopoverContent
+                        align="start"
+                        className="w-48 rounded-sm p-1.5 shadow-lg bg-white border border-line text-slate-900 z-50"
+                      >
                         {TAGS.map((t) => (
                           <button
                             key={t}
@@ -190,7 +216,11 @@ export function CaptureGallery() {
                             className="flex w-full items-center justify-between rounded px-2 py-1.5 text-left text-xs text-slate-800 hover:bg-slate-100 transition-colors"
                           >
                             {t}
-                            {itemTags.includes(t) && <span className="text-emerald-600 font-bold">✓</span>}
+                            {itemTags.includes(t) && (
+                              <span className="text-emerald-600 font-bold">
+                                ✓
+                              </span>
+                            )}
                           </button>
                         ))}
                       </PopoverContent>
@@ -213,17 +243,28 @@ export function CaptureGallery() {
                         <Flag className="size-2.5 text-red-600" />
                         Flag
                       </PopoverTrigger>
-                      <PopoverContent align="start" className="w-64 rounded-lg p-2 shadow-lg bg-white border border-line text-slate-900 z-50">
-                        <p className="label px-2 py-1 text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Reason code</p>
+                      <PopoverContent
+                        align="start"
+                        className="w-64 rounded-sm p-2 shadow-lg bg-white border border-line text-slate-900 z-50"
+                      >
+                        <p className="label px-2 py-1 text-[10px] text-slate-500 uppercase tracking-wider font-semibold">
+                          Reason code
+                        </p>
                         {FLAG_REASONS.map((r) => (
                           <button
                             key={r.code}
                             type="button"
-                            onClick={() => setFlags((prev) => ({ ...prev, [c.id]: r.code }))}
+                            onClick={() =>
+                              setFlags((prev) => ({ ...prev, [c.id]: r.code }))
+                            }
                             className="block w-full rounded px-2 py-1.5 text-left hover:bg-slate-100 transition-colors"
                           >
-                            <span className="machine block text-xs font-semibold text-slate-900">{r.code}</span>
-                            <span className="block text-[11px] text-slate-500">{r.label}</span>
+                            <span className="machine block text-xs font-semibold text-slate-900">
+                              {r.code}
+                            </span>
+                            <span className="block text-[11px] text-slate-500">
+                              {r.label}
+                            </span>
                           </button>
                         ))}
                         {flag && (

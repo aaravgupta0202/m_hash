@@ -17,7 +17,8 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "tellTale — Demo Console",
-  description: "Context-aware behavioural transition detection. Demo build — all data synthetic.",
+  description:
+    "Context-aware behavioural transition detection. Demo build — all data synthetic.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -31,4 +32,3 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     </html>
   );
 }
-

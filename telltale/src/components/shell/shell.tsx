@@ -5,6 +5,7 @@ import { FilterProvider } from "@/lib/filters";
 import { Sidebar } from "./sidebar";
 import { Topbar } from "./topbar";
 import { DemoLauncher } from "./demo-launcher";
+import { MethodologyInfo } from "./methodology-info";
 
 interface SidebarContextType {
   collapsed: boolean;
@@ -25,7 +26,9 @@ export function Shell({ children }: { children: ReactNode }) {
   const toggleCollapsed = () => setCollapsed((prev) => !prev);
 
   return (
-    <SidebarContext.Provider value={{ collapsed, setCollapsed, toggleCollapsed }}>
+    <SidebarContext.Provider
+      value={{ collapsed, setCollapsed, toggleCollapsed }}
+    >
       <FilterProvider>
         <div className="flex min-h-screen bg-background text-foreground transition-colors duration-200">
           <Sidebar />
@@ -34,9 +37,9 @@ export function Shell({ children }: { children: ReactNode }) {
             <main className="min-w-0 flex-1 px-6 py-5 pb-20">{children}</main>
           </div>
           <DemoLauncher />
+          <MethodologyInfo />
         </div>
       </FilterProvider>
     </SidebarContext.Provider>
   );
 }
-

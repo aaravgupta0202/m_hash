@@ -1,3 +1,4 @@
+import { getBrandSlug } from "@/lib/brand-icons";
 import { CONNECTORS, CONNECTOR_RIBBONS, type ConnectorState } from "@/lib/fixtures";
 
 /**
@@ -63,7 +64,8 @@ export function ConnectorRibbons() {
           const y = AXIS_H + i * ROW_H;
           return (
             <g key={c.id}>
-              <text x={0} y={y + BAR_H} fontSize="11" fill="var(--tt-ink)">
+              <image href={`/brand-icons/${getBrandSlug(c.name)}.svg`} x={0} y={y + 1} width="14" height="14" />
+              <text x={20} y={y + BAR_H} fontSize="11" fill="var(--tt-ink)">
                 {c.name}
               </text>
               <rect
@@ -90,10 +92,10 @@ export function ConnectorRibbons() {
                 </rect>
               ))}
               {/*
-                * Two adjacent non-healthy segments put their labels 45px apart
-                * on a 100px-wide string, which rendered as one unreadable
-                * overlap. Labels that would collide drop to a second line.
-                */}
+               * Two adjacent non-healthy segments put their labels 45px apart
+               * on a 100px-wide string, which rendered as one unreadable
+               * overlap. Labels that would collide drop to a second line.
+               */}
               {labelRows(ribbon?.segments ?? []).map((l, j) => (
                 <text
                   key={`l${j}`}
@@ -117,7 +119,9 @@ export function ConnectorRibbons() {
 /** Estimated advance width of the label text at 9.5px in the mono face. */
 const CHAR_W = 5.4;
 
-function labelRows(segments: { from: number; to: number; state: ConnectorState }[]) {
+function labelRows(
+  segments: { from: number; to: number; state: ConnectorState }[],
+) {
   const out: { from: number; state: ConnectorState; row: number }[] = [];
   for (const seg of segments) {
     if (seg.state === "healthy") continue;
@@ -129,7 +133,8 @@ function labelRows(segments: { from: number; to: number; state: ConnectorState }
       out.some(
         (o) =>
           o.row === row &&
-          x(o.from) + 4 + `${o.state} from ${hhmm(o.from)}`.length * CHAR_W > start &&
+          x(o.from) + 4 + `${o.state} from ${hhmm(o.from)}`.length * CHAR_W >
+            start &&
           x(o.from) + 4 < end,
       )
     ) {

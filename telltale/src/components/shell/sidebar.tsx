@@ -13,16 +13,25 @@ import {
   Info,
   PanelLeftClose,
   PanelLeftOpen,
-  Shield,
-  Briefcase,
   Layers,
 } from "lucide-react";
 import { cn } from "cn";
-import { MODULE_ROLE, RISK_NAV, WORKFORCE_NAV, moduleForPath, normalisePath, type NavItem } from "@/lib/nav";
+import {
+  MODULE_ROLE,
+  RISK_NAV,
+  WORKFORCE_NAV,
+  moduleForPath,
+  normalisePath,
+  type NavItem,
+} from "@/lib/nav";
 import { ModuleSwitch } from "./module-switch";
 import { ProfileChip } from "./profile-chip";
 import { useSidebar } from "./shell";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const NAV_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   "/": LayoutDashboard,
@@ -35,6 +44,29 @@ const NAV_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   "/about": Info,
 };
 
+/**
+ * The collapse used to swap in an entirely different subtree per row — one
+ * JSX branch for expanded, an unrelated one for collapsed (a lone icon in a
+ * Tooltip). Toggling `collapsed` unmounted one and mounted the other in the
+ * same frame the width transition started, so for the ~200ms the <aside>
+ * was still animating narrower, the content inside had already popped to
+ * its end state: icons jumping, badges vanishing mid-flight, the module
+ * switcher briefly rendering as one icon instead of two. That's the glitch.
+ *
+ * Every row below is now a single markup tree at every width. Only the
+ * parts that should disappear when collapsed carry `w-0 opacity-0` (via
+ * `collapsible`), so they shrink and fade over the same 200ms as the rail
+ * itself instead of unmounting out from under it. Tooltips are always
+ * present too — they only *show* on hover regardless of width, so there's
+ * no structural fork left to desync.
+ */
+const collapsible = (collapsed: boolean, extra?: string) =>
+  cn(
+    "overflow-hidden whitespace-nowrap transition-all duration-200",
+    collapsed ? "w-0 opacity-0" : "opacity-100",
+    extra,
+  );
+
 export function Sidebar() {
   const pathname = normalisePath(usePathname());
   const mod = moduleForPath(pathname);
@@ -44,200 +76,186 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "sticky top-0 z-30 flex h-screen shrink-0 flex-col border-r border-line bg-white text-slate-900 transition-all duration-200 shadow-xs",
-        collapsed ? "w-18" : "w-64",
+        "sticky top-0 z-30 flex h-screen shrink-0 flex-col border-r border-line bg-white transition-[width] duration-200",
+        collapsed ? "w-16" : "w-64",
       )}
     >
-      {/* Header & Logo */}
-      <div className={cn("border-b border-line p-3.5", collapsed ? "px-2 text-center" : "px-4")}>
-        <div className="flex items-center justify-between">
-          <Link href="/" className="group flex items-center gap-2.5 overflow-hidden">
-            <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-emerald-200 bg-emerald-50 text-emerald-600 shadow-xs">
-              <Layers className="size-4.5 text-emerald-600" />
-            </div>
-            {!collapsed && (
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-base tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors">
-                    tellTale
-                  </span>
-                  <span className="label rounded-[3px] bg-emerald-50 px-1.5 py-0.2 text-[9px] font-bold text-emerald-700 border border-emerald-200">
-                    CONSOLE
-                  </span>
-                </div>
-                <span className="text-[10px] text-slate-500 truncate">Transition Detection</span>
-              </div>
-            )}
-          </Link>
-          <button
-            type="button"
-            onClick={toggleCollapsed}
-            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-            className={cn(
-              "flex size-7 items-center justify-center rounded border border-line text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors",
-              collapsed && "mx-auto mt-2",
-            )}
-          >
-            {collapsed ? <PanelLeftOpen className="size-4" /> : <PanelLeftClose className="size-4" />}
-          </button>
+      {/* Header */}
+      <div className="flex h-14 shrink-0 items-center gap-2 border-b border-line px-3">
+        <Link href="/" className="flex min-w-0 flex-1 items-center gap-2.5">
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-emerald-200 bg-emerald-50 text-emerald-700">
+            <Layers className="size-4" />
+          </div>
+          <div className={collapsible(collapsed, "flex min-w-0 flex-col")}>
+            <span className="truncate text-sm font-semibold tracking-tight text-ink">
+              tellTale
+            </span>
+            <span className="truncate text-[10px] text-grey">
+              Transition detection
+            </span>
+          </div>
+        </Link>
+        <button
+          type="button"
+          onClick={toggleCollapsed}
+          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          className="flex size-7 shrink-0 items-center justify-center rounded-sm text-grey hover:bg-purple-lt hover:text-purple"
+        >
+          {collapsed ? (
+            <PanelLeftOpen className="size-4" />
+          ) : (
+            <PanelLeftClose className="size-4" />
+          )}
+        </button>
+      </div>
+
+      {/* Module switcher */}
+      <div className="shrink-0 border-b border-line p-2.5">
+        <ModuleSwitch current={mod} collapsed={collapsed} />
+        <div
+          className={collapsible(
+            collapsed,
+            "mt-2 flex items-center justify-between px-0.5",
+          )}
+        >
+          <span className="label text-grey">Role</span>
+          <span className="label rounded-sm bg-purple-lt px-1.5 py-0.5 text-purple">
+            {MODULE_ROLE[mod]}
+          </span>
         </div>
       </div>
 
-      {/* Module Switcher */}
-      <div className={cn("border-b border-line", collapsed ? "p-2 text-center" : "p-3")}>
-        {collapsed ? (
-          <Tooltip>
-            <TooltipTrigger render={<div className="flex justify-center" />}>
-              <div
-                className="flex size-9 items-center justify-center rounded border border-emerald-200 bg-emerald-50 text-emerald-700"
-                title={`Active: ${MODULE_ROLE[mod]}`}
-              >
-                {mod === "risk" ? <Shield className="size-4.5" /> : <Briefcase className="size-4.5" />}
-              </div>
-            </TooltipTrigger>
-            <TooltipContent side="right" className="bg-slate-900 border border-slate-800 text-white">
-              Role: {MODULE_ROLE[mod]}
-            </TooltipContent>
-          </Tooltip>
-        ) : (
-          <>
-            <ModuleSwitch current={mod} />
-            <div className="mt-2.5 flex items-center justify-between px-1">
-              <span className="label text-slate-500 text-[10px]">Active Role</span>
-              <span className="label rounded border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-700">
-                {MODULE_ROLE[mod]}
-              </span>
-            </div>
-          </>
-        )}
-      </div>
-
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto px-2 py-3">
-        {!collapsed && (
-          <p className="label mb-2 px-2 text-[10px] text-slate-400">
-            {mod === "risk" ? "Risk Module · Pseudonymous" : "Workforce Module · Named"}
-          </p>
-        )}
-        <ul className="space-y-1">
+      <nav className="flex-1 overflow-x-hidden overflow-y-auto px-2 py-3">
+        <p className={collapsible(collapsed, "label mb-1.5 px-2 text-grey")}>
+          {mod === "risk" ? "Risk · pseudonymous" : "Workforce · named"}
+        </p>
+        <ul className="space-y-0.5">
           {items.map((item) => (
-            <NavLink key={item.href} item={item} active={item.match(pathname)} collapsed={collapsed} />
+            <NavLink
+              key={item.href}
+              item={item}
+              active={item.match(pathname)}
+              collapsed={collapsed}
+            />
           ))}
         </ul>
       </nav>
 
-      {/* Footer Controls & Honesty Badge */}
-      <div className="space-y-2 border-t border-line p-2.5">
-        {!collapsed ? (
-          <>
-            <ProfileChip />
-            <Link
-              href="/about"
-              className={cn(
-                "flex items-center gap-2 rounded px-2.5 py-1.5 text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors",
-                pathname === "/about" && "bg-emerald-50 text-emerald-800 font-semibold border-l-2 border-emerald-600",
-              )}
-            >
-              <Info className="size-4 text-emerald-600 shrink-0" />
-              <span>About this build</span>
-            </Link>
-            <div className="rounded border border-emerald-200 bg-emerald-50/70 px-2.5 py-1.5">
-              <p className="label text-emerald-800 flex items-center gap-1.5">
-                <span className="size-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                Demo build — all data synthetic
-              </p>
-            </div>
-          </>
-        ) : (
-          <div className="flex flex-col items-center space-y-2">
-            <Tooltip>
-              <TooltipTrigger
-                render={
-                  <Link
-                    href="/about"
-                    className={cn(
-                      "flex size-9 items-center justify-center rounded text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors",
-                      pathname === "/about" && "bg-emerald-50 text-emerald-700 border border-emerald-200",
-                    )}
-                  />
-                }
-              >
-                <Info className="size-4.5" />
-              </TooltipTrigger>
-              <TooltipContent side="right" className="bg-slate-900 border border-slate-800 text-white">
-                About this build
-              </TooltipContent>
-            </Tooltip>
+      {/* Footer */}
+      <div className="shrink-0 space-y-2 border-t border-line p-2.5">
+        <div className={collapsed ? "hidden" : "block"}>
+          <ProfileChip />
+        </div>
 
-            {/* Note: Honesty badge MUST be in HTML for check-export.mjs */}
-            <Tooltip>
-              <TooltipTrigger
-                render={
-                  <div className="flex size-7 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700">
-                    <span className="size-2 rounded-full bg-emerald-600 animate-pulse" />
-                  </div>
-                }
-              >
-                <span className="sr-only">Demo build — all data synthetic</span>
-              </TooltipTrigger>
-              <TooltipContent side="right" className="bg-slate-900 border border-slate-800 text-white">
-                Demo build — all data synthetic
-              </TooltipContent>
-            </Tooltip>
-          </div>
-        )}
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <Link
+                href="/about"
+                className={cn(
+                  "flex items-center gap-2 rounded-sm px-2 py-1.5 text-xs text-grey hover:bg-purple-lt hover:text-purple",
+                  pathname === "/about" && "bg-purple-lt text-purple",
+                )}
+              />
+            }
+          >
+            <Info className="size-3.5 shrink-0" />
+            <span className={collapsible(collapsed)}>About this build</span>
+          </TooltipTrigger>
+          {collapsed && (
+            <TooltipContent
+              side="right"
+              className="border border-slate-800 bg-slate-900 text-white"
+            >
+              About this build
+            </TooltipContent>
+          )}
+        </Tooltip>
+
+        {/* Honesty badge (PRD §4) — must render in HTML regardless of width,
+            so check-export.mjs finds it on every page. No pulse: the whole
+            point of this line is that nothing here is live. */}
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <div
+                className={cn(
+                  "flex items-center gap-1.5 rounded-sm border border-amber-200 bg-amber-50 px-2 py-1.5",
+                  collapsed && "justify-center px-0",
+                )}
+              />
+            }
+          >
+            <span className="size-1.5 shrink-0 rounded-full bg-amber-500" />
+            <span
+              className={cn("label text-amber-800", collapsible(collapsed))}
+            >
+              Demo build — all data synthetic
+            </span>
+          </TooltipTrigger>
+          {collapsed && (
+            <TooltipContent
+              side="right"
+              className="border border-slate-800 bg-slate-900 text-white"
+            >
+              Demo build — all data synthetic
+            </TooltipContent>
+          )}
+        </Tooltip>
       </div>
     </aside>
   );
 }
 
-function NavLink({ item, active, collapsed }: { item: NavItem; active: boolean; collapsed: boolean }) {
+function NavLink({
+  item,
+  active,
+  collapsed,
+}: {
+  item: NavItem;
+  active: boolean;
+  collapsed: boolean;
+}) {
   const Icon = NAV_ICONS[item.href] ?? LayoutDashboard;
-
-  if (collapsed) {
-    return (
-      <li>
-        <Tooltip>
-          <TooltipTrigger
-            render={
-              <Link
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "flex size-9 items-center justify-center rounded transition-all",
-                  active
-                    ? "border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-xs font-semibold"
-                    : "text-slate-500 hover:bg-slate-100 hover:text-slate-900",
-                )}
-              />
-            }
-          >
-            <Icon className="size-4.5" />
-          </TooltipTrigger>
-          <TooltipContent side="right" className="bg-slate-900 border border-slate-800 text-white">
-            {item.label}
-          </TooltipContent>
-        </Tooltip>
-      </li>
-    );
-  }
 
   return (
     <li>
-      <Link
-        href={item.href}
-        aria-current={active ? "page" : undefined}
-        className={cn(
-          "flex items-center gap-2.5 rounded-md px-2.5 py-2 text-xs transition-all",
-          active
-            ? "border-l-2 border-emerald-600 bg-emerald-50 font-semibold text-emerald-900 shadow-xs"
-            : "border-l-2 border-transparent text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <Link
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "flex items-center gap-2.5 rounded-sm border-l-2 px-2 py-2 text-sm",
+                active
+                  ? "border-purple bg-purple-lt font-medium text-purple"
+                  : "border-transparent text-ink hover:bg-purple-lt/60 hover:text-purple",
+                collapsed && "justify-center px-0",
+              )}
+            />
+          }
+        >
+          <Icon
+            className={cn(
+              "size-4 shrink-0",
+              active ? "text-purple" : "text-grey",
+            )}
+          />
+          <span className={collapsible(collapsed, "truncate")}>
+            {item.label}
+          </span>
+        </TooltipTrigger>
+        {collapsed && (
+          <TooltipContent
+            side="right"
+            className="border border-slate-800 bg-slate-900 text-white"
+          >
+            {item.label}
+          </TooltipContent>
         )}
-      >
-        <Icon className={cn("size-4 shrink-0", active ? "text-emerald-600" : "text-slate-400")} />
-        <span className="truncate">{item.label}</span>
-      </Link>
+      </Tooltip>
     </li>
   );
 }
-

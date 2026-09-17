@@ -17,19 +17,57 @@ export const ESCALATED_ANOMALIES = 66;
 export const INVESTIGATIONS = 23;
 
 export const STAT_TILES: StatTile[] = [
-  { label: "Events ingested", value: "1,284,402", sub: "last 30 days, 6 connectors" },
-  { label: "Alerts suppressed by context", value: "1,847", sub: "84% of raised anomalies" },
+  {
+    label: "Events ingested",
+    value: "1,284,402",
+    sub: "last 30 days, 6 connectors",
+  },
+  {
+    label: "Alerts suppressed by context",
+    value: "1,847",
+    sub: "84% of raised anomalies",
+  },
   { label: "Reached an analyst", value: "23", sub: "ranked, with evidence" },
-  { label: "Confirmed findings", value: "3", sub: "2 insider, 1 session theft" },
+  {
+    label: "Confirmed findings",
+    value: "3",
+    sub: "2 insider, 1 session theft",
+  },
 ];
 
 export const NOISE_SEGMENTS: NoiseSegment[] = [
-  { label: "Scope-matched ticket", reasonCode: "SCOPE_MATCHED_TICKET", pct: 52, count: 1143 },
-  { label: "On-call rotation", reasonCode: "ON_CALL_ROTATION", pct: 18, count: 396 },
-  { label: "Approved travel", reasonCode: "APPROVED_TRAVEL", pct: 7, count: 154 },
+  {
+    label: "Scope-matched ticket",
+    reasonCode: "SCOPE_MATCHED_TICKET",
+    pct: 52,
+    count: 1143,
+  },
+  {
+    label: "On-call rotation",
+    reasonCode: "ON_CALL_ROTATION",
+    pct: 18,
+    count: 396,
+  },
+  {
+    label: "Approved travel",
+    reasonCode: "APPROVED_TRAVEL",
+    pct: 7,
+    count: 154,
+  },
   { label: "Role change", reasonCode: "ROLE_CHANGE", pct: 7, count: 154 },
-  { label: "Below threshold", reasonCode: "BELOW_THRESHOLD", pct: 13, count: 286 },
-  { label: "Escalated", reasonCode: "ESCALATED", pct: 3, count: 66, escalated: true },
+  {
+    label: "Below threshold",
+    reasonCode: "BELOW_THRESHOLD",
+    pct: 13,
+    count: 286,
+  },
+  {
+    label: "Escalated",
+    reasonCode: "ESCALATED",
+    pct: 3,
+    count: 66,
+    escalated: true,
+  },
 ];
 
 export const NOISE_FOOTNOTE =

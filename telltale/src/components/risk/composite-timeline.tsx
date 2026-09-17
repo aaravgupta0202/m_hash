@@ -3,7 +3,12 @@
 import { useMemo, useRef, useState } from "react";
 import { cn } from "cn";
 import { SENSITIVITY_COLOR } from "@/components/risk/chips";
-import type { CompositeTimeline, ContextBar, Sensitivity, TimelineTick } from "@/lib/fixtures";
+import type {
+  CompositeTimeline,
+  ContextBar,
+  Sensitivity,
+  TimelineTick,
+} from "@/lib/fixtures";
 
 /**
  * PRD §5.3B — the composite timeline. Hand-built SVG, not a chart library:
@@ -34,8 +39,8 @@ const LANES = {
   trajectory: { top: 74, h: 38 },
   context: { top: 116, h: 30 },
   /* A dedicated row for the two derived annotations. They used to be drawn
-     inside the CONTEXT lane, where on a subject that has both they collided
-     with the record label and with each other. */
+ inside the CONTEXT lane, where on a subject that has both they collided
+ with the record label and with each other. */
   risk: { top: 166, h: 88 },
 } as const;
 
@@ -64,7 +69,11 @@ interface Hover {
   tone: string;
 }
 
-export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeline }) {
+export function CompositeTimelineChart({
+  timeline,
+}: {
+  timeline: CompositeTimeline;
+}) {
   const ref = useRef<SVGSVGElement>(null);
   const [cursor, setCursor] = useState<number | null>(null);
   const [hover, setHover] = useState<Hover | null>(null);
@@ -101,13 +110,22 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
           <Legend swatch="var(--tt-red)" label="critical" />
           <span className="flex items-center gap-1.5">
             <svg width="12" height="12" aria-hidden>
-              <circle cx="6" cy="6" r="4.5" fill="none" stroke="var(--tt-ink)" strokeWidth="1.4" />
+              <circle
+                cx="6"
+                cy="6"
+                r="4.5"
+                fill="none"
+                stroke="var(--tt-ink)"
+                strokeWidth="1.4"
+              />
             </svg>
             <span className="text-[11px] text-grey">first ever</span>
           </span>
         </div>
         <p className="machine text-xs text-grey">
-          {cursorT === null ? "hover for a crosshair" : `${hhmm(cursorT)} · risk ${riskAt(cursorT)}`}
+          {cursorT === null
+            ? "hover for a crosshair"
+            : `${hhmm(cursorT)} · risk ${riskAt(cursorT)}`}
         </p>
       </div>
 
@@ -127,8 +145,16 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
           >
             <defs>
               <linearGradient id="tt-risk-fill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="var(--tt-purple)" stopOpacity="0.28" />
-                <stop offset="100%" stopColor="var(--tt-purple)" stopOpacity="0.04" />
+                <stop
+                  offset="0%"
+                  stopColor="var(--tt-purple)"
+                  stopOpacity="0.28"
+                />
+                <stop
+                  offset="100%"
+                  stopColor="var(--tt-purple)"
+                  stopOpacity="0.04"
+                />
               </linearGradient>
               <pattern
                 id="tt-hatch"
@@ -137,8 +163,21 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
                 patternTransform="rotate(45)"
                 patternUnits="userSpaceOnUse"
               >
-                <rect width="6" height="6" fill="var(--tt-red)" fillOpacity="0.08" />
-                <line x1="0" y1="0" x2="0" y2="6" stroke="var(--tt-red)" strokeWidth="1.6" strokeOpacity="0.5" />
+                <rect
+                  width="6"
+                  height="6"
+                  fill="var(--tt-red)"
+                  fillOpacity="0.08"
+                />
+                <line
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="6"
+                  stroke="var(--tt-red)"
+                  strokeWidth="1.6"
+                  strokeOpacity="0.5"
+                />
               </pattern>
             </defs>
 
@@ -194,7 +233,9 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
                   x={x(g.from)}
                   y={LANES.session.top - 2}
                   width={Math.max(6, x(g.to) - x(g.from))}
-                  height={LANES.context.top + LANES.context.h - LANES.session.top + 4}
+                  height={
+                    LANES.context.top + LANES.context.h - LANES.session.top + 4
+                  }
                   fill="var(--tt-red)"
                   fillOpacity="0.05"
                   stroke="var(--tt-red)"
@@ -217,8 +258,16 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
             {/* Lane labels and baselines. */}
             {(
               [
-                ["session", "SESSION", `${timeline.session.length} auth events`],
-                ["trajectory", "TRAJECTORY", `${timeline.trajectory.length} actions`],
+                [
+                  "session",
+                  "SESSION",
+                  `${timeline.session.length} auth events`,
+                ],
+                [
+                  "trajectory",
+                  "TRAJECTORY",
+                  `${timeline.trajectory.length} actions`,
+                ],
                 [
                   "context",
                   "CONTEXT",
@@ -228,10 +277,21 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
               ] as const
             ).map(([key, label, sub]) => (
               <g key={key}>
-                <text x={0} y={LANES[key].top + 12} fontSize="10" fill="var(--tt-purple)" className="label">
+                <text
+                  x={0}
+                  y={LANES[key].top + 12}
+                  fontSize="10"
+                  fill="var(--tt-purple)"
+                  className="label"
+                >
                   {label}
                 </text>
-                <text x={0} y={LANES[key].top + 25} fontSize="9.5" fill="var(--tt-grey)">
+                <text
+                  x={0}
+                  y={LANES[key].top + 25}
+                  fontSize="9.5"
+                  fill="var(--tt-grey)"
+                >
                   {sub}
                 </text>
                 <line
@@ -259,7 +319,9 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
                     width={bw}
                     height={LANES.context.h - 10}
                     rx="2"
-                    fill={suspicious ? "url(#tt-hatch)" : CONTEXT_FILL[bar.verdict]}
+                    fill={
+                      suspicious ? "url(#tt-hatch)" : CONTEXT_FILL[bar.verdict]
+                    }
                     fillOpacity={suspicious ? 1 : 0.16}
                     stroke={CONTEXT_FILL[bar.verdict]}
                     strokeOpacity="0.6"
@@ -268,7 +330,11 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
                         x: bx + bw / 2,
                         y: LANES.context.top,
                         title: bar.recordId,
-                        lines: [bar.label, `${hhmm(bar.from)} → ${hhmm(bar.to)}`, bar.verdict.toUpperCase()],
+                        lines: [
+                          bar.label,
+                          `${hhmm(bar.from)} → ${hhmm(bar.to)}`,
+                          bar.verdict.toUpperCase(),
+                        ],
                         tone: CONTEXT_FILL[bar.verdict],
                       })
                     }
@@ -317,18 +383,35 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
                   stroke="var(--tt-red)"
                   strokeWidth="1"
                 />
-                <text x={x(precedence.from)} y={ANNOTATION_Y} fontSize="10" className="machine" fill="var(--tt-red)">
-                  ↑ {precedence.to - precedence.from}m after the record the subject created
+                <text
+                  x={x(precedence.from)}
+                  y={ANNOTATION_Y}
+                  fontSize="10"
+                  className="machine"
+                  fill="var(--tt-red)"
+                >
+                  ↑ {precedence.to - precedence.from}m after the record the
+                  subject created
                 </text>
               </g>
             )}
 
             {/* SESSION and TRAJECTORY ticks. */}
             {timeline.session.map((tick, i) => (
-              <Tick key={`s${i}`} tick={tick} lane="session" onHover={setHover} />
+              <Tick
+                key={`s${i}`}
+                tick={tick}
+                lane="session"
+                onHover={setHover}
+              />
             ))}
             {timeline.trajectory.map((tick, i) => (
-              <Tick key={`t${i}`} tick={tick} lane="trajectory" onHover={setHover} />
+              <Tick
+                key={`t${i}`}
+                tick={tick}
+                lane="trajectory"
+                onHover={setHover}
+              />
             ))}
 
             {/* RISK — stepped area. The score changes at an event, not between events. */}
@@ -356,9 +439,20 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
               </g>
             ))}
             <path d={riskArea(timeline)} fill="url(#tt-risk-fill)" />
-            <path d={riskLine(timeline)} fill="none" stroke="var(--tt-purple)" strokeWidth="1.6" />
+            <path
+              d={riskLine(timeline)}
+              fill="none"
+              stroke="var(--tt-purple)"
+              strokeWidth="1.6"
+            />
             {timeline.risk.map((p, i) => (
-              <circle key={i} cx={x(p.t)} cy={riskY(p.risk)} r="2" fill="var(--tt-purple)" />
+              <circle
+                key={i}
+                cx={x(p.t)}
+                cy={riskY(p.risk)}
+                r="2"
+                fill="var(--tt-purple)"
+              />
             ))}
             <text
               x={x(last.t) - 6}
@@ -407,16 +501,22 @@ export function CompositeTimelineChart({ timeline }: { timeline: CompositeTimeli
 
           {hover && (
             <div
-              className="pointer-events-none absolute z-10 w-64 rounded-lg border border-line bg-white p-2.5 shadow-lg text-slate-800"
+              className="pointer-events-none absolute z-10 w-64 rounded-sm border border-line bg-white p-2.5 shadow-lg text-slate-800"
               style={{ left: Math.min(hover.x + 12, 600), top: hover.y + 12 }}
             >
-              <p className="machine text-xs font-semibold" style={{ color: hover.tone }}>
+              <p
+                className="machine text-xs font-semibold"
+                style={{ color: hover.tone }}
+              >
                 {hover.title}
               </p>
               {hover.lines.map((l, i) => (
                 <p
                   key={i}
-                  className={cn("mt-0.5 text-[11px] leading-snug", i === 0 ? "machine text-ink" : "text-grey")}
+                  className={cn(
+                    "mt-0.5 text-[11px] leading-snug",
+                    i === 0 ? "machine text-ink" : "text-grey",
+                  )}
                 >
                   {l}
                 </p>
@@ -442,7 +542,9 @@ function Tick({
   const cy = mid(lane);
   const top = LANES[lane].top + 7;
   const bottom = LANES[lane].top + LANES[lane].h - 7;
-  const color = tick.asnChange ? "var(--tt-red)" : SENSITIVITY_COLOR[tick.sensitivity as Sensitivity];
+  const color = tick.asnChange
+    ? "var(--tt-red)"
+    : SENSITIVITY_COLOR[tick.sensitivity as Sensitivity];
 
   return (
     <g
@@ -453,20 +555,50 @@ function Tick({
           title: tick.action,
           lines: [
             tick.ts.replace("T", " ").replace("Z", " UTC"),
-            tick.resource ? `resource · ${tick.resource}` : `${tick.sensitivity} sensitivity`,
-            [tick.note, tick.firstEver ? "first ever in 180d" : null].filter(Boolean).join(" · "),
+            tick.resource
+              ? `resource · ${tick.resource}`
+              : `${tick.sensitivity} sensitivity`,
+            [tick.note, tick.firstEver ? "first ever in 180d" : null]
+              .filter(Boolean)
+              .join(" · "),
           ].filter(Boolean),
           tone: color,
         })
       }
       onMouseLeave={() => onHover(null)}
     >
-      <rect x={cx - 6} y={top - 4} width="12" height={bottom - top + 8} fill="transparent" />
-      <line x1={cx} x2={cx} y1={top} y2={bottom} stroke={color} strokeWidth="1.4" strokeOpacity="0.75" />
-      {tick.firstEver && <circle cx={cx} cy={cy} r="4.5" fill="none" stroke={color} strokeWidth="1.4" />}
+      <rect
+        x={cx - 6}
+        y={top - 4}
+        width="12"
+        height={bottom - top + 8}
+        fill="transparent"
+      />
+      <line
+        x1={cx}
+        x2={cx}
+        y1={top}
+        y2={bottom}
+        stroke={color}
+        strokeWidth="1.4"
+        strokeOpacity="0.75"
+      />
+      {tick.firstEver && (
+        <circle
+          cx={cx}
+          cy={cy}
+          r="4.5"
+          fill="none"
+          stroke={color}
+          strokeWidth="1.4"
+        />
+      )}
       <circle cx={cx} cy={cy} r="2.2" fill={color} />
       {tick.asnChange && (
-        <path d={`M ${cx - 3.5} ${top - 2} L ${cx + 3.5} ${top - 2} L ${cx} ${top + 3.5} Z`} fill="var(--tt-red)" />
+        <path
+          d={`M ${cx - 3.5} ${top - 2} L ${cx + 3.5} ${top - 2} L ${cx} ${top + 3.5} Z`}
+          fill="var(--tt-red)"
+        />
       )}
     </g>
   );
@@ -475,14 +607,20 @@ function Tick({
 function Legend({ swatch, label }: { swatch: string; label: string }) {
   return (
     <span className="flex items-center gap-1.5">
-      <span className="inline-block size-2 rounded-full" style={{ backgroundColor: swatch }} />
+      <span
+        className="inline-block size-2 rounded-full"
+        style={{ backgroundColor: swatch }}
+      />
       <span className="text-[11px] text-grey">{label}</span>
     </span>
   );
 }
 
 const riskY = (r: number) =>
-  LANES.risk.top + LANES.risk.h - (Math.max(0, Math.min(100, r)) / 100) * (LANES.risk.h - 8) - 4;
+  LANES.risk.top +
+  LANES.risk.h -
+  (Math.max(0, Math.min(100, r)) / 100) * (LANES.risk.h - 8) -
+  4;
 
 function stepPoints(t: CompositeTimeline): [number, number][] {
   const pts = [...t.risk].sort((a, b) => a.t - b.t);
@@ -496,7 +634,10 @@ function stepPoints(t: CompositeTimeline): [number, number][] {
 
 function riskLine(t: CompositeTimeline) {
   return stepPoints(t)
-    .map(([px, py], i) => `${i === 0 ? "M" : "L"} ${px.toFixed(1)} ${py.toFixed(1)}`)
+    .map(
+      ([px, py], i) =>
+        `${i === 0 ? "M" : "L"} ${px.toFixed(1)} ${py.toFixed(1)}`,
+    )
     .join(" ");
 }
 
@@ -513,7 +654,9 @@ function riskArea(t: CompositeTimeline) {
  * hour are one window, so a four-step exfiltration reads as one event rather
  * than as four separate annotations.
  */
-function findUnauthorisedWindows(t: CompositeTimeline): { from: number; to: number }[] {
+function findUnauthorisedWindows(
+  t: CompositeTimeline,
+): { from: number; to: number }[] {
   /*
    * A suspicious record counts as covering the activity here, even though it
    * authorises nothing. It is drawn hatched in red and carries its own
@@ -522,9 +665,16 @@ function findUnauthorisedWindows(t: CompositeTimeline): { from: number; to: numb
    * finding on that subject is that a record exists and is forged, not that
    * none exists.
    */
-  const covered = (m: number) => t.context.some((b) => m >= b.from && m <= b.to);
+  const covered = (m: number) =>
+    t.context.some((b) => m >= b.from && m <= b.to);
   const flagged = [...t.session, ...t.trajectory]
-    .filter((e) => (e.sensitivity === "critical" || e.sensitivity === "high" || e.asnChange) && !covered(e.t))
+    .filter(
+      (e) =>
+        (e.sensitivity === "critical" ||
+          e.sensitivity === "high" ||
+          e.asnChange) &&
+        !covered(e.t),
+    )
     .map((e) => e.t)
     .sort((a, b) => a - b);
   if (flagged.length === 0) return [];
@@ -544,10 +694,14 @@ function findUnauthorisedWindows(t: CompositeTimeline): { from: number; to: numb
 }
 
 /** Where a suspicious record precedes the access it was created to cover. */
-function findPrecedenceMeasure(t: CompositeTimeline): { from: number; to: number } | null {
+function findPrecedenceMeasure(
+  t: CompositeTimeline,
+): { from: number; to: number } | null {
   const bar = t.context.find((b) => b.verdict === "suspicious");
   if (!bar) return null;
-  const access = t.trajectory.find((e) => e.t > bar.from && e.sensitivity === "critical");
+  const access = t.trajectory.find(
+    (e) => e.t > bar.from && e.sensitivity === "critical",
+  );
   if (!access) return null;
   return { from: bar.from, to: access.t };
 }

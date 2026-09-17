@@ -19,7 +19,9 @@ import { NOISE_SEGMENTS, RAISED_ANOMALIES } from "@/lib/fixtures";
 const MUTED = ["#059669", "#10b981", "#34d399", "#2dd4bf", "#6ee7b7"];
 const ACCENT = "#dc2626";
 
-const row = Object.fromEntries(NOISE_SEGMENTS.map((s) => [s.reasonCode, s.pct]));
+const row = Object.fromEntries(
+  NOISE_SEGMENTS.map((s) => [s.reasonCode, s.pct]),
+);
 const data = [{ name: "raised", ...row }];
 
 export function NoiseBar() {
@@ -27,9 +29,13 @@ export function NoiseBar() {
 
   return (
     <div className="p-4">
-      <div className="h-10 w-full rounded-md overflow-hidden border border-line">
+      <div className="h-10 w-full rounded-sm overflow-hidden border border-line">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} layout="vertical" margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+          <BarChart
+            data={data}
+            layout="vertical"
+            margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+          >
             <XAxis type="number" domain={[0, 100]} hide />
             <YAxis type="category" dataKey="name" hide />
             {NOISE_SEGMENTS.map((s, i) => (
@@ -38,7 +44,9 @@ export function NoiseBar() {
                 dataKey={s.reasonCode}
                 stackId="a"
                 fill={s.escalated ? ACCENT : MUTED[i % MUTED.length]}
-                fillOpacity={active === null || active === s.reasonCode ? 1 : 0.4}
+                fillOpacity={
+                  active === null || active === s.reasonCode ? 1 : 0.4
+                }
                 stroke="#ffffff"
                 strokeWidth={1.5}
                 isAnimationActive={false}
@@ -63,13 +71,24 @@ export function NoiseBar() {
           >
             <span
               className="size-2.5 shrink-0 rounded-sm"
-              style={{ backgroundColor: s.escalated ? ACCENT : MUTED[i % MUTED.length] }}
+              style={{
+                backgroundColor: s.escalated ? ACCENT : MUTED[i % MUTED.length],
+              }}
             />
-            <span className={cn("min-w-0 flex-1 truncate text-xs", s.escalated ? "font-semibold text-red-600" : "text-slate-800")}>
+            <span
+              className={cn(
+                "min-w-0 flex-1 truncate text-xs",
+                s.escalated ? "font-semibold text-red-600" : "text-slate-800",
+              )}
+            >
               {s.label}
             </span>
-            <span className="machine w-48 shrink-0 text-right text-[11px] text-slate-500">{s.reasonCode}</span>
-            <span className="machine w-10 shrink-0 text-right text-xs text-slate-800 font-medium">{s.pct}%</span>
+            <span className="machine w-48 shrink-0 text-right text-[11px] text-slate-500">
+              {s.reasonCode}
+            </span>
+            <span className="machine w-10 shrink-0 text-right text-xs text-slate-800 font-medium">
+              {s.pct}%
+            </span>
             <span className="machine w-14 shrink-0 text-right text-xs text-slate-500">
               {s.count.toLocaleString("en-US")}
             </span>
@@ -77,9 +96,15 @@ export function NoiseBar() {
         ))}
         <li className="flex items-center gap-3 px-2 py-2 bg-slate-50 mt-1 rounded border border-line">
           <span className="size-2.5 shrink-0" />
-          <span className="min-w-0 flex-1 text-xs font-bold text-slate-900">Raised anomalies</span>
-          <span className="machine w-48 shrink-0 text-right text-[11px] text-slate-500">TOTAL</span>
-          <span className="machine w-10 shrink-0 text-right text-xs text-slate-900 font-semibold">100%</span>
+          <span className="min-w-0 flex-1 text-xs font-bold text-slate-900">
+            Raised anomalies
+          </span>
+          <span className="machine w-48 shrink-0 text-right text-[11px] text-slate-500">
+            TOTAL
+          </span>
+          <span className="machine w-10 shrink-0 text-right text-xs text-slate-900 font-semibold">
+            100%
+          </span>
           <span className="machine w-14 shrink-0 text-right text-xs font-bold text-emerald-700">
             {RAISED_ANOMALIES.toLocaleString("en-US")}
           </span>
@@ -88,4 +113,3 @@ export function NoiseBar() {
     </div>
   );
 }
-
